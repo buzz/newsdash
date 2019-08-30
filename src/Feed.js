@@ -34,27 +34,21 @@ const Feed = ({ url }) => {
 
   const parsedUrl = new URL(url)
 
-  const feedIcon = feed.image
-    ? (
-      <a
-        className={classNames('nondraggable', css.feedIcon)}
-        href={feed.link}
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        <img
-          alt={feed.image.title || feed.title}
-          src={`https://favicon.keeweb.info/${parsedUrl.hostname}`}
-          title={feed.image.title || feed.title}
-        />
-      </a>
-    )
-    : null
-
   return (
     <div className={css.feed}>
       <div className={css.feedHeader}>
-        {feedIcon}
+        <a
+          className={classNames('nondraggable', css.feedIcon)}
+          href={feed.link}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <img
+            alt={feed.title}
+            src={`https://favicon.keeweb.info/${parsedUrl.hostname}`}
+            title={feed.title}
+          />
+        </a>
         <h2 className="nondraggable">
           <a
             href={feed.link}
