@@ -7,13 +7,13 @@ const ResponsiveGridLayout = WidthProvider(Responsive)
 const layouts = {
   lg: [
     {
-      i: 'a', x: 0, y: 0, w: 2, h: 8,
+      i: 'a', x: 0, y: 0, w: 1, h: 8,
     },
     {
-      i: 'b', x: 2, y: 0, w: 2, h: 8,
+      i: 'b', x: 1, y: 0, w: 1, h: 8,
     },
     {
-      i: 'c', x: 4, y: 0, w: 2, h: 8,
+      i: 'c', x: 2, y: 0, w: 1, h: 8,
     },
   ],
 }
@@ -23,7 +23,7 @@ const NewsGrid = () => {
     lg: 1200, md: 996, sm: 768, xs: 480,
   }
   const cols = {
-    lg: 8, md: 6, sm: 4, xs: 2,
+    lg: 4, md: 4, sm: 3, xs: 2,
   }
   return (
     <ResponsiveGridLayout
@@ -33,7 +33,7 @@ const NewsGrid = () => {
       draggableCancel=".nondraggable"
       margin={[4, 4]}
       layouts={layouts}
-      rowHeight={30}
+      rowHeight={50}
     >
       <div key="a">
         <Feed url="https://www.spiegel.de/video/index.rss" />
