@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import Parser from 'rss-parser'
 import { format } from 'timeago.js'
+import Scrollbar from 'react-custom-scrollbars'
 
 import css from './Feed.sass'
 
@@ -64,8 +65,8 @@ const Feed = ({ url }) => {
           </a>
         </h2>
       </div>
-      <div className={css.feedList}>
-        <ul>
+      <Scrollbar autoHide>
+        <ul className={css.feedList}>
           {feed.items.map((item) => (
             <li
               className={classNames('nondraggable', css.feedItem)}
@@ -86,7 +87,8 @@ const Feed = ({ url }) => {
             </li>
           ))}
         </ul>
-      </div>
+      </Scrollbar>
+      <div className={css.bottomPadding} />
     </div>
   )
 }

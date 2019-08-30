@@ -1,7 +1,13 @@
 @import './common.sass'
 
+$color-base: blue
+$color-border: scale-color($color-base, $lightness: 80%)
+$color-header-bg: scale-color($color-base, $lightness: 85%)
+$color-bg: scale-color($color-base, $lightness: 95%)
+
 .feed
-  background-color: rgb(247, 247, 247)
+  background-color: $color-bg
+  border: 1px solid $color-border
   display: flex
   flex-direction: column
   height: 100%
@@ -9,7 +15,8 @@
   $headerHeight: 24px
 
   .feedHeader
-    background-color: rgb(230, 230, 230)
+    background-color: $color-header-bg
+    border-bottom: 1px solid $color-border
     display: flex
     flex-direction: row
     height: $headerHeight
@@ -30,29 +37,34 @@
       text-overflow: ellipsis
       white-space: nowrap
 
-  .feedList
-    overflow: hidden auto
-    margin-bottom: $padding-lg
+      a:hover
+        color: $color-text-bright
 
-    ul
-      list-style-type: none
-      padding-left: 0
-      margin: $padding-lg $padding-md 0 0
+  ul.feedList
+    list-style-type: none
+    padding-left: 0
+    margin: $padding-sm 0 0 0
 
-      .feedItem
-        padding: 0 0 $padding-md $padding-md
+    .feedItem
 
-        > a
-          display: flex
+      > a
+        padding: $padding-md / 2 $padding-lg $padding-md / 2
+        display: flex
 
-          .itemTitle
-            flex-grow: 1
-            overflow: hidden
-            text-overflow: ellipsis
-            white-space: nowrap
+        &:hover
+          background-color: rgba(0, 0, 0, 0.05)
 
-          .itemDate
-            color: $color-text-bright
-            font-size: 90%
-            padding-left: $padding-sm
-            white-space: nowrap
+        .itemTitle
+          flex-grow: 1
+          overflow: hidden
+          text-overflow: ellipsis
+          white-space: nowrap
+
+        .itemDate
+          color: $color-text-bright
+          font-size: 90%
+          padding-left: $padding-sm
+          white-space: nowrap
+
+  .bottomPadding
+    height: $padding-sm
