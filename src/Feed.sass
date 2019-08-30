@@ -1,0 +1,44 @@
+@import './common.sass'
+
+.feed
+  background-color: rgb(247, 247, 247)
+  display: flex
+  flex-direction: column
+  height: 100%
+
+  $headerHeight: 24px
+
+  .feedHeader
+    background-color: rgb(230, 230, 230)
+    display: flex
+    flex-direction: row
+    height: $headerHeight
+
+    .feedIcon
+      margin: $padding-sm 0 0 $padding-lg
+
+      > img
+        height: 16px
+        width: 16px
+
+    h2
+      font-size: 100%
+      line-height: $headerHeight
+      margin: 0
+      padding-left: $padding-lg
+      overflow: hidden
+      text-overflow: ellipsis
+      white-space: nowrap
+
+  .feedList
+    overflow: hidden auto
+
+    ul
+      list-style-type: none
+      padding-inline-start: 0
+
+      .feedItem
+        overflow: hidden
+        padding: 0 0 $padding-lg $padding-lg
+        text-overflow: ellipsis
+        white-space: nowrap
