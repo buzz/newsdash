@@ -2,12 +2,15 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import Parser from 'rss-parser'
+import { format } from 'timeago.js'
 
 import css from './Feed.sass'
 
 const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/'
 
 const parser = new Parser()
+
+const dateFormat = (date) => format(date).replace(' ago', '')
 
 const Feed = ({ url }) => {
   const [feed, setFeed] = useState({
@@ -73,7 +76,12 @@ const Feed = ({ url }) => {
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                {item.title}
+                <span className={css.itemTitle}>
+                  {item.title}
+                </span>
+                <span className={css.itemDate}>
+                  {dateFormat(item.isoDate)}
+                </span>
               </a>
             </li>
           ))}

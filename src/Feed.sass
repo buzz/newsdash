@@ -15,7 +15,7 @@
     height: $headerHeight
 
     .feedIcon
-      margin: $padding-sm 0 0 $padding-lg
+      margin: $padding-sm 0 0 $padding-md
 
       > img
         height: 16px
@@ -25,20 +25,34 @@
       font-size: 100%
       line-height: $headerHeight
       margin: 0
-      padding-left: $padding-lg
+      padding-left: $padding-md
       overflow: hidden
       text-overflow: ellipsis
       white-space: nowrap
 
   .feedList
     overflow: hidden auto
+    margin-bottom: $padding-lg
 
     ul
       list-style-type: none
-      padding-inline-start: 0
+      padding-left: 0
+      margin: $padding-lg $padding-md 0 0
 
       .feedItem
-        overflow: hidden
-        padding: 0 0 $padding-lg $padding-lg
-        text-overflow: ellipsis
-        white-space: nowrap
+        padding: 0 0 $padding-md $padding-md
+
+        > a
+          display: flex
+
+          .itemTitle
+            flex-grow: 1
+            overflow: hidden
+            text-overflow: ellipsis
+            white-space: nowrap
+
+          .itemDate
+            color: $color-text-bright
+            font-size: 90%
+            padding-left: $padding-sm
+            white-space: nowrap
