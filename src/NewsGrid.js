@@ -27,6 +27,7 @@ const NewsGrid = () => {
   }
   return (
     <ResponsiveGridLayout
+      autoSize={false}
       breakpoints={breakpoints}
       cols={cols}
       draggableCancel=".nondraggable"
