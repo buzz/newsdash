@@ -1,25 +1,42 @@
 export const actionTypes = {
-  LOAD_FEED: 'LOAD_FEED',
+  ADD_FEED: 'ADD_FEED',
+  DELETE_FEED: 'DELETE_FEED',
+  EDIT_FEED: 'EDIT_FEED',
   LOAD_FEED_FAILURE: 'LOAD_FEED_FAILURE',
   LOAD_FEED_SUCCESS: 'LOAD_FEED_SUCCESS',
+  LOAD_FEED: 'LOAD_FEED',
 }
 
-export function loadFeed() {
-  return {
-    type: actionTypes.LOAD_FEED,
-  }
-}
+export const addFeed = () => ({
+  type: actionTypes.ADD_FEED,
+})
 
-export function loadFeedSuccess(data) {
-  return {
-    type: actionTypes.LOAD_FEED_SUCCESS,
-    data,
-  }
-}
+export const deleteFeed = (id) => ({
+  type: actionTypes.DELETE_FEED,
+  id,
+})
 
-export function loadFeedFailure(error) {
-  return {
-    type: actionTypes.LOAD_FEED_FAILURE,
-    error,
-  }
-}
+export const editFeed = (id, feed, prevFeed) => ({
+  type: actionTypes.EDIT_FEED,
+  id,
+  feed,
+  prevFeed,
+})
+
+export const loadFeedFailure = (id, error) => ({
+  type: actionTypes.LOAD_FEED_FAILURE,
+  id,
+  error,
+})
+
+export const loadFeedSuccess = (id, data) => ({
+  type: actionTypes.LOAD_FEED_SUCCESS,
+  id,
+  data,
+})
+
+export const loadFeed = (id, url) => ({
+  type: actionTypes.LOAD_FEED,
+  id,
+  url,
+})
