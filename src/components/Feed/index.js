@@ -1,16 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { useSelector } from 'react-redux'
 import classNames from 'classnames'
 import { format } from 'timeago.js'
 import Scrollbar from 'react-custom-scrollbars'
 
 import css from './Feed.sass'
-import { FAVICON_PROXY } from '../../constants'
 import useFeed from '../../hooks/useFeed'
+import getApp from '../../store/selectors/app'
 
 const dateFormat = (date) => format(date).replace(' ago', '')
 
 const Feed = ({ url }) => {
+  const { faviconProxy } = useSelector(getApp)
   const feed = useFeed(url)
   const parsedUrl = new URL(url)
 
@@ -25,7 +27,7 @@ const Feed = ({ url }) => {
         >
           <img
             alt={feed.title}
-            src={`${FAVICON_PROXY}${parsedUrl.hostname}`}
+            src={`${faviconProxy}${parsedUrl.hostname}`}
             title={feed.title}
           />
         </a>
