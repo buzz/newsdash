@@ -37,7 +37,7 @@ const Edit = ({
           />
         </div>
       </form>
-      <div className={css.buttons}>
+      <div className={classNames('nondraggable', css.buttons)}>
         <button
           className={css.delete}
           onClick={onDeleteClick}
