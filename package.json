@@ -30,6 +30,9 @@
     ]
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.22",
+    "@fortawesome/free-solid-svg-icons": "^5.10.2",
+    "@fortawesome/react-fontawesome": "^0.1.4",
     "classnames": "^2.2.6",
     "prop-types": "^15.7.2",
     "react": "^16.8.1",
@@ -42,7 +45,8 @@
     "redux-orm": "^0.13.3",
     "redux-saga": "^1.0.5",
     "rss-parser": "^3.7.2",
-    "timeago.js": "^4.0.0-beta.2"
+    "timeago.js": "^4.0.0-beta.2",
+    "uuid": "^3.3.3"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",

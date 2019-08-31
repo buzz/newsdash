@@ -1,0 +1,112 @@
+import React, { useMemo, useState } from 'react'
+import PropTypes from 'prop-types'
+import { useDispatch, useSelector } from 'react-redux'
+import Scrollbar from 'react-custom-scrollbars'
+
+import css from './Feed.sass'
+import Header from './Header'
+import List from './List'
+import Edit from './Edit'
+import LoadingSpinner from './LoadingSpinner'
+import getApp from '../../../store/selectors/app'
+import feedSelectors from '../../../store/selectors/feed'
+import feedItemSelectors from '../../../store/selectors/feedItem'
+import { deleteFeed, editFeed } from '../../../store/actions/feed'
+import { FEED_STATUS } from '../../../constants'
+
+const getTitle = (feed, editMode) => {
+  switch (feed.status) {
+    case FEED_STATUS.NEW:
+      return 'Add feed'
+    case FEED_STATUS.LOADING:
+      return 'Loading…'
+    case FEED_STATUS.ERROR:
+      return 'Error loading!'
+    default:
+  }
+  if (editMode) {
+    return 'Edit feed'
+  }
+  return feed.title
+}
+
+const Feed = ({ id, url }) => {
+  const dispatch = useDispatch()
+  const [editMode, setEditMode] = useState(true)
+  const { faviconProxy } = useSelector(getApp)
+  const getFeed = useMemo(feedSelectors.makeGetFeed, [])
+  const getFeedItems = useMemo(feedItemSelectors.makeGetFeedItems, [])
+  const feed = useSelector((state) => getFeed(state, id))
+  const feedItems = useSelector((state) => getFeedItems(state, id))
+
+  const iconUrl = url.startsWith('http')
+    ? `${faviconProxy}${(new URL(url)).hostname}`
+    : ''
+
+  const deleteFeedClick = () => {
+    dispatch(deleteFeed(id))
+    setEditMode(false)
+  }
+
+  const editFeedClick = (editedFeed) => {
+    dispatch(editFeed(id, editedFeed, feed))
+    setEditMode(false)
+  }
+
+  let body
+  if (editMode) {
+    body = (
+      <Edit
+        onCancelClick={() => setEditMode(false)}
+        onDeleteClick={deleteFeedClick}
+        onOkClick={editFeedClick}
+        feed={feed}
+      />
+    )
+  } else {
+    switch (feed.status) {
+      case FEED_STATUS.ERROR:
+        body = (
+          <div className={css.feedMessage}>
+            <div>{feed.error}</div>
+          </div>
+        )
+        break
+      case FEED_STATUS.LOADING:
+        body = (
+          <div className={css.feedMessage}>
+            <LoadingSpinner />
+          </div>
+        )
+        break
+      case FEED_STATUS.LOADED:
+        body = <List items={feedItems} />
+        break
+      default:
+        break
+    }
+  }
+
+  return (
+    <div className={css.feed}>
+      <Header
+        editMode={editMode}
+        iconUrl={iconUrl}
+        link={feed.link}
+        onEditClick={() => setEditMode(true)}
+        title={getTitle(feed, editMode)}
+      />
+      <Scrollbar autoHide>
+        {body}
+      </Scrollbar>
+      <div className={css.bottomPadding} />
+    </div>
+  )
+}
+
+Feed.propTypes = {
+  id: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
+}
+
+export default Feed

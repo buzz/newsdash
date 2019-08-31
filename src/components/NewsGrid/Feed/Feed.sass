@@ -1,0 +1,136 @@
+@import '../../../common.sass'
+
+$color-base: blue
+$color-border: scale-color($color-base, $lightness: 80%)
+$color-header-bg: scale-color($color-base, $lightness: 85%)
+$color-bg: scale-color($color-base, $lightness: 95%)
+
+.feed
+  background-color: $color-bg
+  border: 1px solid $color-border
+  border-radius: $border-radius
+  display: flex
+  flex-direction: column
+  height: 100%
+
+  $headerHeight: 24px
+
+  .feedHeader
+    background-color: $color-header-bg
+    border-bottom: 1px solid $color-border
+    display: flex
+    flex-direction: row
+    height: $headerHeight
+
+    .feedIcon
+      margin: $padding-sm 0 0 $padding-md
+
+      > img
+        height: 16px
+        width: 16px
+
+    .feedHeaderMiddle
+      flex-grow: 1
+
+      h2
+        display: inline-block
+        font-size: 100%
+        line-height: $headerHeight
+        margin: 0
+        overflow: hidden
+        padding-left: $padding-md
+        text-overflow: ellipsis
+        white-space: nowrap
+
+        a:hover
+          color: $color-text-bright
+
+    .headerButton
+      background-color: transparent
+      border: none
+      cursor: pointer
+      color: $color-text
+      margin-left: $padding-sm
+      padding: 0 $padding-sm
+
+      svg
+        color: $color-text
+
+      &:hover svg
+        color: $color-text-bright
+
+  .feedMessage
+    margin: $padding-lg $padding-lg 0 $padding-lg
+    text-align: center
+
+    svg
+      font-size: 400%
+
+  ul.feedList
+    list-style-type: none
+    padding-left: 0
+    margin: $padding-sm 0 0 0
+
+    .feedItem
+
+      a
+        padding: $padding-md / 2 $padding-lg $padding-md / 2
+        display: flex
+
+        &:hover
+          background-color: rgba(0, 0, 0, 0.05)
+
+        &:visited
+          color: $color-text-visited
+
+        .itemTitle
+          flex-grow: 1
+          overflow: hidden
+          text-overflow: ellipsis
+          white-space: nowrap
+
+        .itemDate
+          color: $color-text-bright
+          font-size: 90%
+          padding-left: $padding-sm
+          white-space: nowrap
+
+  .bottomPadding
+    height: $padding-sm
+
+  .edit
+    display: flex
+    flex-direction: column
+    height: 100%
+    margin: $padding-sm 0 0 0
+
+    form
+      flex-grow: 1
+
+      .row
+        display: flex
+        line-height: 24px
+        padding: $padding-md / 2 $padding-lg $padding-md / 2
+
+        > :first-child
+          overflow: hidden
+          padding-right: $padding-lg
+          text-overflow: ellipsis
+          white-space: nowrap
+          width: 25%
+
+        > :nth-child(2)
+          flex-grow: 1
+          min-width: 0
+
+    .buttons
+      display: flex
+      padding: $padding-lg 0 $padding-lg $padding-lg
+
+      button
+        +button
+        flex-grow: 1
+        margin-right: $padding-lg
+
+        &.delete
+          +button-danger

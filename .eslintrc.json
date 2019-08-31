@@ -23,6 +23,16 @@
       "exports": "always-multiline",
       "functions": "ignore"
     }],
-    "jsx-a11y/anchor-is-valid": ["off"]
+    "jsx-a11y/anchor-is-valid": ["off"],
+    "jsx-a11y/label-has-associated-control": [
+      "error",
+      {
+        "labelComponents": [],
+        "labelAttributes": [],
+        "controlComponents": [],
+        "assert": "either",
+        "depth": 4
+      }
+    ]
   }
 }
