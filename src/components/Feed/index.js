@@ -1,37 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import Parser from 'rss-parser'
 import { format } from 'timeago.js'
 import Scrollbar from 'react-custom-scrollbars'
 
 import css from './Feed.sass'
-
-const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/'
-
-const parser = new Parser()
+import { FAVICON_PROXY } from '../../constants'
+import useFeed from '../../hooks/useFeed'
 
 const dateFormat = (date) => format(date).replace(' ago', '')
 
 const Feed = ({ url }) => {
-  const [feed, setFeed] = useState({
-    title: 'Loading…',
-    items: [],
-  })
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await parser.parseURL(CORS_PROXY + url)
-      setFeed(data)
-      console.log(data)
-      data.items.forEach((item) => {
-        console.log(`${item.title}:${item.link}`)
-        console.log(item)
-      })
-      console.log('-----------------------------------------')
-    }
-    fetchData()
-  }, [url])
-
+  const feed = useFeed(url)
   const parsedUrl = new URL(url)
 
   return (
@@ -45,7 +25,7 @@ const Feed = ({ url }) => {
         >
           <img
             alt={feed.title}
-            src={`https://favicon.keeweb.info/${parsedUrl.hostname}`}
+            src={`${FAVICON_PROXY}${parsedUrl.hostname}`}
             title={feed.title}
           />
         </a>
