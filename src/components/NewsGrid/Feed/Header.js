@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faRss } from '@fortawesome/free-solid-svg-icons'
 
-import css from './Feed.sass'
+import css from './Header.sass'
 
 const Header = ({
   editMode,

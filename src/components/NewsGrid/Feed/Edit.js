@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faTimes, faTrash } from '@fortawesome/free-solid-svg-icons'
 
-import css from './Feed.sass'
+import css from './Edit.sass'
 import { feedType } from '../../../propTypes'
 
 const Edit = ({

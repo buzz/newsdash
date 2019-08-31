@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import { format } from 'timeago.js'
 import Tooltip from 'react-tooltip-lite'
 
-import css from './Feed.sass'
+import css from './List.sass'
 import { feedItemType } from '../../../propTypes'
 
 const dateFormat = (date) => format(date).replace(' ago', '')

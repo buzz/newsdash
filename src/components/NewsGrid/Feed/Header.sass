@@ -1,0 +1,45 @@
+@import '../../../common.sass'
+
+$headerHeight: 24px
+
+.feedHeader
+  background-color: $color-feed-header-bg
+  border-bottom: 1px solid $color-feed-border
+  display: flex
+  flex-direction: row
+  height: $headerHeight
+
+  .feedIcon
+    margin: $padding-sm 0 0 $padding-md
+
+    > img
+      height: 16px
+      width: 16px
+
+  .feedHeaderMiddle
+    flex-grow: 1
+    overflow: hidden
+
+    h2
+      display: inline-block
+      font-size: 100%
+      line-height: $headerHeight
+      margin: 0
+      padding-left: $padding-md
+
+      a:hover
+        color: $color-text-bright
+
+  .headerButton
+    background-color: transparent
+    border: none
+    cursor: pointer
+    color: $color-text
+    margin-left: $padding-sm
+    padding: 0 $padding-sm
+
+    svg
+      color: $color-text
+
+    &:hover svg
+      color: $color-text-bright
