@@ -62,7 +62,7 @@ export default class Feed extends Model {
       case feedActionTypes.LOAD_FEED_SUCCESS:
         action.data.items.forEach((item) => {
           const feedItem = {
-            id: item.id || item.guid,
+            id: item.id || item.guid || item.link,
             link: item.link,
             date: Date.parse(item.isoDate),
             title: item.title,
