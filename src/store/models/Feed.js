@@ -62,7 +62,8 @@ export default class Feed extends Model {
       case feedActionTypes.LOAD_FEED_SUCCESS:
         action.data.items.forEach((item) => {
           const feedItem = {
-            id: item.id || item.guid || item.link,
+            // prefix ID with feed ID to prevent collisions
+            id: `${action.id}${item.id || item.guid || item.link}`,
             link: item.link,
             date: Date.parse(item.isoDate),
             title: item.title,
@@ -83,6 +84,14 @@ export default class Feed extends Model {
           status: FEED_STATUS.LOADED,
           error: undefined,
           lastFetched: Date.now(),
+        })
+        break
+      case feedActionTypes.STORE_POSITION:
+        feedModel.withId(action.id).update({
+          x: action.x,
+          y: action.y,
+          w: action.w,
+          h: action.h,
         })
         break
       default:

@@ -5,6 +5,7 @@ export const actionTypes = {
   LOAD_FEED_FAILURE: 'LOAD_FEED_FAILURE',
   LOAD_FEED_SUCCESS: 'LOAD_FEED_SUCCESS',
   LOAD_FEED: 'LOAD_FEED',
+  STORE_POSITION: 'STORE_POSITION',
 }
 
 export const addFeed = () => ({
@@ -39,4 +40,13 @@ export const loadFeed = (id, url) => ({
   type: actionTypes.LOAD_FEED,
   id,
   url,
+})
+
+export const storePosition = (id, x, y, w, h) => ({
+  type: actionTypes.STORE_POSITION,
+  id,
+  x,
+  y,
+  w,
+  h,
 })
