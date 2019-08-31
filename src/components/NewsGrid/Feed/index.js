@@ -32,7 +32,7 @@ const getTitle = (feed, editMode) => {
 
 const Feed = ({ id, url }) => {
   const dispatch = useDispatch()
-  const [editMode, setEditMode] = useState(true)
+  const [editMode, setEditMode] = useState(url === '')
   const { faviconProxy } = useSelector(getApp)
   const getFeed = useMemo(feedSelectors.makeGetFeed, [])
   const getFeedItems = useMemo(feedItemSelectors.makeGetFeedItems, [])
