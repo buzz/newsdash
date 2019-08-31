@@ -31,16 +31,14 @@ $color-bg: scale-color($color-base, $lightness: 95%)
 
     .feedHeaderMiddle
       flex-grow: 1
+      overflow: hidden
 
       h2
         display: inline-block
         font-size: 100%
         line-height: $headerHeight
         margin: 0
-        overflow: hidden
         padding-left: $padding-md
-        text-overflow: ellipsis
-        white-space: nowrap
 
         a:hover
           color: $color-text-bright
@@ -134,3 +132,8 @@ $color-bg: scale-color($color-base, $lightness: 95%)
 
         &.delete
           +button-danger
+
+.tooltipImage
+  float: left
+  margin: 0 $padding-md $padding-sm 0
+  max-width: 90px

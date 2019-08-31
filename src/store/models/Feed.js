@@ -1,8 +1,14 @@
 import { Model, attr } from 'redux-orm'
 import uuidv1 from 'uuid/v1'
 
-import { FEED_STATUS } from '../../constants'
+import { FEED_STATUS, MAX_CONTENT_LENGTH } from '../../constants'
 import { actionTypes as feedActionTypes } from '../actions/feed'
+
+const truncate = (text) => (
+  text.length > MAX_CONTENT_LENGTH
+    ? `${text.substring(0, MAX_CONTENT_LENGTH)}…`
+    : text
+)
 
 export default class Feed extends Model {
   static get modelName() {
@@ -41,13 +47,13 @@ export default class Feed extends Model {
         }
         break
       case feedActionTypes.LOAD_FEED:
-        feedModel.update({
+        feedModel.withId(action.id).update({
           status: FEED_STATUS.LOADING,
           error: undefined,
         })
         break
       case feedActionTypes.LOAD_FEED_FAILURE:
-        feedModel.update({
+        feedModel.withId(action.id).update({
           status: FEED_STATUS.ERROR,
           error: action.error,
           lastFetched: undefined,
@@ -55,14 +61,21 @@ export default class Feed extends Model {
         break
       case feedActionTypes.LOAD_FEED_SUCCESS:
         action.data.items.forEach((item) => {
-          session.FeedItem.upsert({
+          const feedItem = {
             id: item.id || item.guid,
             link: item.link,
             date: Date.parse(item.isoDate),
             title: item.title,
-            content: item.contentSnippet || item.content,
             feed: action.id,
-          })
+          }
+          const content = item.summary || item.contentSnippet || item.content
+          if (content) {
+            feedItem.content = truncate(content)
+          }
+          if (item.enclosure && item.enclosure.url) {
+            feedItem.imageUrl = item.enclosure.url
+          }
+          session.FeedItem.upsert(feedItem)
         })
         feedModel.withId(action.id).update({
           title: action.data.title,

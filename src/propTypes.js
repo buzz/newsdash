@@ -22,5 +22,6 @@ export const feedItemType = PropTypes.shape({
   link: PropTypes.string.isRequired,
   date: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired,
+  content: PropTypes.string,
+  imageUrl: PropTypes.string,
 })
