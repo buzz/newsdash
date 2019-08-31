@@ -1,18 +1,20 @@
 import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import Parser from 'rss-parser'
 
-import { CORS_PROXY } from '../constants'
+import getApp from '../store/selectors/app'
 
 const parser = new Parser()
 
 const useFeed = (url) => {
+  const { corsProxy } = useSelector(getApp)
   const [feed, setFeed] = useState({
     title: 'Loading…',
     items: [],
   })
   useEffect(() => {
     const fetchData = async () => {
-      const data = await parser.parseURL(CORS_PROXY + url)
+      const data = await parser.parseURL(`${corsProxy}${url}`)
       setFeed(data)
       console.log(data)
       data.items.forEach((item) => {
