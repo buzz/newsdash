@@ -1,0 +1,38 @@
+@import '../../../common.sass'
+
+.edit
+  display: flex
+  flex-direction: column
+  height: 100%
+  margin: $padding-sm 0 0 0
+
+  form
+    flex-grow: 1
+
+    .row
+      display: flex
+      line-height: 24px
+      padding: $padding-md / 2 $padding-lg $padding-md / 2
+
+      > :first-child
+        overflow: hidden
+        padding-right: $padding-lg
+        text-overflow: ellipsis
+        white-space: nowrap
+        width: 25%
+
+      > :nth-child(2)
+        flex-grow: 1
+        min-width: 0
+
+  .buttons
+    display: flex
+    padding: $padding-lg 0 $padding-lg $padding-lg
+
+    button
+      +button
+      flex-grow: 1
+      margin-right: $padding-lg
+
+      &.delete
+        +button-danger
