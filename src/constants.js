@@ -9,3 +9,5 @@ export const FEED_STATUS = {
   LOADING: 'LOADING',
   ERROR: 'ERROR',
 }
+
+export const MAX_CONTENT_LENGTH = 300

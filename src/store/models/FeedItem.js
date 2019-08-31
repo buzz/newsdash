@@ -12,6 +12,7 @@ export default class FeedItem extends Model {
       date: attr(),
       title: attr(),
       content: attr(),
+      imageUrl: attr(),
       feed: fk('Feed', 'items'),
     }
   }
