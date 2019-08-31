@@ -11,7 +11,10 @@ const makeGetFeedItems = () => createSelector(
   (session, id) => {
     const feed = session.Feed.withId(id)
     return feed
-      ? feed.items.toRefArray()
+      ? feed
+        .items
+        .toRefArray()
+        .sort((a, b) => b.date - a.date) // sort by date
       : []
   }
 )
