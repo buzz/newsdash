@@ -6,12 +6,9 @@ import fetchFeed from '../../api'
 
 export default function* loadFeed({ id, url }) {
   const { corsProxy } = yield select(getApp)
-  let feedData
   try {
-    feedData = yield call(fetchFeed, url, corsProxy)
+    yield put(loadFeedSuccess(id, yield call(fetchFeed, url, corsProxy)))
   } catch (e) {
     yield put(loadFeedFailure(id, e.message))
-    return
   }
-  yield put(loadFeedSuccess(id, feedData))
 }
