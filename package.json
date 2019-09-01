@@ -1,6 +1,8 @@
 {
   "name": "newsdash",
+  "description": "A serverless news dashboard inspired by iGoogle and Netvibes",
   "version": "0.1.0",
+  "license": "AGPL-3.0-or-later",
   "keywords": [
     "feedreader",
     "news",
@@ -11,7 +13,10 @@
     "name": "buzz",
     "url": "https://github.com/buzz"
   },
-  "license": "AGPL-3.0-or-later",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/buzz/newsdash.git"
+  },
   "scripts": {
     "build": "webpack -p --mode production",
     "dev": "webpack-dev-server",
