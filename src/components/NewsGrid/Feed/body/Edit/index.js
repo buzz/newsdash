@@ -50,7 +50,7 @@ const Edit = ({
           <label htmlFor={urlId}>URL</label>
           <input
             id={urlId}
-            onChange={(event) => setUrl(event.currentTarget.value)}
+            onChange={(event) => setUrl(event.currentTarget.value.trim())}
             ref={inputRef}
             type="text"
             value={url}
