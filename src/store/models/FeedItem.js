@@ -1,5 +1,7 @@
 import { Model, attr, fk } from 'redux-orm'
 
+import { actionTypes as feedItemActionTypes } from '../actions/feedItem'
+
 export default class FeedItem extends Model {
   static get modelName() {
     return 'FeedItem'
@@ -14,6 +16,18 @@ export default class FeedItem extends Model {
       content: attr(),
       imageUrl: attr(),
       feed: fk('Feed', 'items'),
+    }
+  }
+
+  static reducer(action, feedItemModel, session) {
+    switch (action.type) {
+      case feedItemActionTypes.PRUNE:
+        session.Feed.withId(action.feedId).items.toModelArray().forEach(
+          (item) => item.delete()
+        )
+        break
+      default:
+        break
     }
   }
 }
