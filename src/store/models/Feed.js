@@ -25,6 +25,7 @@ export default class Feed extends Model {
       status: attr({ getDefault: () => FEED_STATUS.NEW }),
       error: attr(),
       lastFetched: attr(),
+      useCorsProxy: attr({ getDefault: () => false }),
       x: attr({ getDefault: () => 0 }),
       y: attr({ getDefault: () => 0 }),
       w: attr({ getDefault: () => 1 }),
@@ -85,6 +86,9 @@ export default class Feed extends Model {
           error: undefined,
           lastFetched: Date.now(),
         })
+        break
+      case feedActionTypes.SET_USE_CORS_PROXY:
+        feedModel.withId(action.id).update({ useCorsProxy: action.value })
         break
       case feedActionTypes.STORE_POSITION:
         feedModel.withId(action.id).update({

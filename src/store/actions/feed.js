@@ -6,6 +6,7 @@ export const actionTypes = {
   LOAD_FEED_SUCCESS: 'LOAD_FEED_SUCCESS',
   LOAD_FEED: 'LOAD_FEED',
   REFRESH_FEED: 'REFRESH_FEED',
+  SET_USE_CORS_PROXY: 'SET_USE_CORS_PROXY',
   STORE_POSITION: 'STORE_POSITION',
 }
 
@@ -46,6 +47,12 @@ export const loadFeed = (id, url) => ({
 export const refreshFeed = (id) => ({
   type: actionTypes.REFRESH_FEED,
   id,
+})
+
+export const setUseCorsProxy = (id, value = true) => ({
+  type: actionTypes.SET_USE_CORS_PROXY,
+  id,
+  value,
 })
 
 export const storePosition = (id, x, y, w, h) => ({

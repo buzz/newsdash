@@ -1,6 +1,6 @@
 import { put } from 'redux-saga/effects'
 
-import { loadFeed } from '../../store/actions/feed'
+import { loadFeed, setUseCorsProxy } from '../../store/actions/feed'
 import { prune } from '../../store/actions/feedItem'
 
 export default function* editFeed({ id, feed, prevFeed }) {
@@ -8,7 +8,8 @@ export default function* editFeed({ id, feed, prevFeed }) {
     feed.url !== ''
     && feed.url !== prevFeed.url
   ) {
+    yield put(setUseCorsProxy(id, false))
     yield put(prune(id))
-    yield put(loadFeed(id, feed.url, feed.lastFetched))
+    yield put(loadFeed(id, feed.url))
   }
 }
