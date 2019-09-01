@@ -2,12 +2,13 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 
 const devMode = process.env.NODE_ENV !== 'production'
 const SRC_DIR = path.join(__dirname, 'src')
 const DIST_DIR = path.join(__dirname, 'dist')
 
-module.exports = {
+const config = {
   entry: [
     path.join(SRC_DIR, 'index.js'),
   ],
@@ -28,11 +29,11 @@ module.exports = {
       {
         test: /\.css$/,
         loaders: [
-          MiniCssExtractPlugin.loader,
+          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
-              sourceMap: true,
+              sourceMap: devMode,
             },
           },
         ],
@@ -50,7 +51,7 @@ module.exports = {
                 localIdentName: '[local]__[hash:base64:5]',
                 context: path.join(__dirname, 'src'),
               },
-              sourceMap: true,
+              sourceMap: devMode,
               importLoaders: 1,
             },
           },
@@ -62,7 +63,7 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: 'html-loader',
-          options: { minimize: true },
+          options: { minimize: !devMode },
         },
       },
     ],
@@ -71,7 +72,6 @@ module.exports = {
     extensions: ['*', '.js'],
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: path.join(SRC_DIR, 'index.html'),
       filename: './index.html',
@@ -81,9 +81,19 @@ module.exports = {
       chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
     }),
   ],
-  devServer: {
+}
+
+if (process.env.BUNDLE_ANALYZE) {
+  config.plugins.push(new BundleAnalyzerPlugin())
+}
+
+if (devMode) {
+  config.plugins.push(new webpack.HotModuleReplacementPlugin())
+  config.devServer = {
     contentBase: DIST_DIR,
     hot: true,
     port: 3000,
-  },
+  }
 }
+
+module.exports = config
