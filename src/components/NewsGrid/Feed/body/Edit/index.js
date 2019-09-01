@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faTimes, faTrash } from '@fortawesome/free-solid-svg-icons'
 
 import css from './Edit.sass'
-import { feedType } from '../../../propTypes'
+import { feedType } from '../../../../../propTypes'
 
 const Edit = ({
   onCancelClick,
