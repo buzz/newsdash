@@ -46,46 +46,38 @@ const Feed = ({ id, url }) => {
         feed={feed}
       />
     )
+  } else if (feed.status === FEED_STATUS.ERROR) {
+    body = (
+      <div className={css.feedMessage}>
+        <p>
+          <strong>Sorry, unable to retrieve the feed!</strong>
+        </p>
+        <p>
+          URL:
+          {' '}
+          <a
+            className="nondraggable"
+            href={feed.url}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <code>{feed.url}</code>
+          </a>
+          <br />
+          Error message:
+          {' '}
+          <code>{feed.error}</code>
+        </p>
+      </div>
+    )
+  } else if (feed.status === FEED_STATUS.LOADING && !feedItems.length) {
+    body = (
+      <div className={css.feedMessage}>
+        <p>Loading feed…</p>
+      </div>
+    )
   } else {
-    switch (feed.status) {
-      case FEED_STATUS.ERROR:
-        body = (
-          <div className={css.feedMessage}>
-            <p>
-              <strong>Sorry, unable to retrieve the feed!</strong>
-            </p>
-            <p>
-              URL:
-              {' '}
-              <a
-                className="nondraggable"
-                href={feed.url}
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                <code>{feed.url}</code>
-              </a>
-              <br />
-              Error message:
-              {' '}
-              <code>{feed.error}</code>
-            </p>
-          </div>
-        )
-        break
-      case FEED_STATUS.LOADING:
-        body = (
-          <div className={css.feedMessage}>
-            <p>Loading feed…</p>
-          </div>
-        )
-        break
-      case FEED_STATUS.LOADED:
-        body = <List items={feedItems} />
-        break
-      default:
-        break
-    }
+    body = <List items={feedItems} />
   }
 
   return (
