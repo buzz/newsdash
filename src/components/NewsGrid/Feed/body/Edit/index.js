@@ -14,14 +14,34 @@ const Edit = ({
   feed,
 }) => {
   const [url, setUrl] = useState(feed.url)
+  const [deleteConfirm, setDeleteConfirm] = useState(false)
+
   const inputRef = useRef()
-  useEffect(() => {
-    inputRef.current.focus()
-  })
+  useEffect(() => { inputRef.current.focus() })
 
   const rowClassNames = classNames('nondraggable', css.row)
-
   const urlId = `${feed.id}-url`
+
+  const deleteButton = deleteConfirm
+    ? (
+      <button
+        className={css.deleteConfirm}
+        onClick={onDeleteClick}
+        type="button"
+      >
+        <FontAwesomeIcon icon={faTrash} />
+        Really?
+      </button>
+    )
+    : (
+      <button
+        onClick={() => setDeleteConfirm(true)}
+        type="button"
+      >
+        <FontAwesomeIcon icon={faTrash} />
+        Delete
+      </button>
+    )
 
   return (
     <div className={css.edit}>
@@ -38,14 +58,7 @@ const Edit = ({
         </div>
       </form>
       <div className={classNames('nondraggable', css.buttons)}>
-        <button
-          className={css.delete}
-          onClick={onDeleteClick}
-          type="button"
-        >
-          <FontAwesomeIcon icon={faTrash} />
-          Delete
-        </button>
+        {deleteButton}
         <button
           onClick={() => onOkClick({ url })}
           type="button"
