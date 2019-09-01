@@ -76,25 +76,31 @@ const Header = ({
     )
     : <h2>{title}</h2>
 
-  const editButton = editMode
-    ? null
-    : (
-      <button
-        aria-label="Edit feed"
-        className={classNames('nondraggable', css.headerButton)}
-        title="Edit"
-        type="button"
-        onClick={onEditClick}
-      >
-        <FontAwesomeIcon icon={faEdit} />
-      </button>
-    )
+  const buttons = (
+    <div className={classNames('nondraggable', css.buttons)}>
+      {
+        editMode
+          ? null
+          : (
+            <button
+              aria-label="Edit feed"
+              className={css.headerButton}
+              title="Edit"
+              type="button"
+              onClick={onEditClick}
+            >
+              <FontAwesomeIcon icon={faEdit} />
+            </button>
+          )
+      }
+    </div>
+  )
 
   return (
     <div className={css.feedHeader}>
       {iconLink}
       {headerTitle}
-      {editButton}
+      {buttons}
     </div>
   )
 }

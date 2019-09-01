@@ -30,16 +30,22 @@ $headerHeight: 24px
     a:hover
       color: $color-text-bright
 
-  .headerButton
-    background-color: transparent
-    border: none
-    cursor: pointer
-    color: $color-text
-    margin-left: $padding-sm
-    padding: 0 $padding-sm
+  .buttons
 
-    svg
-      color: $color-text
+    button
+      background-color: transparent
+      border: none
+      margin-top: $padding-sm
+      padding: 0 $padding-sm
 
-    &:hover svg
-      color: $color-text-bright
+      &:enabled
+        cursor: pointer
+
+      &:disabled
+        opacity: 0.5
+
+      svg
+        color: $color-text
+
+      &:hover:enabled svg
+        color: $color-text-bright
