@@ -5,20 +5,39 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faRss } from '@fortawesome/free-solid-svg-icons'
 
 import css from './Header.sass'
+import { FEED_STATUS } from '../../../../constants'
+import { feedStatusType } from '../../../../propTypes'
+
+const getTitle = (feedTitle, editMode, status) => {
+  switch (status) {
+    case FEED_STATUS.NEW:
+      return 'Add feed'
+    case FEED_STATUS.LOADING:
+      return `Loading: ${feedTitle}`
+    case FEED_STATUS.ERROR:
+      return `Error: ${feedTitle}`
+    default:
+  }
+  if (editMode) {
+    return `Edit: ${feedTitle}`
+  }
+  return feedTitle
+}
 
 const Header = ({
   editMode,
   iconUrl,
   link,
   onEditClick,
-  title,
+  status,
+  title: feedTitle,
 }) => {
   const icon = iconUrl
     ? (
       <img
-        alt={title}
+        alt={feedTitle}
         src={iconUrl}
-        title={title}
+        title={feedTitle}
       />
     )
     : <FontAwesomeIcon icon={faRss} />
@@ -40,10 +59,13 @@ const Header = ({
       </span>
     )
 
-  const feedTitle = link
+  const title = getTitle(feedTitle, editMode, status)
+
+  const headerTitle = link && !editMode
     ? (
-      <h2 className="nondraggable">
+      <h2>
         <a
+          className="nondraggable"
           href={link}
           rel="noopener noreferrer"
           target="_blank"
@@ -60,7 +82,7 @@ const Header = ({
       <button
         aria-label="Edit feed"
         className={classNames('nondraggable', css.headerButton)}
-        title="Edit feed"
+        title="Edit"
         type="button"
         onClick={onEditClick}
       >
@@ -71,9 +93,7 @@ const Header = ({
   return (
     <div className={css.feedHeader}>
       {iconLink}
-      <span className={css.feedHeaderMiddle}>
-        {feedTitle}
-      </span>
+      {headerTitle}
       {editButton}
     </div>
   )
@@ -84,6 +104,7 @@ Header.propTypes = {
   iconUrl: PropTypes.string.isRequired,
   link: PropTypes.string.isRequired,
   onEditClick: PropTypes.func.isRequired,
+  status: feedStatusType.isRequired,
   title: PropTypes.string.isRequired,
 }
 

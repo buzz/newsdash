@@ -14,22 +14,6 @@ import feedItemSelectors from '../../../store/selectors/feedItem'
 import { deleteFeed, editFeed } from '../../../store/actions/feed'
 import { FEED_STATUS } from '../../../constants'
 
-const getTitle = (feed, editMode) => {
-  switch (feed.status) {
-    case FEED_STATUS.NEW:
-      return 'Add feed'
-    case FEED_STATUS.LOADING:
-      return 'Loading…'
-    case FEED_STATUS.ERROR:
-      return 'Error loading!'
-    default:
-  }
-  if (editMode) {
-    return 'Edit feed'
-  }
-  return feed.title
-}
-
 const Feed = ({ id, url }) => {
   const dispatch = useDispatch()
   const [editMode, setEditMode] = useState(url === '')
@@ -94,7 +78,8 @@ const Feed = ({ id, url }) => {
         iconUrl={iconUrl}
         link={feed.link}
         onEditClick={() => setEditMode(true)}
-        title={getTitle(feed, editMode)}
+        status={feed.status}
+        title={feed.title}
       />
       <Scrollbar autoHide>
         {body}
