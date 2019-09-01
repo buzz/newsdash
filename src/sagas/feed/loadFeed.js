@@ -10,10 +10,11 @@ const parser = new Parser()
 // first time try to fetch feed directly and remember if CORS proxy is necessary
 export default function* loadFeed({ id, url }) {
   const feed = yield select(feedSelectors.getFeed, id)
+  const fetchUrl = url || feed.url
 
   if (!feed.useCorsProxy) {
     try {
-      yield put(loadFeedSuccess(id, yield call([parser, parser.parseURL], url)))
+      yield put(loadFeedSuccess(id, yield call([parser, parser.parseURL], fetchUrl)))
       return
     } catch {
       yield put(setUseCorsProxy(id))
@@ -22,7 +23,7 @@ export default function* loadFeed({ id, url }) {
 
   const { corsProxy } = yield select(getApp)
   try {
-    yield put(loadFeedSuccess(id, yield call([parser, parser.parseURL], `${corsProxy}${url}`)))
+    yield put(loadFeedSuccess(id, yield call([parser, parser.parseURL], `${corsProxy}${fetchUrl}`)))
   } catch (e) {
     yield put(loadFeedFailure(id, e.message))
   }
