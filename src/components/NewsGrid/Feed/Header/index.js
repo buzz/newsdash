@@ -12,8 +12,6 @@ const getTitle = (feedTitle, editMode, status) => {
   switch (status) {
     case FEED_STATUS.NEW:
       return 'Add feed'
-    case FEED_STATUS.LOADING:
-      return `Loading: ${feedTitle}`
     case FEED_STATUS.ERROR:
       return `Error: ${feedTitle}`
     default:
@@ -113,10 +111,14 @@ const Header = ({
   )
 }
 
+Header.defaultProps = {
+  link: '',
+}
+
 Header.propTypes = {
   editMode: PropTypes.bool.isRequired,
   iconUrl: PropTypes.string.isRequired,
-  link: PropTypes.string.isRequired,
+  link: PropTypes.string,
   onEditClick: PropTypes.func.isRequired,
   onRefreshClick: PropTypes.func.isRequired,
   status: feedStatusType.isRequired,
