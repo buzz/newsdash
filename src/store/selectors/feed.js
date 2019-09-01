@@ -14,8 +14,8 @@ const makeGetFeed = () => createSelector(
   orm,
   getOrm,
   selectId,
-  (session, url) => {
-    const feed = session.Feed.withId(url)
+  (session, id) => {
+    const feed = session.Feed.withId(id)
     return feed
       ? feed.ref
       : {
