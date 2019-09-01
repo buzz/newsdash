@@ -1,7 +1,7 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux'
 import { createReducer } from 'redux-orm'
 import createSagaMiddleware from 'redux-saga'
-import throttle from 'lodash.throttle'
+import throttle from 'lodash/throttle'
 
 import orm from './orm'
 import defaultInitialState from './defaultInitialState'

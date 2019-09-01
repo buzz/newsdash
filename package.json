@@ -14,8 +14,8 @@
     "url": "https://github.com/buzz"
   },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/buzz/newsdash.git"
+    "type": "git",
+    "url": "https://github.com/buzz/newsdash.git"
   },
   "scripts": {
     "build": "webpack -p --mode production",
@@ -39,6 +39,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.10.2",
     "@fortawesome/react-fontawesome": "^0.1.4",
     "classnames": "^2.2.6",
+    "lodash": "^4.17.15",
     "lodash.throttle": "^4.1.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.1",
