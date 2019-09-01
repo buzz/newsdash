@@ -1,0 +1,13 @@
+@import '../../../../../common.sass'
+
+$transition-speed: 200ms
+
+\:global(:export)
+  transitionSpeed: $transition-speed
+
+.enter
+  opacity: 0
+
+.enterActive
+  transition: opacity $transition-speed cubic-bezier(1, 0, 0.8, 0.05), margin $transition-speed ease-in
+  opacity: 1

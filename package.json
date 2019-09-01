@@ -50,6 +50,7 @@
     "react-redux": "^7.1.1",
     "react-resizable": "^1.8.0",
     "react-tooltip-lite": "^1.10.0",
+    "react-transition-group": "^4.2.2",
     "redux": "^4.0.4",
     "redux-orm": "^0.13.3",
     "redux-saga": "^1.0.5",
