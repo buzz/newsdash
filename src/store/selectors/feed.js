@@ -26,6 +26,7 @@ const makeGetFeed = () => createSelector(
 )
 
 export default {
+  getFeed: makeGetFeed(),
   getFeeds,
   makeGetFeed,
 }
