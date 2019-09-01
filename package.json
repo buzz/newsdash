@@ -11,7 +11,7 @@
     "name": "buzz",
     "url": "https://github.com/buzz"
   },
-  "license": "GPL-3.0-or-later",
+  "license": "AGPL-3.0-or-later",
   "scripts": {
     "build": "webpack -p --mode production",
     "dev": "webpack-dev-server",
