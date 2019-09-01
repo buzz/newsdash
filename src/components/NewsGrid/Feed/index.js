@@ -7,11 +7,10 @@ import css from './Feed.sass'
 import Header from './Header'
 import List from './body/List'
 import Edit from './body/Edit'
-import LoadingSpinner from './LoadingSpinner'
 import getApp from '../../../store/selectors/app'
 import feedSelectors from '../../../store/selectors/feed'
 import feedItemSelectors from '../../../store/selectors/feedItem'
-import { deleteFeed, editFeed } from '../../../store/actions/feed'
+import { deleteFeed, editFeed, refreshFeed } from '../../../store/actions/feed'
 import { FEED_STATUS } from '../../../constants'
 
 const Feed = ({ id, url }) => {
@@ -96,6 +95,7 @@ const Feed = ({ id, url }) => {
         iconUrl={iconUrl}
         link={feed.link}
         onEditClick={() => setEditMode(true)}
+        onRefreshClick={() => dispatch(refreshFeed(feed.id))}
         status={feed.status}
         title={feed.title}
       />
