@@ -52,14 +52,32 @@ const Feed = ({ id, url }) => {
       case FEED_STATUS.ERROR:
         body = (
           <div className={css.feedMessage}>
-            <div>{feed.error}</div>
+            <p>
+              <strong>Sorry, unable to retrieve the feed!</strong>
+            </p>
+            <p>
+              URL:
+              {' '}
+              <a
+                className="nondraggable"
+                href={feed.url}
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <code>{feed.url}</code>
+              </a>
+              <br />
+              Error message:
+              {' '}
+              <code>{feed.error}</code>
+            </p>
           </div>
         )
         break
       case FEED_STATUS.LOADING:
         body = (
           <div className={css.feedMessage}>
-            <LoadingSpinner />
+            <p>Loading feed…</p>
           </div>
         )
         break
