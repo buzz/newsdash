@@ -1,5 +1,14 @@
 @import '../../common.sass'
 
+=button-round
+  +button-base
+  $diameter: 32px
+  border-radius: $diameter / 2
+  font-size: 140%
+  height: $diameter
+  width: $diameter
+  line-height: $diameter
+
 .controlBar
   bottom: $padding-lg
   position: absolute
