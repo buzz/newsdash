@@ -11,9 +11,14 @@
     "ecmaVersion": 7,
     "sourceType": "module"
   },
+  "plugins": [
+    "react-hooks"
+  ],
   "rules": {
     "react/jsx-filename-extension": ["error", { "extensions": [".js"] }],
     "react/forbid-prop-types": ["off"],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
     "semi": ["error", "never"],
     "function-paren-newline": ["off"],
     "comma-dangle": ["error", {
