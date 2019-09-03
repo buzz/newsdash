@@ -1,6 +1,11 @@
 import { Model, attr } from 'redux-orm'
 
-import { DEFAULT_CORS_PROXY, DEFAULT_FAVICON_PROXY, DEFAULT_FETCH_INTERVAL } from '../../constants'
+import {
+  DEFAULT_CORS_PROXY,
+  DEFAULT_FAVICON_PROXY,
+  DEFAULT_FETCH_INTERVAL,
+  DEFAULT_GRID_COLS,
+} from '../../constants'
 import { actionTypes as appActionTypes } from '../actions/app'
 
 export default class App extends Model {
@@ -11,8 +16,9 @@ export default class App extends Model {
   static get fields() {
     return {
       id: attr({ getDefault: () => 0 }),
-      faviconProxy: attr({ getDefault: () => DEFAULT_FAVICON_PROXY }),
+      gridCols: attr({ getDefault: () => DEFAULT_GRID_COLS }),
       corsProxy: attr({ getDefault: () => DEFAULT_CORS_PROXY }),
+      faviconProxy: attr({ getDefault: () => DEFAULT_FAVICON_PROXY }),
       fetchInterval: attr({ getDefault: () => DEFAULT_FETCH_INTERVAL }),
     }
   }

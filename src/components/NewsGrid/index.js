@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Responsive, WidthProvider } from 'react-grid-layout'
 import Feed from './Feed'
 
+import getApp from '../../store/selectors/app'
 import feedSelectors from '../../store/selectors/feed'
 import { storePosition } from '../../store/actions/feed'
 
@@ -22,15 +23,11 @@ const generateLayouts = (feeds) => feeds.map((feed) => ({
 
 const NewsGrid = () => {
   const dispatch = useDispatch()
+  const { gridCols } = useSelector(getApp)
   const feeds = useSelector(feedSelectors.getFeeds)
 
-  const breakpoints = {
-    lg: 1200, md: 996, sm: 768, xs: 480,
-  }
-  const cols = {
-    lg: 4, md: 4, sm: 3, xs: 2,
-  }
   const layouts = { lg: generateLayouts(feeds) }
+
   const onLayoutChange = (layout) => (
     layout.forEach(
       (item) => {
@@ -50,8 +47,8 @@ const NewsGrid = () => {
   return (
     <ResponsiveGridLayout
       autoSize={false}
-      breakpoints={breakpoints}
-      cols={cols}
+      breakpoints={{ lg: 1200 }}
+      cols={{ lg: gridCols }}
       draggableCancel=".nondraggable"
       layouts={layouts}
       margin={[4, 4]}
