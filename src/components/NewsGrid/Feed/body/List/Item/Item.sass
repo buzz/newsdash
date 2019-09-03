@@ -26,7 +26,21 @@
       padding-left: $padding-sm
       white-space: nowrap
 
-.tooltipImage
-  float: left
-  margin: 0 $padding-md $padding-sm 0
-  max-width: 90px
+.tooltip
+  font-size: 100%
+  max-width: 350px
+  opacity: $tooltip-opacity
+  box-shadow: 1px
+
+  \:global(.rc-tooltip-inner)
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.5)
+
+    &::after
+      clear: left
+      content: ""
+      display: block
+
+  .tooltipImage
+    float: left
+    margin: 0 $padding-md $padding-sm 0
+    max-width: 90px

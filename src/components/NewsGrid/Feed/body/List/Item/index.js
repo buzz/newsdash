@@ -1,8 +1,8 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { format } from 'timeago.js'
-import Tooltip from 'react-tooltip-lite'
+import Tooltip from 'rc-tooltip'
+import 'rc-tooltip/assets/bootstrap.css'
 
 import TooltipContent from './TooltipContent'
 import { feedItemType } from '../../../../../../propTypes'
@@ -10,27 +10,6 @@ import { feedItemType } from '../../../../../../propTypes'
 import css from './Item.sass'
 
 const dateFormat = (date) => format(date).replace(' ago', '')
-
-const ItemLink = ({ date, link, title }) => (
-  <a
-    href={link}
-    rel="noopener noreferrer"
-    target="_blank"
-  >
-    <span className={css.itemTitle}>
-      {title}
-    </span>
-    <span className={css.itemDate}>
-      {dateFormat(date)}
-    </span>
-  </a>
-)
-
-ItemLink.propTypes = {
-  date: PropTypes.number.isRequired,
-  link: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-}
 
 const Item = ({ item }) => {
   const tooltipContent = item.content
@@ -43,14 +22,32 @@ const Item = ({ item }) => {
     )
     : null
 
-  const itemLink = <ItemLink date={item.date} link={item.link} title={item.title} />
+  const itemLink = (
+    <a
+      href={item.link}
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      <span className={css.itemTitle}>
+        {item.title}
+      </span>
+      <span className={css.itemDate}>
+        {dateFormat(item.date)}
+      </span>
+    </a>
+  )
 
   return (
     <li className={classNames('nondraggable', css.feedItem)}>
       {
         item.content
           ? (
-            <Tooltip content={tooltipContent}>
+            <Tooltip
+              mouseLeaveDelay={0}
+              overlay={tooltipContent}
+              overlayClassName={css.tooltip}
+              placement="bottom"
+            >
               {itemLink}
             </Tooltip>
           )
