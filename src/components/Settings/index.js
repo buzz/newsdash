@@ -1,13 +1,26 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import Slider from 'rc-slider'
+import 'rc-slider/assets/index.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 import css from './Settings.sass'
 import getApp from '../../store/selectors/app'
+import { updateSettings } from '../../store/actions/app'
+
+const fetchIntervalMin = 5
+const fetchIntervalMax = 60
+const fetchIntervalStep = 5
+let fetchIntervalMarks = {}
+for (let i = fetchIntervalMin; i <= fetchIntervalMax; i += fetchIntervalStep) {
+  fetchIntervalMarks = { ...fetchIntervalMarks, [i]: i }
+}
 
 const Settings = ({ setShowSettings }) => {
+  const dispatch = useDispatch()
+
   const {
     corsProxy: oldCorsProxy,
     faviconProxy: oldFaviconProxy,
@@ -17,11 +30,6 @@ const Settings = ({ setShowSettings }) => {
   const [corsProxy, setCorsProxy] = useState(oldCorsProxy)
   const [faviconProxy, setFaviconProxy] = useState(oldFaviconProxy)
   const [fetchInterval, setFetchInterval] = useState(oldFetchInterval)
-
-  const fetchIntervalOnChange = (ev) => {
-    const val = parseInt(ev.currentTarget.value.trim(), 10)
-    setFetchInterval(Number.isInteger(val) ? val * 60 * 1000 : fetchInterval)
-  }
 
   return (
     <div className={css.settings}>
@@ -37,19 +45,32 @@ const Settings = ({ setShowSettings }) => {
       <h1>Settings</h1>
       <form>
         <div className={css.row}>
-          <label htmlFor="fetchIntervalInput">Feed fetch interval (min)</label>
-          <input
-            id="fetchIntervalInput"
-            onChange={fetchIntervalOnChange}
-            type="text"
-            value={fetchInterval / 60 / 1000}
-          />
+          <span>Feed fetch interval (min)</span>
+          <div className={css.sliderWrapper}>
+            <Slider
+              className={css.slider}
+              defaultValue={fetchInterval / 60 / 1000}
+              marks={fetchIntervalMarks}
+              max={fetchIntervalMax}
+              min={fetchIntervalMin}
+              step={fetchIntervalStep}
+              onChange={(val) => {
+                const valMilli = val * 60 * 1000
+                setFetchInterval(valMilli)
+                dispatch(updateSettings({ fetchInterval: valMilli }))
+              }}
+            />
+          </div>
         </div>
         <div className={css.row}>
           <label htmlFor="faviconProxyInput">Favicon proxy</label>
           <input
             id="faviconProxyInput"
-            onChange={(ev) => setFaviconProxy(ev.currentTarget.value.trim())}
+            onChange={(ev) => {
+              const val = ev.currentTarget.value.trim()
+              setFaviconProxy(val)
+              dispatch(updateSettings({ faviconProxy: val }))
+            }}
             type="text"
             value={faviconProxy}
           />
@@ -58,7 +79,11 @@ const Settings = ({ setShowSettings }) => {
           <label htmlFor="corsProxyInput">CORS proxy</label>
           <input
             id="corsProxyInput"
-            onChange={(ev) => setCorsProxy(ev.currentTarget.value.trim())}
+            onChange={(ev) => {
+              const val = ev.currentTarget.value.trim()
+              setCorsProxy(val)
+              dispatch(updateSettings({ corsProxy: val }))
+            }}
             type="text"
             value={corsProxy}
           />
