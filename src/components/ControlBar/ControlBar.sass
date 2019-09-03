@@ -1,19 +1,34 @@
-@import '../../common.sass'
-
-=button-round
-  +button-base
-  $diameter: 32px
-  border-radius: $diameter / 2
-  font-size: 140%
-  height: $diameter
-  width: $diameter
-  line-height: $diameter
+@import '../../style/_common.sass'
+@import '../../style/_buttons.sass'
 
 .controlBar
+  $num-buttons: 3
+  $control-bar-padding: $padding-sm
+  background-color: $color-control-bg
+  border-radius: $button-diameter-md / 2 + $control-bar-padding
   bottom: $padding-lg
+  display: flex
+  flex-direction: column-reverse
+  padding: $control-bar-padding
   position: absolute
   right: $padding-lg
   z-index: 999
+  overflow: hidden
+  transition: height $transition-speed ease-in
+  height: $num-buttons * $button-diameter-md + ($num-buttons - 1) * $padding-md
+
+  &.hidden
+    height: $button-diameter-md
+
+    button
+      opacity: 0.0
 
   button
-    +button-round
+    @extend .button-round-md
+    margin-bottom: $padding-md
+    opacity: 1.0
+    transition: opacity $transition-speed ease-in
+
+    &:first-child
+      margin-bottom: 0
+      opacity: 1.0

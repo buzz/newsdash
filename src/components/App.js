@@ -1,17 +1,35 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Provider } from 'react-redux'
+import Modal from 'react-modal'
 
+import modalCss from './Modal.sass'
 import makeStore from '../store'
 import ControlBar from './ControlBar'
 import NewsGrid from './NewsGrid'
+import Settings from './Settings'
 
 const store = makeStore()
 
-const App = () => (
-  <Provider store={store}>
-    <ControlBar />
-    <NewsGrid />
-  </Provider>
-)
+Modal.setAppElement('#root')
+
+const App = () => {
+  const [showSettings, setShowSettings] = useState(false)
+
+  return (
+    <Provider store={store}>
+      <ControlBar setShowSettings={setShowSettings} />
+      <NewsGrid />
+      <Modal
+        className={modalCss.modal}
+        contentLabel="Example Modal"
+        isOpen={showSettings}
+        onRequestClose={() => setShowSettings(false)}
+        overlayClassName={modalCss.overlay}
+      >
+        <Settings setShowSettings={setShowSettings} />
+      </Modal>
+    </Provider>
+  )
+}
 
 export default App
