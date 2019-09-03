@@ -1,0 +1,42 @@
+@import './_common.sass'
+
+=button-base
+  background-color: $color-button-bg
+  border: none
+  color: $color-text-inverted
+  cursor: pointer
+  outline: none
+  white-space: nowrap
+
+  &:hover
+    color: white
+    background-color: $color-button-bg-hover
+
+=button
+  +button-base
+  font-size: 100%
+  padding: $padding-button
+
+  svg
+    padding-right: $padding-md
+
+=button-danger
+  +button
+  background-color: $color-danger
+  color: $color-text-danger
+
+  &:hover
+    color: $color-text-danger
+    background-color: $color-danger-hover
+
+=make-button-round($size, $button-diameter, $font-size)
+  .button-round-#{$size}
+    +button-base
+    border-radius: $button-diameter / 2
+    font-size: $font-size
+    height: $button-diameter
+    width: $button-diameter
+    line-height: $button-diameter
+
++make-button-round(sm, $button-diameter-sm, 105%) // .button-round-sm
++make-button-round(md, $button-diameter-md, 140%) // .button-round-md

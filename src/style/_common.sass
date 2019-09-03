@@ -5,12 +5,15 @@ $color-text-bright: rgb(69, 69, 69)
 $color-text-hover: scale-color(rgb(36, 36, 36), $lightness: $lightness-highlight)
 $color-text-visited: rgb(98, 98, 98)
 $color-text-inverted: invert($color-text)
+
 $color-danger: rgb(207, 30, 30)
 $color-danger-hover: scale-color($color-danger, $lightness: $lightness-highlight)
 $color-text-danger: white
 
 $color-control-bg: rgb(98, 98, 98)
-$color-control-bg-hover: scale-color($color-control-bg, $lightness: $lightness-highlight)
+$color-control-border: scale-color($color-control-bg, $lightness: -$lightness-highlight)
+$color-button-bg: scale-color($color-control-bg, $lightness: $lightness-highlight)
+$color-button-bg-hover: scale-color($color-button-bg, $lightness: $lightness-highlight)
 
 $color-feed-base: blue
 $color-feed-border: scale-color($color-feed-base, $lightness: 80%)
@@ -22,34 +25,11 @@ $padding-sm: 4px
 $padding-md: 8px
 $padding-lg: 12px
 
+$padding-button: $padding-sm
+$button-diameter-md: 32px
+$button-diameter-sm: 24px
+
 $tooltip-opacity: 0.95
 $tooltip-color: #333
 
-=button-base
-  background-color: $color-control-bg
-  border: none
-  color: $color-text-inverted
-  cursor: pointer
-  outline: none
-  white-space: nowrap
-
-  &:hover
-    color: white
-    background-color: $color-control-bg-hover
-
-=button
-  +button-base
-  font-size: 100%
-  padding: $padding-sm $padding-sm
-
-  svg
-    padding-right: $padding-md
-
-=button-danger
-  +button
-  background-color: $color-danger
-  color: $color-text-danger
-
-  &:hover
-    color: $color-text-danger
-    background-color: $color-danger-hover
+$transition-speed: 200ms

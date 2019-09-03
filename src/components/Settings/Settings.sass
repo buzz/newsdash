@@ -1,0 +1,34 @@
+@import '../../style/_common.sass'
+@import '../../style/_buttons.sass'
+
+.buttonClose
+  @extend .button-round-sm
+  position: absolute
+  right: $padding-lg
+  top: $padding-lg
+
+.settings
+
+  h1
+    font-size: 160%
+    margin-top: 0
+
+  .row
+    $h: 25px
+    display: flex
+    padding: $padding-md / 2 0
+    height: $h
+
+    > :first-child
+      overflow: hidden
+      padding-right: $padding-lg
+      text-overflow: ellipsis
+      white-space: nowrap
+      line-height: $h
+
+    > :nth-child(2)
+      flex-grow: 1
+      min-width: 0
+
+    input
+      text-align: right
