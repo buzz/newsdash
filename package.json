@@ -43,6 +43,7 @@
     "lodash": "^4.17.15",
     "lodash.throttle": "^4.1.1",
     "prop-types": "^15.7.2",
+    "rc-slider": "^8.7.0",
     "rc-tooltip": "^3.7.3",
     "react": "^16.8.1",
     "react-custom-scrollbars": "^4.2.1",

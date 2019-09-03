@@ -21,7 +21,7 @@ const App = () => {
       <NewsGrid />
       <Modal
         className={modalCss.modal}
-        contentLabel="Example Modal"
+        contentLabel="Settings"
         isOpen={showSettings}
         onRequestClose={() => setShowSettings(false)}
         overlayClassName={modalCss.overlay}
