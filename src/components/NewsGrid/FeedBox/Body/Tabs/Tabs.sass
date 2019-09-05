@@ -1,0 +1,36 @@
+@import '../../../../../style/_common.sass'
+
+.tabs
+  flex-grow: 1
+
+  \:global(.rc-tabs)
+    display: flex
+    flex-direction: column
+    height: 100%
+
+    .tabsBar
+      background-color: $color-feed-tabs-bg
+      border-bottom: 1px solid $color-feed-border
+
+      \:global(.rc-tabs-nav-container)
+        padding: 0 $padding-md
+
+        \:global(.rc-tabs-tab-prev)
+          display: none
+
+        \:global(.rc-tabs-tab-next)
+          display: none
+
+        \:global(.rc-tabs-tab)
+          color: $color-text-bright
+          margin: 0
+          padding: $padding-sm $padding-sm $padding-sm / 2
+
+          &:hover
+            color: black
+
+        \:global(.rc-tabs-tab-active)
+          color: black
+
+    \:global(.rc-tabs-content)
+      flex-grow: 1

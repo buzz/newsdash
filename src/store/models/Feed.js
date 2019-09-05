@@ -1,5 +1,4 @@
-import { Model, attr } from 'redux-orm'
-import uuidv1 from 'uuid/v1'
+import { Model, attr, fk } from 'redux-orm'
 
 import { FEED_STATUS, MAX_CONTENT_LENGTH } from '../../constants'
 import { actionTypes as feedActionTypes } from '../actions/feed'
@@ -17,30 +16,29 @@ export default class Feed extends Model {
 
   static get fields() {
     return {
-      id: attr({ getDefault: () => uuidv1() }),
+      id: attr(),
       url: attr({ getDefault: () => '' }),
       link: attr({ getDefault: () => '' }),
       title: attr({ getDefault: () => 'New feed' }),
-      color: attr({ getDefault: () => '' }), // TODO random color
       status: attr({ getDefault: () => FEED_STATUS.NEW }),
       error: attr(),
-      lastFetched: attr(),
+      lastFetched: attr({ getDefault: () => 0 }),
       useCorsProxy: attr({ getDefault: () => false }),
-      x: attr({ getDefault: () => 0 }),
-      y: attr({ getDefault: () => 0 }),
-      w: attr({ getDefault: () => 1 }),
-      h: attr({ getDefault: () => 8 }),
+      feedBox: fk('FeedBox', 'feeds'),
     }
   }
 
   static reducer(action, feedModel, session) {
     switch (action.type) {
       case feedActionTypes.ADD_FEED:
-        feedModel.create({})
+        feedModel.create({ feedBox: action.feedBoxId, url: action.url })
         break
-      case feedActionTypes.DELETE_FEED:
-        feedModel.withId(action.id).delete()
+      case feedActionTypes.DELETE_FEED: {
+        const feed = feedModel.withId(action.id)
+        feed.items.toModelArray().map((item) => item.delete())
+        feed.delete()
         break
+      }
       case feedActionTypes.EDIT_FEED:
         feedModel.withId(action.id).update(action.feed)
         if (action.prevFeed.url !== action.feed.url) {
@@ -89,14 +87,6 @@ export default class Feed extends Model {
         break
       case feedActionTypes.SET_USE_CORS_PROXY:
         feedModel.withId(action.id).update({ useCorsProxy: action.value })
-        break
-      case feedActionTypes.STORE_POSITION:
-        feedModel.withId(action.id).update({
-          x: action.x,
-          y: action.y,
-          w: action.w,
-          h: action.h,
-        })
         break
       default:
         break

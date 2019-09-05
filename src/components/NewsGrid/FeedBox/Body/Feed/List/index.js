@@ -4,7 +4,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 import css from './List.sass'
 import itemTransition from './itemTransition.sass'
-import { feedItemType } from '../../../../../propTypes'
+import { feedItemType } from '../../../../../../propTypes'
 import Item from './Item'
 
 const { transitionSpeed, ...transitionClassNames } = itemTransition

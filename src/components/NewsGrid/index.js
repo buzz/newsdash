@@ -1,21 +1,21 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Responsive, WidthProvider } from 'react-grid-layout'
-import Feed from './Feed'
+import FeedBox from './FeedBox'
 
 import getApp from '../../store/selectors/app'
-import feedSelectors from '../../store/selectors/feed'
-import { storePosition } from '../../store/actions/feed'
+import feedBoxSelectors from '../../store/selectors/feedBox'
+import { editFeedBox } from '../../store/actions/feedBox'
 
 const ResponsiveGridLayout = WidthProvider(Responsive)
 
-const generateLayouts = (feeds) => (
-  feeds.map((feed) => ({
-    i: feed.id,
-    x: feed.x,
-    y: feed.y,
-    w: feed.w,
-    h: feed.h,
+const generateLayout = (feedBoxes) => (
+  feedBoxes.map((feedBox) => ({
+    i: feedBox.id.toString(),
+    x: feedBox.x,
+    y: feedBox.y,
+    w: feedBox.w,
+    h: feedBox.h,
     minW: 1,
     maxW: 2,
     minH: 2,
@@ -26,25 +26,20 @@ const generateLayouts = (feeds) => (
 const NewsGrid = () => {
   const dispatch = useDispatch()
   const { gridCols } = useSelector(getApp)
-  const feeds = useSelector(feedSelectors.getFeeds)
-
-  const layouts = { lg: generateLayouts(feeds) }
-
-  const onLayoutChange = (layout) => (
+  const feedBoxes = useSelector(feedBoxSelectors.getFeedBoxes)
+  const onLayoutChange = (layout) => {
     layout.forEach(
       (item) => {
         dispatch(
-          storePosition(item.i, item.x, item.y, item.w, item.h)
+          editFeedBox(
+            parseInt(item.i, 10),
+            {
+              x: item.x, y: item.y, w: item.w, h: item.h,
+            })
         )
       }
     )
-  )
-
-  const feedBoxes = feeds.map(({ id, url }) => (
-    <div key={id}>
-      <Feed id={id} url={url} />
-    </div>
-  ))
+  }
 
   return (
     <ResponsiveGridLayout
@@ -52,12 +47,18 @@ const NewsGrid = () => {
       breakpoints={{ lg: 1200 }}
       cols={{ lg: gridCols }}
       draggableCancel=".nondraggable"
-      layouts={layouts}
+      layouts={{ lg: generateLayout(feedBoxes) }}
       margin={[4, 4]}
       onLayoutChange={onLayoutChange}
       rowHeight={48}
     >
-      {feedBoxes}
+      {
+        feedBoxes.map((feedBox) => (
+          <div key={feedBox.id.toString()}>
+            <FeedBox feedBox={feedBox} />
+          </div>
+        ))
+      }
     </ResponsiveGridLayout>
   )
 }
