@@ -9,17 +9,19 @@ import { storePosition } from '../../store/actions/feed'
 
 const ResponsiveGridLayout = WidthProvider(Responsive)
 
-const generateLayouts = (feeds) => feeds.map((feed) => ({
-  i: feed.id,
-  x: feed.x,
-  y: feed.y,
-  w: feed.w,
-  h: feed.h,
-  minW: 1,
-  maxW: 2,
-  minH: 2,
-  maxH: 12,
-}))
+const generateLayouts = (feeds) => (
+  feeds.map((feed) => ({
+    i: feed.id,
+    x: feed.x,
+    y: feed.y,
+    w: feed.w,
+    h: feed.h,
+    minW: 1,
+    maxW: 2,
+    minH: 2,
+    maxH: 12,
+  }))
+)
 
 const NewsGrid = () => {
   const dispatch = useDispatch()
