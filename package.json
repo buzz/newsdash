@@ -44,6 +44,7 @@
     "lodash.throttle": "^4.1.1",
     "prop-types": "^15.7.2",
     "rc-slider": "^8.7.0",
+    "rc-tabs": "^9.6.6",
     "rc-tooltip": "^3.7.3",
     "react": "^16.8.1",
     "react-custom-scrollbars": "^4.2.1",
@@ -57,8 +58,7 @@
     "redux-orm": "^0.13.3",
     "redux-saga": "^1.0.5",
     "rss-parser": "^3.7.2",
-    "timeago.js": "^4.0.0-beta.2",
-    "uuid": "^3.3.3"
+    "timeago.js": "^4.0.0-beta.2"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",

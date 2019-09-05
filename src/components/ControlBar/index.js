@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEllipsisH, faCog, faPlus } from '@fortawesome/free-solid-svg-icons'
 
 import css from './ControlBar.sass'
-import { addFeed } from '../../store/actions/feed'
+import { addFeedBox } from '../../store/actions/feedBox'
 
 const ControlBar = ({ setShowSettings }) => {
   const [hidden, setHidden] = useState(true)
@@ -34,7 +34,7 @@ const ControlBar = ({ setShowSettings }) => {
       </button>
       <button
         aria-label="Add new feed"
-        onClick={() => dispatch(addFeed())}
+        onClick={() => dispatch(addFeedBox())}
         title="Add new feed"
         type="button"
       >

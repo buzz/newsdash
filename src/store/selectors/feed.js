@@ -10,7 +10,7 @@ const getFeeds = createSelector(
   (session) => session.Feed.all().toRefArray()
 )
 
-const makeGetFeed = () => createSelector(
+const getFeed = createSelector(
   orm,
   getOrm,
   selectId,
@@ -26,7 +26,6 @@ const makeGetFeed = () => createSelector(
 )
 
 export default {
-  getFeed: makeGetFeed(),
+  getFeed,
   getFeeds,
-  makeGetFeed,
 }

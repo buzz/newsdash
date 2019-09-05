@@ -5,7 +5,7 @@ import Tooltip from 'rc-tooltip'
 import 'rc-tooltip/assets/bootstrap.css'
 
 import TooltipContent from './TooltipContent'
-import { feedItemType } from '../../../../../../propTypes'
+import { feedItemType } from '../../../../../../../propTypes'
 
 import css from './Item.sass'
 
@@ -22,6 +22,14 @@ const Item = ({ item }) => {
     )
     : null
 
+  const itemDate = item.date
+    ? (
+      <span className={css.itemDate}>
+        {dateFormat(item.date)}
+      </span>
+    )
+    : null
+
   const itemLink = (
     <a
       href={item.link}
@@ -31,9 +39,7 @@ const Item = ({ item }) => {
       <span className={css.itemTitle}>
         {item.title}
       </span>
-      <span className={css.itemDate}>
-        {dateFormat(item.date)}
-      </span>
+      {itemDate}
     </a>
   )
 
