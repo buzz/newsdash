@@ -1,6 +1,7 @@
 export const actionTypes = {
   ADD_FEED: 'ADD_FEED',
   DELETE_FEED: 'DELETE_FEED',
+  EDIT_FEED: 'EDIT_FEED',
   LOAD_FEED_FAILURE: 'LOAD_FEED_FAILURE',
   LOAD_FEED_SUCCESS: 'LOAD_FEED_SUCCESS',
   LOAD_FEED: 'LOAD_FEED',
@@ -20,7 +21,7 @@ export const deleteFeed = (id) => ({
 })
 
 export const editFeed = (id, attrs) => ({
-  type: actionTypes.DELETE_FEED,
+  type: actionTypes.EDIT_FEED,
   id,
   attrs,
 })

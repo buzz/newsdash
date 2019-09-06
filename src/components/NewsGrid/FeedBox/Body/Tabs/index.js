@@ -21,7 +21,7 @@ const FeedTabs = ({ activeFeedId, feeds, setActiveFeedId }) => (
     >
       {
         feeds.map((feed) => (
-          <TabPane key={feed.id.toString()} tab={feed.title}>
+          <TabPane key={feed.id.toString()} tab={feed.customTitle || feed.title}>
             <Scrollbar autoHide>
               <Feed feed={feed} />
             </Scrollbar>
