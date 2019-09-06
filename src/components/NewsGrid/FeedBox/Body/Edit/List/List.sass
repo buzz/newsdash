@@ -8,8 +8,8 @@
 
   li
     display: flex
-    line-height: $button-diameter-xs
-    margin-bottom: $padding-sm
+    line-height: 24px
+    margin: $padding-sm / 2 0
 
     .icon
       margin-right: $padding-sm
@@ -22,6 +22,16 @@
       text-overflow: ellipsis
       white-space: nowrap
 
-    button
-      @extend .button-round-xs
-      min-width: $button-diameter-xs
+    .editForm
+      flex-grow: 1
+
+      input
+        box-sizing: border-box
+        width: 100%
+
+    .buttons
+
+      button
+        @extend .button-round-xs
+        min-width: $button-diameter-xs
+        margin-left: $padding-sm

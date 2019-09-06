@@ -16,7 +16,7 @@ const getTitle = (feed, feedBox, editMode) => {
     return 'Edit'
   }
   if (feed && feed.status === FEED_STATUS.ERROR) {
-    return `Error: ${feed.title}`
+    return `Error: ${feed.customTitle || feed.title}`
   }
   if (feedBox.title) {
     return feedBox.title
@@ -24,7 +24,7 @@ const getTitle = (feed, feedBox, editMode) => {
   if (!feed) {
     return ''
   }
-  return feed.title
+  return feed.customTitle || feed.title
 }
 
 const Header = ({
@@ -72,7 +72,6 @@ const Header = ({
         </button>
         <button
           aria-label="Edit feed"
-          disabled={isLoading}
           title="Edit"
           type="button"
           onClick={onEditClick}
@@ -97,7 +96,7 @@ Header.defaultProps = {
 
 Header.propTypes = {
   feed: feedType,
-  feedBox: feedBoxType,
+  feedBox: feedBoxType.isRequired,
   editMode: PropTypes.bool.isRequired,
   onEditClick: PropTypes.func.isRequired,
 }
