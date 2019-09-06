@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { useDispatch } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEllipsisH, faCog, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faEllipsisV, faCog, faPlus } from '@fortawesome/free-solid-svg-icons'
 
 import css from './ControlBar.sass'
 import { addFeedBox } from '../../store/actions/feedBox'
@@ -22,7 +22,7 @@ const ControlBar = ({ setShowSettings }) => {
         title={toggleButtonTitle}
         type="button"
       >
-        <FontAwesomeIcon icon={faEllipsisH} />
+        <FontAwesomeIcon icon={faEllipsisV} />
       </button>
       <button
         aria-label="Settings"
