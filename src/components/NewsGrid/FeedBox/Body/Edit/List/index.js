@@ -12,14 +12,14 @@ import { feedType } from '../../../../../../propTypes'
 import css from './List.sass'
 
 const getTitle = (feed) => {
+  const title = feed.customTitle || feed.title
   switch (feed.status) {
     case FEED_STATUS.LOADING:
-    case FEED_STATUS.NEW:
-      return 'Loading…'
+      return `${title} (loading…)`
     case FEED_STATUS.ERROR:
       return 'Error loading!'
     default:
-      return feed.customTitle || feed.title
+      return title
   }
 }
 
