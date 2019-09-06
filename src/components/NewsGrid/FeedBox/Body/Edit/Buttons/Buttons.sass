@@ -1,0 +1,14 @@
+@import '../../../../../../style/_common.sass'
+@import '../../../../../../style/_buttons.sass'
+
+.buttons
+  display: flex
+  padding: $padding-lg 0 $padding-lg $padding-lg
+
+  button
+    +button
+    flex-grow: 1
+    margin-right: $padding-lg
+
+    &.deleteConfirm
+      +button-danger

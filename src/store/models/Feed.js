@@ -18,6 +18,7 @@ export default class Feed extends Model {
     return {
       id: attr(),
       url: attr({ getDefault: () => '' }),
+      customTitle: attr(),
       link: attr({ getDefault: () => '' }),
       title: attr({ getDefault: () => 'New feed' }),
       status: attr({ getDefault: () => FEED_STATUS.NEW }),
@@ -40,10 +41,7 @@ export default class Feed extends Model {
         break
       }
       case feedActionTypes.EDIT_FEED:
-        feedModel.withId(action.id).update(action.feed)
-        if (action.prevFeed.url !== action.feed.url) {
-          feedModel.withId(action.id).update({ lastFetched: undefined })
-        }
+        feedModel.withId(action.id).update(action.attrs)
         break
       case feedActionTypes.LOAD_FEED:
         feedModel.withId(action.id).update({
