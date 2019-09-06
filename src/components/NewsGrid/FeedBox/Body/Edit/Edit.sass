@@ -38,39 +38,3 @@
 
           button
             @extend .button-round-sm
-    .feeds
-      list-style-type: none
-      margin: 0
-      padding: $padding-md / 2 $padding-lg $padding-md / 2
-
-      li
-        display: flex
-        line-height: $button-diameter-xs
-        margin-bottom: $padding-sm
-
-        .icon
-          margin-right: $padding-sm
-          padding-top: 2px
-
-        .title
-          flex-grow: 1
-          overflow: hidden
-          padding-right: $padding-sm
-          text-overflow: ellipsis
-          white-space: nowrap
-
-        button
-          @extend .button-round-xs
-          min-width: $button-diameter-xs
-
-  .buttons
-    display: flex
-    padding: $padding-lg 0 $padding-lg $padding-lg
-
-    button
-      +button
-      flex-grow: 1
-      margin-right: $padding-lg
-
-      &.deleteConfirm
-        +button-danger

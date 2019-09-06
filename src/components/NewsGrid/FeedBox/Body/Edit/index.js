@@ -3,94 +3,25 @@ import PropTypes from 'prop-types'
 import { useDispatch } from 'react-redux'
 import classNames from 'classnames'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  faArrowLeft,
-  faPlus,
-  faTimes,
-  faTrash,
-} from '@fortawesome/free-solid-svg-icons'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import Scrollbar from 'react-custom-scrollbars'
 
-import FeedIcon from '../../../../FeedIcon'
+import List from './List'
+import Buttons from './Buttons'
 import { feedBoxType } from '../../../../../propTypes'
-import { addFeed, deleteFeed } from '../../../../../store/actions/feed'
+import { addFeed } from '../../../../../store/actions/feed'
 import { editFeedBox } from '../../../../../store/actions/feedBox'
-import { FEED_STATUS } from '../../../../../constants'
 import css from './Edit.sass'
 
-const Edit = ({
-  onBackClick,
-  onDeleteClick,
-  feedBox,
-}) => {
-  const [deleteConfirm, setDeleteConfirm] = useState(false)
+const Edit = ({ feedBox, onBackClick, onDeleteClick }) => {
   const [addUrl, setAddUrl] = useState('')
   const [feedBoxTitle, setFeedBoxTitle] = useState(feedBox.title || '')
   const dispatch = useDispatch()
   const inputRef = useRef()
   useEffect(() => { inputRef.current.focus() }, [])
 
-  const deleteButton = deleteConfirm
-    ? (
-      <button
-        className={css.deleteConfirm}
-        onClick={onDeleteClick}
-        type="button"
-      >
-        <FontAwesomeIcon icon={faTrash} />
-        Really?
-      </button>
-    )
-    : (
-      <button
-        onClick={() => setDeleteConfirm(true)}
-        type="button"
-      >
-        <FontAwesomeIcon icon={faTrash} />
-        Delete
-      </button>
-    )
-
-  const feeds = feedBox.feeds.map(
-    (feed) => {
-      let title
-      switch (feed.status) {
-        case FEED_STATUS.LOADING:
-        case FEED_STATUS.NEW:
-          title = 'Loading…'
-          break
-        case FEED_STATUS.ERROR:
-          title = 'Error loading!'
-          break
-        default:
-          title = feed.title
-          break
-      }
-      return (
-        <li key={feed.id.toString()}>
-          <FeedIcon className={css.icon} feed={feed} noLink />
-          <span className={css.title} title={feed.url}>
-            {title}
-          </span>
-          <button
-            className="nondraggable"
-            onClick={() => dispatch(deleteFeed(feed.id))}
-            title="Remove feed"
-            type="button"
-          >
-            <FontAwesomeIcon icon={faTimes} />
-          </button>
-        </li>
-      )
-    }
-  )
-
   const feedList = feedBox.feeds.length
-    ? (
-      <ul className={css.feeds}>
-        {feeds}
-      </ul>
-    )
+    ? <List feeds={feedBox.feeds} />
     : null
 
   const onAddFeedClick = () => {
@@ -126,10 +57,11 @@ const Edit = ({
             </div>
           </form>
           <h2>Feeds</h2>
-          <form>
+          <form onSubmit={(ev) => ev.preventDefault()}>
             <div className={classNames('nondraggable', css.row, css.addFeed)}>
               <input
                 onChange={(ev) => setAddUrl(ev.target.value.trim())}
+                onKeyUp={(ev) => ev.keyCode === 13 && onAddFeedClick()}
                 placeholder="Add feed URL…"
                 ref={inputRef}
                 type="text"
@@ -147,24 +79,15 @@ const Edit = ({
           {feedList}
         </Scrollbar>
       </div>
-      <div className={classNames('nondraggable', css.buttons)}>
-        <button
-          onClick={onBackClick}
-          type="button"
-        >
-          <FontAwesomeIcon icon={faArrowLeft} />
-          Back
-        </button>
-        {deleteButton}
-      </div>
+      <Buttons onBackClick={onBackClick} onDeleteClick={onDeleteClick} />
     </div>
   )
 }
 
 Edit.propTypes = {
+  feedBox: feedBoxType.isRequired,
   onBackClick: PropTypes.func.isRequired,
   onDeleteClick: PropTypes.func.isRequired,
-  feedBox: feedBoxType.isRequired,
 }
 
 export default Edit

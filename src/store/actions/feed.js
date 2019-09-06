@@ -19,6 +19,12 @@ export const deleteFeed = (id) => ({
   id,
 })
 
+export const editFeed = (id, attrs) => ({
+  type: actionTypes.DELETE_FEED,
+  id,
+  attrs,
+})
+
 export const loadFeedFailure = (id, error) => ({
   type: actionTypes.LOAD_FEED_FAILURE,
   id,
