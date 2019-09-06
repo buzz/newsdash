@@ -17,9 +17,9 @@ const generateLayout = (feedBoxes) => (
     w: feedBox.w,
     h: feedBox.h,
     minW: 1,
-    maxW: 2,
+    maxW: Infinity,
     minH: 2,
-    maxH: 12,
+    maxH: Infinity,
   }))
 )
 
