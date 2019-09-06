@@ -28,12 +28,20 @@ const fetchIntervalMax = 60
 const fetchIntervalStep = 5
 const fetchIntervalMarks = makeSliderMarks(fetchIntervalMin, fetchIntervalMax, fetchIntervalStep)
 
+const feedItemsToKeepIntervalMin = 20
+const feedItemsToKeepIntervalMax = 200
+const feedItemsToKeepIntervalStep = 20
+const feedItemsToKeepIntervalMarks = makeSliderMarks(
+  feedItemsToKeepIntervalMin, feedItemsToKeepIntervalMax, feedItemsToKeepIntervalStep
+)
+
 const Settings = ({ setShowSettings }) => {
   const dispatch = useDispatch()
 
   const {
     corsProxy: oldCorsProxy,
     faviconProxy: oldFaviconProxy,
+    feedItemsToKeep: oldFeedItemsToKeep,
     fetchInterval: oldFetchInterval,
     gridCols: oldGridCols,
   } = useSelector(getApp)
@@ -42,6 +50,7 @@ const Settings = ({ setShowSettings }) => {
   const [corsProxy, setCorsProxy] = useState(oldCorsProxy)
   const [faviconProxy, setFaviconProxy] = useState(oldFaviconProxy)
   const [fetchInterval, setFetchInterval] = useState(oldFetchInterval)
+  const [feedItemsToKeep, setFeedItemsToKeep] = useState(oldFeedItemsToKeep)
 
   return (
     <div className={css.settings}>
@@ -87,6 +96,23 @@ const Settings = ({ setShowSettings }) => {
                 const valMilli = val * 60 * 1000
                 setFetchInterval(valMilli)
                 dispatch(updateSettings({ fetchInterval: valMilli }))
+              }}
+            />
+          </div>
+        </div>
+        <div className={css.row}>
+          <span>Keep feed items</span>
+          <div className={css.sliderWrapper}>
+            <Slider
+              className={css.slider}
+              defaultValue={feedItemsToKeep}
+              marks={feedItemsToKeepIntervalMarks}
+              max={feedItemsToKeepIntervalMax}
+              min={feedItemsToKeepIntervalMin}
+              step={feedItemsToKeepIntervalStep}
+              onChange={(val) => {
+                setFeedItemsToKeep(val)
+                dispatch(updateSettings({ feedItemsToKeep: val }))
               }}
             />
           </div>
