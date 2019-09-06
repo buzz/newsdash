@@ -64,7 +64,6 @@ export default class Feed extends Model {
             // prefix ID with feed ID to prevent collisions
             id: `${action.id}${item.id || item.guid || item.link}`,
             link: item.link,
-            date: Date.parse(item.isoDate),
             title: item.title,
             feed: action.id,
           }
@@ -75,7 +74,13 @@ export default class Feed extends Model {
           if (item.enclosure && item.enclosure.url) {
             feedItem.imageUrl = item.enclosure.url
           }
-          session.FeedItem.upsert(feedItem)
+          const newFeedItem = session.FeedItem.upsert(feedItem)
+          if (item.isoDate) {
+            newFeedItem.update({ date: Date.parse(item.isoDate) })
+          } else if (!newFeedItem.date) {
+            // if no date is present, we need set Date.now() on first fetch
+            newFeedItem.update({ date: Date.now() })
+          }
         })
         feedModel.withId(action.id).update({
           title: action.data.title,

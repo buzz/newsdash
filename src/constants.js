@@ -2,6 +2,10 @@ export const DEFAULT_CORS_PROXY = 'https://cors-anywhere.herokuapp.com/'
 export const DEFAULT_FAVICON_PROXY = 'http://www.google.com/s2/favicons?domain='
 
 export const DEFAULT_FETCH_INTERVAL = 10 * 60 * 1000
+export const PRUNE_INTERVAL = 5 * 60 * 1000
+export const FETCH_CHECK_INTERVAL = 30 * 1000
+export const MAX_FEED_ITEMS_TO_KEEP = 100
+
 export const DEFAULT_GRID_COLS = 4
 export const MAX_CONTENT_LENGTH = 300
 

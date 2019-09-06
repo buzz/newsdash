@@ -21,11 +21,25 @@ export default class FeedItem extends Model {
 
   static reducer(action, feedItemModel, session) {
     switch (action.type) {
-      case feedItemActionTypes.PRUNE:
-        session.Feed.withId(action.feedId).items.toModelArray().forEach(
-          (item) => item.delete()
-        )
+      case feedItemActionTypes.PRUNE: {
+        const { feedItemsToKeep } = session.App.first().ref
+        session
+          .Feed
+          .all()
+          .toModelArray()
+          .forEach(
+            (feed) => feed
+              .items
+              .toModelArray()
+              .sort((a, b) => b.date - a.date) // sort by date
+              .forEach((feedItem, i) => {
+                if (i >= feedItemsToKeep) {
+                  feedItem.delete()
+                }
+              })
+          )
         break
+      }
       default:
         break
     }
