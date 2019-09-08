@@ -2,7 +2,8 @@
 
 =button-base
   background-color: $color-button-bg
-  border: none
+  border-radius: $border-radius
+  border: 1px solid $color-control-border
   color: $color-button-text
   cursor: pointer
   outline: none
@@ -33,6 +34,7 @@
   .button-round-#{$size}
     +button-base
     border-radius: $button-diameter / 2
+    border: none
     font-size: $font-size
     height: $button-diameter
     line-height: $button-diameter
