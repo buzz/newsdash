@@ -1,7 +1,18 @@
 import { createSelector } from 'redux-orm'
+import tinycolor from 'tinycolor2'
 
 import orm from '../orm'
 import getOrm from './orm'
+
+const getColors = (hue) => {
+  const baseColor = tinycolor({ h: hue, s: 1.0, l: 0.5 }).desaturate(85).lighten(45)
+  return {
+    bg: baseColor.toHexString(),
+    border: baseColor.clone().darken(20).toHexString(),
+    headerBg: baseColor.clone().darken(9).toHexString(),
+    tabsBg: baseColor.clone().darken(4).toHexString(),
+  }
+}
 
 const getFeedBoxes = createSelector(
   orm,
@@ -13,6 +24,7 @@ const getFeedBoxes = createSelector(
     .map((feedBox) => ({
       ...feedBox.ref,
       feeds: feedBox.feeds.toRefArray(),
+      colors: getColors(feedBox.hue),
     }))
 )
 

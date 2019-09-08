@@ -7,6 +7,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import Scrollbar from 'react-custom-scrollbars'
 
 import List from './List'
+import HueSlider from './HueSlider'
 import Buttons from './Buttons'
 import { feedBoxType } from '../../../../../propTypes'
 import { addFeed } from '../../../../../store/actions/feed'
@@ -53,6 +54,14 @@ const Edit = ({ feedBox, onBackClick, onDeleteClick }) => {
                 placeholder="Custom title…"
                 type="text"
                 value={feedBoxTitle}
+              />
+            </div>
+            <div className={classNames('nondraggable', css.row)}>
+              <HueSlider
+                feedBox={feedBox}
+                onChange={
+                  (hue) => dispatch(editFeedBox(feedBox.id, { hue }))
+                }
               />
             </div>
           </form>
