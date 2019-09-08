@@ -38,9 +38,6 @@ const Body = ({
   if (!feeds.length) {
     return (
       <div className={css.feedMessage}>
-        <p>
-          No feeds to display…
-        </p>
         <button
           className="nondraggable"
           onClick={() => setEditMode(true)}
