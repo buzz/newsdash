@@ -21,8 +21,13 @@ const FeedBox = ({ feedBox }) => {
     }
   }, [activeFeedId, feeds])
 
+  const style = {
+    backgroundColor: feedBox.colors.bg,
+    borderColor: feedBox.colors.border,
+  }
+
   return (
-    <div className={css.feedBox}>
+    <div className={css.feedBox} style={style}>
       <Header
         editMode={editMode}
         feed={feeds.find((feed) => feed.id === activeFeedId)}

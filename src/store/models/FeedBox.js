@@ -10,7 +10,7 @@ export default class FeedBox extends Model {
   static get fields() {
     return {
       id: attr(),
-      color: attr({ getDefault: () => '' }), // TODO random color
+      hue: attr({ getDefault: () => Math.round(Math.random() * 360) }),
       title: attr(),
       x: attr({ getDefault: () => 0 }),
       y: attr({ getDefault: () => 0 }),

@@ -81,8 +81,13 @@ const Header = ({
       </div>
     )
 
+  const headerStyle = {
+    backgroundColor: feedBox.colors.headerBg,
+    borderColor: feedBox.colors.border,
+  }
+
   return (
-    <div className={css.feedHeader}>
+    <div className={css.feedHeader} style={headerStyle}>
       {icon}
       {headerTitle}
       {buttons}

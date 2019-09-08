@@ -4,7 +4,7 @@ import { FEED_STATUS } from './constants'
 
 export const feedBoxType = PropTypes.shape({
   id: PropTypes.number.isRequired,
-  color: PropTypes.string.isRequired,
+  hue: PropTypes.number.isRequired,
   x: PropTypes.number.isRequired,
   y: PropTypes.number.isRequired,
   w: PropTypes.number.isRequired,

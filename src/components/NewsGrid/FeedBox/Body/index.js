@@ -64,6 +64,7 @@ const Body = ({
     return (
       <Tabs
         activeFeedId={activeFeedId}
+        feedBox={feedBox}
         feeds={feeds}
         setActiveFeedId={setActiveFeedId}
       />
