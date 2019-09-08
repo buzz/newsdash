@@ -23,7 +23,10 @@ const getFeedBoxes = createSelector(
     .toModelArray()
     .map((feedBox) => ({
       ...feedBox.ref,
-      feeds: feedBox.feeds.toRefArray(),
+      feeds: feedBox
+        .feeds
+        .toRefArray()
+        .sort((a, b) => a.index - b.index),
       colors: getColors(feedBox.hue),
     }))
 )

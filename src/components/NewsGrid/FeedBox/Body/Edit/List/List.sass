@@ -1,37 +1,6 @@
 @import '../../../../../../style/_common.sass'
-@import '../../../../../../style/_buttons.sass'
 
 .feeds
   list-style-type: none
   margin: 0
   padding: $padding-md / 2 $padding-lg $padding-md / 2
-
-  li
-    display: flex
-    line-height: 24px
-    margin: $padding-sm / 2 0
-
-    .icon
-      margin-right: $padding-sm
-      padding-top: 2px
-
-    .title
-      flex-grow: 1
-      overflow: hidden
-      padding-right: $padding-sm
-      text-overflow: ellipsis
-      white-space: nowrap
-
-    .editForm
-      flex-grow: 1
-
-      input
-        box-sizing: border-box
-        width: 100%
-
-    .buttons
-
-      button
-        @extend .button-round-xs
-        min-width: $button-diameter-xs
-        margin-left: $padding-sm

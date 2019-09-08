@@ -23,6 +23,7 @@ export default class Feed extends Model {
       title: attr({ getDefault: () => 'New feed' }),
       status: attr({ getDefault: () => FEED_STATUS.NEW }),
       error: attr(),
+      index: attr(),
       lastFetched: attr({ getDefault: () => 0 }),
       useCorsProxy: attr({ getDefault: () => false }),
       feedBox: fk('FeedBox', 'feeds'),
@@ -31,9 +32,25 @@ export default class Feed extends Model {
 
   static reducer(action, feedModel, session) {
     switch (action.type) {
-      case feedActionTypes.ADD_FEED:
-        feedModel.create({ feedBox: action.feedBoxId, url: action.url })
+      case feedActionTypes.ADD_FEED: {
+        // find highest index
+        const feeds = session
+          .FeedBox
+          .withId(action.feedBoxId)
+          .feeds
+          .toRefArray()
+        const index = feeds.length
+          ? feeds
+            .map((feed) => feed.index)
+            .sort((a, b) => b - a)[0] + 1
+          : 0
+        feedModel.create({
+          feedBox: action.feedBoxId,
+          index,
+          url: action.url,
+        })
         break
+      }
       case feedActionTypes.DELETE_FEED: {
         const feed = feedModel.withId(action.id)
         feed.items.toModelArray().map((item) => item.delete())
