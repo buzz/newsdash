@@ -15,9 +15,6 @@ const getTitle = (feed, feedBox, editMode) => {
   if (editMode) {
     return 'Edit'
   }
-  if (feed && feed.status === FEED_STATUS.ERROR) {
-    return `Error: ${feed.customTitle || feed.title}`
-  }
   if (feedBox.title) {
     return feedBox.title
   }

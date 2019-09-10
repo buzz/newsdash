@@ -4,11 +4,14 @@ import classNames from 'classnames'
 import Tabs, { TabPane } from 'rc-tabs'
 import TabContent from 'rc-tabs/lib/TabContent'
 import ScrollableTabBar from 'rc-tabs/lib/ScrollableTabBar'
-import 'rc-tabs/assets/index.css'
 import Scrollbar from 'react-custom-scrollbars'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faExclamationTriangle, faSync } from '@fortawesome/free-solid-svg-icons'
+import 'rc-tabs/assets/index.css'
 
-import { feedBoxType, feedType } from '../../../../../propTypes'
 import Feed from '../Feed'
+import { feedBoxType, feedType } from '../../../../../propTypes'
+import { FEED_STATUS } from '../../../../../constants'
 import css from './Tabs.sass'
 
 const FeedTabs = ({
@@ -26,17 +29,46 @@ const FeedTabs = ({
       <Tabs
         activeKey={activeFeedId.toString()}
         onChange={(key) => setActiveFeedId(parseInt(key, 10))}
-        renderTabBar={() => <ScrollableTabBar className={classNames('nondraggable', css.tabsBar)} style={scrollableTabBarStyle} />}
+        renderTabBar={() => <ScrollableTabBar className={classNames('nondraggable', css.tabBar)} style={scrollableTabBarStyle} />}
         renderTabContent={() => <TabContent />}
       >
         {
-          feeds.map((feed) => (
-            <TabPane key={feed.id.toString()} tab={feed.customTitle || feed.title}>
-              <Scrollbar autoHide>
-                <Feed feed={feed} />
-              </Scrollbar>
-            </TabPane>
-          ))
+          feeds.map((feed) => {
+            let tabIcon = null
+            if (feed.status === FEED_STATUS.LOADING) {
+              tabIcon = (
+                <FontAwesomeIcon
+                  className={css.tabIcon}
+                  fixedWidth
+                  icon={faSync}
+                  spin
+                  title={`Failed to update feed: ${feed.error}`}
+                />
+              )
+            } else if (feed.status === FEED_STATUS.ERROR) {
+              tabIcon = (
+                <FontAwesomeIcon
+                  className={classNames(css.tabIcon, css.error)}
+                  fixedWidth
+                  icon={faExclamationTriangle}
+                  title={`Failed to update feed: ${feed.error}`}
+                />
+              )
+            }
+            const tabContent = (
+              <>
+                {feed.customTitle || feed.title}
+                {tabIcon}
+              </>
+            )
+            return (
+              <TabPane key={feed.id.toString()} tab={tabContent}>
+                <Scrollbar autoHide>
+                  <Feed feed={feed} />
+                </Scrollbar>
+              </TabPane>
+            )
+          })
         }
       </Tabs>
     </div>
