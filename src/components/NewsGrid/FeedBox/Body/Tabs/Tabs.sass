@@ -8,7 +8,7 @@
     flex-direction: column
     height: 100%
 
-    .tabsBar
+    .tabBar
       border-bottom-style: solid
       border-bottom-width: 1px
 
@@ -24,7 +24,7 @@
         \:global(.rc-tabs-tab)
           color: $color-text-bright
           margin: 0
-          padding: $padding-sm $padding-sm $padding-sm / 2
+          padding: $padding-sm $padding-md $padding-sm / 2
 
           &:hover
             color: black
@@ -35,3 +35,10 @@
 
     \:global(.rc-tabs-content)
       flex-grow: 1
+
+    .tabIcon
+      font-size: 80%
+      margin-left: $padding-sm
+
+      &.error
+        color: $color-danger

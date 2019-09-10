@@ -11,7 +11,7 @@ const Feed = ({ feed }) => {
   const getFeedItems = useMemo(feedItemSelectors.makeGetFeedItems, [])
   const feedItems = useSelector((state) => getFeedItems(state, feed ? feed.id : null))
 
-  if (feed.status === FEED_STATUS.ERROR) {
+  if (feed.status === FEED_STATUS.ERROR && !feedItems.length) {
     return (
       <div className={css.feedMessage}>
         <p>
