@@ -1,12 +1,12 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux'
 import { createReducer } from 'redux-orm'
 import createSagaMiddleware from 'redux-saga'
-import throttle from 'lodash/throttle'
+import reduceReducers from 'reduce-reducers'
 
 import orm from './orm'
+import loadStateReducer from './loadStateReducer'
 import defaultInitialState from './defaultInitialState'
 import rootSaga from '../sagas'
-import { loadState, saveState } from './localStorage'
 
 // add redux devtools
 const bindMiddleware = (middleware) => {
@@ -21,19 +21,16 @@ const bindMiddleware = (middleware) => {
 
 // create store and run root saga
 const makeStore = () => {
-  const rootReducer = combineReducers({ orm: createReducer(orm) })
+  const rootReducer = combineReducers({
+    orm: reduceReducers(null, loadStateReducer, createReducer(orm)),
+  })
   const sagaMiddleware = createSagaMiddleware()
   const store = createStore(
     rootReducer,
-    loadState() || defaultInitialState(),
+    defaultInitialState(),
     bindMiddleware([sagaMiddleware])
   )
   store.sagaTask = sagaMiddleware.run(rootSaga)
-  store.subscribe(
-    throttle(() => {
-      saveState(store.getState())
-    }, 1000)
-  )
   return store
 }
 
