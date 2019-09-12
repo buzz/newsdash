@@ -2,6 +2,8 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const TerserJSPlugin = require('terser-webpack-plugin')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 
 const devMode = process.env.NODE_ENV !== 'production'
@@ -15,7 +17,11 @@ const config = {
   output: {
     path: DIST_DIR,
     publicPath: '/',
-    filename: 'bundle.js',
+    filename: devMode ? 'newsdash.js' : 'newsdash.[hash].js',
+  },
+  optimization: {
+    minimize: !devMode,
+    minimizer: [new TerserJSPlugin(), new OptimizeCSSAssetsPlugin()],
   },
   module: {
     rules: [

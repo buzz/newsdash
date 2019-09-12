@@ -18,8 +18,8 @@
     "url": "https://github.com/buzz/newsdash.git"
   },
   "scripts": {
-    "build": "webpack -p --mode production",
-    "bundle-analyze": "BUNDLE_ANALYZE=1 webpack -p --mode production",
+    "build": "NODE_ENV=production webpack -p --mode production",
+    "bundle-analyze": "BUNDLE_ANALYZE=1 yarn build",
     "dev": "webpack-dev-server",
     "lint": "eslint ."
   },
@@ -83,9 +83,11 @@
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.8.0",
     "node-sass": "^4.9.1",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
     "redux-devtools-extension": "^2.13.8",
     "sass-loader": "^8.0.0",
     "style-loader": "^1.0.0",
+    "terser-webpack-plugin": "^2.0.1",
     "webpack": "^4.12.0",
     "webpack-bundle-analyzer": "^3.4.1",
     "webpack-cli": "^3.0.8",
