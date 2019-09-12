@@ -73,7 +73,14 @@ export default class Feed extends Model {
           lastFetched: undefined,
         })
         break
-      case feedActionTypes.LOAD_FEED_SUCCESS:
+      case feedActionTypes.LOAD_FEED_SUCCESS: {
+        const feed = feedModel.withId(action.id)
+
+        feed.items.toModelArray().forEach(
+          // set new=false on all old feed items
+          (feedItem) => feedItem.update({ new: false })
+        )
+
         action.data.items.forEach((item) => {
           const feedItem = {
             // prefix ID with feed ID to prevent collisions
@@ -97,7 +104,7 @@ export default class Feed extends Model {
             newFeedItem.update({ date: Date.now() })
           }
         })
-        feedModel.withId(action.id).update({
+        feed.update({
           title: action.data.title,
           link: action.data.link,
           status: FEED_STATUS.LOADED,
@@ -105,6 +112,7 @@ export default class Feed extends Model {
           lastFetched: Date.now(),
         })
         break
+      }
       case feedActionTypes.SET_USE_CORS_PROXY:
         feedModel.withId(action.id).update({ useCorsProxy: action.value })
         break

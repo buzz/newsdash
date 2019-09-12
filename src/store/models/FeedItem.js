@@ -15,6 +15,7 @@ export default class FeedItem extends Model {
       title: attr(),
       content: attr(),
       imageUrl: attr(),
+      new: attr({ getDefault: () => true }),
       feed: fk('Feed', 'items'),
     }
   }
