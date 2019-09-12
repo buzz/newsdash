@@ -66,8 +66,14 @@ const Item = ({ item }) => {
     </a>
   )
 
+  const feedItemClassNames = classNames(
+    'nondraggable',
+    css.feedItem,
+    { [css.new]: item.new }
+  )
+
   return (
-    <li className={classNames('nondraggable', css.feedItem)}>
+    <li className={feedItemClassNames}>
       {
         item.content
           ? (
