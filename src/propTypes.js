@@ -13,6 +13,7 @@ export const feedBoxType = PropTypes.shape({
   id: PropTypes.number.isRequired,
   colors: colorsType.isRequired,
   hue: PropTypes.number.isRequired,
+  title: PropTypes.number,
   x: PropTypes.number.isRequired,
   y: PropTypes.number.isRequired,
   w: PropTypes.number.isRequired,
@@ -31,9 +32,12 @@ export const feedItemType = PropTypes.shape({
 export const feedType = PropTypes.shape({
   id: PropTypes.number.isRequired,
   url: PropTypes.string.isRequired,
+  customTitle: PropTypes.string,
   link: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   status: PropTypes.oneOf(Object.values(FEED_STATUS)),
   error: PropTypes.string,
+  index: PropTypes.number.isRequired,
   lastFetched: PropTypes.number,
+  useCorsProxy: PropTypes.bool.isRequired,
 })
