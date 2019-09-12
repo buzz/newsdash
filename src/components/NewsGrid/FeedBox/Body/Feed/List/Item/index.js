@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { format } from 'timeago.js'
 import Tooltip from 'rc-tooltip'
@@ -9,7 +10,33 @@ import { feedItemType } from '../../../../../../../propTypes'
 
 import css from './Item.sass'
 
-const dateFormat = (date) => format(date).replace(' ago', '')
+const dateFormat = (date) => (
+  format(date)
+    .replace(/minutes?/, 'min')
+    .replace(/hours?/, 'h')
+    .replace(' ago', '')
+)
+
+const ItemDate = ({ date }) => {
+  const [redrawTimer, setRedrawTimer] = useState(0)
+  useEffect(() => {
+    const interval = setInterval(
+      () => setRedrawTimer((old) => old + 1),
+      15 * 1000
+    )
+    return () => clearInterval(interval)
+  }, [redrawTimer])
+
+  return (
+    <span className={css.itemDate}>
+      {dateFormat(date)}
+    </span>
+  )
+}
+
+ItemDate.propTypes = {
+  date: PropTypes.number.isRequired,
+}
 
 const Item = ({ item }) => {
   const tooltipContent = item.content
@@ -23,11 +50,7 @@ const Item = ({ item }) => {
     : null
 
   const itemDate = item.date
-    ? (
-      <span className={css.itemDate}>
-        {dateFormat(item.date)}
-      </span>
-    )
+    ? <ItemDate date={item.date} />
     : null
 
   const itemLink = (
