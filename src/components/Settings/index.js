@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import classNames from 'classnames'
 import { useDispatch, useSelector } from 'react-redux'
 import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faFileImport, faTimes } from '@fortawesome/free-solid-svg-icons'
 
 import css from './Settings.sass'
 import getApp from '../../store/selectors/app'
-import { updateSettings } from '../../store/actions/app'
+import getOrm from '../../store/selectors/orm'
+import { importState, updateSettings } from '../../store/actions/app'
 
 const makeSliderMarks = (min, max, step) => {
   let marks = {}
@@ -45,25 +47,19 @@ const Settings = ({ setShowSettings }) => {
     fetchInterval: oldFetchInterval,
     gridCols: oldGridCols,
   } = useSelector(getApp)
+  const ormState = useSelector(getOrm)
 
   const [gridCols, setGridCols] = useState(oldGridCols)
   const [corsProxy, setCorsProxy] = useState(oldCorsProxy)
   const [faviconProxy, setFaviconProxy] = useState(oldFaviconProxy)
   const [fetchInterval, setFetchInterval] = useState(oldFetchInterval)
   const [feedItemsToKeep, setFeedItemsToKeep] = useState(oldFeedItemsToKeep)
+  const [importData, setImportData] = useState()
 
   return (
     <div className={css.settings}>
-      <button
-        aria-label="Close settings"
-        className={css.buttonClose}
-        onClick={() => setShowSettings(false)}
-        title="Close settings"
-        type="button"
-      >
-        <FontAwesomeIcon icon={faTimes} />
-      </button>
       <h1>Settings</h1>
+
       <form>
         <div className={css.row}>
           <span>Grid columns</span>
@@ -82,6 +78,7 @@ const Settings = ({ setShowSettings }) => {
             />
           </div>
         </div>
+
         <div className={css.row}>
           <span>Feed fetch interval (min)</span>
           <div className={css.sliderWrapper}>
@@ -100,6 +97,7 @@ const Settings = ({ setShowSettings }) => {
             />
           </div>
         </div>
+
         <div className={css.row}>
           <span>Keep feed items</span>
           <div className={css.sliderWrapper}>
@@ -117,6 +115,7 @@ const Settings = ({ setShowSettings }) => {
             />
           </div>
         </div>
+
         <div className={css.row}>
           <label htmlFor="faviconProxyInput">Favicon proxy</label>
           <input
@@ -130,6 +129,7 @@ const Settings = ({ setShowSettings }) => {
             value={faviconProxy}
           />
         </div>
+
         <div className={css.row}>
           <label htmlFor="corsProxyInput">CORS proxy</label>
           <input
@@ -144,6 +144,57 @@ const Settings = ({ setShowSettings }) => {
           />
         </div>
       </form>
+
+      <h1>Import/Export</h1>
+
+      <form>
+        <div className={classNames(css.row, css.rowFull)}>
+          <p>
+            You can transfer your settings to another computer by copying it
+            from the export field and pasting it into the input field.
+          </p>
+        </div>
+
+        <div className={css.row}>
+          <label htmlFor="importInput">Import</label>
+          <div className={css.inputAndButton}>
+            <input
+              id="importInput"
+              onChange={(ev) => setImportData(ev.currentTarget.value.trim())}
+              type="text"
+            />
+            <button
+              className={css.button}
+              onClick={() => dispatch(importState(JSON.parse(importData)))}
+              type="button"
+            >
+              <FontAwesomeIcon icon={faFileImport} />
+              Import
+            </button>
+          </div>
+        </div>
+
+        <div className={css.row}>
+          <label htmlFor="exportInput">Export</label>
+          <input
+            id="exportInput"
+            onFocus={(ev) => ev.target.select()}
+            readOnly
+            type="text"
+            value={JSON.stringify(ormState)}
+          />
+        </div>
+      </form>
+
+      <button
+        aria-label="Close settings"
+        className={css.buttonClose}
+        onClick={() => setShowSettings(false)}
+        title="Close settings"
+        type="button"
+      >
+        <FontAwesomeIcon icon={faTimes} />
+      </button>
     </div>
   )
 }

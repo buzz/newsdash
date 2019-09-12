@@ -9,9 +9,11 @@
 
 .settings
 
+  > :first-child
+    margin-top: 0
+
   h1
     font-size: 160%
-    margin-top: 0
 
   .row
     $h: 25px
@@ -19,20 +21,42 @@
     padding: $padding-md / 2 0
     margin-bottom: $padding-lg
 
+    &.rowFull
+
+      > :first-child
+        line-height: inherit
+        margin-top: 0
+        text-overflow: inherit
+        white-space: inherit
+        width: 100%
+
+      p
+        margin: $padding-md 0
+
     &:last-child
       margin-bottom: 0
 
     > :first-child
       line-height: $h
       overflow: hidden
-      padding-right: $padding-lg
       text-overflow: ellipsis
       white-space: nowrap
       width: 45%
 
     > :nth-child(2)
+      box-sizing: border-box
       flex-grow: 1
       width: 55%
+
+    .inputAndButton
+      display: flex
+
+      input
+        flex-grow: 1
+
+      button
+        +button
+        margin-left: $padding-md
 
 .sliderWrapper
   padding: 0 $padding-lg
