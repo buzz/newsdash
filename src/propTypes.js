@@ -2,8 +2,16 @@ import PropTypes from 'prop-types'
 
 import { FEED_STATUS } from './constants'
 
+const colorsType = PropTypes.shape({
+  bg: PropTypes.string.isRequired,
+  border: PropTypes.string.isRequired,
+  headerBg: PropTypes.string.isRequired,
+  tabsBg: PropTypes.string.isRequired,
+})
+
 export const feedBoxType = PropTypes.shape({
   id: PropTypes.number.isRequired,
+  colors: colorsType.isRequired,
   hue: PropTypes.number.isRequired,
   x: PropTypes.number.isRequired,
   y: PropTypes.number.isRequired,
