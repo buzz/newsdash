@@ -2,9 +2,11 @@ import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 
 import List from './List'
+import Regular from './Regular'
+import Tiles from './Tiles'
 import feedItemSelectors from '../../../../../store/selectors/feedItem'
 import { feedType } from '../../../../../propTypes'
-import { FEED_STATUS } from '../../../../../constants'
+import { FEED_STATUS, FEED_DISPLAY } from '../../../../../constants'
 import css from '../Body.sass'
 
 const Feed = ({ feed }) => {
@@ -45,7 +47,20 @@ const Feed = ({ feed }) => {
     )
   }
 
-  return <List items={feedItems} />
+  switch (feed.display) {
+    case FEED_DISPLAY.CONDENSED_LIST:
+      return <List condensed items={feedItems} />
+    case FEED_DISPLAY.LIST:
+      return <List items={feedItems} />
+    case FEED_DISPLAY.REGULAR:
+      return <Regular items={feedItems} />
+    case FEED_DISPLAY.TILES:
+      return <Tiles items={feedItems} />
+    default:
+      break
+  }
+
+  return null
 }
 
 Feed.propTypes = {

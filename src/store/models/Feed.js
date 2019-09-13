@@ -1,6 +1,6 @@
 import { Model, attr, fk } from 'redux-orm'
 
-import { FEED_STATUS, MAX_CONTENT_LENGTH } from '../../constants'
+import { FEED_STATUS, FEED_DISPLAY, MAX_CONTENT_LENGTH } from '../../constants'
 import { actionTypes as feedActionTypes } from '../actions/feed'
 
 const truncate = (text) => (
@@ -22,6 +22,7 @@ export default class Feed extends Model {
       link: attr({ getDefault: () => '' }),
       title: attr({ getDefault: () => 'New feed' }),
       status: attr({ getDefault: () => FEED_STATUS.NEW }),
+      display: attr({ getDefault: () => FEED_DISPLAY.REGULAR }),
       error: attr(),
       index: attr(),
       lastFetched: attr({ getDefault: () => 0 }),

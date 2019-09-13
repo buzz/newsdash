@@ -1,12 +1,23 @@
 @import '../../../../../../../style/_common.sass'
 
 .feedItem
+  +text-shadow
 
   &.new
     background-color: $color-new-item-bg
 
+  &.condensed
+
+    a
+      border-bottom: none
+      padding: $padding-md / 2 $padding-lg $padding-md / 2
+
+  &:last-child a
+    border-bottom: none
+
   a
-    padding: $padding-md / 2 $padding-lg $padding-md / 2
+    border-bottom: 1px solid fade-out(black, 0.9)
+    padding: $padding-md $padding-lg $padding-md
     display: flex
 
     &:hover

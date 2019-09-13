@@ -15,3 +15,17 @@ export const FEED_STATUS = {
   LOADING: 'LOADING',
   ERROR: 'ERROR',
 }
+
+export const FEED_DISPLAY = {
+  CONDENSED_LIST: 'CONDENSED_LIST',
+  LIST: 'LIST',
+  REGULAR: 'REGULAR',
+  TILES: 'TILES',
+}
+
+export const FEED_DISPLAY_OPTIONS = {
+  CONDENSED_LIST: 'List (condensed)',
+  LIST: 'List',
+  REGULAR: 'Normal',
+  TILES: 'Tiles',
+}
