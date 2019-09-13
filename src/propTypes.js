@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 
-import { FEED_STATUS } from './constants'
+import { FEED_STATUS, FEED_DISPLAY } from './constants'
 
 const colorsType = PropTypes.shape({
   bg: PropTypes.string.isRequired,
@@ -13,7 +13,7 @@ export const feedBoxType = PropTypes.shape({
   id: PropTypes.number.isRequired,
   colors: colorsType.isRequired,
   hue: PropTypes.number.isRequired,
-  title: PropTypes.number,
+  title: PropTypes.string,
   x: PropTypes.number.isRequired,
   y: PropTypes.number.isRequired,
   w: PropTypes.number.isRequired,
@@ -36,6 +36,7 @@ export const feedType = PropTypes.shape({
   link: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   status: PropTypes.oneOf(Object.values(FEED_STATUS)),
+  display: PropTypes.oneOf(Object.values(FEED_DISPLAY)),
   error: PropTypes.string,
   index: PropTypes.number.isRequired,
   lastFetched: PropTypes.number,

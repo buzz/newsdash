@@ -15,11 +15,16 @@ a
   &:hover
     color: $color-text-hover
 
-input
+input, select
   background-color: $color-control-bg
   border-radius: $border-radius
   border: 1px solid $color-control-border
+
+input
   padding: $padding-sm
+
+select
+  padding: 0
 
 \:global(.react-draggable-dragging)
   opacity: 0.7

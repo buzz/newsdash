@@ -18,7 +18,7 @@ const onEntering = (node) => {
   node.style.marginTop = ''
 }
 
-const List = ({ items }) => (
+const List = ({ condensed, items }) => (
   <TransitionGroup className={css.feedList} component="ul">
     {
       items.map(
@@ -30,7 +30,7 @@ const List = ({ items }) => (
             onEnter={onEnter}
             onEntering={onEntering}
           >
-            <Item item={item} />
+            <Item condensed={condensed} item={item} />
           </CSSTransition>
         )
       )
@@ -38,7 +38,12 @@ const List = ({ items }) => (
   </TransitionGroup>
 )
 
+List.defaultProps = {
+  condensed: false,
+}
+
 List.propTypes = {
+  condensed: PropTypes.bool,
   items: PropTypes.arrayOf(feedItemType).isRequired,
 }
 

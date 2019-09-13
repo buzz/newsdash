@@ -38,7 +38,7 @@ ItemDate.propTypes = {
   date: PropTypes.number.isRequired,
 }
 
-const Item = ({ item }) => {
+const Item = ({ condensed, item }) => {
   const tooltipContent = item.content
     ? (
       <TooltipContent
@@ -69,7 +69,10 @@ const Item = ({ item }) => {
   const feedItemClassNames = classNames(
     'nondraggable',
     css.feedItem,
-    { [css.new]: item.new }
+    {
+      [css.condensed]: condensed,
+      [css.new]: item.new,
+    }
   )
 
   return (
@@ -92,7 +95,12 @@ const Item = ({ item }) => {
   )
 }
 
+Item.defaultProps = {
+  condensed: false,
+}
+
 Item.propTypes = {
+  condensed: PropTypes.bool,
   item: feedItemType.isRequired,
 }
 
