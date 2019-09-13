@@ -43,7 +43,6 @@
     "@fortawesome/free-solid-svg-icons": "^5.10.2",
     "@fortawesome/react-fontawesome": "^0.1.4",
     "classnames": "^2.2.6",
-    "lodash": "^4.17.15",
     "prop-types": "^15.7.2",
     "rc-slider": "^8.7.0",
     "rc-tabs": "^9.6.6",
@@ -52,6 +51,7 @@
     "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.8.1",
     "react-grid-layout": "^0.16.6",
+    "react-masonry-css": "^1.0.12",
     "react-modal": "^3.10.1",
     "react-redux": "^7.1.1",
     "react-resizable": "^1.8.0",
@@ -61,6 +61,7 @@
     "redux": "^4.0.4",
     "redux-orm": "^0.13.3",
     "redux-saga": "^1.0.5",
+    "resize-observer-polyfill": "^1.5.1",
     "rss-parser": "^3.7.2",
     "timeago.js": "^4.0.0-beta.2",
     "tinycolor2": "^1.4.1"

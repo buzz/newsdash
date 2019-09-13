@@ -4,7 +4,7 @@ import Tooltip from 'rc-tooltip'
 import 'rc-tooltip/assets/bootstrap.css'
 
 import Image from './Image'
-import ItemDate from './ItemDate'
+import Date from '../../Date'
 import TooltipContent from './TooltipContent'
 import { FEED_DISPLAY } from '../../../../../../../constants'
 import { feedItemType, feedItemListType } from '../../../../../../../propTypes'
@@ -21,8 +21,8 @@ const Item = ({ item, type }) => {
     )
     : null
 
-  const itemDate = item.date
-    ? <ItemDate date={item.date} />
+  const date = item.date
+    ? <Date className={css.date} date={item.date} />
     : null
 
   const itemDisplay = type === FEED_DISPLAY.DETAILED
@@ -38,7 +38,7 @@ const Item = ({ item, type }) => {
             <span className={css.itemTitle}>
               {item.title}
             </span>
-            {itemDate}
+            {date}
           </span>
           <span className={css.itemContent}>
             {item.content}
@@ -51,7 +51,7 @@ const Item = ({ item, type }) => {
         <span className={css.itemTitle}>
           {item.title}
         </span>
-        {itemDate}
+        {date}
       </>
     )
 
