@@ -1,5 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
@@ -85,6 +86,22 @@ const config = {
     new MiniCssExtractPlugin({
       filename: devMode ? '[name].css' : '[name].[hash].css',
       chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+    }),
+    new FaviconsWebpackPlugin({
+      logo: path.join(SRC_DIR, 'static', 'logo.svg'),
+      favicons: {
+        icons: {
+          android: true,
+          appleIcon: true,
+          appleStartup: false,
+          coast: false,
+          favicons: true,
+          firefox: false,
+          windows: false,
+          yandex: false,
+        },
+        start_url: '/',
+      },
     }),
   ],
 }
