@@ -14,7 +14,7 @@ import {
 import { deleteFeed, editFeed } from '../../../../../../../store/actions/feed'
 import { feedType } from '../../../../../../../propTypes'
 import FeedIcon from '../../../../../../FeedIcon'
-import { FEED_STATUS, FEED_DISPLAY, FEED_DISPLAY_OPTIONS } from '../../../../../../../constants'
+import { FEED_STATUS, FEED_DISPLAY, FEED_DISPLAY_LABELS } from '../../../../../../../constants'
 import css from './SortableFeed.sass'
 
 const getTitle = (feed) => {
@@ -139,7 +139,7 @@ const Feed = ({ feed }) => {
             {
               Object.values(FEED_DISPLAY).map((displayOption) => (
                 <option key={displayOption} value={displayOption}>
-                  {FEED_DISPLAY_OPTIONS[displayOption]}
+                  {FEED_DISPLAY_LABELS[displayOption]}
                 </option>
               ))
             }

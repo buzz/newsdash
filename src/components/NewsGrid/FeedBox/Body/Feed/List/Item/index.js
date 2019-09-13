@@ -1,48 +1,20 @@
-import React, { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
 import classNames from 'classnames'
-import { format } from 'timeago.js'
 import Tooltip from 'rc-tooltip'
 import 'rc-tooltip/assets/bootstrap.css'
 
+import Image from './Image'
+import ItemDate from './ItemDate'
 import TooltipContent from './TooltipContent'
-import { feedItemType } from '../../../../../../../propTypes'
-
+import { FEED_DISPLAY } from '../../../../../../../constants'
+import { feedItemType, feedItemListType } from '../../../../../../../propTypes'
 import css from './Item.sass'
 
-const dateFormat = (date) => (
-  format(date)
-    .replace(/minutes?/, 'min')
-    .replace(/hours?/, 'h')
-    .replace(' ago', '')
-)
-
-const ItemDate = ({ date }) => {
-  const [redrawTimer, setRedrawTimer] = useState(0)
-  useEffect(() => {
-    const interval = setInterval(
-      () => setRedrawTimer((old) => old + 1),
-      15 * 1000
-    )
-    return () => clearInterval(interval)
-  }, [redrawTimer])
-
-  return (
-    <span className={css.itemDate}>
-      {dateFormat(date)}
-    </span>
-  )
-}
-
-ItemDate.propTypes = {
-  date: PropTypes.number.isRequired,
-}
-
-const Item = ({ condensed, item }) => {
+const Item = ({ item, type }) => {
   const tooltipContent = item.content
     ? (
       <TooltipContent
-        imageUrl={item.imageUrl}
+        imageUrl={type !== FEED_DISPLAY.DETAILED ? item.imageUrl : null}
         text={item.content}
         title={item.title}
       />
@@ -53,16 +25,43 @@ const Item = ({ condensed, item }) => {
     ? <ItemDate date={item.date} />
     : null
 
+  const itemDisplay = type === FEED_DISPLAY.DETAILED
+    ? (
+      <>
+        <Image
+          alt={item.title}
+          className={css.itemImage}
+          src={item.imageUrl}
+        />
+        <span className={css.itemText}>
+          <span className={css.titleLine}>
+            <span className={css.itemTitle}>
+              {item.title}
+            </span>
+            {itemDate}
+          </span>
+          <span className={css.itemContent}>
+            {item.content}
+          </span>
+        </span>
+      </>
+    )
+    : (
+      <>
+        <span className={css.itemTitle}>
+          {item.title}
+        </span>
+        {itemDate}
+      </>
+    )
+
   const itemLink = (
     <a
       href={item.link}
       rel="noopener noreferrer"
       target="_blank"
     >
-      <span className={css.itemTitle}>
-        {item.title}
-      </span>
-      {itemDate}
+      {itemDisplay}
     </a>
   )
 
@@ -70,7 +69,8 @@ const Item = ({ condensed, item }) => {
     'nondraggable',
     css.feedItem,
     {
-      [css.condensed]: condensed,
+      [css.detailed]: type === FEED_DISPLAY.DETAILED,
+      [css.condensed]: type === FEED_DISPLAY.CONDENSED_LIST,
       [css.new]: item.new,
     }
   )
@@ -95,12 +95,8 @@ const Item = ({ condensed, item }) => {
   )
 }
 
-Item.defaultProps = {
-  condensed: false,
-}
-
 Item.propTypes = {
-  condensed: PropTypes.bool,
+  type: feedItemListType.isRequired,
   item: feedItemType.isRequired,
 }
 

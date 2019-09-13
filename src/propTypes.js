@@ -42,3 +42,9 @@ export const feedType = PropTypes.shape({
   lastFetched: PropTypes.number,
   useCorsProxy: PropTypes.bool.isRequired,
 })
+
+export const feedItemListType = PropTypes.oneOf([
+  FEED_DISPLAY.CONDENSED_LIST,
+  FEED_DISPLAY.LIST,
+  FEED_DISPLAY.DETAILED,
+])

@@ -4,7 +4,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 import css from './List.sass'
 import itemTransition from './itemTransition.sass'
-import { feedItemType } from '../../../../../../propTypes'
+import { feedItemType, feedItemListType } from '../../../../../../propTypes'
 import Item from './Item'
 
 const { transitionSpeed, ...transitionClassNames } = itemTransition
@@ -18,7 +18,7 @@ const onEntering = (node) => {
   node.style.marginTop = ''
 }
 
-const List = ({ condensed, items }) => (
+const List = ({ items, type }) => (
   <TransitionGroup className={css.feedList} component="ul">
     {
       items.map(
@@ -30,7 +30,7 @@ const List = ({ condensed, items }) => (
             onEnter={onEnter}
             onEntering={onEntering}
           >
-            <Item condensed={condensed} item={item} />
+            <Item type={type} item={item} />
           </CSSTransition>
         )
       )
@@ -38,12 +38,8 @@ const List = ({ condensed, items }) => (
   </TransitionGroup>
 )
 
-List.defaultProps = {
-  condensed: false,
-}
-
 List.propTypes = {
-  condensed: PropTypes.bool,
+  type: feedItemListType.isRequired,
   items: PropTypes.arrayOf(feedItemType).isRequired,
 }
 

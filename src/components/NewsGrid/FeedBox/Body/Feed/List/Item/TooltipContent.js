@@ -1,19 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import Image from './Image'
 import css from './Item.sass'
 
-const TooltipContent = ({ imageUrl, text, title }) => {
-  const image = imageUrl
-    ? <img className={css.tooltipImage} src={imageUrl} alt={title} />
-    : null
-  return (
-    <>
-      {image}
-      {text}
-    </>
-  )
-}
+const TooltipContent = ({ imageUrl, text, title }) => (
+  <>
+    <Image alt={title} className={css.tooltipImage} src={imageUrl} />
+    {text}
+  </>
+)
 
 TooltipContent.defaultProps = {
   imageUrl: null,

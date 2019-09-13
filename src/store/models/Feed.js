@@ -22,7 +22,7 @@ export default class Feed extends Model {
       link: attr({ getDefault: () => '' }),
       title: attr({ getDefault: () => 'New feed' }),
       status: attr({ getDefault: () => FEED_STATUS.NEW }),
-      display: attr({ getDefault: () => FEED_DISPLAY.REGULAR }),
+      display: attr({ getDefault: () => FEED_DISPLAY.DETAILED }),
       error: attr(),
       index: attr(),
       lastFetched: attr({ getDefault: () => 0 }),

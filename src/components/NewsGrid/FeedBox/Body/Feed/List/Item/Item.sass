@@ -12,6 +12,49 @@
       border-bottom: none
       padding: $padding-md / 2 $padding-lg $padding-md / 2
 
+  &.detailed
+
+    a
+      $h: 70px
+      height: $h
+      overflow: hidden
+
+      .itemImage
+        flex-grow: 1
+        height: $h
+        margin-right: $padding-md
+        max-width: 90px
+        min-width: 90px
+
+      .itemText
+        display: flex
+        flex-direction: column
+        flex-grow: 1
+        overflow: hidden
+
+        .titleLine
+          display: flex
+
+          .itemTitle
+            -webkit-box-orient: vertical
+            -webkit-line-clamp: 2
+            display: -webkit-box
+            font-size: 100%
+            font-weight: bold
+            overflow: hidden
+            text-overflow: inherit
+            white-space: inherit
+
+          .itemDate
+            font-size: 90%
+
+        .itemContent
+          -webkit-box-orient: vertical
+          -webkit-line-clamp: 2
+          display: -webkit-box
+          font-size: 90%
+          overflow: hidden
+
   &:last-child a
     border-bottom: none
 
@@ -58,4 +101,10 @@
   .tooltipImage
     float: left
     margin: 0 $padding-md $padding-sm 0
-    max-width: 90px
+    height: 70px
+    width: 90px
+
+.feedImage
+  background-position: center
+  background-size: cover
+  overflow: hidden
