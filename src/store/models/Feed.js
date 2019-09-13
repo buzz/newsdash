@@ -101,6 +101,11 @@ export default class Feed extends Model {
           }
           if (item.enclosure && item.enclosure.url) {
             feedItem.imageUrl = item.enclosure.url
+          } else if (item['content:encoded']) {
+            const match = item['content:encoded'].match('<img.+?src\\s*=\\s*"(.+?)"')
+            if (match && match.length > 1) {
+              [, feedItem.imageUrl] = match
+            }
           }
           const newFeedItem = session.FeedItem.upsert(feedItem)
           if (item.isoDate) {
