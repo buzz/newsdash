@@ -35,6 +35,9 @@
       "last 1 safari version"
     ]
   },
+  "eslintIgnore": [
+    "/dist"
+  ],
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.22",
     "@fortawesome/free-solid-svg-icons": "^5.10.2",
