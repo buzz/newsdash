@@ -57,9 +57,14 @@ export default class Feed extends Model {
         feed.delete()
         break
       }
-      case feedActionTypes.EDIT_FEED:
-        feedModel.withId(action.id).update(action.attrs)
+      case feedActionTypes.EDIT_FEED: {
+        const feed = feedModel.withId(action.id)
+        if (Object.keys(action.attrs).includes('url')) {
+          feed.items.toModelArray().map((item) => item.delete())
+        }
+        feed.update(action.attrs)
         break
+      }
       case feedActionTypes.LOAD_FEED:
         feedModel.withId(action.id).update({
           status: FEED_STATUS.LOADING,

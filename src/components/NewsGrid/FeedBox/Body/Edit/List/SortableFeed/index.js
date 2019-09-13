@@ -3,7 +3,12 @@ import { useDispatch } from 'react-redux'
 import classNames from 'classnames'
 import { SortableElement, sortableHandle } from 'react-sortable-hoc'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faPen, faTimes } from '@fortawesome/free-solid-svg-icons'
+import {
+  faBars,
+  faLink,
+  faPen,
+  faTrash,
+} from '@fortawesome/free-solid-svg-icons'
 
 import { deleteFeed, editFeed } from '../../../../../../../store/actions/feed'
 import { feedType } from '../../../../../../../propTypes'
@@ -29,38 +34,64 @@ const DragHandle = sortableHandle(() => (
   </span>
 ))
 
+const FEED_ITEM_DISPLAY = {
+  REGULAR: 0,
+  EDIT_TITLE: 1,
+  EDIT_URL: 2,
+}
+
 const Feed = ({ feed }) => {
   const dispatch = useDispatch()
   const title = getTitle(feed)
-  const [showCustomTitleInput, setShowCustomTitleInput] = useState(false)
+  const [feedItemDisplay, setFeedItemDisplay] = useState(FEED_ITEM_DISPLAY.REGULAR)
   const [newCustomTitle, setNewCustomTitle] = useState(feed.customTitle)
+  const [newUrl, setNewUrl] = useState(feed.url)
 
-  const editTitle = () => {
+  const dispatchTitle = () => {
     dispatch(editFeed(feed.id, { customTitle: newCustomTitle }))
   }
 
-  const titleInputOnKeyUp = (ev) => {
-    if (ev.keyCode === 13) {
-      editTitle()
-      setShowCustomTitleInput(false)
-    }
+  const dispatchUrl = () => {
+    dispatch(editFeed(feed.id, { url: newUrl }))
   }
+
+  const makeInputOnKeyUp = (dispatchValue) => (
+    (ev) => {
+      if (ev.keyCode === 13) {
+        dispatchValue()
+        setFeedItemDisplay(FEED_ITEM_DISPLAY.REGULAR)
+      }
+    }
+  )
+
+  const makeEditOnClick = (dispatchValue, editFeedItemDisplay) => (
+    () => {
+      if (feedItemDisplay === editFeedItemDisplay) {
+        dispatchValue()
+        setFeedItemDisplay(FEED_ITEM_DISPLAY.REGULAR)
+      } else {
+        setFeedItemDisplay(editFeedItemDisplay)
+      }
+    }
+  )
 
   const inputRef = useRef()
   useEffect(() => {
-    if (showCustomTitleInput) {
+    if ([FEED_ITEM_DISPLAY.EDIT_TITLE, FEED_ITEM_DISPLAY.EDIT_URL].includes(feedItemDisplay)) {
       inputRef.current.focus()
     }
-  }, [showCustomTitleInput])
+  }, [feedItemDisplay])
 
-  const titleField = showCustomTitleInput
-    ? (
-      <div className={css.editForm}>
+  let feedDisplay
+
+  if (feedItemDisplay === FEED_ITEM_DISPLAY.EDIT_TITLE) {
+    feedDisplay = (
+      <div className={css.form}>
         <form onSubmit={(ev) => ev.preventDefault()}>
           <input
             className="nondraggable"
             onChange={(ev) => setNewCustomTitle(ev.target.value)}
-            onKeyUp={titleInputOnKeyUp}
+            onKeyUp={makeInputOnKeyUp(dispatchTitle)}
             placeholder={feed.title}
             ref={inputRef}
             value={newCustomTitle}
@@ -68,40 +99,55 @@ const Feed = ({ feed }) => {
         </form>
       </div>
     )
-    : (
+  } else if (feedItemDisplay === FEED_ITEM_DISPLAY.EDIT_URL) {
+    feedDisplay = (
+      <div className={css.form}>
+        <form onSubmit={(ev) => ev.preventDefault()}>
+          <input
+            className="nondraggable"
+            onChange={(ev) => setNewUrl(ev.target.value)}
+            onKeyUp={makeInputOnKeyUp(dispatchUrl)}
+            placeholder={feed.url}
+            ref={inputRef}
+            value={newUrl}
+          />
+        </form>
+      </div>
+    )
+  } else {
+    feedDisplay = (
       <span className={css.title} title={feed.url}>
         {title}
       </span>
     )
-
-  const editOnClick = () => {
-    if (showCustomTitleInput) {
-      editTitle()
-      setShowCustomTitleInput(false)
-    } else {
-      setShowCustomTitleInput(true)
-    }
   }
 
   return (
     <li className={css.listItem}>
       <DragHandle />
       <FeedIcon className={css.icon} feed={feed} noLink />
-      {titleField}
+      {feedDisplay}
       <div className={classNames('nondraggable', css.buttons)}>
         <button
-          onClick={editOnClick}
-          title="Change title"
+          onClick={makeEditOnClick(dispatchTitle, FEED_ITEM_DISPLAY.EDIT_TITLE)}
+          title="Edit title"
           type="button"
         >
           <FontAwesomeIcon icon={faPen} />
+        </button>
+        <button
+          onClick={makeEditOnClick(dispatchUrl, FEED_ITEM_DISPLAY.EDIT_URL)}
+          title="Edit URL"
+          type="button"
+        >
+          <FontAwesomeIcon icon={faLink} />
         </button>
         <button
           onClick={() => dispatch(deleteFeed(feed.id))}
           title="Remove feed"
           type="button"
         >
-          <FontAwesomeIcon icon={faTimes} />
+          <FontAwesomeIcon icon={faTrash} />
         </button>
       </div>
     </li>
