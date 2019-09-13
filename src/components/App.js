@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Provider } from 'react-redux'
 import Modal from 'react-modal'
 
+import '../style/index.sass'
 import modalCss from './Modal.sass'
 import makeStore from '../store'
 import ControlBar from './ControlBar'

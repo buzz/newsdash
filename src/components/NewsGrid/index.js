@@ -1,11 +1,14 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Responsive, WidthProvider } from 'react-grid-layout'
-import FeedBox from './FeedBox'
+import 'react-grid-layout/css/styles.css'
+import 'react-resizable/css/styles.css'
 
+import FeedBox from './FeedBox'
 import getApp from '../../store/selectors/app'
 import feedBoxSelectors from '../../store/selectors/feedBox'
 import { editFeedBox } from '../../store/actions/feedBox'
+import css from './NewsGrid.sass'
 
 const ResponsiveGridLayout = WidthProvider(Responsive)
 
@@ -42,24 +45,25 @@ const NewsGrid = () => {
   }
 
   return (
-    <ResponsiveGridLayout
-      autoSize={false}
-      breakpoints={{ lg: 1200 }}
-      cols={{ lg: gridCols }}
-      draggableCancel=".nondraggable"
-      layouts={{ lg: generateLayout(feedBoxes) }}
-      margin={[4, 4]}
-      onLayoutChange={onLayoutChange}
-      rowHeight={48}
-    >
-      {
-        feedBoxes.map((feedBox) => (
-          <div key={feedBox.id.toString()}>
-            <FeedBox feedBox={feedBox} />
-          </div>
-        ))
-      }
-    </ResponsiveGridLayout>
+    <div className={css.newsGridWrapper}>
+      <ResponsiveGridLayout
+        breakpoints={{ lg: 1200 }}
+        cols={{ lg: gridCols }}
+        draggableCancel=".nondraggable"
+        layouts={{ lg: generateLayout(feedBoxes) }}
+        margin={[16, 16]}
+        onLayoutChange={onLayoutChange}
+        rowHeight={48}
+      >
+        {
+          feedBoxes.map((feedBox) => (
+            <div key={feedBox.id.toString()}>
+              <FeedBox feedBox={feedBox} />
+            </div>
+          ))
+        }
+      </ResponsiveGridLayout>
+    </div>
   )
 }
 
