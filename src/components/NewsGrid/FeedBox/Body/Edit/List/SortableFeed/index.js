@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import classNames from 'classnames'
 import { SortableElement, sortableHandle } from 'react-sortable-hoc'
@@ -17,7 +17,7 @@ const getTitle = (feed) => {
     case FEED_STATUS.LOADING:
       return `${title} (loading…)`
     case FEED_STATUS.ERROR:
-      return 'Error loading!'
+      return `${title} (loading error)`
     default:
       return title
   }
@@ -37,8 +37,21 @@ const Feed = ({ feed }) => {
 
   const editTitle = () => {
     dispatch(editFeed(feed.id, { customTitle: newCustomTitle }))
-    setShowCustomTitleInput(false)
   }
+
+  const titleInputOnKeyUp = (ev) => {
+    if (ev.keyCode === 13) {
+      editTitle()
+      setShowCustomTitleInput(false)
+    }
+  }
+
+  const inputRef = useRef()
+  useEffect(() => {
+    if (showCustomTitleInput) {
+      inputRef.current.focus()
+    }
+  }, [showCustomTitleInput])
 
   const titleField = showCustomTitleInput
     ? (
@@ -46,10 +59,10 @@ const Feed = ({ feed }) => {
         <form onSubmit={(ev) => ev.preventDefault()}>
           <input
             className="nondraggable"
-            onBlur={editTitle}
             onChange={(ev) => setNewCustomTitle(ev.target.value)}
-            onKeyUp={(ev) => (ev.keyCode === 13 && editTitle())}
+            onKeyUp={titleInputOnKeyUp}
             placeholder={feed.title}
+            ref={inputRef}
             value={newCustomTitle}
           />
         </form>
@@ -61,6 +74,15 @@ const Feed = ({ feed }) => {
       </span>
     )
 
+  const editOnClick = () => {
+    if (showCustomTitleInput) {
+      editTitle()
+      setShowCustomTitleInput(false)
+    } else {
+      setShowCustomTitleInput(true)
+    }
+  }
+
   return (
     <li className={css.listItem}>
       <DragHandle />
@@ -68,7 +90,7 @@ const Feed = ({ feed }) => {
       {titleField}
       <div className={classNames('nondraggable', css.buttons)}>
         <button
-          onClick={() => setShowCustomTitleInput(!showCustomTitleInput)}
+          onClick={editOnClick}
           title="Change title"
           type="button"
         >
