@@ -7,7 +7,7 @@ export const FETCH_CHECK_INTERVAL = 30 * 1000
 export const MAX_FEED_ITEMS_TO_KEEP = 100
 
 export const DEFAULT_GRID_COLS = 4
-export const MAX_CONTENT_LENGTH = 300
+export const MAX_CONTENT_LENGTH = 600
 
 export const FEED_STATUS = {
   NEW: 'NEW',
@@ -19,13 +19,13 @@ export const FEED_STATUS = {
 export const FEED_DISPLAY = {
   CONDENSED_LIST: 'CONDENSED_LIST',
   LIST: 'LIST',
-  REGULAR: 'REGULAR',
+  DETAILED: 'DETAILED',
   TILES: 'TILES',
 }
 
-export const FEED_DISPLAY_OPTIONS = {
+export const FEED_DISPLAY_LABELS = {
   CONDENSED_LIST: 'List (condensed)',
   LIST: 'List',
-  REGULAR: 'Normal',
+  DETAILED: 'Detailed',
   TILES: 'Tiles',
 }

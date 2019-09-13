@@ -2,7 +2,6 @@ import React, { useMemo } from 'react'
 import { useSelector } from 'react-redux'
 
 import List from './List'
-import Regular from './Regular'
 import Tiles from './Tiles'
 import feedItemSelectors from '../../../../../store/selectors/feedItem'
 import { feedType } from '../../../../../propTypes'
@@ -49,11 +48,11 @@ const Feed = ({ feed }) => {
 
   switch (feed.display) {
     case FEED_DISPLAY.CONDENSED_LIST:
-      return <List condensed items={feedItems} />
+      return <List type={FEED_DISPLAY.CONDENSED_LIST} items={feedItems} />
     case FEED_DISPLAY.LIST:
-      return <List items={feedItems} />
-    case FEED_DISPLAY.REGULAR:
-      return <Regular items={feedItems} />
+      return <List type={FEED_DISPLAY.LIST} items={feedItems} />
+    case FEED_DISPLAY.DETAILED:
+      return <List type={FEED_DISPLAY.DETAILED} items={feedItems} />
     case FEED_DISPLAY.TILES:
       return <Tiles items={feedItems} />
     default:
