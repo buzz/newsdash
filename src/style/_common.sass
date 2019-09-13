@@ -4,15 +4,16 @@ $color-text: rgb(36, 36, 36)
 $color-text-bright: rgb(69, 69, 69)
 $color-text-hover: scale-color(rgb(36, 36, 36), $lightness: $lightness-highlight)
 $color-text-visited: rgb(98, 98, 98)
+$color-text-inv: rgb(221, 221, 221)
 
 $color-danger: rgb(207, 30, 30)
 $color-danger-hover: scale-color($color-danger, $lightness: $lightness-highlight)
-$color-text-danger: white
+$color-text-danger: $color-text-inv
 
 $color-control-bg: rgba(255, 255, 255, 0.5)
 $color-control-border: rgba(0, 0, 0, 0.5)
 
-$color-button-text: white
+$color-button-text: $color-text-inv
 $color-button-bg-opaque: scale-color(black, $lightness: 40%)
 $color-button-bg-opaque-hover: scale-color($color-button-bg-opaque, $lightness: $lightness-highlight)
 $color-button-bg: fade-out(black, 0.6)
@@ -30,4 +31,7 @@ $tooltip-opacity: 0.95
 $transition-speed: 200ms
 
 =text-shadow
-  text-shadow: 0 1px 0 white
+  text-shadow: 0 1px 0 $color-text-inv
+
+=text-shadow-inv
+  text-shadow: 0 1px 0 $color-text

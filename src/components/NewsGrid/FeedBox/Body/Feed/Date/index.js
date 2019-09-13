@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { format } from 'timeago.js'
 
-import css from './Item.sass'
+import css from './Date.sass'
 
 const dateFormat = (date) => (
   format(date)
@@ -11,7 +12,7 @@ const dateFormat = (date) => (
     .replace(' ago', '')
 )
 
-const ItemDate = ({ date }) => {
+const ItemDate = ({ className, date }) => {
   const [redrawTimer, setRedrawTimer] = useState(0)
   useEffect(() => {
     const interval = setInterval(
@@ -22,13 +23,18 @@ const ItemDate = ({ date }) => {
   }, [redrawTimer])
 
   return (
-    <span className={css.itemDate}>
+    <span className={classNames(className, css.date)}>
       {dateFormat(date)}
     </span>
   )
 }
 
+ItemDate.defaultProps = {
+  className: null,
+}
+
 ItemDate.propTypes = {
+  className: PropTypes.string,
   date: PropTypes.number.isRequired,
 }
 
