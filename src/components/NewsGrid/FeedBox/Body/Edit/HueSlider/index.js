@@ -39,7 +39,7 @@ const HueSlider = ({ feedBox, onChange }) => {
 
   const setNewPos = (p) => {
     setPos(p)
-    onChange(p * 360)
+    onChange(Math.floor(p * 360))
   }
 
   const updateFromMouseEvent = (ev) => {
