@@ -44,7 +44,6 @@
       width: 45%
 
     > :nth-child(2)
-      box-sizing: border-box
       flex-grow: 1
       width: 55%
 
@@ -53,10 +52,12 @@
 
       input
         flex-grow: 1
+        height: $h
         min-width: 10px
 
       button
         +button
+        height: $h
         margin-left: $padding-md
 
 .sliderWrapper

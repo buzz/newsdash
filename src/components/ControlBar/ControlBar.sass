@@ -9,7 +9,7 @@
   bottom: $padding-lg
   display: flex
   flex-direction: column-reverse
-  height: $num-buttons * $button-diameter-md + ($num-buttons - 1) * $padding-md
+  height: $num-buttons * $button-diameter-md + 2 * $control-bar-padding + ($num-buttons - 1) * $padding-md
   left: $padding-lg
   overflow: hidden
   padding: $control-bar-padding
@@ -18,7 +18,7 @@
   z-index: 999
 
   &.hidden
-    height: $button-diameter-md
+    height: $button-diameter-md + 2 * $control-bar-padding
 
     button
       opacity: 0.0
