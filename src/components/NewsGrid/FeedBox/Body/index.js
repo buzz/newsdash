@@ -57,18 +57,14 @@ const Body = ({
     )
   }
 
-  if (activeFeedId) {
-    return (
-      <Tabs
-        activeFeedId={activeFeedId}
-        feedBox={feedBox}
-        feeds={feeds}
-        setActiveFeedId={setActiveFeedId}
-      />
-    )
-  }
-
-  return null
+  return (
+    <Tabs
+      activeFeedId={activeFeedId}
+      feedBox={feedBox}
+      feeds={feeds}
+      setActiveFeedId={setActiveFeedId}
+    />
+  )
 }
 
 Body.defaultProps = {
