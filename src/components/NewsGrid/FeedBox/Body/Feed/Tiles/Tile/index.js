@@ -1,12 +1,36 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
+import { CSSTransition } from 'react-transition-group'
 
 import Date from '../../Date'
 import { feedItemType } from '../../../../../../../propTypes'
 import css from './Tile.sass'
 
-const Tile = ({ color, item, height }) => {
+const transitionClassNames = {
+  enterActive: css.enterActive,
+  enterDone: css.enterDone,
+  exitActive: css.exitActive,
+  exitDone: css.exitDone,
+}
+
+const Tile = ({ color, gridWidth, item }) => {
+  const [hover, setHover] = useState(false)
+  const [height, setHeight] = useState(250)
+  const [needToMeasure, setNeedToMeasure] = useState(true)
+  const [oldGridWidth, setOldGridWidth] = useState(gridWidth)
+
+  const overlayRef = useRef()
+  useEffect(() => {
+    if (oldGridWidth !== gridWidth) {
+      setOldGridWidth(gridWidth)
+      setNeedToMeasure(true)
+    } else if (needToMeasure) {
+      setHeight(overlayRef.current.offsetHeight)
+      setNeedToMeasure(false)
+    }
+  }, [gridWidth, oldGridWidth, needToMeasure, overlayRef])
+
   const tileImageStyle = color
     ? { backgroundColor: color }
     : { backgroundImage: `url(${item.imageUrl})` }
@@ -28,17 +52,28 @@ const Tile = ({ color, item, height }) => {
           href={item.link}
           rel="noopener noreferrer"
           target="_blank"
+          onMouseEnter={() => setHover(true)}
+          onMouseLeave={() => setHover(false)}
         >
           <div className={tileImageClassNames} style={tileImageStyle} />
-          <div className={css.overlay}>
-            <div className={css.caption}>
-              <span className={css.title}>{item.title}</span>
-              <span className={css.date}>{date}</span>
+          <CSSTransition
+            in={hover}
+            timeout={parseInt(css.transitionSpeed.slice(0, -2), 10)}
+            classNames={transitionClassNames}
+          >
+            <div
+              className={classNames(css.overlay, { [css.measured]: !needToMeasure })}
+              ref={overlayRef}
+            >
+              <div className={css.caption}>
+                <h2 className={css.title}>{item.title}</h2>
+                <span className={css.date}>{date}</span>
+              </div>
+              <p className={css.content}>
+                {item.content}
+              </p>
             </div>
-            <p className={css.content}>
-              {item.content}
-            </p>
-          </div>
+          </CSSTransition>
         </a>
       </div>
     </div>
@@ -51,8 +86,8 @@ Tile.defaultProps = {
 
 Tile.propTypes = {
   color: PropTypes.string,
+  gridWidth: PropTypes.number.isRequired,
   item: feedItemType.isRequired,
-  height: PropTypes.number.isRequired,
 }
 
 export default Tile
