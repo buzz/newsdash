@@ -2,9 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-import Date from '../Date'
-import { feedItemType } from '../../../../../../propTypes'
-import css from './Tiles.sass'
+import Date from '../../Date'
+import { feedItemType } from '../../../../../../../propTypes'
+import css from './Tile.sass'
 
 const Tile = ({ color, item, height }) => {
   const tileImageStyle = color
