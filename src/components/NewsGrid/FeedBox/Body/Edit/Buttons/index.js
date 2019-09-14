@@ -1,48 +1,26 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft, faTrash } from '@fortawesome/free-solid-svg-icons'
 
+import ConfirmButton from '../../../../../ConfirmButton'
 import css from './Buttons.sass'
 
-const Buttons = ({ onBackClick, onDeleteClick }) => {
-  const [deleteConfirm, setDeleteConfirm] = useState(false)
-
-  const deleteButton = deleteConfirm
-    ? (
-      <button
-        className={css.deleteConfirm}
-        onClick={onDeleteClick}
-        type="button"
-      >
-        <FontAwesomeIcon icon={faTrash} />
-        Really?
-      </button>
-    )
-    : (
-      <button
-        onClick={() => setDeleteConfirm(true)}
-        type="button"
-      >
-        <FontAwesomeIcon icon={faTrash} />
-        Delete
-      </button>
-    )
-
-  return (
-    <div className={classNames('nondraggable', css.buttons)}>
-      <button
-        onClick={onBackClick}
-        type="button"
-      >
-        <FontAwesomeIcon icon={faArrowLeft} />
-        Back
-      </button>
-      {deleteButton}
-    </div>
-  )
-}
+const Buttons = ({ onBackClick, onDeleteClick }) => (
+  <div className={classNames('nondraggable', css.buttons)}>
+    <button
+      onClick={onBackClick}
+      type="button"
+    >
+      <FontAwesomeIcon icon={faArrowLeft} />
+      Back
+    </button>
+    <ConfirmButton icon={faTrash} onClick={onDeleteClick}>
+      Delete
+    </ConfirmButton>
+  </div>
+)
 
 Buttons.propTypes = {
   onBackClick: PropTypes.func.isRequired,

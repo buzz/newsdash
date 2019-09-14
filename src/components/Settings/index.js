@@ -7,10 +7,11 @@ import 'rc-slider/assets/index.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileImport, faTimes } from '@fortawesome/free-solid-svg-icons'
 
-import css from './Settings.sass'
+import ConfirmButton from '../ConfirmButton'
 import getApp from '../../store/selectors/app'
-import getOrm from '../../store/selectors/orm'
+import getSettingsExport from '../../store/selectors/getSettingsExport'
 import { importState, updateSettings } from '../../store/actions/app'
+import css from './Settings.sass'
 
 const makeSliderMarks = (min, max, step) => {
   let marks = {}
@@ -47,7 +48,7 @@ const Settings = ({ setShowSettings }) => {
     fetchInterval: oldFetchInterval,
     gridCols: oldGridCols,
   } = useSelector(getApp)
-  const ormState = useSelector(getOrm)
+  const ormState = useSelector(getSettingsExport)
 
   const [gridCols, setGridCols] = useState(oldGridCols)
   const [corsProxy, setCorsProxy] = useState(oldCorsProxy)
@@ -55,6 +56,15 @@ const Settings = ({ setShowSettings }) => {
   const [fetchInterval, setFetchInterval] = useState(oldFetchInterval)
   const [feedItemsToKeep, setFeedItemsToKeep] = useState(oldFeedItemsToKeep)
   const [importData, setImportData] = useState()
+
+  const doImport = () => {
+    try {
+      dispatch(importState(JSON.parse(importData)))
+      setShowSettings(false)
+    } catch {
+      // TODO handle JSON error
+    }
+  }
 
   return (
     <div className={css.settings}>
@@ -163,14 +173,12 @@ const Settings = ({ setShowSettings }) => {
               onChange={(ev) => setImportData(ev.currentTarget.value.trim())}
               type="text"
             />
-            <button
-              className={css.button}
-              onClick={() => dispatch(importState(JSON.parse(importData)))}
-              type="button"
+            <ConfirmButton
+              icon={faFileImport}
+              onClick={doImport}
             >
-              <FontAwesomeIcon icon={faFileImport} />
               Import
-            </button>
+            </ConfirmButton>
           </div>
         </div>
 
