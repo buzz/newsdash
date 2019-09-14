@@ -7,7 +7,8 @@ import css from './Item.sass'
 const TooltipContent = ({ imageUrl, text, title }) => (
   <>
     <Image alt={title} className={css.tooltipImage} src={imageUrl} />
-    {text}
+    <h2>{title}</h2>
+    <p>{text}</p>
   </>
 )
 
