@@ -1,84 +1,11 @@
-@import '../../../../../../style/_common.sass'
+@import './_tile-vars.sass'
 
 .tiles
-  $tiles-padding: $padding-lg - $padding-sm
   margin: $tiles-padding $tiles-padding 0 $tiles-padding
 
   .masonryGrid
-    $gutter-size: $padding-md
     display: flex
     margin-left: -$gutter-size
-    width: auto
 
     .gridColumn
       padding-left: $gutter-size
-      background-clip: padding-box
-
-      .tile
-        margin-bottom: $gutter-size
-
-        .tileWrapper
-          height: 100%
-          position: relative
-          width: 100%
-
-          .tileInner
-            border-radius: $border-radius
-            display: block
-            height: 100%
-            overflow: hidden
-            position: relative
-            width: 100%
-
-            .tileImage
-              background-position: center
-              background-size: cover
-              height: 100%
-              width: 100%
-
-              &.noImage
-                box-shadow: 0 0 60px rgba(0, 0, 0, 0.5) inset
-
-            .overlay
-              +text-shadow-inv
-              background-color: rgba(0, 0, 0, 0.8)
-              bottom: 0
-              color: $color-text-inv
-              display: flex
-              flex-direction: column
-              height: 32px
-              padding: $padding-md
-              position: absolute
-              transition: height $transition-speed ease-in
-              width: 100%
-
-              .caption
-                display: flex
-
-                .title
-                  flex-grow: 1
-                  font-size: 115%
-                  overflow: hidden
-                  text-overflow: ellipsis
-                  white-space: nowrap
-
-                .date
-                  color: $color-text-inv
-                  font-size: 90%
-
-              .content
-                font-size: 105%
-                opacity: 0
-                transition: opacity $transition-speed ease-in
-
-            &:hover
-
-              .overlay
-                height: 100%
-
-                .title
-                  text-overflow: inherit
-                  white-space: inherit
-
-                .content
-                  opacity: 1
