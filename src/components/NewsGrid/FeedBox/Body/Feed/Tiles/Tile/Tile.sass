@@ -1,8 +1,12 @@
 @import '../../../../../../../style/_common.sass'
 @import '../_tile-vars.sass'
 
+\:global(:export)
+  transitionSpeed: $transition-speed
+
 .tile
   margin-bottom: $gutter-size
+  transition: height $transition-speed ease-in
 
   .tileWrapper
     height: 100%
@@ -27,45 +31,69 @@
           box-shadow: 0 0 60px rgba(0, 0, 0, 0.5) inset
 
       .overlay
+        $padding: $padding-md
         +text-shadow-inv
-        background-color: rgba(0, 0, 0, 0.8)
+        background-color: rgba(0, 0, 0, 0.6)
         bottom: 0
         color: $color-text-inv
         display: flex
         flex-direction: column
-        height: 32px
         padding: $padding-md
         position: absolute
-        transition: height $transition-speed ease-in
+        transition: height $transition-speed ease-in, background-color $transition-speed ease-in
+        visibility: hidden
         width: 100%
 
         .caption
           display: flex
+          flex-grow: 1
 
           .title
             flex-grow: 1
-            font-size: 115%
-            overflow: hidden
-            text-overflow: ellipsis
-            white-space: nowrap
+            font-size: 100%
+            font-weight: bold
+            margin: 0
 
           .date
             color: $color-text-inv
             font-size: 90%
 
         .content
+          flex-grow: 0
           font-size: 105%
+          margin: $padding-sm 0 0
           opacity: 0
           transition: opacity $transition-speed ease-in
 
-      &:hover
-
-        .overlay
-          height: 100%
+        &.measured
+          height: 32px
+          visibility: visible
 
           .title
-            text-overflow: inherit
-            white-space: inherit
+            overflow: hidden
+            text-overflow: ellipsis !important
+            white-space: nowrap !important
+
+        &.enterActive, &.enterDone
+          background-color: rgba(0, 0, 0, 0.75) !important
+          height: 100% !important
+
+          .title
+            text-overflow: inherit !important
+            white-space: inherit !important
 
           .content
-            opacity: 1
+            opacity: 1 !important
+
+        &.exitActive
+
+          .title
+            text-overflow: inherit !important
+            white-space: inherit !important
+
+        &.exitDone
+
+          .title
+            overflow: hidden
+            text-overflow: ellipsis !important
+            white-space: nowrap !important

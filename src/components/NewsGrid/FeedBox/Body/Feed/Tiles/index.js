@@ -10,24 +10,24 @@ import css from './Tiles.sass'
 
 const MIN_COL_WIDTH = 200
 
-const getTileParams = (items) => (
-  items.map((item) => ({
-    heightFactor: Math.random() - 0.5,
-    color: item.imageUrl
+const getTileColors = (items) => (
+  items.map((item) => (
+    item.imageUrl
       ? null
       : tinycolor({
         h: Math.round((Math.random() * 360)),
         s: 0.2,
         l: 0.85,
-      }).toHexString(),
-  }))
+      }).toHexString()
+  ))
 )
 
 const Tiles = ({ items }) => {
   const [ref, width] = useWidthObserver()
   const colNum = Math.max(1, Math.floor(width / MIN_COL_WIDTH))
-  const colWidth = width / colNum
-  const tileParams = useRef(getTileParams(items))
+
+  // keep tile colors permanent across grid re-layouts
+  const tileColors = useRef(getTileColors(items))
 
   // somehow Masonry is not recalculating after initial render
   const masonryRef = useRef()
@@ -47,18 +47,14 @@ const Tiles = ({ items }) => {
       >
         {
           items.map(
-            (item, i) => {
-              const { color, heightFactor } = tileParams.current[i]
-              const height = Math.round(colWidth + heightFactor * 150)
-              return (
-                <Tile
-                  color={color}
-                  height={height}
-                  item={item}
-                  key={item.id.toString()}
-                />
-              )
-            }
+            (item, i) => (
+              <Tile
+                color={tileColors.current[i]}
+                gridWidth={width}
+                item={item}
+                key={item.id.toString()}
+              />
+            )
           )
         }
       </Masonry>
