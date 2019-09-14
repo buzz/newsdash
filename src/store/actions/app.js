@@ -1,14 +1,21 @@
 export const actionTypes = {
-  UPDATE_SETTINGS: 'UPDATE_SETTINGS',
   IMPORT_STATE: 'IMPORT_STATE',
+  LOAD_STATE: 'LOAD_STATE',
+  UPDATE_SETTINGS: 'UPDATE_SETTINGS',
 }
+
+export const importState = (data) => ({
+  type: actionTypes.IMPORT_STATE,
+  data,
+})
+
+
+export const loadState = (orm) => ({
+  type: actionTypes.LOAD_STATE,
+  orm,
+})
 
 export const updateSettings = (settings) => ({
   type: actionTypes.UPDATE_SETTINGS,
   settings,
-})
-
-export const importState = (orm) => ({
-  type: actionTypes.IMPORT_STATE,
-  orm,
 })
