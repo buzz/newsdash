@@ -1,6 +1,6 @@
 import { Model, attr, fk } from 'redux-orm'
 
-import { actionTypes as feedItemActionTypes } from '../actions/feedItem'
+import { actionTypes as feedItemActionTypes } from 'newsdash/store/actions/feedItem'
 
 export default class FeedItem extends Model {
   static get modelName() {

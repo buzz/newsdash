@@ -1,9 +1,9 @@
 import { call, put, select } from 'redux-saga/effects'
 import Parser from 'rss-parser'
 
-import feedSelectors from '../../store/selectors/feed'
-import { loadFeedFailure, loadFeedSuccess, setUseCorsProxy } from '../../store/actions/feed'
-import getApp from '../../store/selectors/app'
+import feedSelectors from 'newsdash/store/selectors/feed'
+import { loadFeedFailure, loadFeedSuccess, setUseCorsProxy } from 'newsdash/store/actions/feed'
+import getApp from 'newsdash/store/selectors/app'
 
 const parser = new Parser()
 

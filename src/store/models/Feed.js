@@ -1,7 +1,7 @@
 import { Model, attr, fk } from 'redux-orm'
 
-import { FEED_STATUS, FEED_DISPLAY, MAX_CONTENT_LENGTH } from '../../constants'
-import { actionTypes as feedActionTypes } from '../actions/feed'
+import { FEED_STATUS, FEED_DISPLAY, MAX_CONTENT_LENGTH } from 'newsdash/constants'
+import { actionTypes as feedActionTypes } from 'newsdash/store/actions/feed'
 
 const truncate = (text) => (
   text.length > MAX_CONTENT_LENGTH

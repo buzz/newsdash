@@ -1,6 +1,6 @@
 import { call, put } from 'redux-saga/effects'
 
-import { loadFeed } from '../../store/actions/feed'
+import { loadFeed } from 'newsdash/store/actions/feed'
 
 export default function* fetchFeedsSaga({ id, attrs }) {
   const attrsKeys = yield call([Object, Object.keys], attrs)

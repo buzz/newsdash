@@ -3,11 +3,12 @@ import classNames from 'classnames'
 import Tooltip from 'rc-tooltip'
 import 'rc-tooltip/assets/bootstrap.css'
 
+import { feedItemType, feedItemListType } from 'newsdash/components/propTypes'
+import { FEED_DISPLAY } from 'newsdash/constants'
+import Date from 'newsdash/components/NewsGrid/FeedBox/Body/Feed/Date'
+
 import Image from './Image'
-import Date from '../../Date'
 import TooltipContent from './TooltipContent'
-import { FEED_DISPLAY } from '../../../../../../../constants'
-import { feedItemType, feedItemListType } from '../../../../../../../propTypes'
 import css from './Item.sass'
 
 const Item = ({ item, type }) => {

@@ -9,9 +9,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExclamationTriangle, faSync } from '@fortawesome/free-solid-svg-icons'
 import 'rc-tabs/assets/index.css'
 
-import Feed from '../Feed'
-import { feedBoxType, feedType } from '../../../../../propTypes'
-import { FEED_STATUS } from '../../../../../constants'
+import { feedBoxType, feedType } from 'newsdash/components/propTypes'
+import { FEED_STATUS } from 'newsdash/constants'
+import Feed from 'newsdash/components/NewsGrid/FeedBox/Body/Feed'
 import css from './Tabs.sass'
 
 const FeedTabs = ({

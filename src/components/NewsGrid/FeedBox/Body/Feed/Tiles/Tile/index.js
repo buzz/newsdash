@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { CSSTransition } from 'react-transition-group'
 
-import Date from '../../Date'
-import { feedItemType } from '../../../../../../../propTypes'
+import { feedItemType } from 'newsdash/components/propTypes'
+import Date from 'newsdash/components/NewsGrid/FeedBox/Body/Feed/Date'
 import css from './Tile.sass'
 
 const transitionClassNames = {

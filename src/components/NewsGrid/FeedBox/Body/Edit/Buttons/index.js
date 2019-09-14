@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft, faTrash } from '@fortawesome/free-solid-svg-icons'
 
-import ConfirmButton from '../../../../../ConfirmButton'
+import ConfirmButton from 'newsdash/components/ConfirmButton'
 import css from './Buttons.sass'
 
 const Buttons = ({ onBackClick, onDeleteClick }) => (

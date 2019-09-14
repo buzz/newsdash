@@ -5,8 +5,8 @@ import { useDispatch } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEllipsisV, faCog, faPlus } from '@fortawesome/free-solid-svg-icons'
 
+import { addFeedBox } from 'newsdash/store/actions/feedBox'
 import css from './ControlBar.sass'
-import { addFeedBox } from '../../store/actions/feedBox'
 
 const ControlBar = ({ setShowSettings }) => {
   const [hidden, setHidden] = useState(true)

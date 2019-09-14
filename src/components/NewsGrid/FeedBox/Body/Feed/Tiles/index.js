@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import Masonry from 'react-masonry-css'
 import tinycolor from 'tinycolor2'
 
+import { feedItemType } from 'newsdash/components/propTypes'
+import useWidthObserver from 'newsdash/hooks/useWidthObserver'
 import Tile from './Tile'
-import { feedItemType } from '../../../../../../propTypes'
-import useWidthObserver from '../../../../../../hooks/useWidthObserver'
 import css from './Tiles.sass'
 
 const MIN_COL_WIDTH = 200

@@ -3,10 +3,10 @@ import { createReducer } from 'redux-orm'
 import createSagaMiddleware from 'redux-saga'
 import reduceReducers from 'reduce-reducers'
 
+import rootSaga from 'newsdash/sagas'
 import orm from './orm'
 import loadStateReducer from './loadStateReducer'
 import defaultInitialState from './defaultInitialState'
-import rootSaga from '../sagas'
 
 // add redux devtools
 const bindMiddleware = (middleware) => {

@@ -76,6 +76,9 @@ const config = {
     ],
   },
   resolve: {
+    alias: {
+      newsdash: path.join(SRC_DIR),
+    },
     extensions: ['*', '.js'],
   },
   plugins: [
