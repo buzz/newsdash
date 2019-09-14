@@ -81,10 +81,11 @@
       font-size: 80%
 
 .tooltip
+  box-shadow: 1px
   font-size: 100%
+  line-height: 1.1rem
   max-width: 350px
   opacity: $tooltip-opacity
-  box-shadow: 1px
 
   \:global(.rc-tooltip-inner)
     box-shadow: 0 0 7px rgba(0, 0, 0, 0.5)
@@ -94,11 +95,18 @@
       content: ""
       display: block
 
+  h2
+    font-size: 100%
+    margin: 0 0 $padding-sm
+
+  p
+    margin: $padding-sm 0 0
+
   .tooltipImage
     float: left
     margin: 0 $padding-md $padding-sm 0
-    height: 70px
-    width: 90px
+    height: 80px
+    width: 100px
 
 .feedImage
   background-position: center
