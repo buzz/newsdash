@@ -1,5 +1,11 @@
 @import './_common.sass'
 
+html
+  box-sizing: border-box
+
+*, *:before, *:after
+  box-sizing: inherit
+
 body
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif
   font-size: 14px
@@ -22,6 +28,7 @@ input, select
 
 input
   padding: $padding-sm
+  height: 24px
 
 select
   padding: 0
