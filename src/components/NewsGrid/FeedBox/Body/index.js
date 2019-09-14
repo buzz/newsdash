@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 import { useDispatch } from 'react-redux'
 import Scrollbar from 'react-custom-scrollbars'
 
+import { feedBoxType } from 'newsdash/components/propTypes'
+import { deleteFeedBox } from 'newsdash/store/actions/feedBox'
 import Edit from './Edit'
 import Feed from './Feed'
 import Tabs from './Tabs'
-import { deleteFeedBox } from '../../../../store/actions/feedBox'
-import { feedBoxType } from '../../../../propTypes'
 import css from './Body.sass'
 
 const Body = ({

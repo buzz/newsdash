@@ -1,17 +1,14 @@
 import React, { useState } from 'react'
 import { Provider } from 'react-redux'
-import Modal from 'react-modal'
 
-import '../style/index.sass'
-import modalCss from './Modal.sass'
-import makeStore from '../store'
+import makeStore from 'newsdash/store'
 import ControlBar from './ControlBar'
+import Modal from './Modal'
 import NewsGrid from './NewsGrid'
 import Settings from './Settings'
+import 'newsdash/style/index.sass'
 
 const store = makeStore()
-
-Modal.setAppElement('#root')
 
 const App = () => {
   const [showSettings, setShowSettings] = useState(false)
@@ -21,11 +18,9 @@ const App = () => {
       <ControlBar setShowSettings={setShowSettings} />
       <NewsGrid />
       <Modal
-        className={modalCss.modal}
         contentLabel="Settings"
         isOpen={showSettings}
         onRequestClose={() => setShowSettings(false)}
-        overlayClassName={modalCss.overlay}
       >
         <Settings setShowSettings={setShowSettings} />
       </Modal>

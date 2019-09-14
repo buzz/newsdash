@@ -11,10 +11,10 @@ import {
   faTrash,
 } from '@fortawesome/free-solid-svg-icons'
 
-import { deleteFeed, editFeed } from '../../../../../../../store/actions/feed'
-import { feedType } from '../../../../../../../propTypes'
-import FeedIcon from '../../../../../../FeedIcon'
-import { FEED_STATUS, FEED_DISPLAY, FEED_DISPLAY_LABELS } from '../../../../../../../constants'
+import { FEED_STATUS, FEED_DISPLAY, FEED_DISPLAY_LABELS } from 'newsdash/constants'
+import { feedType } from 'newsdash/components/propTypes'
+import { deleteFeed, editFeed } from 'newsdash/store/actions/feed'
+import FeedIcon from 'newsdash/components/FeedIcon'
 import css from './SortableFeed.sass'
 
 const getTitle = (feed) => {

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 
-import { FEED_STATUS, FEED_DISPLAY } from './constants'
+import { FEED_STATUS, FEED_DISPLAY } from 'newsdash/constants'
 
 const colorsType = PropTypes.shape({
   bg: PropTypes.string.isRequired,

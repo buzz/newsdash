@@ -1,6 +1,6 @@
 import { call, delay } from 'redux-saga/effects'
 
-import { FETCH_CHECK_INTERVAL } from '../../constants'
+import { FETCH_CHECK_INTERVAL } from 'newsdash/constants'
 import fetchFeedsSaga from './fetchFeedsSaga'
 
 export default function* periodicallyFetchFeedsSaga() {

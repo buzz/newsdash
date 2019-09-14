@@ -4,10 +4,10 @@ import { Responsive, WidthProvider } from 'react-grid-layout'
 import 'react-grid-layout/css/styles.css'
 import 'react-resizable/css/styles.css'
 
+import getApp from 'newsdash/store/selectors/app'
+import feedBoxSelectors from 'newsdash/store/selectors/feedBox'
+import { editFeedBox } from 'newsdash/store/actions/feedBox'
 import FeedBox from './FeedBox'
-import getApp from '../../store/selectors/app'
-import feedBoxSelectors from '../../store/selectors/feedBox'
-import { editFeedBox } from '../../store/actions/feedBox'
 import css from './NewsGrid.sass'
 
 const ResponsiveGridLayout = WidthProvider(Responsive)

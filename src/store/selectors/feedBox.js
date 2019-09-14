@@ -1,7 +1,7 @@
 import { createSelector } from 'redux-orm'
 import tinycolor from 'tinycolor2'
 
-import orm from '../orm'
+import orm from 'newsdash/store/orm'
 import getOrm from './orm'
 
 const getColors = (hue) => {

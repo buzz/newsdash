@@ -6,12 +6,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import Scrollbar from 'react-custom-scrollbars'
 
+import { addFeed } from 'newsdash/store/actions/feed'
+import { editFeedBox } from 'newsdash/store/actions/feedBox'
+import { feedBoxType } from 'newsdash/components/propTypes'
 import List from './List'
 import HueSlider from './HueSlider'
 import Buttons from './Buttons'
-import { feedBoxType } from '../../../../../propTypes'
-import { addFeed } from '../../../../../store/actions/feed'
-import { editFeedBox } from '../../../../../store/actions/feedBox'
 import css from './Edit.sass'
 
 const Edit = ({ feedBox, onBackClick, onDeleteClick }) => {

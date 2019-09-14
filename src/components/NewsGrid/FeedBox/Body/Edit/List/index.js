@@ -4,9 +4,9 @@ import { useDispatch } from 'react-redux'
 import classNames from 'classnames'
 import { SortableContainer } from 'react-sortable-hoc'
 
+import { feedType } from 'newsdash/components/propTypes'
+import { editFeed } from 'newsdash/store/actions/feed'
 import SortableFeed from './SortableFeed'
-import { editFeed } from '../../../../../../store/actions/feed'
-import { feedType } from '../../../../../../propTypes'
 import css from './List.sass'
 
 const SortableFeedList = SortableContainer(({ feeds }) => (

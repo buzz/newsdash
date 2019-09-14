@@ -1,7 +1,6 @@
 {
   "env": {
-    "browser": true,
-    "es6": true
+    "node": true
   },
   "extends": [
     "airbnb"
@@ -11,14 +10,7 @@
     "ecmaVersion": 7,
     "sourceType": "module"
   },
-  "plugins": [
-    "react-hooks"
-  ],
   "rules": {
-    "react/jsx-filename-extension": ["error", { "extensions": [".js"] }],
-    "react/forbid-prop-types": ["off"],
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
     "semi": ["error", "never"],
     "function-paren-newline": ["off"],
     "comma-dangle": ["error", {
@@ -27,17 +19,6 @@
       "imports": "always-multiline",
       "exports": "always-multiline",
       "functions": "ignore"
-    }],
-    "jsx-a11y/anchor-is-valid": ["off"],
-    "jsx-a11y/label-has-associated-control": [
-      "error",
-      {
-        "labelComponents": [],
-        "labelAttributes": [],
-        "controlComponents": [],
-        "assert": "either",
-        "depth": 4
-      }
-    ]
+    }]
   }
 }

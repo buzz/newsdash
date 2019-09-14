@@ -1,6 +1,6 @@
 import { Model, attr } from 'redux-orm'
 
-import { actionTypes as feedBoxActionTypes } from '../actions/feedBox'
+import { actionTypes as feedBoxActionTypes } from 'newsdash/store/actions/feedBox'
 
 export default class FeedBox extends Model {
   static get modelName() {

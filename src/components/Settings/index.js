@@ -7,10 +7,10 @@ import 'rc-slider/assets/index.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileImport, faTimes } from '@fortawesome/free-solid-svg-icons'
 
-import ConfirmButton from '../ConfirmButton'
-import getApp from '../../store/selectors/app'
-import getSettingsExport from '../../store/selectors/getSettingsExport'
-import { importState, updateSettings } from '../../store/actions/app'
+import getApp from 'newsdash/store/selectors/app'
+import getSettingsExport from 'newsdash/store/selectors/getSettingsExport'
+import { importState, updateSettings } from 'newsdash/store/actions/app'
+import ConfirmButton from 'newsdash/components/ConfirmButton'
 import css from './Settings.sass'
 
 const makeSliderMarks = (min, max, step) => {

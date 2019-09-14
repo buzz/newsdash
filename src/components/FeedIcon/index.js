@@ -5,9 +5,10 @@ import classNames from 'classnames'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRss } from '@fortawesome/free-solid-svg-icons'
 
-import { feedType } from '../../propTypes'
-import getApp from '../../store/selectors/app'
+import { feedType } from 'newsdash/components/propTypes'
+import getApp from 'newsdash/store/selectors/app'
 import css from './FeedIcon.sass'
+
 
 const FeedIcon = ({ className, feed, noLink }) => {
   const { faviconProxy } = useSelector(getApp)

@@ -6,8 +6,8 @@ import {
   DEFAULT_FETCH_INTERVAL,
   DEFAULT_GRID_COLS,
   MAX_FEED_ITEMS_TO_KEEP,
-} from '../../constants'
-import { actionTypes as appActionTypes } from '../actions/app'
+} from 'newsdash/constants'
+import { actionTypes as appActionTypes } from 'newsdash/store/actions/app'
 
 export default class App extends Model {
   static get modelName() {

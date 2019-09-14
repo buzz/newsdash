@@ -5,11 +5,11 @@ import classNames from 'classnames'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faSync } from '@fortawesome/free-solid-svg-icons'
 
+import { FEED_STATUS } from 'newsdash/constants'
+import { feedBoxType, feedType } from 'newsdash/components/propTypes'
+import { refreshFeed } from 'newsdash/store/actions/feed'
+import FeedIcon from 'newsdash/components/FeedIcon'
 import css from './Header.sass'
-import { FEED_STATUS } from '../../../../constants'
-import { feedBoxType, feedType } from '../../../../propTypes'
-import { refreshFeed } from '../../../../store/actions/feed'
-import FeedIcon from '../../../FeedIcon'
 
 const getTitle = (feed, feedBox, editMode) => {
   if (editMode) {

@@ -1,9 +1,9 @@
 import { put, select } from 'redux-saga/effects'
 
-import { FEED_STATUS } from '../../constants'
-import { loadFeed } from '../../store/actions/feed'
-import feedSelectors from '../../store/selectors/feed'
-import getApp from '../../store/selectors/app'
+import { FEED_STATUS } from 'newsdash/constants'
+import { loadFeed } from 'newsdash/store/actions/feed'
+import feedSelectors from 'newsdash/store/selectors/feed'
+import getApp from 'newsdash/store/selectors/app'
 
 export default function* fetchFeedsSaga() {
   const { fetchInterval } = yield select(getApp)

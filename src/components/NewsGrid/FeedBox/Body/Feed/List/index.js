@@ -2,9 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
+import { feedItemType, feedItemListType } from 'newsdash/components/propTypes'
 import css from './List.sass'
 import itemTransition from './itemTransition.sass'
-import { feedItemType, feedItemListType } from '../../../../../../propTypes'
 import Item from './Item'
 
 const { transitionSpeed, ...transitionClassNames } = itemTransition
