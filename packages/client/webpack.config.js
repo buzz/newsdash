@@ -119,6 +119,9 @@ if (devMode) {
     contentBase: DIST_DIR,
     hot: true,
     port: 3000,
+    proxy: {
+      '/api': 'http://localhost:3001',
+    },
   }
 }
 

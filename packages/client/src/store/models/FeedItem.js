@@ -22,6 +22,9 @@ export default class FeedItem extends Model {
 
   static reducer(action, feedItemModel, session) {
     switch (action.type) {
+      case feedItemActionTypes.EDIT_FEED_ITEM:
+        feedItemModel.withId(action.id).update(action.attrs)
+        break
       case feedItemActionTypes.PRUNE: {
         const { feedItemsToKeep } = session.App.first().ref
         session
