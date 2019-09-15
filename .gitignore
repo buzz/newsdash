@@ -1,8 +1,7 @@
 *~
-/dist
 /node_modules
-/yarn-debug.log*
-/npm-debug.log*
-/yarn-error.log*
+yarn-debug.log*
+npm-debug.log*
+yarn-error.log*
 /deploy.sh
 .DS_Store
