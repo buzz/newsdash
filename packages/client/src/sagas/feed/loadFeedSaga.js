@@ -8,7 +8,7 @@ import getApp from 'newsdash/store/selectors/app'
 const parser = new Parser()
 
 // first time try to fetch feed directly and remember if CORS proxy is necessary
-export default function* loadFeed({ id, url }) {
+export default function* loadFeedSaga({ id, url }) {
   const feed = yield select(feedSelectors.getFeed, id)
   const fetchUrl = url || feed.url
 

@@ -5,7 +5,7 @@ import { editFeedItem } from 'newsdash/store/actions/feedItem'
 
 const getFeedItems = feedItemSelectors.makeGetFeedItems()
 
-export default function* loadfeedItemsImageUrls({ id }) {
+export default function* loadFeedItemsImageUrlsSaga({ id }) {
   const items = yield select(getFeedItems, id)
   for (let i = 0; i < items.length; i += 1) {
     const item = items[i]

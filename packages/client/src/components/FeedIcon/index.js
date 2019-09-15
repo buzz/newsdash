@@ -1,24 +1,21 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useSelector } from 'react-redux'
 import classNames from 'classnames'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRss } from '@fortawesome/free-solid-svg-icons'
 
 import { feedType } from 'newsdash/components/propTypes'
-import getApp from 'newsdash/store/selectors/app'
 import css from './FeedIcon.sass'
 
+const getFaviconUrl = (url) => {
+  const { origin } = new URL(url)
+  return new URL('favicon.ico', origin)
+}
 
 const FeedIcon = ({ className, feed, noLink }) => {
-  const { faviconProxy } = useSelector(getApp)
-
-  const iconUrl = feed && feed.url.startsWith('http')
-    ? `${faviconProxy}${(new URL(feed.url)).hostname}`
-    : null
-
-  const icon = iconUrl
-    ? <img alt={feed.title} src={iconUrl} title={feed.title} />
+  const faviconUrl = feed && feed.link ? getFaviconUrl(feed.link) : null
+  const icon = faviconUrl
+    ? <img alt={feed.title} src={faviconUrl} title={feed.title} />
     : <FontAwesomeIcon icon={faRss} />
 
   return feed && feed.link && !noLink

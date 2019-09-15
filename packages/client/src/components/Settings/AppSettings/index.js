@@ -35,7 +35,6 @@ const feedItemsToKeepIntervalMarks = makeSliderMarks(
 const AppSettings = () => {
   const {
     corsProxy: oldCorsProxy,
-    faviconProxy: oldFaviconProxy,
     feedItemsToKeep: oldFeedItemsToKeep,
     fetchInterval: oldFetchInterval,
     gridCols: oldGridCols,
@@ -45,7 +44,6 @@ const AppSettings = () => {
 
   const [gridCols, setGridCols] = useState(oldGridCols)
   const [corsProxy, setCorsProxy] = useState(oldCorsProxy)
-  const [faviconProxy, setFaviconProxy] = useState(oldFaviconProxy)
   const [fetchInterval, setFetchInterval] = useState(oldFetchInterval)
   const [feedItemsToKeep, setFeedItemsToKeep] = useState(oldFeedItemsToKeep)
 
@@ -107,21 +105,6 @@ const AppSettings = () => {
             />
           </div>
         </div>
-
-        <div className={css.row}>
-          <label htmlFor="faviconProxyInput">Favicon proxy</label>
-          <input
-            id="faviconProxyInput"
-            onChange={(ev) => {
-              const val = ev.currentTarget.value.trim()
-              setFaviconProxy(val)
-              dispatch(updateSettings({ faviconProxy: val }))
-            }}
-            type="text"
-            value={faviconProxy}
-          />
-        </div>
-
         <div className={css.row}>
           <label htmlFor="corsProxyInput">CORS proxy</label>
           <input
