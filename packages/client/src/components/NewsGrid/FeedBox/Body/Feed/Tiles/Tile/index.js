@@ -31,9 +31,9 @@ const Tile = ({ color, gridWidth, item }) => {
     }
   }, [gridWidth, oldGridWidth, needToMeasure, overlayRef])
 
-  const tileImageStyle = color
-    ? { backgroundColor: color }
-    : { backgroundImage: `url(${item.imageUrl})` }
+  const tileImageStyle = item.imageUrl
+    ? { backgroundImage: `url(${item.imageUrl})` }
+    : { backgroundColor: color }
 
   const tileImageClassNames = classNames(
     css.tileImage,
