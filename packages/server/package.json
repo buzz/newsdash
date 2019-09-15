@@ -1,0 +1,32 @@
+{
+  "name": "@newsdash/server",
+  "description": "Server for newsdash",
+  "version": "0.2.0",
+  "license": "AGPL-3.0-or-later",
+  "private": true,
+  "author": {
+    "name": "buzz",
+    "url": "https://github.com/buzz"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/buzz/newsdash.git",
+    "directory": "packages/server"
+  },
+  "scripts": {
+    "build": "babel src -d dist",
+    "dev": "nodemon --exec babel-node src/server.js",
+    "start": "yarn build && node dist/server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "got": "^9.6.0",
+    "metascraper": "^5.7.4",
+    "metascraper-image": "^5.7.4"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.6.0",
+    "@babel/node": "^7.6.1",
+    "nodemon": "^1.19.2"
+  }
+}
