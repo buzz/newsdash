@@ -22,13 +22,14 @@
     "url": "https://github.com/buzz/newsdash.git"
   },
   "scripts": {
-    "build": "NODE_ENV=production yarn workspace @newsdash/client build",
-    "bundle-analyze": "BUNDLE_ANALYZE=1 yarn build",
-    "dev": "yarn workspace @newsdash/client dev",
+    "client:build:bundle-analyze": "BUNDLE_ANALYZE=1 yarn build",
+    "client:build": "NODE_ENV=production yarn workspace @newsdash/client build",
+    "client:dev": "yarn workspace @newsdash/client dev",
     "lint": "eslint ."
   },
   "eslintIgnore": [
-    "/packages/client/dist"
+    "/packages/client/dist",
+    "/packages/server/dist"
   ],
   "dependencies": {
   },
