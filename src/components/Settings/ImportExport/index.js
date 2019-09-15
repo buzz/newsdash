@@ -2,17 +2,23 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useDispatch, useSelector } from 'react-redux'
 import classNames from 'classnames'
-import { faFileImport } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faClipboard, faExclamationTriangle, faFileImport } from '@fortawesome/free-solid-svg-icons'
 
+import useCopyToClipboard from 'newsdash/hooks/useCopyToClipboard'
 import getSettingsExport from 'newsdash/store/selectors/getSettingsExport'
 import { importState } from 'newsdash/store/actions/app'
 import ConfirmButton from 'newsdash/components/ConfirmButton'
-import css from 'newsdash/components/Settings/Settings.sass'
+import settingsCss from 'newsdash/components/Settings/Settings.sass'
+import css from './ImportSettings.sass'
 
 const ImportExport = ({ setShowSettings }) => {
+  const copyToClipboard = useCopyToClipboard()
   const dispatch = useDispatch()
-  const ormState = useSelector(getSettingsExport)
+  const settingsExport = useSelector(getSettingsExport)
   const [importData, setImportData] = useState()
+
+  const settingsExportJson = JSON.stringify(settingsExport)
 
   const doImport = () => {
     try {
@@ -27,16 +33,41 @@ const ImportExport = ({ setShowSettings }) => {
     <>
       <h1>Import/Export</h1>
       <form>
-        <div className={classNames(css.row, css.rowFull)}>
+        <div className={classNames(settingsCss.row, settingsCss.rowFull)}>
           <p>
-            You can transfer your settings to another computer by copying it
-            from the export field and pasting it into the input field.
+            Here you can backup your personal settings and all your feeds.
+            Copy the contents of the export field and save it to a file or
+            transfer it to another computer.
+          </p>
+          <p className={css.warning}>
+            <FontAwesomeIcon icon={faExclamationTriangle} />
+            The import will overwrite your settings and clear all your feeds!
           </p>
         </div>
 
-        <div className={css.row}>
+        <div className={settingsCss.row}>
+          <label htmlFor="exportInput">Export</label>
+          <div className={settingsCss.inputAndButton}>
+            <input
+              id="exportInput"
+              onFocus={(ev) => ev.target.select()}
+              readOnly
+              type="text"
+              value={settingsExportJson}
+            />
+            <button
+              onClick={() => copyToClipboard(settingsExportJson)}
+              type="button"
+            >
+              <FontAwesomeIcon icon={faClipboard} />
+              Copy
+            </button>
+          </div>
+        </div>
+
+        <div className={settingsCss.row}>
           <label htmlFor="importInput">Import</label>
-          <div className={css.inputAndButton}>
+          <div className={settingsCss.inputAndButton}>
             <input
               id="importInput"
               onChange={(ev) => setImportData(ev.currentTarget.value.trim())}
@@ -49,17 +80,6 @@ const ImportExport = ({ setShowSettings }) => {
               Import
             </ConfirmButton>
           </div>
-        </div>
-
-        <div className={css.row}>
-          <label htmlFor="exportInput">Export</label>
-          <input
-            id="exportInput"
-            onFocus={(ev) => ev.target.select()}
-            readOnly
-            type="text"
-            value={JSON.stringify(ormState)}
-          />
         </div>
       </form>
     </>
