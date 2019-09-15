@@ -25,7 +25,10 @@
     "client:build:bundle-analyze": "BUNDLE_ANALYZE=1 yarn build",
     "client:build": "NODE_ENV=production yarn workspace @newsdash/client build",
     "client:dev": "yarn workspace @newsdash/client dev",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "server:build": "yarn workspace @newsdash/server build",
+    "server:dev": "yarn workspace @newsdash/server dev",
+    "server:start": "yarn workspace @newsdash/server start"
   },
   "eslintIgnore": [
     "/packages/client/dist",
