@@ -2,6 +2,7 @@ import express from 'express'
 import metascraper from 'metascraper'
 import metascraperImage from 'metascraper-image'
 import got from 'got'
+import QuickLRU from 'quick-lru'
 
 import pkg from '../package.json'
 
@@ -21,10 +22,13 @@ const feedContentTypes = [
 ]
 const htmlContentType = 'text/html'
 
+const cache = new QuickLRU({ maxSize: 1000 })
+
 const fetch = async (url, acceptedContentTypes = null) => {
   const response = await got(
     url,
     {
+      cache,
       headers: { 'user-agent': USER_AGENT },
     }
   )

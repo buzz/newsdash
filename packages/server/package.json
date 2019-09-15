@@ -22,7 +22,8 @@
     "express": "^4.17.1",
     "got": "^9.6.0",
     "metascraper": "^5.7.4",
-    "metascraper-image": "^5.7.4"
+    "metascraper-image": "^5.7.4",
+    "quick-lru": "^4.0.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.0",
