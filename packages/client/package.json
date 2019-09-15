@@ -1,0 +1,85 @@
+{
+  "name": "@newsdash/client",
+  "description": "Web client for newsdash",
+  "version": "0.2.0",
+  "license": "AGPL-3.0-or-later",
+  "private": true,
+  "author": {
+    "name": "buzz",
+    "url": "https://github.com/buzz"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/buzz/newsdash.git",
+    "directory": "packages/client"
+  },
+  "scripts": {
+    "build": "NODE_ENV=production webpack -p --mode production",
+    "bundle-analyze": "BUNDLE_ANALYZE=1 yarn build",
+    "dev": "webpack-dev-server"
+  },
+  "browserslist": {
+    "production": [
+      ">0.25%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.22",
+    "@fortawesome/free-solid-svg-icons": "^5.10.2",
+    "@fortawesome/react-fontawesome": "^0.1.4",
+    "classnames": "^2.2.6",
+    "prop-types": "^15.7.2",
+    "rc-slider": "^8.7.0",
+    "rc-tabs": "^9.6.6",
+    "rc-tooltip": "^3.7.3",
+    "react": "^16.8.1",
+    "react-custom-scrollbars": "^4.2.1",
+    "react-dom": "^16.8.1",
+    "react-grid-layout": "^0.16.6",
+    "react-masonry-css": "^1.0.12",
+    "react-modal": "^3.10.1",
+    "react-redux": "^7.1.1",
+    "react-resizable": "^1.8.0",
+    "react-sortable-hoc": "^1.10.1",
+    "react-transition-group": "^4.2.2",
+    "reduce-reducers": "^1.0.4",
+    "redux": "^4.0.4",
+    "redux-orm": "^0.13.3",
+    "redux-saga": "^1.0.5",
+    "resize-observer-polyfill": "^1.5.1",
+    "rss-parser": "^3.7.2",
+    "timeago.js": "^4.0.0-beta.2",
+    "tinycolor2": "^1.4.1"
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.0.0",
+    "@babel/runtime": "^7.3.1",
+    "babel-loader": "^8.0.5",
+    "css-loader": "^3.2.0",
+    "eslint-import-resolver-webpack": "^0.11.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.2",
+    "eslint-plugin-react-hooks": "^2.0.1",
+    "favicons-webpack-plugin": "^1.0.2",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "node-sass": "^4.9.1",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "redux-devtools-extension": "^2.13.8",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.0",
+    "terser-webpack-plugin": "^2.0.1",
+    "webpack": "^4.12.0",
+    "webpack-bundle-analyzer": "^3.4.1",
+    "webpack-cli": "^3.0.8",
+    "webpack-dev-server": "^3.1.4"
+  }
+}
