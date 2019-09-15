@@ -59,7 +59,17 @@ app.get('/api/image/:requestedUrl', async (req, res, next) => {
   const { requestedUrl } = req.params
   try {
     const { body: html, url } = await fetch(requestedUrl, [htmlContentType])
-    res.json(await imageScraper({ html, url }))
+    const metadata = await imageScraper({ html, url })
+    if (metadata.image) {
+      res.json(
+        // metascraper might return list of images
+        metadata.image.match(',')
+          ? { image: metadata.image.split(',')[0] }
+          : metadata
+      )
+    } else {
+      throw new Error('No image returned from metascraper!')
+    }
   } catch (err) {
     next(err)
   }
