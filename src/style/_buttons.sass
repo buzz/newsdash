@@ -7,10 +7,11 @@
   color: $color-button-text
   cursor: pointer
   outline: none
+  text-shadow: 0 1px 0 $color-control-border
   white-space: nowrap
 
   &:hover
-    color: white
+    color: white !important
     background-color: $color-button-bg-hover
 
 =button
@@ -23,12 +24,13 @@
 
 =button-danger
   +button
-  background-color: $color-danger !important
-  color: $color-text-danger !important
+  background-color: $color-danger-bg !important
+  color: $color-danger-base !important
+  text-shadow: 0 1px 0 scale-color($color-danger-base, $lightness: 80%) !important
 
   &:hover
-    color: $color-text-danger
-    background-color: $color-danger-hover
+    background-color: $color-danger-hover !important
+    text-shadow: 0 1px 0 scale-color($color-danger-base, $lightness: -50%) !important
 
 =make-button-round($size, $button-diameter, $font-size, $padding: 1px 6px)
   .button-round-#{$size}
