@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import Masonry from 'react-masonry-css'
 import tinycolor from 'tinycolor2'
@@ -10,24 +10,29 @@ import css from './Tiles.sass'
 
 const MIN_COL_WIDTH = 200
 
-const getTileColors = (items) => (
-  items.map((item) => (
-    item.imageUrl
-      ? null
-      : tinycolor({
+const getTileColors = (items, prevTileColors) => {
+  const tileColors = [...prevTileColors]
+  for (let i = 0; i < items.length; i += 1) {
+    if (!tileColors[i]) {
+      tileColors[i] = tinycolor({
         h: Math.round((Math.random() * 360)),
         s: 0.2,
         l: 0.85,
       }).toHexString()
-  ))
-)
+    }
+  }
+  return tileColors
+}
 
 const Tiles = ({ items }) => {
   const [ref, width] = useWidthObserver()
   const colNum = Math.max(1, Math.floor(width / MIN_COL_WIDTH))
 
   // keep tile colors permanent across grid re-layouts
-  const tileColors = useRef(getTileColors(items))
+  const [tileColors, setTileColors] = useState(getTileColors(items, []))
+  useEffect(() => {
+    setTileColors((prevTileColors) => getTileColors(items, prevTileColors))
+  }, [items])
 
   // somehow Masonry is not recalculating after initial render
   const masonryRef = useRef()
@@ -49,10 +54,10 @@ const Tiles = ({ items }) => {
           items.map(
             (item, i) => (
               <Tile
-                color={tileColors.current[i]}
+                color={tileColors[i]}
                 gridWidth={width}
                 item={item}
-                key={item.id.toString()}
+                key={item.id}
               />
             )
           )
