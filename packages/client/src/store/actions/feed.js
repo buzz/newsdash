@@ -6,7 +6,6 @@ export const actionTypes = {
   LOAD_FEED_SUCCESS: 'LOAD_FEED_SUCCESS',
   LOAD_FEED: 'LOAD_FEED',
   REFRESH_FEED: 'REFRESH_FEED',
-  SET_USE_CORS_PROXY: 'SET_USE_CORS_PROXY',
 }
 
 export const addFeed = (feedBoxId, url) => ({
@@ -47,10 +46,4 @@ export const loadFeed = (id, url) => ({
 export const refreshFeed = (id) => ({
   type: actionTypes.REFRESH_FEED,
   id,
-})
-
-export const setUseCorsProxy = (id, value = true) => ({
-  type: actionTypes.SET_USE_CORS_PROXY,
-  id,
-  value,
 })

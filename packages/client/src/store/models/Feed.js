@@ -26,7 +26,6 @@ export default class Feed extends Model {
       error: attr(),
       index: attr(),
       lastFetched: attr({ getDefault: () => 0 }),
-      useCorsProxy: attr({ getDefault: () => false }),
       feedBox: fk('FeedBox', 'feeds'),
     }
   }
@@ -116,9 +115,6 @@ export default class Feed extends Model {
         })
         break
       }
-      case feedActionTypes.SET_USE_CORS_PROXY:
-        feedModel.withId(action.id).update({ useCorsProxy: action.value })
-        break
       default:
         break
     }

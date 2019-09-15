@@ -10,7 +10,6 @@ const getSettingsExport = createSelector(
     feedBoxes: session.FeedBox.all().toRefArray(),
     feeds: session.Feed.all().toRefArray().map((feed) => ({
       ...feed,
-      useCorsProxy: undefined,
       lastFetched: undefined,
       status: undefined,
       error: undefined,
