@@ -1,12 +1,12 @@
 import { call, takeEvery, takeLatest } from 'redux-saga/effects'
 
 import { actionTypes as feedActionTypes } from 'newsdash/store/actions/feed'
-import loadFeedSaga from './loadFeed'
+import loadFeedSaga from './loadFeedSaga'
 import editFeedSaga from './editFeedSaga'
 import fetchFeedsSaga from './fetchFeedsSaga'
 import periodicallyFetchFeedsSaga from './periodicallyFetchFeedsSaga'
 import periodicallyPruneFeedItemsSaga from './periodicallyPruneFeedItemsSaga'
-import refreshFeedSaga from './refreshFeed'
+import refreshFeedSaga from './refreshFeedSaga'
 
 export default [
   takeEvery(feedActionTypes.ADD_FEED, fetchFeedsSaga),
