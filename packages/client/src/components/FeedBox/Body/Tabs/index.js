@@ -11,7 +11,7 @@ import 'rc-tabs/assets/index.css'
 
 import { feedBoxType, feedType } from 'newsdash/components/propTypes'
 import { FEED_STATUS } from 'newsdash/constants'
-import Feed from 'newsdash/components/NewsGrid/FeedBox/Body/Feed'
+import Feed from 'newsdash/components/Feed'
 import css from './Tabs.sass'
 
 const FeedTabs = ({

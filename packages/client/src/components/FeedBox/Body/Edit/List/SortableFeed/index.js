@@ -14,7 +14,7 @@ import {
 import { FEED_STATUS, FEED_DISPLAY, FEED_DISPLAY_LABELS } from 'newsdash/constants'
 import { feedType } from 'newsdash/components/propTypes'
 import { deleteFeed, editFeed } from 'newsdash/store/actions/feed'
-import FeedIcon from 'newsdash/components/FeedIcon'
+import Icon from 'newsdash/components/Feed/Icon'
 import css from './SortableFeed.sass'
 
 const getTitle = (feed) => {
@@ -158,7 +158,7 @@ const Feed = ({ feed }) => {
   return (
     <li className={css.listItem}>
       <DragHandle />
-      <FeedIcon
+      <Icon
         className={classNames(css.icon, { [css.favIcon]: feed.url.startsWith('http') })}
         feed={feed}
         noLink

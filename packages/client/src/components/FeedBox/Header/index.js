@@ -8,7 +8,7 @@ import { faEdit, faSync } from '@fortawesome/free-solid-svg-icons'
 import { FEED_STATUS } from 'newsdash/constants'
 import { feedBoxType, feedType } from 'newsdash/components/propTypes'
 import { refreshFeed } from 'newsdash/store/actions/feed'
-import FeedIcon from 'newsdash/components/FeedIcon'
+import Icon from 'newsdash/components/Feed/Icon'
 import css from './Header.sass'
 
 const getTitle = (feed, feedBox, editMode) => {
@@ -33,9 +33,12 @@ const Header = ({
   const dispatch = useDispatch()
   const title = getTitle(feed, feedBox, editMode)
 
-  const icon = editMode || !feed
-    ? <FeedIcon className={css.feedIcon} />
-    : <FeedIcon className={css.feedIcon} feed={feed} />
+  const icon = (
+    <Icon
+      className={css.feedIcon}
+      feed={editMode || !feed ? null : feed}
+    />
+  )
 
   const headerTitle = feed && feed.link && !editMode
     ? (
