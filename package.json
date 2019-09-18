@@ -22,8 +22,9 @@
     "url": "https://github.com/buzz/newsdash.git"
   },
   "scripts": {
+    "build": "yarn client:build && yarn server:build",
     "client:build:bundle-analyze": "BUNDLE_ANALYZE=1 yarn build",
-    "client:build": "NODE_ENV=production yarn workspace @newsdash/client build",
+    "client:build": "yarn workspace @newsdash/client build",
     "client:dev": "yarn workspace @newsdash/client dev",
     "lint": "eslint .",
     "server:build": "yarn workspace @newsdash/server build",
