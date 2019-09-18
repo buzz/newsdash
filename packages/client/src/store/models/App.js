@@ -16,6 +16,7 @@ export default class App extends Model {
   static get fields() {
     return {
       id: attr({ getDefault: () => 0 }),
+      apiPresent: attr({ getDefault: () => false }),
       gridCols: attr({ getDefault: () => DEFAULT_GRID_COLS }),
       corsProxy: attr({ getDefault: () => DEFAULT_CORS_PROXY }),
       feedItemsToKeep: attr({ getDefault: () => MAX_FEED_ITEMS_TO_KEEP }),
@@ -25,8 +26,8 @@ export default class App extends Model {
 
   static reducer(action, appModel, session) {
     switch (action.type) {
-      case appActionTypes.UPDATE_SETTINGS:
-        appModel.first().update(action.settings)
+      case appActionTypes.EDIT_APP:
+        appModel.first().update(action.attrs)
         break
       case appActionTypes.IMPORT_STATE: {
         const { data } = action

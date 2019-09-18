@@ -6,7 +6,7 @@ import QuickLRU from 'quick-lru'
 
 import pkg from '../package.json'
 
-const USER_AGENT = `newsdash/${pkg.version} (https://github.com/buzz/newsdash)`
+const USER_AGENT = `${pkg.name}/${pkg.version} (https://github.com/buzz/newsdash)`
 
 const imageScraper = metascraper([metascraperImage()])
 
@@ -43,6 +43,10 @@ const fetch = async (url, acceptedContentTypes = null) => {
   }
   return response
 }
+
+app.get('/api/version', (req, res) => {
+  res.json({ name: pkg.name, version: pkg.version })
+})
 
 app.get('/api/fetch-feed/:requestedUrl', async (req, res, next) => {
   const { requestedUrl } = req.params

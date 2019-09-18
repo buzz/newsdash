@@ -4,7 +4,7 @@ import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css'
 
 import getApp from 'newsdash/store/selectors/app'
-import { updateSettings } from 'newsdash/store/actions/app'
+import { editApp } from 'newsdash/store/actions/app'
 import css from 'newsdash/components/Settings/Settings.sass'
 
 const makeSliderMarks = (min, max, step) => {
@@ -34,6 +34,7 @@ const feedItemsToKeepIntervalMarks = makeSliderMarks(
 
 const AppSettings = () => {
   const {
+    apiPresent,
     corsProxy: oldCorsProxy,
     feedItemsToKeep: oldFeedItemsToKeep,
     fetchInterval: oldFetchInterval,
@@ -63,7 +64,7 @@ const AppSettings = () => {
               step={gridColStep}
               onChange={(val) => {
                 setGridCols(val)
-                dispatch(updateSettings({ gridCols: val }))
+                dispatch(editApp({ gridCols: val }))
               }}
             />
           </div>
@@ -82,7 +83,7 @@ const AppSettings = () => {
               onChange={(val) => {
                 const valMilli = val * 60 * 1000
                 setFetchInterval(valMilli)
-                dispatch(updateSettings({ fetchInterval: valMilli }))
+                dispatch(editApp({ fetchInterval: valMilli }))
               }}
             />
           </div>
@@ -100,7 +101,7 @@ const AppSettings = () => {
               step={feedItemsToKeepIntervalStep}
               onChange={(val) => {
                 setFeedItemsToKeep(val)
-                dispatch(updateSettings({ feedItemsToKeep: val }))
+                dispatch(editApp({ feedItemsToKeep: val }))
               }}
             />
           </div>
@@ -108,11 +109,12 @@ const AppSettings = () => {
         <div className={css.row}>
           <label htmlFor="corsProxyInput">CORS proxy</label>
           <input
+            disabled={apiPresent}
             id="corsProxyInput"
             onChange={(ev) => {
               const val = ev.currentTarget.value.trim()
               setCorsProxy(val)
-              dispatch(updateSettings({ corsProxy: val }))
+              dispatch(editApp({ corsProxy: val }))
             }}
             type="text"
             value={corsProxy}
