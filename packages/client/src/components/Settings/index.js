@@ -3,14 +3,18 @@ import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
+import ApiCheck from './ApiCheck'
 import AppSettings from './AppSettings'
 import ImportExport from './ImportExport'
 import css from './Settings.sass'
 
 const Settings = ({ setShowSettings }) => (
   <div className={css.settings}>
-    <AppSettings />
-    <ImportExport setShowSettings={setShowSettings} />
+    <div>
+      <AppSettings />
+      <ImportExport setShowSettings={setShowSettings} />
+      <ApiCheck />
+    </div>
     <button
       aria-label="Close settings"
       className={css.buttonClose}
