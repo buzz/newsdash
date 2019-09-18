@@ -35,7 +35,6 @@ export const feedType = PropTypes.shape({
   customTitle: PropTypes.string,
   link: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  logoUrl: PropTypes.string,
   status: PropTypes.oneOf(Object.values(FEED_STATUS)),
   display: PropTypes.oneOf(Object.values(FEED_DISPLAY)),
   error: PropTypes.string,

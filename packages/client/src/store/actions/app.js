@@ -1,7 +1,7 @@
 export const actionTypes = {
   IMPORT_STATE: 'IMPORT_STATE',
   LOAD_STATE: 'LOAD_STATE',
-  UPDATE_SETTINGS: 'UPDATE_SETTINGS',
+  EDIT_APP: 'EDIT_APP',
 }
 
 export const importState = (data) => ({
@@ -15,7 +15,7 @@ export const loadState = (orm) => ({
   orm,
 })
 
-export const updateSettings = (settings) => ({
-  type: actionTypes.UPDATE_SETTINGS,
-  settings,
+export const editApp = (attrs) => ({
+  type: actionTypes.EDIT_APP,
+  attrs,
 })
