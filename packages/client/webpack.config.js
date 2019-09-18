@@ -7,6 +7,8 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const TerserJSPlugin = require('terser-webpack-plugin')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 
+const pkgInfo = require('../../package.json')
+
 const devMode = process.env.NODE_ENV !== 'production'
 const SRC_DIR = path.join(__dirname, 'src')
 const DIST_DIR = path.join(__dirname, 'dist')
@@ -93,6 +95,11 @@ const config = {
     new FaviconsWebpackPlugin({
       logo: path.join(SRC_DIR, 'static', 'logo.svg'),
       favicons: {
+        appName: pkgInfo.name,
+        appDescription: pkgInfo.description,
+        developerName: null,
+        developerURL: null,
+        version: pkgInfo.version,
         icons: {
           android: true,
           appleIcon: true,

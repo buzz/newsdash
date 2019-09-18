@@ -4,7 +4,7 @@ import metascraperImage from 'metascraper-image'
 import got from 'got'
 import QuickLRU from 'quick-lru'
 
-import pkg from '../package.json'
+import pkg from '../../../package.json'
 
 const USER_AGENT = `${pkg.name}/${pkg.version} (https://github.com/buzz/newsdash)`
 

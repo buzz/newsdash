@@ -9,7 +9,7 @@ export default function* checkApiPresenceSaga() {
       throw new Error()
     }
     const { name } = yield call([response, response.json])
-    if (name !== '@newsdash/server') {
+    if (name !== 'newsdash') {
       throw new Error()
     }
     yield put(editApp({ apiPresent: true }))
