@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import { CSSTransition } from 'react-transition-group'
 
 import { feedItemType } from 'newsdash/components/propTypes'
-import Date from 'newsdash/components/NewsGrid/FeedBox/Body/Feed/Date'
+import Date from 'newsdash/components/Feed/Date'
 import css from './Tile.sass'
 
 const transitionClassNames = {

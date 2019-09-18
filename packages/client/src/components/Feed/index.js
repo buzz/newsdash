@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { feedType } from 'newsdash/components/propTypes'
 import feedItemSelectors from 'newsdash/store/selectors/feedItem'
 import { FEED_STATUS, FEED_DISPLAY } from 'newsdash/constants'
-import css from 'newsdash/components/NewsGrid/FeedBox/Body/Body.sass'
+import css from 'newsdash/components/FeedBox/Body/Body.sass'
 import List from './List'
 import Tiles from './Tiles'
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
-import css from './Feed.sass'
+import css from './FeedBox.sass'
 import Body from './Body'
 import Header from './Header'
 
