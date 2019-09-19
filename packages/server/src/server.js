@@ -50,11 +50,29 @@ app.get('/api/image/:requestedUrl', async (req, res, next) => {
           : metadata
       )
     } else {
-      throw new Error('No image found!')
+      const err = new Error('No image found')
+      err.statusCode = 404
+      throw err
     }
   } catch (err) {
     next(err)
   }
+})
+
+app.use((req, res, next) => {
+  const err = new Error('Page Not Found')
+  err.statusCode = 404
+  next(err)
+})
+
+app.use((err, req, res, next) => {
+  if (process.env.NODE_ENV !== 'production') {
+    console.error(err.stack)
+  }
+  res
+    .status(err.statusCode || 500)
+    .json({ message: err.message })
+  next()
 })
 
 app.listen(port, () => console.log(`Listening on port ${port}`))
