@@ -13,56 +13,34 @@ const imageScraper = metascraper([metascraperImage()])
 const app = express()
 const port = 3001
 
-const feedContentTypes = [
-  'text/xml',
-  'application/xml',
-  'application/rdf+xml',
-  'application/rss+xml',
-  'application/atom+xml',
-]
-const htmlContentType = 'text/html'
-
 const cache = new QuickLRU({ maxSize: 1000 })
 
-const fetch = async (url, acceptedContentTypes = null) => {
-  const response = await got(
-    url,
-    {
-      cache,
-      headers: { 'user-agent': USER_AGENT },
-    }
-  )
-  const contentType = response.headers['content-type']
-  if (acceptedContentTypes) {
-    const correctContentType = acceptedContentTypes.some(
-      (testContentType) => contentType.startsWith(testContentType)
-    )
-    if (!correctContentType) {
-      throw new Error(`Wrong content-type received: ${contentType}`)
-    }
+const fetch = (url, opts = {}) => got(
+  url,
+  {
+    cache,
+    decompress: false,
+    headers: { 'User-Agent': USER_AGENT },
+    timeout: 10000,
+    ...opts,
   }
-  return response
-}
+)
 
 app.get('/api/version', (req, res) => {
   res.json({ name: pkg.name, version: pkg.version })
 })
 
-app.get('/api/fetch-feed/:requestedUrl', async (req, res, next) => {
+app.get('/api/fetch-feed/:requestedUrl', (req, res, next) => {
   const { requestedUrl } = req.params
-  try {
-    const { body, headers } = await fetch(requestedUrl, feedContentTypes)
-    res.set('Content-Type', headers['content-type'])
-    res.send(body)
-  } catch (err) {
-    next(err)
-  }
+  fetch(requestedUrl, { stream: true })
+    .on('error', next)
+    .pipe(res)
 })
 
 app.get('/api/image/:requestedUrl', async (req, res, next) => {
   const { requestedUrl } = req.params
   try {
-    const { body: html, url } = await fetch(requestedUrl, [htmlContentType])
+    const { body: html, url } = await fetch(requestedUrl)
     const metadata = await imageScraper({ html, url })
     if (metadata.image) {
       res.json(
@@ -72,7 +50,7 @@ app.get('/api/image/:requestedUrl', async (req, res, next) => {
           : metadata
       )
     } else {
-      throw new Error('No image returned from metascraper!')
+      throw new Error('No image found!')
     }
   } catch (err) {
     next(err)
