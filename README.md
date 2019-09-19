@@ -1,11 +1,11 @@
 <h1 align="center">
-  <a href="https://github.com/buzz/newsdash"><img src="src/static/logo-newsdash.svg" alt="newsdash" /></a>
+  <a href="https://github.com/buzz/newsdash"><img src="packages/client/src/static/logo-newsdash.svg" alt="newsdash" /></a>
 </h1>
 
 <h4 align="center">A news dashboard inspired by iGoogle and Netvibes</h4>
 
 <p align="center">
-  <a href="https://github.com/buzz/newsdash/releases/latest/download/newsdash-dist.zip"><img src="https://img.shields.io/github/package-json/v/buzz/newsdash?color=%23999"></a> <a href="https://github.com/buzz/newsdash/issues"><img src="https://img.shields.io/github/issues/buzz/newsdash"></a> <a href="#computer-installation"><img src="https://img.shields.io/badge/self-hosted-blue"></a> <a href="https://github.com/buzz/newsdash/issues"><img src="https://img.shields.io/badge/contributions-welcome-brightgreen"></a> <a href="https://www.gnu.org/licenses/agpl-3.0.en.html"><img src="https://img.shields.io/github/license/buzz/newsdash"></a>
+  <a href="https://github.com/buzz/newsdash/releases/latest"><img src="https://img.shields.io/github/package-json/v/buzz/newsdash?color=%23999"></a> <a href="https://github.com/buzz/newsdash/issues"><img src="https://img.shields.io/github/issues/buzz/newsdash"></a> <a href="#computer-installation"><img src="https://img.shields.io/badge/self-hosted-blue"></a> <a href="https://github.com/buzz/newsdash/issues"><img src="https://img.shields.io/badge/contributions-welcome-brightgreen"></a> <a href="https://www.gnu.org/licenses/agpl-3.0.en.html"><img src="https://img.shields.io/github/license/buzz/newsdash"></a>
 </p>
 
 <p align="center">
@@ -31,18 +31,87 @@
 
 ## :thinking: Motivation
 
-In lack of a decent, modern and simple web-based feed reader I created this
-web application mainly for personal use.
+I couldn't find a modern and simple web-based feed reader that met my
+requirements. So I wrote my own.
 
 ## :computer: Installation
 
-Currently newsdash is a
-[bunch of static files](https://github.com/buzz/newsdash/releases/latest/download/newsdash-dist.zip)
-without a server backend. This means you can just upload it to your web server
-and are ready to go.
+### Docker
 
-All settings and feeds are stored in your browser. You can transfer them to
-another computer by using the import/export feature.
+To get you up and running just spin up the Docker image. You can then access
+the web app at http://localhost:3001/.
+
+```bash
+$ docker run \
+    -p 127.0.0.1:3001:3001 \
+    newsdash/newsdash
+```
+
+#### nginx
+
+For a production deployment you should use some sort of reverse proxy like
+[nginx](https://nginx.org/). This way you can add things like basic
+authentication, gzip compression and TLS termination. nginx is also much better
+at serving the static files. The container exports the minified production
+build in the volume `/newsdash/client`.
+
+A sample nginx configuration snippet you can start from.
+
+```nginx
+server {
+  listen 443 ssl http2;
+  server_name newsdash.example.com;
+  root /path/to/newsdash-client;
+
+  ssl on;
+  ssl_certificate [...];
+
+  auth_basic "Restricted";
+  auth_basic_user_file htpasswd_file;
+
+  gzip on;
+  gzip_min_length 500;
+  gzip_proxied any;
+  gzip_types
+    text/css
+    text/xml
+    application/atom+xml
+    application/javascript
+    application/manifest+json
+    application/rdf+xml
+    application/rss+xml
+    application/xml;
+
+  location /api/ {
+    proxy_set_header X-Forwarded-For $remote_addr;
+    proxy_set_header Host $http_host;
+    proxy_pass http://localhost:3001;
+  }
+
+  location / {
+    try_files $uri $uri/index.html =404;
+  }
+}
+
+```
+
+#### API-less
+
+It's possible to run newsdash without the API part.
+
+The upside is, it's easy to deploy. You just have to upload a bunch of static
+files. Grab the
+[dist package](https://github.com/buzz/newsdash/releases/latest/download/newsdash-dist.zip)
+and unzip it to a folder on your webserver.
+
+The web app will detect that it doesn't have access to the API and runs in
+fallback mode. It will be fully functional although some limitations apply.
+
+* Feeds are fetched using a public CORS proxy.
+* Images are only present if the feed has image URLs included. Usually they
+  come in low resolution.
+* All settings and feeds are stored locally in your browser. You need to
+  transfer them manually to another computer using the import/export function.
 
 ## :hammer_and_wrench: Development
 
@@ -51,11 +120,12 @@ Make sure you have recent versions of [Node.js](https://nodejs.org/) and
 
 Check out the project and start a development server.
 
-```sh
+```bash
 $ git clone https://github.com/buzz/newsdash.git
 $ cd newsdash
 $ yarn install
-$ yarn dev
+$ yarn client:dev
+$ yarn server:dev
 ```
 
 ## :love_letter: Credits
