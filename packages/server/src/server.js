@@ -1,3 +1,4 @@
+import path from 'path'
 import express from 'express'
 import metascraper from 'metascraper'
 import metascraperImage from 'metascraper-image'
@@ -7,6 +8,7 @@ import QuickLRU from 'quick-lru'
 import pkg from '../../../package.json'
 
 const USER_AGENT = `${pkg.name}/${pkg.version} (https://github.com/buzz/newsdash)`
+const CLIENT_DIST_DIR = path.resolve(__dirname, '..', '..', 'client', 'dist')
 
 const imageScraper = metascraper([metascraperImage()])
 
@@ -58,6 +60,8 @@ app.get('/api/image/:requestedUrl', async (req, res, next) => {
     next(err)
   }
 })
+
+app.use(express.static(CLIENT_DIST_DIR))
 
 app.use((req, res, next) => {
   const err = new Error('Page Not Found')
