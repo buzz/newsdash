@@ -24,6 +24,9 @@
       .tileImageWrapper
         box-shadow: 0 0 60px rgba(0, 0, 0, 0.5) inset
         height: 100%
+        left: 0
+        position: absolute
+        top: 0
         width: 100%
 
         .tileImage
@@ -31,18 +34,12 @@
           object-fit: cover
           width: 100%
 
-      .overlay
+      .overlayShadow
         $padding: $padding-md
-        +text-shadow-inv
-        background-color: rgba(0, 0, 0, 0.6)
-        bottom: 0
-        color: $color-text-inv
+        visibility: hidden
         display: flex
         flex-direction: column
         padding: $padding-md
-        position: absolute
-        transition: height $transition-speed ease-in, background-color $transition-speed ease-in
-        visibility: hidden
         width: 100%
 
         .caption
@@ -63,28 +60,38 @@
           flex-grow: 0
           font-size: 105%
           margin: $padding-sm 0 0
+
+      .overlay
+        @extend .overlayShadow
+        +text-shadow-inv
+        background-color: rgba(0, 0, 0, 0.6)
+        bottom: 0
+        color: $color-text-inv
+        height: 32px
+        position: absolute
+        transition: height $transition-speed ease-in, background-color $transition-speed ease-in
+        visibility: inherit
+        z-index: 1
+
+        .content
           opacity: 0
           transition: opacity $transition-speed ease-in
 
-        &.measured
-          height: 32px
-          visibility: visible
-
-          .title
-            overflow: hidden
-            text-overflow: ellipsis !important
-            white-space: nowrap !important
+        .title
+          overflow: hidden
+          text-overflow: ellipsis !important
+          white-space: nowrap !important
 
         &.enterActive, &.enterDone
           background-color: rgba(0, 0, 0, 0.75) !important
           height: 100% !important
 
+          .content
+            opacity: 1 !important
+
           .title
             text-overflow: inherit !important
             white-space: inherit !important
-
-          .content
-            opacity: 1 !important
 
         &.exitActive
 

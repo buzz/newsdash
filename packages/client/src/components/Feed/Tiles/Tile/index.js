@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { CSSTransition } from 'react-transition-group'
@@ -15,22 +15,36 @@ const transitionClassNames = {
   exitDone: css.exitDone,
 }
 
-const Tile = ({ color, gridWidth, item }) => {
-  const [hover, setHover] = useState(false)
-  const [height, setHeight] = useState(250)
-  const [needToMeasure, setNeedToMeasure] = useState(true)
-  const [oldGridWidth, setOldGridWidth] = useState(gridWidth)
+const Overlay = ({
+  className,
+  content,
+  date,
+  title,
+}) => (
+  <div className={className}>
+    <div className={css.caption}>
+      <h2 className={css.title}>{title}</h2>
+      <span className={css.date}>{date}</span>
+    </div>
+    <p className={css.content}>
+      {content}
+    </p>
+  </div>
+)
 
-  const overlayRef = useRef()
-  useEffect(() => {
-    if (oldGridWidth !== gridWidth) {
-      setOldGridWidth(gridWidth)
-      setNeedToMeasure(true)
-    } else if (needToMeasure) {
-      setHeight(overlayRef.current.offsetHeight)
-      setNeedToMeasure(false)
-    }
-  }, [gridWidth, oldGridWidth, needToMeasure, overlayRef])
+Overlay.defaultProps = {
+  content: '',
+}
+
+Overlay.propTypes = {
+  className: PropTypes.string.isRequired,
+  content: PropTypes.string,
+  date: PropTypes.node.isRequired,
+  title: PropTypes.string.isRequired,
+}
+
+const Tile = ({ color, item }) => {
+  const [hover, setHover] = useState(false)
 
   const tileImage = item.imageUrl
     ? (
@@ -47,7 +61,7 @@ const Tile = ({ color, gridWidth, item }) => {
     : null
 
   return (
-    <div className={css.tile} style={{ height: `${height}px` }}>
+    <div className={css.tile}>
       <div className={css.tileWrapper}>
         <a
           className={classNames('nondraggable', css.tileInner)}
@@ -57,30 +71,30 @@ const Tile = ({ color, gridWidth, item }) => {
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
         >
+          <CSSTransition
+            in={hover}
+            timeout={parseInt(css.transitionSpeed.slice(0, -2), 10)}
+            classNames={transitionClassNames}
+          >
+            <Overlay
+              className={css.overlay}
+              content={item.content}
+              date={date}
+              title={item.title}
+            />
+          </CSSTransition>
+          <Overlay
+            className={css.overlayShadow}
+            content={item.content}
+            date={date}
+            title={item.title}
+          />
           <div
             className={css.tileImageWrapper}
             style={{ backgroundColor: color }}
           >
             {tileImage}
           </div>
-          <CSSTransition
-            in={hover}
-            timeout={parseInt(css.transitionSpeed.slice(0, -2), 10)}
-            classNames={transitionClassNames}
-          >
-            <div
-              className={classNames(css.overlay, { [css.measured]: !needToMeasure })}
-              ref={overlayRef}
-            >
-              <div className={css.caption}>
-                <h2 className={css.title}>{item.title}</h2>
-                <span className={css.date}>{date}</span>
-              </div>
-              <p className={css.content}>
-                {item.content}
-              </p>
-            </div>
-          </CSSTransition>
         </a>
       </div>
     </div>
@@ -93,7 +107,6 @@ Tile.defaultProps = {
 
 Tile.propTypes = {
   color: PropTypes.string,
-  gridWidth: PropTypes.number.isRequired,
   item: feedItemType.isRequired,
 }
 
