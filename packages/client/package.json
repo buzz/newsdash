@@ -35,6 +35,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.10.2",
     "@fortawesome/react-fontawesome": "^0.1.4",
     "classnames": "^2.2.6",
+    "lazysizes": "^5.1.1",
     "prop-types": "^15.7.2",
     "rc-slider": "^8.7.0",
     "rc-tabs": "^9.6.6",

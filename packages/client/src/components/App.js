@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import { Provider } from 'react-redux'
+import 'lazysizes'
+import 'lazysizes/plugins/attrchange/ls.attrchange'
+import 'lazysizes/plugins/native-loading/ls.native-loading'
 
 import makeStore from 'newsdash/store'
 import ControlBar from './ControlBar'

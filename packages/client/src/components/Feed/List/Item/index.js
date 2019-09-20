@@ -6,8 +6,8 @@ import 'rc-tooltip/assets/bootstrap.css'
 import { feedItemType, feedItemListType } from 'newsdash/components/propTypes'
 import { FEED_DISPLAY } from 'newsdash/constants'
 import Date from 'newsdash/components/Feed/Date'
+import Image from 'newsdash/components/Feed/Image'
 
-import Image from './Image'
 import TooltipContent from './TooltipContent'
 import css from './Item.sass'
 
