@@ -1,0 +1,76 @@
+@import 'newsdash/style/_common.sass'
+
+\:global(:export)
+  transitionSpeed: $transition-speed
+
+.overlayShadow
+  $padding: $padding-md
+  visibility: hidden
+  display: flex
+  flex-direction: column
+  padding: $padding-md
+  width: 100%
+
+  .caption
+    display: flex
+    flex-grow: 1
+
+    .title
+      flex-grow: 1
+      font-size: 100%
+      font-weight: bold
+      margin: 0
+
+  .content
+    flex-grow: 0
+    font-size: 105%
+    margin: $padding-sm 0 0
+
+.overlay
+  @extend .overlayShadow
+  +text-shadow-inv
+  background-color: rgba(0, 0, 0, 0.6)
+  bottom: 0
+  color: $color-text-inv
+  height: 32px
+  position: absolute
+  transition: height $transition-speed ease-in, background-color $transition-speed ease-in
+  visibility: inherit
+  z-index: 1
+
+  .content
+    opacity: 0
+    transition: opacity $transition-speed ease-in
+
+  .title
+    overflow: hidden
+    text-overflow: ellipsis !important
+    white-space: nowrap !important
+
+  .date
+    color: $color-text-inv
+    font-size: 90%
+
+  &.enterActive, &.enterDone
+    background-color: rgba(0, 0, 0, 0.75) !important
+    height: 100% !important
+
+    .content
+      opacity: 1 !important
+
+    .title
+      text-overflow: inherit !important
+      white-space: inherit !important
+
+  &.exitActive
+
+    .title
+      text-overflow: inherit !important
+      white-space: inherit !important
+
+  &.exitDone
+
+    .title
+      overflow: hidden
+      text-overflow: ellipsis !important
+      white-space: nowrap !important
