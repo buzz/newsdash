@@ -14,7 +14,7 @@ WORKDIR /newsdash
 COPY --from=build /newsdash/package.json .
 COPY --from=build /newsdash/packages/client/dist ./packages/client/dist
 COPY --from=build /newsdash/packages/server/package.json ./packages/server/
-COPY --from=build /newsdash/packages/server/dist/server.js ./packages/server/src/
+COPY --from=build /newsdash/packages/server/dist ./packages/server/dist
 RUN set -xe && \
   addgroup -S newsdash && \
   adduser -S -g newsdash newsdash && \
@@ -33,4 +33,4 @@ RUN set -xe && \
 EXPOSE 3001
 VOLUME /newsdash/client
 
-CMD ["/bin/sh", "-c", "cp -R packages/client/dist/* client/ && su - newsdash -s /bin/sh -c \"NODE_ENV=production /newsdash/packages/server/node_modules/.bin/pm2-runtime start --name newsdash -- /newsdash/packages/server/src/server.js\""]
+CMD ["/bin/sh", "-c", "cp -R packages/client/dist/* client/ && su - newsdash -s /bin/sh -c \"NODE_ENV=production /newsdash/packages/server/node_modules/.bin/pm2-runtime start --name newsdash -- /newsdash/packages/server/dist/server.js\""]

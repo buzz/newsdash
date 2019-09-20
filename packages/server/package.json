@@ -16,7 +16,7 @@
   "scripts": {
     "build": "babel src -d dist",
     "dev": "nodemon --exec babel-node src/server.js",
-    "start": "node dist/server.js"
+    "start": "NODE_ENV=production node dist/server.js"
   },
   "dependencies": {
     "express": "^4.17.1",
