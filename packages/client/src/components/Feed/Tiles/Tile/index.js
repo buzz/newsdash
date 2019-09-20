@@ -5,6 +5,7 @@ import { CSSTransition } from 'react-transition-group'
 
 import { feedItemType } from 'newsdash/components/propTypes'
 import Date from 'newsdash/components/Feed/Date'
+import Image from 'newsdash/components/Feed/Image'
 import css from './Tile.sass'
 
 const transitionClassNames = {
@@ -33,18 +34,13 @@ const Tile = ({ color, gridWidth, item }) => {
 
   const tileImage = item.imageUrl
     ? (
-      <img
+      <Image
         alt={item.title}
         className={css.tileImage}
         src={item.imageUrl}
       />
     )
-    : (
-      <div
-        className={css.tileImagePlaceholder}
-        style={{ backgroundColor: color }}
-      />
-    )
+    : null
 
   const date = item.date
     ? <Date className={css.date} date={item.date} />
@@ -61,7 +57,12 @@ const Tile = ({ color, gridWidth, item }) => {
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
         >
-          {tileImage}
+          <div
+            className={css.tileImageWrapper}
+            style={{ backgroundColor: color }}
+          >
+            {tileImage}
+          </div>
           <CSSTransition
             in={hover}
             timeout={parseInt(css.transitionSpeed.slice(0, -2), 10)}

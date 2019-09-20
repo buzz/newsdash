@@ -2,15 +2,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-import css from './Item.sass'
+import css from './Image.sass'
 
 const Image = ({ alt, className, src }) => (
   src
     ? (
       <img
         alt={alt}
-        className={classNames(className, css.feedImage)}
-        src={src}
+        className={classNames('lazyload', css.feedImage, className)}
+        data-src={src}
+        loading="lazy"
       />
     )
     : null

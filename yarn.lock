@@ -5534,6 +5534,11 @@ latest-version@^3.0.0:
   dependencies:
     package-json "^4.0.0"
 
+lazysizes@^5.1.1:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/lazysizes/-/lazysizes-5.1.1.tgz#7ca0266519d531ce740d6782e42faf700883646c"
+  integrity sha512-UCbdRSsozjlS6r56dPMFXX+AW2t8G0duRKxQDwvEpNTrWOHQo56YlTx5ssT7epU87PoruF1q9tvW3kSbQjorMw==
+
 lcid@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/lcid/-/lcid-1.0.0.tgz#308accafa0bc483a3867b4b6f2b9506251d1b835"
