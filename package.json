@@ -17,6 +17,7 @@
     "name": "buzz",
     "url": "https://github.com/buzz"
   },
+  "homepage": "https://github.com/buzz/newsdash",
   "repository": {
     "type": "git",
     "url": "https://github.com/buzz/newsdash.git"
@@ -29,7 +30,8 @@
     "lint": "eslint .",
     "server:build": "yarn workspace @newsdash/server build",
     "server:dev": "yarn workspace @newsdash/server dev",
-    "server:start": "yarn workspace @newsdash/server start"
+    "server:start": "yarn workspace @newsdash/server start",
+    "start": "yarn server:start"
   },
   "eslintIgnore": [
     "/packages/client/dist",
