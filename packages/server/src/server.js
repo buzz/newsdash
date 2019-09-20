@@ -5,6 +5,7 @@ import apiRouter from './api'
 import errorHandlers from './errorHandlers'
 
 express()
+  .use(express.json())
   .use('/api', apiRouter)
   .use(express.static(CLIENT_DIST_DIR))
   .use((req, res, next) => {

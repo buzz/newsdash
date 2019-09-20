@@ -9,10 +9,9 @@ export const importState = (data) => ({
   data,
 })
 
-
-export const loadState = (orm) => ({
+export const loadState = (data) => ({
   type: actionTypes.LOAD_STATE,
-  orm,
+  data,
 })
 
 export const editApp = (attrs) => ({

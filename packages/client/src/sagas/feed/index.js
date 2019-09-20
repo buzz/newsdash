@@ -5,7 +5,6 @@ import loadFeedSaga from './loadFeedSaga'
 import editFeedSaga from './editFeedSaga'
 import fetchFeedsSaga from './fetchFeedsSaga'
 import periodicallyFetchFeedsSaga from './periodicallyFetchFeedsSaga'
-import periodicallyPruneFeedItemsSaga from './periodicallyPruneFeedItemsSaga'
 import refreshFeedSaga from './refreshFeedSaga'
 
 export default [
@@ -14,5 +13,4 @@ export default [
   takeEvery(feedActionTypes.LOAD_FEED, loadFeedSaga),
   takeLatest(feedActionTypes.REFRESH_FEED, refreshFeedSaga),
   call(periodicallyFetchFeedsSaga),
-  call(periodicallyPruneFeedItemsSaga),
 ]

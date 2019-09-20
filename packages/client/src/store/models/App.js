@@ -57,6 +57,12 @@ export default class App extends Model {
         }
         break
       }
+      case appActionTypes.LOAD_STATE: {
+        if (action.data.app) {
+          appModel.first().update(action.data.app)
+        }
+        break
+      }
       default:
         break
     }

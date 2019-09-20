@@ -4,6 +4,15 @@ import orm from 'newsdash/store/orm'
 import getOrm from './orm'
 import selectId from './id'
 
+const getAllFeedItems = createSelector(
+  orm,
+  getOrm,
+  (session) => session
+    .FeedItem
+    .all()
+    .toRefArray()
+)
+
 const makeGetFeedItems = () => createSelector(
   orm,
   getOrm,
@@ -20,5 +29,6 @@ const makeGetFeedItems = () => createSelector(
 )
 
 export default {
+  getAllFeedItems,
   makeGetFeedItems,
 }
