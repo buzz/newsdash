@@ -21,14 +21,17 @@
       position: relative
       width: 100%
 
-      .tileImage
-        background-position: center
-        background-size: cover
+      =tileBackground
         height: 100%
         width: 100%
 
-        &.noImage
-          box-shadow: 0 0 60px rgba(0, 0, 0, 0.5) inset
+      .tileImage
+        +tileBackground
+        object-fit: cover
+
+      .tileImagePlaceholder
+        +tileBackground
+        box-shadow: 0 0 60px rgba(0, 0, 0, 0.5) inset
 
       .overlay
         $padding: $padding-md

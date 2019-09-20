@@ -31,14 +31,20 @@ const Tile = ({ color, gridWidth, item }) => {
     }
   }, [gridWidth, oldGridWidth, needToMeasure, overlayRef])
 
-  const tileImageStyle = item.imageUrl
-    ? { backgroundImage: `url(${item.imageUrl})` }
-    : { backgroundColor: color }
-
-  const tileImageClassNames = classNames(
-    css.tileImage,
-    { [css.noImage]: color }
-  )
+  const tileImage = item.imageUrl
+    ? (
+      <img
+        alt={item.title}
+        className={css.tileImage}
+        src={item.imageUrl}
+      />
+    )
+    : (
+      <div
+        className={css.tileImagePlaceholder}
+        style={{ backgroundColor: color }}
+      />
+    )
 
   const date = item.date
     ? <Date className={css.date} date={item.date} />
@@ -55,7 +61,7 @@ const Tile = ({ color, gridWidth, item }) => {
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
         >
-          <div className={tileImageClassNames} style={tileImageStyle} />
+          {tileImage}
           <CSSTransition
             in={hover}
             timeout={parseInt(css.transitionSpeed.slice(0, -2), 10)}

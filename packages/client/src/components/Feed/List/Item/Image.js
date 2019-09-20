@@ -7,10 +7,10 @@ import css from './Item.sass'
 const Image = ({ alt, className, src }) => (
   src
     ? (
-      <div
+      <img
+        alt={alt}
         className={classNames(className, css.feedImage)}
-        style={{ backgroundImage: `url(${src})` }}
-        title={alt}
+        src={src}
       />
     )
     : null
