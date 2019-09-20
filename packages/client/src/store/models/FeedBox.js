@@ -1,5 +1,6 @@
 import { Model, attr } from 'redux-orm'
 
+import { actionTypes as appActionTypes } from 'newsdash/store/actions/app'
 import { actionTypes as feedBoxActionTypes } from 'newsdash/store/actions/feedBox'
 
 export default class FeedBox extends Model {
@@ -35,6 +36,13 @@ export default class FeedBox extends Model {
       }
       case feedBoxActionTypes.EDIT_FEED_BOX:
         feedBoxModel.withId(action.id).update(action.attrs)
+        break
+      case appActionTypes.LOAD_STATE:
+        if (action.data.feedBoxes) {
+          action.data.feedBoxes.forEach(
+            (feedBox) => feedBoxModel.upsert(feedBox)
+          )
+        }
         break
       default:
         break

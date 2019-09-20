@@ -1,11 +1,9 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux'
 import { createReducer } from 'redux-orm'
 import createSagaMiddleware from 'redux-saga'
-import reduceReducers from 'reduce-reducers'
 
 import rootSaga from 'newsdash/sagas'
 import orm from './orm'
-import loadStateReducer from './loadStateReducer'
 import defaultInitialState from './defaultInitialState'
 
 // add redux devtools
@@ -21,9 +19,7 @@ const bindMiddleware = (middleware) => {
 
 // create store and run root saga
 const makeStore = () => {
-  const rootReducer = combineReducers({
-    orm: reduceReducers(null, loadStateReducer, createReducer(orm)),
-  })
+  const rootReducer = combineReducers({ orm: createReducer(orm) })
   const sagaMiddleware = createSagaMiddleware()
   const store = createStore(
     rootReducer,

@@ -1,5 +1,6 @@
 import { Model, attr, fk } from 'redux-orm'
 
+import { actionTypes as appActionTypes } from 'newsdash/store/actions/app'
 import { actionTypes as feedItemActionTypes } from 'newsdash/store/actions/feedItem'
 
 export default class FeedItem extends Model {
@@ -26,6 +27,7 @@ export default class FeedItem extends Model {
         feedItemModel.withId(action.id).update(action.attrs)
         break
       case feedItemActionTypes.PRUNE: {
+        // keep only n items per feed
         const { feedItemsToKeep } = session.App.first().ref
         session
           .Feed
@@ -42,8 +44,21 @@ export default class FeedItem extends Model {
                 }
               })
           )
+        // remove orphan feedItems (that don't have a feed)
+        feedItemModel
+          .all()
+          .toModelArray()
+          .filter((feedItem) => !feedItem.feed)
+          .forEach((feedItem) => feedItem.delete())
         break
       }
+      case appActionTypes.LOAD_STATE:
+        if (action.data.feedItems) {
+          action.data.feedItems.forEach(
+            (feeditem) => feedItemModel.upsert(feeditem)
+          )
+        }
+        break
       default:
         break
     }

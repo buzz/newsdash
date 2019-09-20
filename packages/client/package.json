@@ -50,7 +50,6 @@
     "react-resizable": "^1.8.0",
     "react-sortable-hoc": "^1.10.1",
     "react-transition-group": "^4.2.2",
-    "reduce-reducers": "^1.0.4",
     "redux": "^4.0.4",
     "redux-orm": "^0.13.3",
     "redux-saga": "^1.0.5",

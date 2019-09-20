@@ -1,4 +1,4 @@
-export const load = (key) => {
+export const loadFromLocalStorage = (key) => {
   try {
     const serializedState = localStorage.getItem(key)
     if (serializedState === null) {
@@ -10,9 +10,9 @@ export const load = (key) => {
   }
 }
 
-export const save = (key, data) => {
+export const saveToLocalStorage = (key, jsonData) => {
   try {
-    localStorage.setItem(key, JSON.stringify(data))
+    localStorage.setItem(key, jsonData)
   } catch {
     // ignore write errors
   }

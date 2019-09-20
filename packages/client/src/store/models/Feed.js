@@ -1,6 +1,7 @@
 import { Model, attr, fk } from 'redux-orm'
 
 import { FEED_STATUS, FEED_DISPLAY, MAX_CONTENT_LENGTH } from 'newsdash/constants'
+import { actionTypes as appActionTypes } from 'newsdash/store/actions/app'
 import { actionTypes as feedActionTypes } from 'newsdash/store/actions/feed'
 
 const truncate = (text) => (
@@ -115,6 +116,13 @@ export default class Feed extends Model {
         })
         break
       }
+      case appActionTypes.LOAD_STATE:
+        if (action.data.feeds) {
+          action.data.feeds.forEach(
+            (feed) => feedModel.upsert(feed)
+          )
+        }
+        break
       default:
         break
     }

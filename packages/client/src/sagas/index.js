@@ -3,17 +3,15 @@ import { all, call } from 'redux-saga/effects'
 import checkApiPresenceSaga from './checkApiPresenceSaga'
 import feedItemSagas from './feedItem'
 import feedSagas from './feed'
+import stateSagas from './state'
 import loadStateSaga from './state/loadStateSaga'
-import continuouslySaveStateSaga from './state/continuouslySaveStateSaga'
 
 export default function* rootSaga() {
-  yield all([
-    call(loadStateSaga),
-    call(checkApiPresenceSaga),
-  ])
+  yield call(checkApiPresenceSaga)
+  yield call(loadStateSaga)
   yield all([
     ...feedItemSagas,
     ...feedSagas,
-    call(continuouslySaveStateSaga),
+    ...stateSagas,
   ])
 }
