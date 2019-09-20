@@ -159,7 +159,7 @@ const Feed = ({ feed }) => {
     <li className={css.listItem}>
       <DragHandle />
       <Icon
-        className={classNames(css.icon, { [css.favIcon]: feed.url.startsWith('http') })}
+        className={css.icon}
         feed={feed}
         noLink
       />
