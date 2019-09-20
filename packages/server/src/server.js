@@ -9,6 +9,7 @@ import pkg from '../../../package.json'
 
 const USER_AGENT = `${pkg.name}/${pkg.version} (https://github.com/buzz/newsdash)`
 const CLIENT_DIST_DIR = path.resolve(__dirname, '..', '..', 'client', 'dist')
+const FETCH_TIMEOUT = 10000
 
 const imageScraper = metascraper([metascraperImage()])
 
@@ -23,7 +24,7 @@ const fetch = (url, opts = {}) => got(
     cache,
     decompress: false,
     headers: { 'User-Agent': USER_AGENT },
-    timeout: 10000,
+    timeout: FETCH_TIMEOUT,
     ...opts,
   }
 )
@@ -69,14 +70,43 @@ app.use((req, res, next) => {
   next(err)
 })
 
-app.use((err, req, res, next) => {
-  if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== 'production') {
+  app.use((err, req, res, next) => {
     console.error(err.stack)
+    next(err)
+  })
+}
+
+app.use((err, req, res, next) => {
+  let statusCode
+  switch (err.code) {
+    case 'ENOTFOUND': {
+      statusCode = 404
+      break
+    }
+    case 'ETIMEDOUT': {
+      statusCode = 408
+      break
+    }
+    default:
+      return
   }
-  res
-    .status(err.statusCode || 500)
-    .json({ message: err.message })
-  next()
+  if (statusCode) {
+    const newError = new Error()
+    newError.statusCode = statusCode
+    next(newError)
+  } else {
+    next(err)
+  }
+})
+
+app.use((err, req, res, next) => {
+  if (!res.headersSent) {
+    res
+      .status(err.statusCode || 500)
+      .end()
+  }
+  next(err)
 })
 
 app.listen(port, () => console.log(`Listening on port ${port}`))
