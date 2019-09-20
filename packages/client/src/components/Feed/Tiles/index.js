@@ -50,18 +50,7 @@ const Tiles = ({ items }) => {
         columnClassName={css.gridColumn}
         ref={masonryRef}
       >
-        {
-          items.map(
-            (item, i) => (
-              <Tile
-                color={tileColors[i]}
-                gridWidth={width}
-                item={item}
-                key={item.id}
-              />
-            )
-          )
-        }
+        {items.map((item, i) => <Tile color={tileColors[i]} item={item} key={item.id} />)}
       </Masonry>
     </div>
   )
