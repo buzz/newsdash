@@ -8,6 +8,7 @@ import makeStore from 'newsdash/store'
 import ControlBar from './ControlBar'
 import Modal from './Modal'
 import NewsGrid from './NewsGrid'
+import NotificationManager from './NotificationManager'
 import Settings from './Settings'
 import 'newsdash/style/index.sass'
 
@@ -27,6 +28,7 @@ const App = () => {
       >
         <Settings setShowSettings={setShowSettings} />
       </Modal>
+      <NotificationManager />
     </Provider>
   )
 }

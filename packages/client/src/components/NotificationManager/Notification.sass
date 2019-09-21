@@ -1,0 +1,50 @@
+@import 'newsdash/style/_common.sass'
+
+.notificationContainer
+  position: fixed
+  right: $padding-lg
+  top: $padding-lg
+  width: 260px
+  z-index: 2500
+
+  > span > div
+    position: relative
+    width: 100%
+    transition: opacity $transition-speed ease-in
+
+    &[class*='--fade-leave-active'], &[class*='--fade-enter']
+      opacity: 0
+
+    [class$='notice-close']
+      position: absolute
+      right: 5px
+      top: 4px
+      cursor: pointer
+
+    .notification
+      background-color: $color-notification-bg
+      border-radius: $border-radius
+      border: 1px solid $color-control-border
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2)
+      margin-bottom: $padding-md
+      overflow: hidden
+      padding: $padding-md $padding-lg
+
+      &.danger
+        background-color: $color-danger-bg
+        border-color: $color-danger-border
+        color: $color-danger
+
+        h3
+          color: scale-color($color-danger, $lightness: -30%)
+          font-size: 110%
+          margin: 0
+
+      h3
+        font-size: 110%
+        margin: 0
+        padding-right: $padding-lg
+
+      p
+        margin-bottom: 0
+        margin-top: $padding-md
