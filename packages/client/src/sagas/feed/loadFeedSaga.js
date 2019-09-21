@@ -1,9 +1,11 @@
 import { call, put, select } from 'redux-saga/effects'
 import Parser from 'rss-parser'
 
+import { NOTIFICATION_TYPES } from 'newsdash/constants'
+import { loadFeedFailure, loadFeedSuccess } from 'newsdash/store/actions/feed'
+import { showNotification } from 'newsdash/store/actions/notification'
 import getApp from 'newsdash/store/selectors/app'
 import feedSelectors from 'newsdash/store/selectors/feed'
-import { loadFeedFailure, loadFeedSuccess } from 'newsdash/store/actions/feed'
 
 const parser = new Parser()
 
@@ -25,14 +27,31 @@ export default function* loadFeedSaga({ id, url }) {
     const text = yield call([response, response.text])
     try {
       yield put(loadFeedSuccess(id, yield call([parser, parser.parseString], text)))
-    } catch (e) {
-      yield put(loadFeedFailure(id, `Could not parse feed XML: ${e.message}`))
+    } catch (err) {
+      const message = `Could not parse feed XML: ${err.message}`
+      yield put(loadFeedFailure(id, message))
+      yield put(showNotification({
+        message: `Failed to parse data for ${feedUrl}. ${message}`,
+        title: 'Failed to fetch feed!',
+        type: NOTIFICATION_TYPES.ERROR,
+      }))
     }
   } catch (err) {
     if (err.response) {
-      yield put(loadFeedFailure(id, `${err.response.status} ${err.response.statusText}`))
+      const message = `${err.response.status} ${err.response.statusText}`
+      yield put(loadFeedFailure(id, message))
+      yield put(showNotification({
+        message: `Failed to fetch URL ${feedUrl}. ${message}`,
+        title: 'Failed to fetch feed!',
+        type: NOTIFICATION_TYPES.ERROR,
+      }))
     } else {
       yield put(loadFeedFailure(id, err.message))
+      yield put(showNotification({
+        message: `Failed to fetch URL ${feedUrl}. ${err.message}`,
+        title: 'Failed to fetch feed!',
+        type: NOTIFICATION_TYPES.ERROR,
+      }))
     }
   }
 }
