@@ -29,37 +29,17 @@ export default class App extends Model {
       case appActionTypes.EDIT_APP:
         appModel.first().update(action.attrs)
         break
-      case appActionTypes.IMPORT_STATE: {
-        const { data } = action
-        if (data.app && data.feedBoxes && data.feeds) {
-          // 1. delete everything
-          [appModel, session.Feed, session.FeedBox, session.FeedItem].forEach(
-            (SessionModel) => SessionModel
-              .all()
-              .toModelArray()
-              .forEach((instance) => instance.delete())
-          )
-          // 2. import data
-          appModel.create(data.app)
-          const toImport = [
-            [data.feedBoxes, session.FeedBox],
-            [data.feeds, session.Feed],
-          ]
-          toImport.forEach(
-            ([instances, SessionModel]) => (
-              instances.forEach(
-                (instanceData) => (
-                  SessionModel.create(instanceData)
-                )
-              )
-            )
-          )
-        }
+      case appActionTypes.CLEAR_STATE:
+        [appModel, session.Feed, session.FeedBox, session.FeedItem].forEach(
+          (EntityModel) => EntityModel
+            .all()
+            .toModelArray()
+            .forEach((instance) => instance.delete())
+        )
         break
-      }
       case appActionTypes.LOAD_STATE: {
         if (action.data.app) {
-          appModel.first().update(action.data.app)
+          appModel.upsert({ ...action.data.app, id: 0 })
         }
         break
       }

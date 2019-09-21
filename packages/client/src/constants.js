@@ -8,7 +8,7 @@ export const MAX_FEED_ITEMS_TO_KEEP = 100
 export const DEFAULT_GRID_COLS = 4
 export const MAX_CONTENT_LENGTH = 600
 
-export const SAVE_STATE_INTERVAL = 4000
+export const SAVE_STATE_THROTTLE_DELAY = 2000
 export const LOCALSTORAGE_SETTINGS_KEY = 'newsdash_settings'
 export const LOCALSTORAGE_FEEDITEMS_KEY = 'newsdash_feeditems'
 

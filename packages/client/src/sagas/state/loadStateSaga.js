@@ -13,7 +13,8 @@ function* loadStateFromApiSaga() {
     const stateData = yield call([response, response.json])
     yield put(loadState(stateData))
   } catch (err) {
-    //
+    // TODO
+    console.error(err)
   }
 }
 
