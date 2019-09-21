@@ -21,12 +21,8 @@ const ImportExport = ({ setShowSettings }) => {
   const settingsExportJson = JSON.stringify(settingsExport)
 
   const doImport = () => {
-    try {
-      dispatch(importState(JSON.parse(importData)))
-      setShowSettings(false)
-    } catch {
-      // TODO handle JSON error
-    }
+    dispatch(importState(importData))
+    setShowSettings(false)
   }
 
   return (

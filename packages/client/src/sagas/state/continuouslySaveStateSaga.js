@@ -1,6 +1,10 @@
 import { call, select } from 'redux-saga/effects'
 
-import { LOCALSTORAGE_FEEDITEMS_KEY, LOCALSTORAGE_SETTINGS_KEY, SAVE_STATE_INTERVAL } from 'newsdash/constants'
+import {
+  LOCALSTORAGE_FEEDITEMS_KEY,
+  LOCALSTORAGE_SETTINGS_KEY,
+  SAVE_STATE_THROTTLE_DELAY,
+} from 'newsdash/constants'
 import trailingThrottle from 'newsdash/sagas/trailingThrottle'
 import { saveToLocalStorage } from 'newsdash/store/localStorage'
 import getApp from 'newsdash/store/selectors/app'
@@ -18,7 +22,8 @@ function* postStateToApiSaga(settingsJson) {
       method: 'POST',
     })
   } catch (err) {
-    //
+    // TODO
+    console.error(err)
   }
 }
 
@@ -39,5 +44,5 @@ function* saveStateSaga() {
 }
 
 export default function* continuouslySaveStateSaga() {
-  yield trailingThrottle(SAVE_STATE_INTERVAL, '*', saveStateSaga)
+  yield trailingThrottle(SAVE_STATE_THROTTLE_DELAY, '*', saveStateSaga)
 }
