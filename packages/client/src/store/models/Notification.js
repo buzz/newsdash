@@ -22,9 +22,11 @@ export default class Notification extends Model {
       case notificationActionTypes.NOTIFICATION_SHOWN:
         notificationModel.withId(action.id).delete()
         break
+
       case notificationActionTypes.SHOW_NOTIFICATION:
         notificationModel.create(action.notification)
         break
+
       default:
         break
     }

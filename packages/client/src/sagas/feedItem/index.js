@@ -1,10 +1,10 @@
 import { call, takeEvery } from 'redux-saga/effects'
 
-import { actionTypes as feedActionTypes } from 'newsdash/store/actions/feed'
+import { actionTypes as feedItemActionTypes } from 'newsdash/store/actions/feedItem'
 import loadFeedItemsImageUrlsSaga from './loadFeedItemsImageUrlsSaga'
 import periodicallyPruneFeedItemsSaga from './periodicallyPruneFeedItemsSaga'
 
 export default [
-  takeEvery(feedActionTypes.LOAD_FEED_SUCCESS, loadFeedItemsImageUrlsSaga),
+  takeEvery(feedItemActionTypes.PARSE_FEED_ITEMS, loadFeedItemsImageUrlsSaga),
   call(periodicallyPruneFeedItemsSaga),
 ]

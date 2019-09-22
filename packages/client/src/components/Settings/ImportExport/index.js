@@ -7,7 +7,7 @@ import { faClipboard, faExclamationTriangle, faFileImport } from '@fortawesome/f
 
 import useCopyToClipboard from 'newsdash/hooks/useCopyToClipboard'
 import getSettingsExport from 'newsdash/store/selectors/getSettingsExport'
-import { importState } from 'newsdash/store/actions/app'
+import { importSettings } from 'newsdash/store/actions/app'
 import ConfirmButton from 'newsdash/components/ConfirmButton'
 import settingsCss from 'newsdash/components/Settings/Settings.sass'
 import css from './ImportSettings.sass'
@@ -21,7 +21,7 @@ const ImportExport = ({ setShowSettings }) => {
   const settingsExportJson = JSON.stringify(settingsExport)
 
   const doImport = () => {
-    dispatch(importState(importData))
+    dispatch(importSettings(importData))
     setShowSettings(false)
   }
 

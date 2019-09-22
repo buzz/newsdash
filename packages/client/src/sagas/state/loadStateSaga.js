@@ -26,21 +26,26 @@ function* loadStateFromApiSaga() {
   }
 }
 
-function* loadStateFromLocalStorageSaga() {
-  const settings = yield call(loadFromLocalStorage, LOCALSTORAGE_SETTINGS_KEY)
-  if (settings) {
-    yield put(loadState(settings))
-  }
+function* loadFeedItemsFromLocalStorageSaga() {
   const feedItems = yield call(loadFromLocalStorage, LOCALSTORAGE_FEEDITEMS_KEY)
   if (feedItems) {
     yield put(loadState({ feedItems }))
   }
 }
 
+function* loadStateFromLocalStorageSaga() {
+  const settings = yield call(loadFromLocalStorage, LOCALSTORAGE_SETTINGS_KEY)
+  if (settings) {
+    yield put(loadState(settings))
+  }
+}
+
 export default function* loadStateSaga() {
-  yield call(loadStateFromLocalStorageSaga)
   const { apiPresent } = yield select(getApp)
   if (apiPresent) {
     yield call(loadStateFromApiSaga)
+  } else {
+    yield call(loadStateFromLocalStorageSaga)
   }
+  yield call(loadFeedItemsFromLocalStorageSaga)
 }

@@ -1,14 +1,8 @@
 import { Model, attr, fk } from 'redux-orm'
 
-import { FEED_STATUS, FEED_DISPLAY, MAX_CONTENT_LENGTH } from 'newsdash/constants'
+import { FEED_STATUS, FEED_DISPLAY } from 'newsdash/constants'
 import { actionTypes as appActionTypes } from 'newsdash/store/actions/app'
 import { actionTypes as feedActionTypes } from 'newsdash/store/actions/feed'
-
-const truncate = (text) => (
-  text.length > MAX_CONTENT_LENGTH
-    ? `${text.substring(0, MAX_CONTENT_LENGTH)}…`
-    : text
-)
 
 export default class Feed extends Model {
   static get modelName() {
@@ -52,12 +46,14 @@ export default class Feed extends Model {
         })
         break
       }
+
       case feedActionTypes.DELETE_FEED: {
         const feed = feedModel.withId(action.id)
         feed.items.toModelArray().map((item) => item.delete())
         feed.delete()
         break
       }
+
       case feedActionTypes.EDIT_FEED: {
         const feed = feedModel.withId(action.id)
         if (Object.keys(action.attrs).includes('url')) {
@@ -66,12 +62,14 @@ export default class Feed extends Model {
         feed.update(action.attrs)
         break
       }
+
       case feedActionTypes.LOAD_FEED:
         feedModel.withId(action.id).update({
           status: FEED_STATUS.LOADING,
           error: undefined,
         })
         break
+
       case feedActionTypes.LOAD_FEED_FAILURE:
         feedModel.withId(action.id).update({
           status: FEED_STATUS.ERROR,
@@ -79,43 +77,19 @@ export default class Feed extends Model {
           lastFetched: undefined,
         })
         break
-      case feedActionTypes.LOAD_FEED_SUCCESS: {
-        const feed = feedModel.withId(action.id)
 
-        feed.items.toModelArray().forEach(
-          // set new=false on all old feed items
-          (feedItem) => feedItem.update({ new: false })
-        )
-
-        action.data.items.forEach((item) => {
-          const feedItem = {
-            // prefix ID with feed ID to prevent collisions
-            id: `${action.id}${item.id || item.guid || item.link}`,
-            link: item.link,
-            title: item.title,
-            feed: action.id,
-          }
-          const content = item.summary || item.contentSnippet || item.content
-          if (content) {
-            feedItem.content = truncate(content)
-          }
-          const newFeedItem = session.FeedItem.upsert(feedItem)
-          if (item.isoDate) {
-            newFeedItem.update({ date: Date.parse(item.isoDate) })
-          } else if (!newFeedItem.date) {
-            // if no date is present, we need set Date.now() on first fetch
-            newFeedItem.update({ date: Date.now() })
-          }
-        })
-        feed.update({
-          title: action.data.title,
-          link: action.data.link,
-          status: FEED_STATUS.LOADED,
-          error: undefined,
-          lastFetched: Date.now(),
-        })
+      case feedActionTypes.LOAD_FEED_SUCCESS:
+        feedModel
+          .withId(action.id)
+          .update({
+            title: action.data.title,
+            link: action.data.link,
+            status: FEED_STATUS.LOADED,
+            error: undefined,
+            lastFetched: Date.now(),
+          })
         break
-      }
+
       case appActionTypes.LOAD_STATE:
         if (action.data.feeds) {
           action.data.feeds.forEach(
@@ -123,6 +97,7 @@ export default class Feed extends Model {
           )
         }
         break
+
       default:
         break
     }

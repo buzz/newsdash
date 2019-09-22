@@ -29,6 +29,7 @@ export default class App extends Model {
       case appActionTypes.EDIT_APP:
         appModel.first().update(action.attrs)
         break
+
       case appActionTypes.CLEAR_STATE:
         [appModel, session.Feed, session.FeedBox, session.FeedItem].forEach(
           (EntityModel) => EntityModel
@@ -37,12 +38,13 @@ export default class App extends Model {
             .forEach((instance) => instance.delete())
         )
         break
-      case appActionTypes.LOAD_STATE: {
+
+      case appActionTypes.LOAD_STATE:
         if (action.data.app) {
           appModel.upsert({ ...action.data.app, id: 0 })
         }
         break
-      }
+
       default:
         break
     }

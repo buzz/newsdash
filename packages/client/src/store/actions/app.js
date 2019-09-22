@@ -1,6 +1,6 @@
 export const actionTypes = {
   CLEAR_STATE: 'CLEAR_STATE',
-  IMPORT_STATE: 'IMPORT_STATE',
+  IMPORT_SETTINGS: 'IMPORT_SETTINGS',
   LOAD_STATE: 'LOAD_STATE',
   EDIT_APP: 'EDIT_APP',
 }
@@ -9,8 +9,8 @@ export const clearState = () => ({
   type: actionTypes.CLEAR_STATE,
 })
 
-export const importState = (data) => ({
-  type: actionTypes.IMPORT_STATE,
+export const importSettings = (data) => ({
+  type: actionTypes.IMPORT_SETTINGS,
   data,
 })
 
