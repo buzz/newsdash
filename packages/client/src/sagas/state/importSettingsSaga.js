@@ -4,7 +4,7 @@ import { NOTIFICATION_TYPES } from 'newsdash/constants'
 import { clearState, loadState } from 'newsdash/store/actions/app'
 import { showNotification } from 'newsdash/store/actions/notification'
 
-export default function* importStateSaga({ data }) {
+export default function* importSettingsSaga({ data }) {
   try {
     const settings = yield call([JSON, JSON.parse], data)
     if (settings.app && settings.feedBoxes && settings.feeds) {

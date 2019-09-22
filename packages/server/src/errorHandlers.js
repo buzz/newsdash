@@ -30,8 +30,9 @@ const statusCodeSetter = (err, req, res, next) => {
   if (res.headersSent) {
     return next(err)
   }
-  res.status(err.statusCode || 500)
-  res.end()
+  const statusCode = err.statusCode || 500
+  res.status(statusCode)
+  res.json({ error: err.message })
   return undefined
 }
 

@@ -1,4 +1,9 @@
-import { call, put, select } from 'redux-saga/effects'
+import {
+  all,
+  call,
+  put,
+  select,
+} from 'redux-saga/effects'
 
 import {
   LOCALSTORAGE_FEEDITEMS_KEY,
@@ -62,15 +67,15 @@ function* saveStateSaga() {
   const { apiPresent } = yield select(getApp)
   const settings = yield select(getSettingsExport)
   const settingsJson = yield call([JSON, JSON.stringify], settings)
-  // save settings to API, fallback to localStorage
-  if (apiPresent) {
-    yield call(postStateToApiSaga, settingsJson)
-  } else {
-    yield call(saveSettingsToLocalStorageSaga, settingsJson)
-  }
-  yield call(saveFeedItemsToLocalStorageSaga)
+  const effects = [
+    call(saveFeedItemsToLocalStorageSaga),
+    apiPresent
+      ? call(postStateToApiSaga, settingsJson)
+      : call(saveSettingsToLocalStorageSaga, settingsJson),
+  ]
+  yield all(effects)
 }
 
-export default function* continuouslySaveStateSaga() {
+export default function* continuouslySaveSettingsSaga() {
   yield trailingThrottle(SAVE_STATE_THROTTLE_DELAY, '*', saveStateSaga)
 }

@@ -25,6 +25,7 @@ export default class FeedBox extends Model {
       case feedBoxActionTypes.ADD_FEED_BOX:
         feedBoxModel.create({})
         break
+
       case feedBoxActionTypes.DELETE_FEED_BOX: {
         const feedBox = feedBoxModel.withId(action.id)
         feedBox.feeds.toModelArray().forEach((feed) => {
@@ -34,9 +35,11 @@ export default class FeedBox extends Model {
         feedBox.delete()
         break
       }
+
       case feedBoxActionTypes.EDIT_FEED_BOX:
         feedBoxModel.withId(action.id).update(action.attrs)
         break
+
       case appActionTypes.LOAD_STATE:
         if (action.data.feedBoxes) {
           action.data.feedBoxes.forEach(
@@ -44,6 +47,7 @@ export default class FeedBox extends Model {
           )
         }
         break
+
       default:
         break
     }
