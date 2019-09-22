@@ -35,6 +35,7 @@ export const FIELDS_FEED = [
   'link',
   'title',
   'display',
+  'filter',
   ['index', 'int'],
   ['feedBox', 'int'],
 ]
