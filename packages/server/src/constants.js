@@ -16,6 +16,8 @@ export const FIELDS_APP = [
   ['feedItemsToKeep', 'int'],
   ['fetchInterval', 'int'],
   ['gridCols', 'int'],
+  ['lightness', 'int'],
+  ['saturation', 'int'],
 ]
 export const FIELDS_FEEDBOX = [
   ['id', 'int'],

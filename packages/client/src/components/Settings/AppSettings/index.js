@@ -25,12 +25,22 @@ const fetchIntervalMax = 60
 const fetchIntervalStep = 5
 const fetchIntervalMarks = makeSliderMarks(fetchIntervalMin, fetchIntervalMax, fetchIntervalStep)
 
-const feedItemsToKeepIntervalMin = 20
-const feedItemsToKeepIntervalMax = 200
-const feedItemsToKeepIntervalStep = 20
-const feedItemsToKeepIntervalMarks = makeSliderMarks(
-  feedItemsToKeepIntervalMin, feedItemsToKeepIntervalMax, feedItemsToKeepIntervalStep
+const feedItemsToKeepMin = 20
+const feedItemsToKeepMax = 200
+const feedItemsToKeepStep = 20
+const feedItemsToKeepMarks = makeSliderMarks(
+  feedItemsToKeepMin, feedItemsToKeepMax, feedItemsToKeepStep
 )
+
+const lightnessMin = 0
+const lightnessMax = 100
+const lightnessStep = 10
+const lightnessMarks = makeSliderMarks(lightnessMin, lightnessMax, lightnessStep)
+
+const saturationMin = 0
+const saturationMax = 100
+const saturationStep = 10
+const saturationMarks = makeSliderMarks(saturationMin, saturationMax, saturationStep)
 
 const AppSettings = () => {
   const {
@@ -39,6 +49,8 @@ const AppSettings = () => {
     feedItemsToKeep: oldFeedItemsToKeep,
     fetchInterval: oldFetchInterval,
     gridCols: oldGridCols,
+    lightness: oldLightness,
+    saturation: oldSaturation,
   } = useSelector(getApp)
 
   const dispatch = useDispatch()
@@ -47,11 +59,14 @@ const AppSettings = () => {
   const [corsProxy, setCorsProxy] = useState(oldCorsProxy)
   const [fetchInterval, setFetchInterval] = useState(oldFetchInterval)
   const [feedItemsToKeep, setFeedItemsToKeep] = useState(oldFeedItemsToKeep)
+  const [lightness, setLightness] = useState(oldLightness)
+  const [saturation, setSaturation] = useState(oldSaturation)
 
   return (
     <>
-      <h1>Settings</h1>
       <form>
+        <h1>Appearance</h1>
+
         <div className={css.row}>
           <span>Grid columns</span>
           <div className={css.sliderWrapper}>
@@ -69,6 +84,44 @@ const AppSettings = () => {
             />
           </div>
         </div>
+
+        <div className={css.row}>
+          <span>Feed box lightness</span>
+          <div className={css.sliderWrapper}>
+            <Slider
+              className={css.slider}
+              defaultValue={lightness}
+              marks={lightnessMarks}
+              max={lightnessMax}
+              min={lightnessMin}
+              step={lightnessStep}
+              onChange={(val) => {
+                setLightness(val)
+                dispatch(editApp({ lightness: val }))
+              }}
+            />
+          </div>
+        </div>
+
+        <div className={css.row}>
+          <span>Feed box saturation</span>
+          <div className={css.sliderWrapper}>
+            <Slider
+              className={css.slider}
+              defaultValue={saturation}
+              marks={saturationMarks}
+              max={saturationMax}
+              min={saturationMin}
+              step={saturationStep}
+              onChange={(val) => {
+                setSaturation(val)
+                dispatch(editApp({ saturation: val }))
+              }}
+            />
+          </div>
+        </div>
+
+        <h1>Feed settings</h1>
 
         <div className={css.row}>
           <span>Feed fetch interval (min)</span>
@@ -95,10 +148,10 @@ const AppSettings = () => {
             <Slider
               className={css.slider}
               defaultValue={feedItemsToKeep}
-              marks={feedItemsToKeepIntervalMarks}
-              max={feedItemsToKeepIntervalMax}
-              min={feedItemsToKeepIntervalMin}
-              step={feedItemsToKeepIntervalStep}
+              marks={feedItemsToKeepMarks}
+              max={feedItemsToKeepMax}
+              min={feedItemsToKeepMin}
+              step={feedItemsToKeepStep}
               onChange={(val) => {
                 setFeedItemsToKeep(val)
                 dispatch(editApp({ feedItemsToKeep: val }))
@@ -106,6 +159,7 @@ const AppSettings = () => {
             />
           </div>
         </div>
+
         <div className={css.row}>
           <label htmlFor="corsProxyInput">CORS proxy</label>
           <input
