@@ -46,13 +46,13 @@
             white-space: inherit
 
           .date
-            font-size: 90%
+            font-size: $font-size-sm
 
         .itemContent
           -webkit-box-orient: vertical
           -webkit-line-clamp: 2
           display: -webkit-box
-          font-size: 90%
+          font-size: $font-size-sm
           overflow: hidden
 
   &:last-child a
@@ -60,8 +60,9 @@
 
   a
     border-bottom: 1px solid fade-out(black, 0.9)
-    padding: $padding-md $padding-lg $padding-md
     display: flex
+    font-size: $font-size-sm
+    padding: $padding-md $padding-lg $padding-md
 
     &:hover
       color: black
@@ -72,13 +73,9 @@
 
     .itemTitle
       flex-grow: 1
-      font-size: 90%
       overflow: hidden
       text-overflow: ellipsis
       white-space: nowrap
-
-    .date
-      font-size: 80%
 
 .tooltip
   box-shadow: 1px
