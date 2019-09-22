@@ -43,7 +43,7 @@ export default class App extends Model {
         )
         break
 
-      case appActionTypes.LOAD_STATE:
+      case appActionTypes.RESTORE_SETTINGS:
         if (action.data.app) {
           appModel.upsert({ ...action.data.app, id: 0 })
         }

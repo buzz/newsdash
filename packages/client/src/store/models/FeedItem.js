@@ -1,7 +1,6 @@
 import { Model, attr, fk } from 'redux-orm'
 
 import { MAX_CONTENT_LENGTH } from 'newsdash/constants'
-import { actionTypes as appActionTypes } from 'newsdash/store/actions/app'
 import { actionTypes as feedItemActionTypes } from 'newsdash/store/actions/feedItem'
 
 const truncate = (text) => (
@@ -32,14 +31,6 @@ export default class FeedItem extends Model {
     switch (action.type) {
       case feedItemActionTypes.EDIT_FEED_ITEM:
         feedItemModel.withId(action.id).update(action.attrs)
-        break
-
-      case appActionTypes.LOAD_STATE:
-        if (action.data.feedItems) {
-          action.data.feedItems.forEach(
-            (feeditem) => feedItemModel.upsert(feeditem)
-          )
-        }
         break
 
       case feedItemActionTypes.PARSE_FEED_ITEMS:
@@ -97,6 +88,13 @@ export default class FeedItem extends Model {
           .toModelArray()
           .filter((feedItem) => !feedItem.feed)
           .forEach((feedItem) => feedItem.delete())
+        break
+      }
+
+      case feedItemActionTypes.RESTORE_FEED_ITEMS: {
+        for (let i = 0; i < action.items.length; i += 1) {
+          feedItemModel.upsert(action.items[i])
+        }
         break
       }
 
