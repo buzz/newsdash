@@ -3,12 +3,17 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { useDispatch } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEllipsisV, faCog, faPlus } from '@fortawesome/free-solid-svg-icons'
+import {
+  faEllipsisV,
+  faCog,
+  faInfo,
+  faPlus,
+} from '@fortawesome/free-solid-svg-icons'
 
 import { addFeedBox } from 'newsdash/store/actions/feedBox'
 import css from './ControlBar.sass'
 
-const ControlBar = ({ setShowSettings }) => {
+const ControlBar = ({ setShowModal }) => {
   const [hidden, setHidden] = useState(true)
   const dispatch = useDispatch()
 
@@ -25,14 +30,6 @@ const ControlBar = ({ setShowSettings }) => {
         <FontAwesomeIcon icon={faEllipsisV} />
       </button>
       <button
-        aria-label="Settings"
-        onClick={() => setShowSettings(true)}
-        title="Settings"
-        type="button"
-      >
-        <FontAwesomeIcon icon={faCog} />
-      </button>
-      <button
         aria-label="Add new feed"
         onClick={() => dispatch(addFeedBox())}
         title="Add new feed"
@@ -40,12 +37,28 @@ const ControlBar = ({ setShowSettings }) => {
       >
         <FontAwesomeIcon icon={faPlus} />
       </button>
+      <button
+        aria-label="Settings"
+        onClick={() => setShowModal('settings')}
+        title="Settings"
+        type="button"
+      >
+        <FontAwesomeIcon icon={faCog} />
+      </button>
+      <button
+        aria-label="About"
+        onClick={() => setShowModal('about')}
+        title="About"
+        type="button"
+      >
+        <FontAwesomeIcon icon={faInfo} />
+      </button>
     </div>
   )
 }
 
 ControlBar.propTypes = {
-  setShowSettings: PropTypes.func.isRequired,
+  setShowModal: PropTypes.func.isRequired,
 }
 
 export default ControlBar

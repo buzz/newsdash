@@ -75,6 +75,13 @@ const config = {
           options: { minimize: !devMode },
         },
       },
+      {
+        test: /\.svg$/,
+        use: [
+          '@svgr/webpack',
+          'file-loader',
+        ],
+      },
     ],
   },
   resolve: {
