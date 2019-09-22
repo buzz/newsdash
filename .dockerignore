@@ -10,3 +10,4 @@ LICENSE.txt
 Dockerfile
 packages/client/dist
 packages/server/dist
+newsdash-dist.zip
