@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faBars,
   faEye,
+  faFilter,
   faLink,
   faPen,
   faTrash,
@@ -40,6 +41,7 @@ const FEED_ITEM_DISPLAY = {
   EDIT_TITLE: 1,
   EDIT_URL: 2,
   EDIT_DISPLAY: 3,
+  EDIT_FILTER: 4,
 }
 
 const Feed = ({ feed }) => {
@@ -49,6 +51,7 @@ const Feed = ({ feed }) => {
   const [newCustomTitle, setNewCustomTitle] = useState(feed.customTitle)
   const [newUrl, setNewUrl] = useState(feed.url)
   const [newDisplay, setNewDisplay] = useState(feed.display)
+  const [newFilter, setNewFilter] = useState(feed.filter)
 
   const dispatchTitle = () => {
     dispatch(editFeed(feed.id, { customTitle: newCustomTitle }))
@@ -60,6 +63,10 @@ const Feed = ({ feed }) => {
 
   const dispatchDisplay = (val) => {
     dispatch(editFeed(feed.id, { display: val || newDisplay }))
+  }
+
+  const dispatchFilter = () => {
+    dispatch(editFeed(feed.id, { filter: newFilter }))
   }
 
   const makeInputOnKeyUp = (dispatchValue) => (
@@ -147,6 +154,21 @@ const Feed = ({ feed }) => {
         </form>
       </div>
     )
+  } else if (feedItemDisplay === FEED_ITEM_DISPLAY.EDIT_FILTER) {
+    feedDisplay = (
+      <div className={css.form}>
+        <form onSubmit={(ev) => ev.preventDefault()}>
+          <input
+            className="nondraggable"
+            onChange={(ev) => setNewFilter(ev.target.value)}
+            onKeyUp={makeInputOnKeyUp(dispatchFilter)}
+            placeholder={feed.filter}
+            ref={inputRef}
+            value={newFilter}
+          />
+        </form>
+      </div>
+    )
   } else {
     feedDisplay = (
       <span className={css.title} title={feed.url}>
@@ -185,6 +207,13 @@ const Feed = ({ feed }) => {
           type="button"
         >
           <FontAwesomeIcon icon={faEye} />
+        </button>
+        <button
+          onClick={makeEditOnClick(dispatchUrl, FEED_ITEM_DISPLAY.EDIT_FILTER)}
+          title="Edit filter"
+          type="button"
+        >
+          <FontAwesomeIcon icon={faFilter} />
         </button>
         <button
           onClick={() => dispatch(deleteFeed(feed.id))}
