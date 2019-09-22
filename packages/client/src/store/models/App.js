@@ -4,6 +4,8 @@ import {
   DEFAULT_CORS_PROXY,
   DEFAULT_FETCH_INTERVAL,
   DEFAULT_GRID_COLS,
+  DEFAULT_LIGHTNESS,
+  DEFAULT_SATURATION,
   MAX_FEED_ITEMS_TO_KEEP,
 } from 'newsdash/constants'
 import { actionTypes as appActionTypes } from 'newsdash/store/actions/app'
@@ -21,6 +23,8 @@ export default class App extends Model {
       corsProxy: attr({ getDefault: () => DEFAULT_CORS_PROXY }),
       feedItemsToKeep: attr({ getDefault: () => MAX_FEED_ITEMS_TO_KEEP }),
       fetchInterval: attr({ getDefault: () => DEFAULT_FETCH_INTERVAL }),
+      lightness: attr({ getDefault: () => DEFAULT_LIGHTNESS }),
+      saturation: attr({ getDefault: () => DEFAULT_SATURATION }),
     }
   }
 

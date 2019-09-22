@@ -13,6 +13,8 @@ const getSettingsExport = createSelector(
         feedItemsToKeep: app.feedItemsToKeep,
         fetchInterval: app.fetchInterval,
         gridCols: app.gridCols,
+        lightness: app.lightness,
+        saturation: app.saturation,
       },
       feedBoxes: session.FeedBox.all().toRefArray(),
       feeds: session.Feed.all().toRefArray().map((feed) => ({
