@@ -12,7 +12,7 @@ import ConfirmButton from 'newsdash/components/ConfirmButton'
 import settingsCss from 'newsdash/components/Settings/Settings.sass'
 import css from './ImportSettings.sass'
 
-const ImportExport = ({ setShowSettings }) => {
+const ImportExport = ({ setShowModal }) => {
   const copyToClipboard = useCopyToClipboard()
   const dispatch = useDispatch()
   const settingsExport = useSelector(getSettingsExport)
@@ -22,7 +22,7 @@ const ImportExport = ({ setShowSettings }) => {
 
   const doImport = () => {
     dispatch(importSettings(importData))
-    setShowSettings(false)
+    setShowModal(false)
   }
 
   return (
@@ -83,7 +83,7 @@ const ImportExport = ({ setShowSettings }) => {
 }
 
 ImportExport.propTypes = {
-  setShowSettings: PropTypes.func.isRequired,
+  setShowModal: PropTypes.func.isRequired,
 }
 
 export default ImportExport

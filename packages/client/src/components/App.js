@@ -5,6 +5,7 @@ import 'lazysizes/plugins/attrchange/ls.attrchange'
 import 'lazysizes/plugins/native-loading/ls.native-loading'
 
 import makeStore from 'newsdash/store'
+import About from './About'
 import ControlBar from './ControlBar'
 import Modal from './Modal'
 import NewsGrid from './NewsGrid'
@@ -15,18 +16,25 @@ import 'newsdash/style/index.sass'
 const store = makeStore()
 
 const App = () => {
-  const [showSettings, setShowSettings] = useState(false)
+  const [showModal, setShowModal] = useState(false)
+
+  let modalContent = null
+  if (showModal === 'about') {
+    modalContent = <About setShowModal={setShowModal} />
+  } else if (showModal === 'settings') {
+    modalContent = <Settings setShowModal={setShowModal} />
+  }
 
   return (
     <Provider store={store}>
-      <ControlBar setShowSettings={setShowSettings} />
+      <ControlBar setShowModal={setShowModal} />
       <NewsGrid />
       <Modal
         contentLabel="Settings"
-        isOpen={showSettings}
-        onRequestClose={() => setShowSettings(false)}
+        isOpen={showModal !== false}
+        onRequestClose={() => setShowModal(false)}
       >
-        <Settings setShowSettings={setShowSettings} />
+        {modalContent}
       </Modal>
       <NotificationManager />
     </Provider>

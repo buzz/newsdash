@@ -1,4 +1,5 @@
 @import 'newsdash/style/_common.sass'
+@import 'newsdash/style/_buttons.sass'
 
 .modal
   background-color: white
@@ -13,6 +14,12 @@
   top: 50%
   transform: translate(-50%, -50%)
   width: 60%
+
+  .buttonClose
+    @extend .button-round-sm
+    position: absolute
+    right: $padding-lg
+    top: $padding-lg
 
 .overlay
   background-color: rgba(0, 0, 0, 0.7)
