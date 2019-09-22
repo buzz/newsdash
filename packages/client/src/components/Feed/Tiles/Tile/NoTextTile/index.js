@@ -8,26 +8,32 @@ import tileCss from 'newsdash/components/Feed/Tiles/Tile/Tile.sass'
 import overlayCss from 'newsdash/components/Feed/Tiles/Tile/Overlay/Overlay.sass'
 import css from './NoTextTile.sass'
 
-const NoTextTile = ({ color, image, item }) => (
-  <a
-    className={classNames('nondraggable', css.noTextTile, tileCss.tileInner)}
-    href={item.link}
-    rel="noopener noreferrer"
-    target="_blank"
-  >
-    <Overlay className={overlayCss.overlay} item={item} />
-    <div
-      className={tileCss.tileImageWrapper}
-      style={{ backgroundColor: color }}
+const NoTextTile = ({ color, image, item }) => {
+  const style = color ? { backgroundColor: color } : null
+
+  return (
+    <a
+      className={classNames('nondraggable', css.noTextTile, tileCss.tileInner)}
+      href={item.link}
+      rel="noopener noreferrer"
+      target="_blank"
     >
-      {image}
-    </div>
-  </a>
-)
+      <Overlay className={overlayCss.overlay} item={item} />
+      <div className={tileCss.tileImageWrapper} style={style}>
+        {image}
+      </div>
+    </a>
+  )
+}
+
+NoTextTile.defaultProps = {
+  color: null,
+  image: null,
+}
 
 NoTextTile.propTypes = {
-  color: PropTypes.string.isRequired,
-  image: PropTypes.node.isRequired,
+  color: PropTypes.string,
+  image: PropTypes.node,
   item: feedItemType.isRequired,
 }
 
