@@ -14,7 +14,7 @@
     "directory": "packages/server"
   },
   "scripts": {
-    "build": "babel src -d dist",
+    "build": "babel --delete-dir-on-start --out-dir dist src",
     "dev": "nodemon --exec babel-node src/server.js",
     "start": "NODE_ENV=production node dist/server.js"
   },
