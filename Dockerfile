@@ -30,7 +30,8 @@ RUN set -xe && \
     --production=true && \
   rm -r $(yarn cache dir)
 
+ENV REDIS_URL redis://redis:6379
 EXPOSE 3001
 VOLUME /newsdash/client
 
-CMD ["/bin/sh", "-c", "cp -R packages/client/dist/* client/ && su - newsdash -s /bin/sh -c \"NODE_ENV=production /newsdash/packages/server/node_modules/.bin/pm2-runtime start --name newsdash -- /newsdash/packages/server/dist/server.js\""]
+CMD ["/bin/sh", "-c", "cp -R packages/client/dist/* client/ && su - newsdash -s /bin/sh -c \"NODE_ENV=production REDIS_URL=${REDIS_URL} /newsdash/packages/server/node_modules/.bin/pm2-runtime start --name newsdash -- /newsdash/packages/server/dist/server.js\""]
