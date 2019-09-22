@@ -30,7 +30,6 @@ const Overlay = ({ className, item }) => {
 
 Overlay.propTypes = {
   className: PropTypes.string.isRequired,
-  date: PropTypes.number.isRequired,
   item: feedItemType.isRequired,
 }
 

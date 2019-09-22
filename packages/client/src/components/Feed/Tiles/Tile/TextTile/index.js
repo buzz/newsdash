@@ -18,6 +18,8 @@ const transitionClassNames = {
 const TextTile = ({ color, image, item }) => {
   const [hover, setHover] = useState(false)
 
+  const style = color ? { backgroundColor: color } : null
+
   return (
     <a
       className={classNames('nondraggable', tileCss.tileInner)}
@@ -35,19 +37,21 @@ const TextTile = ({ color, image, item }) => {
         <Overlay className={overlayCss.overlay} item={item} />
       </CSSTransition>
       <Overlay className={overlayCss.overlayShadow} item={item} />
-      <div
-        className={tileCss.tileImageWrapper}
-        style={{ backgroundColor: color }}
-      >
+      <div className={tileCss.tileImageWrapper} style={style}>
         {image}
       </div>
     </a>
   )
 }
 
+TextTile.defaultProps = {
+  color: null,
+  image: null,
+}
+
 TextTile.propTypes = {
-  color: PropTypes.string.isRequired,
-  image: PropTypes.node.isRequired,
+  color: PropTypes.string,
+  image: PropTypes.node,
   item: feedItemType.isRequired,
 }
 
