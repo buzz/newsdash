@@ -12,6 +12,7 @@ export const DEFAULT_LIGHTNESS = 90
 export const DEFAULT_SATURATION = 40
 
 export const SAVE_STATE_THROTTLE_DELAY = 2000
+export const SAVE_FEEDITEMS_THROTTLE_DELAY = 5000
 export const LOCALSTORAGE_SETTINGS_KEY = 'newsdash_settings'
 export const LOCALSTORAGE_FEEDITEMS_KEY = 'newsdash_feeditems'
 

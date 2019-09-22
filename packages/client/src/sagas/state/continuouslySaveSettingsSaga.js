@@ -1,21 +1,16 @@
-import {
-  all,
-  call,
-  put,
-  select,
-} from 'redux-saga/effects'
+import { call, put, select } from 'redux-saga/effects'
 
 import {
-  LOCALSTORAGE_FEEDITEMS_KEY,
   LOCALSTORAGE_SETTINGS_KEY,
   NOTIFICATION_TYPES,
   SAVE_STATE_THROTTLE_DELAY,
 } from 'newsdash/constants'
+import { actionTypes as appActionTypes } from 'newsdash/store/actions/app'
+import { actionTypes as feedActionTypes } from 'newsdash/store/actions/feed'
+import { actionTypes as feedBoxActionTypes } from 'newsdash/store/actions/feedBox'
 import { showNotification } from 'newsdash/store/actions/notification'
 import trailingThrottle from 'newsdash/sagas/trailingThrottle'
-import { saveToLocalStorage } from 'newsdash/store/localStorage'
 import getApp from 'newsdash/store/selectors/app'
-import feedItemSelectors from 'newsdash/store/selectors/feedItem'
 import getSettingsExport from 'newsdash/store/selectors/getSettingsExport'
 
 function* postStateToApiSaga(settingsJson) {
@@ -39,7 +34,7 @@ function* postStateToApiSaga(settingsJson) {
 
 function* saveSettingsToLocalStorageSaga(settingsJson) {
   try {
-    yield call(saveToLocalStorage, LOCALSTORAGE_SETTINGS_KEY, settingsJson)
+    yield call([localStorage, localStorage.setItem], LOCALSTORAGE_SETTINGS_KEY, settingsJson)
   } catch (err) {
     yield put(showNotification({
       message: `The settings could not be saved to the local browser storage. ${err.message}`,
@@ -49,33 +44,29 @@ function* saveSettingsToLocalStorageSaga(settingsJson) {
   }
 }
 
-function* saveFeedItemsToLocalStorageSaga() {
-  const feedItems = yield select(feedItemSelectors.getAllFeedItems)
-  const feedItemsJson = yield call([JSON, JSON.stringify], feedItems)
-  try {
-    yield call(saveToLocalStorage, LOCALSTORAGE_FEEDITEMS_KEY, feedItemsJson)
-  } catch (err) {
-    yield put(showNotification({
-      message: `The feed items could not be saved to the local browser storage. ${err.message}`,
-      title: 'Could not save feed items to browser!',
-      type: NOTIFICATION_TYPES.error,
-    }))
-  }
-}
-
 function* saveStateSaga() {
   const { apiPresent } = yield select(getApp)
   const settings = yield select(getSettingsExport)
   const settingsJson = yield call([JSON, JSON.stringify], settings)
-  const effects = [
-    call(saveFeedItemsToLocalStorageSaga),
-    apiPresent
-      ? call(postStateToApiSaga, settingsJson)
-      : call(saveSettingsToLocalStorageSaga, settingsJson),
-  ]
-  yield all(effects)
+  yield apiPresent
+    ? call(postStateToApiSaga, settingsJson)
+    : call(saveSettingsToLocalStorageSaga, settingsJson)
 }
 
 export default function* continuouslySaveSettingsSaga() {
-  yield trailingThrottle(SAVE_STATE_THROTTLE_DELAY, '*', saveStateSaga)
+  yield trailingThrottle(
+    SAVE_STATE_THROTTLE_DELAY,
+    [
+      appActionTypes.CLEAR_STATE,
+      appActionTypes.EDIT_APP,
+      appActionTypes.RESTORE_SETTINGS,
+      feedActionTypes.ADD_FEED,
+      feedActionTypes.EDIT_FEED,
+      feedActionTypes.LOAD_FEED_SUCCESS,
+      feedBoxActionTypes.ADD_FEED_BOX,
+      feedBoxActionTypes.DELETE_FEED_BOX,
+      feedBoxActionTypes.EDIT_FEED_BOX,
+    ],
+    saveStateSaga
+  )
 }
