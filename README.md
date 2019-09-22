@@ -38,14 +38,24 @@ requirements. So I wrote my own.
 
 ### Docker
 
-To get you up and running just spin up the Docker image. You can then access
-the web app at http://localhost:3001/.
+To get you up and running start the Docker image. You can then access the web
+app at http://localhost:3001/.
 
 ```bash
 $ docker run \
+    -e REDIS_URL=redis://redis:6380 \
     -p 127.0.0.1:3001:3001 \
     newsdash/newsdash
 ```
+
+#### Redis
+
+To persist your settings and feeds you need to provide a
+[Redis](http://redis.io) instance. You can start a Redis container and link it
+to newsdash. [Docker Compose](https://docs.docker.com/compose/) works great for
+small setups. Use the environment variable `REDIS_URL` to customize the
+connection URL. It's possible to run without Redis in
+[API-less mode](#api-less).
 
 #### nginx
 
