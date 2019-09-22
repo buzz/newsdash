@@ -30,16 +30,27 @@ const NewsGrid = () => {
   const dispatch = useDispatch()
   const { gridCols } = useSelector(getApp)
   const feedBoxes = useSelector(feedBoxSelectors.getFeedBoxes)
-  const onLayoutChange = (layout) => {
-    layout.forEach(
-      (item) => {
-        dispatch(
-          editFeedBox(
-            parseInt(item.i, 10),
-            {
-              x: item.x, y: item.y, w: item.w, h: item.h,
-            })
-        )
+  const layout = generateLayout(feedBoxes)
+
+  const onLayoutChange = (newLayout) => {
+    newLayout.forEach(
+      (newItem) => {
+        const item = layout.find((layoutItem) => layoutItem.i === newItem.i)
+        if (
+          newItem.x !== item.x
+          || newItem.y !== item.y
+          || newItem.w !== item.w
+          || newItem.h !== item.h
+        ) {
+          dispatch(
+            editFeedBox(
+              parseInt(newItem.i, 10),
+              {
+                x: newItem.x, y: newItem.y, w: newItem.w, h: newItem.h,
+              }
+            )
+          )
+        }
       }
     )
   }
@@ -50,7 +61,7 @@ const NewsGrid = () => {
         breakpoints={{ lg: 1200 }}
         cols={{ lg: gridCols }}
         draggableCancel=".nondraggable"
-        layouts={{ lg: generateLayout(feedBoxes) }}
+        layouts={{ lg: layout }}
         margin={[16, 16]}
         onLayoutChange={onLayoutChange}
         rowHeight={48}
