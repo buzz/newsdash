@@ -1,10 +1,9 @@
 import { createSelector } from 'redux-orm'
 
 import orm from 'newsdash/store/orm'
-import getOrm from './orm'
 
 const getSettingsExport = createSelector(
-  orm, getOrm,
+  orm,
   (session) => {
     const app = session.App.first().ref
     return {
