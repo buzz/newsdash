@@ -1,5 +1,5 @@
-@import 'newsdash/style/_common.sass'
-@import 'newsdash/style/_buttons.sass'
+@import 'newsdash/style/common.sss'
+@import 'newsdash/style/buttons.sss'
 
 .edit
   display: flex
@@ -7,7 +7,7 @@
   height: 100%
 
   .forms
-    +text-shadow
+    @extend %text-shadow
     flex-grow: 1
     height: 100%
     margin-top: $padding-lg
@@ -25,7 +25,7 @@
       .row
         display: flex
         line-height: 24px
-        padding: $padding-md / 2 $padding-lg $padding-md / 2
+        padding: calc($padding-md / 2) $padding-lg calc($padding-md / 2)
 
         input
           flex-grow: 1
@@ -39,5 +39,5 @@
             width: auto
 
           button
-            @extend .button-round-sm
+            @extend %button-round-sm
             min-width: $button-diameter-sm

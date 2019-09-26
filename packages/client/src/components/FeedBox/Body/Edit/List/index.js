@@ -7,7 +7,7 @@ import { SortableContainer } from 'react-sortable-hoc'
 import { feedType } from 'newsdash/components/propTypes'
 import { editFeed } from 'newsdash/store/actions/feed'
 import SortableFeed from './SortableFeed'
-import css from './List.sass'
+import css from './List.sss'
 
 const SortableFeedList = SortableContainer(({ feeds }) => (
   <ul className={classNames('nondraggable', css.feeds)}>

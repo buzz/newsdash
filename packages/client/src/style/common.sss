@@ -1,0 +1,47 @@
+$font-size-xs: 80%
+$font-size-sm: 90%
+$font-size-md: 110%
+
+$lightness-highlight: 35%
+
+$color-text: rgb(36, 36, 36)
+$color-text-bright: rgb(69, 69, 69)
+$color-text-hover: color($color-text l($lightness-highlight))
+$color-text-visited: rgb(98, 98, 98)
+$color-text-inv: rgb(221, 221, 221)
+
+$color-good-base: rgb(55, 207, 30)
+$color-good: color($color-good-base l(30%) s(50%))
+
+$color-danger-base: rgb(207, 30, 30)
+$color-danger: color($color-danger-base l(30%) s(50%))
+$color-danger-bg: color($color-danger-base l(80%) s(50%))
+$color-danger-border: color($color-danger-bg shade(20%))
+$color-danger-hover: color($color-danger-base tint($lightness-highlight))
+
+$color-control-bg: rgba(255, 255, 255, 0.5)
+$color-control-border: rgba(0, 0, 0, 0.5)
+$color-notification-bg: rgba(255, 255, 255, 0.9)
+
+$color-button-text: white
+$color-button-bg-opaque: color(black l(40%))
+$color-button-bg-opaque-hover: color($color-button-bg-opaque l($lightness-highlight))
+$color-button-bg: color(black a(60%))
+$color-button-bg-hover: color(black a(50%))
+
+$color-new-item-bg: rgba(255, 225, 20, 0.1)
+
+$border-radius: 2px
+$padding-sm: 4px
+$padding-md: 8px
+$padding-lg: 12px
+
+$tooltip-opacity: 0.95
+
+$transition-speed: 200ms
+
+%text-shadow
+  text-shadow: 0 1px 0 $color-text-inv
+
+%text-shadow-inv
+  text-shadow: 0 1px 0 $color-text

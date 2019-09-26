@@ -1,40 +1,41 @@
-@import 'newsdash/style/_common.sass'
+@import 'newsdash/style/common.sss'
 
 .tabs
   flex-grow: 1
 
-  \:global(.rc-tabs)
+  :global(.rc-tabs)
     display: flex
     flex-direction: column
     height: 100%
 
     .tabBar
-      +text-shadow
+      @extend %text-shadow
       border-bottom-style: solid
       border-bottom-width: 1px
 
-      \:global(.rc-tabs-nav-container)
+      :global(.rc-tabs-nav-container)
         padding: 0 $padding-md
 
-        \:global(.rc-tabs-tab-prev)
+        :global(.rc-tabs-tab-prev)
           display: none
 
-        \:global(.rc-tabs-tab-next)
+        :global(.rc-tabs-tab-next)
           display: none
 
-        \:global(.rc-tabs-tab)
+        :global(.rc-tabs-tab)
           color: $color-text-bright
+          font-size: 100%
           margin: 0
-          padding: $padding-sm $padding-md $padding-sm / 2
+          padding: $padding-sm $padding-md calc($padding-sm / 2)
 
           &:hover
             color: black
 
-        \:global(.rc-tabs-tab-active)
+        :global(.rc-tabs-tab-active)
           color: black
           text-decoration: underline
 
-    \:global(.rc-tabs-content)
+    :global(.rc-tabs-content)
       flex-grow: 1
 
     .tabIcon

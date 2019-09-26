@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 
 import logoNewsdashUrl from 'newsdash/static/logo-newsdash.svg'
-import css from './About.sass'
+import css from './About.sss'
 
 const About = () => (
   <div className={css.about}>

@@ -4,9 +4,9 @@ import classNames from 'classnames'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 
-import settingsCss from 'newsdash/components/Settings/Settings.sass'
+import settingsCss from 'newsdash/components/Settings/Settings.sss'
 import getApp from 'newsdash/store/selectors/app'
-import css from './ApiCheck.sass'
+import css from './ApiCheck.sss'
 
 const ApiCheck = () => {
   const { apiPresent } = useSelector(getApp)

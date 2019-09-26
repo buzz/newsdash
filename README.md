@@ -148,11 +148,11 @@ The following packages are used:
 - [Babel](https://babeljs.io/)
 - [Font Awesome](https://fontawesome.com/)
 - [Node.js](https://nodejs.org/)
+- [PostCSS](https://postcss.org/)
 - [React-Grid-Layout](https://github.com/STRML/react-grid-layout)
 - [React](https://reactjs.org/)
 - [Redux](https://redux.js.org/)
 - [rss-parser](https://github.com/rbren/rss-parser)
-- [Sass](https://sass-lang.com/)
 - [webpack](https://webpack.js.org/)
 - and many more…
 

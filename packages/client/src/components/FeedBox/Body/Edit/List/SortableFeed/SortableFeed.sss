@@ -1,10 +1,10 @@
-@import 'newsdash/style/_common.sass'
-@import 'newsdash/style/_buttons.sass'
+@import 'newsdash/style/common.sss'
+@import 'newsdash/style/buttons.sss'
 
 .listItem
   display: flex
   line-height: 24px
-  margin: $padding-sm / 2 0
+  margin: calc($padding-sm / 2) 0
 
   .icon
     margin-right: $padding-sm
@@ -35,5 +35,5 @@
     white-space: nowrap
 
     button
-      @extend .button-round-xs
+      @extend %button-round-xs
       margin-left: $padding-sm

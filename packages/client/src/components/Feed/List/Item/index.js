@@ -9,7 +9,7 @@ import Date from 'newsdash/components/Feed/Date'
 import Image from 'newsdash/components/Feed/Image'
 
 import TooltipContent from './TooltipContent'
-import css from './Item.sass'
+import css from './Item.sss'
 
 const Item = ({ item, type }) => {
   const tooltipContent = item.content

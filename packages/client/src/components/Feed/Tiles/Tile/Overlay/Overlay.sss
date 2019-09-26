@@ -1,6 +1,6 @@
-@import 'newsdash/style/_common.sass'
+@import 'newsdash/style/common.sss'
 
-\:global(:export)
+:export
   transitionSpeed: $transition-speed
 
 .overlayShadow
@@ -27,8 +27,8 @@
 
 .overlay
   @extend .overlayShadow
-  +text-shadow-inv
-  background-color: rgba(0, 0, 0, 0.6)
+  @extend %text-shadow-inv
+  background-color: color(black a(0.6))
   bottom: 0
   color: $color-text-inv
   height: 32px
@@ -51,7 +51,7 @@
     font-size: $font-size-sm
 
   &.enterActive, &.enterDone
-    background-color: rgba(0, 0, 0, 0.75) !important
+    background-color: color(black a(0.75)) !important
     height: 100% !important
 
     .content

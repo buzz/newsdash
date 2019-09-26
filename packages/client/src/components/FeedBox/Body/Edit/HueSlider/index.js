@@ -7,7 +7,7 @@ import React, {
 import PropTypes from 'prop-types'
 
 import { feedBoxType } from 'newsdash/components/propTypes'
-import css from './HueSlider.sass'
+import css from './HueSlider.sss'
 
 const KEY_STEP = 0.05
 

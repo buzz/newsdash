@@ -5,8 +5,8 @@ import { CSSTransition } from 'react-transition-group'
 
 import { feedItemType } from 'newsdash/components/propTypes'
 import Overlay from 'newsdash/components/Feed/Tiles/Tile/Overlay'
-import tileCss from 'newsdash/components/Feed/Tiles/Tile/Tile.sass'
-import overlayCss from 'newsdash/components/Feed/Tiles/Tile/Overlay/Overlay.sass'
+import tileCss from 'newsdash/components/Feed/Tiles/Tile/Tile.sss'
+import overlayCss from 'newsdash/components/Feed/Tiles/Tile/Overlay/Overlay.sss'
 
 const transitionClassNames = {
   enterActive: overlayCss.enterActive,

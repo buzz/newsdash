@@ -1,15 +1,16 @@
-@import 'newsdash/style/_common.sass'
-@import 'newsdash/style/_buttons.sass'
+@import 'newsdash/style/common.sss'
+@import 'newsdash/style/buttons.sss'
 
 .controlBar
   $num-buttons: 4
   $control-bar-padding: $padding-sm
-  background-color: scale-color($color-button-bg-opaque, $lightness: 15%)
-  border-radius: $button-diameter-md / 2 + $control-bar-padding
+  $margin-button: $padding-sm
+  background-color: color($color-button-bg-opaque tint(15%))
+  border-radius: calc($button-diameter-md / 2 + $control-bar-padding)
   bottom: $padding-lg
   display: flex
   flex-direction: column-reverse
-  height: $num-buttons * $button-diameter-md + 2 * $control-bar-padding + ($num-buttons - 1) * $padding-md
+  height: calc($num-buttons * $button-diameter-md + 2 * $control-bar-padding + ($num-buttons - 1) * $margin-button)
   left: $padding-lg
   overflow: hidden
   padding: $control-bar-padding
@@ -18,15 +19,15 @@
   z-index: 999
 
   &.hidden
-    height: $button-diameter-md + 2 * $control-bar-padding
+    height: calc($button-diameter-md + 2 * $control-bar-padding)
 
     button
       opacity: 0.0
 
   button
-    @extend .button-round-md
+    @extend %button-round-md
     background-color: $color-button-bg-opaque
-    margin-bottom: $padding-md
+    margin-bottom: $margin-button
     opacity: 1.0
     transition: opacity $transition-speed ease-in
 

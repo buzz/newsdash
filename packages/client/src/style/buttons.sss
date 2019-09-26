@@ -1,6 +1,6 @@
-@import './_common.sass'
+@import './common'
 
-=button-base
+%button-base
   background-color: $color-button-bg
   border-radius: $border-radius
   border: 1px solid $color-control-border
@@ -14,28 +14,28 @@
     color: white !important
     background-color: $color-button-bg-hover
 
-=button
-  +button-base
+%button
+  @extend %button-base
   font-size: 100%
   padding: $padding-sm $padding-md
 
   svg
     margin-right: $padding-md
 
-=button-danger
-  +button
+%button-danger
+  @extend %button
   background-color: $color-danger-bg !important
   color: $color-danger-base !important
-  text-shadow: 0 1px 0 scale-color($color-danger-base, $lightness: 80%) !important
+  text-shadow: 0 1px 0 color($color-danger-base tint(80%)) !important
 
   &:hover
     background-color: $color-danger-hover !important
-    text-shadow: 0 1px 0 scale-color($color-danger-base, $lightness: -50%) !important
+    text-shadow: 0 1px 0 color($color-danger-base shade(50%)) !important
 
-=make-button-round($size, $button-diameter, $font-size, $padding: 1px 6px)
-  .button-round-#{$size}
-    +button-base
-    border-radius: $button-diameter / 2
+@define-mixin make-button-round $size, $button-diameter, $font-size, $padding: 1px 6px
+  %button-round-$(size)
+    @extend %button-base
+    border-radius: 50%
     border: none
     font-size: $font-size
     height: $button-diameter
@@ -44,8 +44,8 @@
     width: $button-diameter
 
 $button-diameter-xs: 20px
-$button-diameter-sm: 24px
+$button-diameter-sm: 25px
 $button-diameter-md: 32px
-+make-button-round(xs, $button-diameter-xs, 80%, 1px 0 0) // .button-round-xs
-+make-button-round(sm, $button-diameter-sm, 105%) // .button-round-sm
-+make-button-round(md, $button-diameter-md, 140%) // .button-round-md
+@mixin make-button-round xs, $button-diameter-xs, 80%, 1px 0 0
+@mixin make-button-round sm, $button-diameter-sm, 14px
+@mixin make-button-round md, $button-diameter-md, 140%

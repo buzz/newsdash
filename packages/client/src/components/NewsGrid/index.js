@@ -8,7 +8,7 @@ import getApp from 'newsdash/store/selectors/app'
 import feedBoxSelectors from 'newsdash/store/selectors/feedBox'
 import { editFeedBox } from 'newsdash/store/actions/feedBox'
 import FeedBox from 'newsdash/components/FeedBox'
-import css from './NewsGrid.sass'
+import css from './NewsGrid.sss'
 
 const ResponsiveGridLayout = WidthProvider(Responsive)
 

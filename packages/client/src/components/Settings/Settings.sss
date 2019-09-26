@@ -1,5 +1,5 @@
-@import 'newsdash/style/_common.sass'
-@import 'newsdash/style/_buttons.sass'
+@import 'newsdash/style/common'
+@import 'newsdash/style/buttons'
 
 .settings
 
@@ -12,7 +12,7 @@
   .row
     $h: 25px
     display: flex
-    padding: $padding-md / 2 0
+    padding: calc($padding-md / 2) 0
     margin-bottom: $padding-lg
 
     &.rowFull
@@ -51,7 +51,7 @@
         min-width: 10px
 
       button
-        +button
+        @extend %button
         height: $h
         margin-left: $padding-md
 
@@ -60,11 +60,11 @@
 
   .slider
 
-    \:global(.rc-slider-track)
+    :global(.rc-slider-track)
       background-color: $color-control-border
 
-    \:global(.rc-slider-dot-active)
+    :global(.rc-slider-dot-active)
       border-color: $color-control-border
 
-    \:global(.rc-slider-handle)
+    :global(.rc-slider-handle)
       border-color: $color-control-border

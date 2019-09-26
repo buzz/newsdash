@@ -11,7 +11,7 @@ import Modal from './Modal'
 import NewsGrid from './NewsGrid'
 import NotificationManager from './NotificationManager'
 import Settings from './Settings'
-import 'newsdash/style/index.sass'
+import 'newsdash/style/index.sss'
 
 const store = makeStore()
 

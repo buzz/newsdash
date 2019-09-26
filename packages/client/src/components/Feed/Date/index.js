@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { format } from 'timeago.js'
 
-import css from './Date.sass'
+import css from './Date.sss'
 
 const dateFormat = (date) => (
   format(date)

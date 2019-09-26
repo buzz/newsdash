@@ -8,7 +8,7 @@ import { feedBoxType } from 'newsdash/components/propTypes'
 import Feed from 'newsdash/components/Feed'
 import Edit from './Edit'
 import Tabs from './Tabs'
-import css from './Body.sass'
+import css from './Body.sss'
 
 const Body = ({
   activeFeedId,

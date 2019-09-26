@@ -11,7 +11,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 
 import { addFeedBox } from 'newsdash/store/actions/feedBox'
-import css from './ControlBar.sass'
+import css from './ControlBar.sss'
 
 const ControlBar = ({ setShowModal }) => {
   const [hidden, setHidden] = useState(true)

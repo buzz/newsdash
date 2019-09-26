@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 import { NOTIFICATION_TYPES } from 'newsdash/constants'
-import css from './Notification.sass'
+import css from './Notification.sss'
 
 const Notification = ({ message, title, type }) => (
   <div
