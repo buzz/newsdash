@@ -15,7 +15,7 @@ import { FEED_STATUS, FEED_DISPLAY, FEED_DISPLAY_LABELS } from 'newsdash/constan
 import { feedType } from 'newsdash/components/propTypes'
 import { deleteFeed, editFeed } from 'newsdash/store/actions/feed'
 import Icon from 'newsdash/components/Feed/Icon'
-import css from './SortableFeed.sass'
+import css from './SortableFeed.sss'
 
 const getTitle = (feed) => {
   const title = feed.customTitle || feed.title

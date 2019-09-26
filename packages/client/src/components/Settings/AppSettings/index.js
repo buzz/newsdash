@@ -5,7 +5,7 @@ import 'rc-slider/assets/index.css'
 
 import getApp from 'newsdash/store/selectors/app'
 import { editApp } from 'newsdash/store/actions/app'
-import css from 'newsdash/components/Settings/Settings.sass'
+import css from 'newsdash/components/Settings/Settings.sss'
 
 const makeSliderMarks = (min, max, step) => {
   let marks = {}

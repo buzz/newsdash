@@ -63,20 +63,28 @@ export default class Feed extends Model {
         break
       }
 
-      case feedActionTypes.LOAD_FEED:
-        feedModel.withId(action.id).update({
-          status: FEED_STATUS.LOADING,
-          error: undefined,
-        })
+      case feedActionTypes.LOAD_FEED: {
+        const feed = feedModel.withId(action.id)
+        if (feed) {
+          feed.update({
+            status: FEED_STATUS.LOADING,
+            error: undefined,
+          })
+        }
         break
+      }
 
-      case feedActionTypes.LOAD_FEED_FAILURE:
-        feedModel.withId(action.id).update({
-          status: FEED_STATUS.ERROR,
-          error: action.error,
-          lastFetched: undefined,
-        })
+      case feedActionTypes.LOAD_FEED_FAILURE: {
+        const feed = feedModel.withId(action.id)
+        if (feed) {
+          feed.update({
+            status: FEED_STATUS.ERROR,
+            error: action.error,
+            lastFetched: undefined,
+          })
+        }
         break
+      }
 
       case feedActionTypes.LOAD_FEED_SUCCESS:
         feedModel

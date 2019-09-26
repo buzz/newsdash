@@ -1,7 +1,7 @@
-@import 'newsdash/style/_common.sass'
+@import 'newsdash/style/common.sss'
 
 .feedItem
-  +text-shadow
+  @extend %text-shadow
 
   &.new
     background-color: $color-new-item-bg
@@ -10,7 +10,7 @@
 
     a
       border-bottom: none
-      padding: $padding-md / 2 $padding-lg $padding-md / 2
+      padding: calc($padding-md / 2) $padding-lg calc($padding-md / 2)
 
   &.detailed
 
@@ -59,14 +59,14 @@
     border-bottom: none
 
   a
-    border-bottom: 1px solid fade-out(black, 0.9)
+    border-bottom: 1px solid color(black a(0.1))
     display: flex
     font-size: $font-size-sm
     padding: $padding-md $padding-lg $padding-md
 
     &:hover
       color: black
-      background-color: rgba(0, 0, 0, 0.05)
+      background-color: color(black a(0.05))
 
     &:visited
       color: $color-text-visited
@@ -84,12 +84,12 @@
   max-width: 350px
   opacity: $tooltip-opacity
 
-  \:global(.rc-tooltip-inner)
-    box-shadow: 0 0 7px rgba(0, 0, 0, 0.5)
+  :global(.rc-tooltip-inner)
+    box-shadow: 0 0 7px color(black a(0.5))
 
     &::after
       clear: left
-      content: ""
+      content: ''
       display: block
 
   h2

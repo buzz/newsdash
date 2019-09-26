@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import css from './ConfirmButton.sass'
+import css from './ConfirmButton.sss'
 
 const ConfirmButton = ({ children, icon, onClick }) => {
   const [activated, setActivated] = useState(false)

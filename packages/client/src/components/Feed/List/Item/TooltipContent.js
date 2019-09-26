@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import Image from 'newsdash/components/Feed/Image'
-import css from './Item.sass'
+import css from './Item.sss'
 
 const TooltipContent = ({ imageUrl, text, title }) => (
   <>

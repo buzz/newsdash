@@ -3,7 +3,6 @@ const webpack = require('webpack')
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const TerserJSPlugin = require('terser-webpack-plugin')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 
@@ -24,7 +23,7 @@ const config = {
   },
   optimization: {
     minimize: !devMode,
-    minimizer: [new TerserJSPlugin(), new OptimizeCSSAssetsPlugin()],
+    minimizer: [new TerserJSPlugin()],
   },
   module: {
     rules: [
@@ -36,20 +35,7 @@ const config = {
         },
       },
       {
-        test: /\.css$/,
-        loaders: [
-          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: devMode,
-            },
-          },
-        ],
-      },
-      {
-        test: /\.sass$/,
-        exclude: /node_modules/,
+        test: /\.sss$/,
         loaders: [
           devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
           {
@@ -61,10 +47,22 @@ const config = {
                 context: path.join(__dirname, 'src'),
               },
               sourceMap: devMode,
-              importLoaders: 1,
             },
           },
-          'sass-loader',
+          'postcss-loader',
+        ],
+      },
+      {
+        test: /\.css$/,
+        loaders: [
+          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: devMode,
+            },
+          },
+          'postcss-loader',
         ],
       },
       {
@@ -88,7 +86,7 @@ const config = {
     alias: {
       newsdash: path.join(SRC_DIR),
     },
-    extensions: ['*', '.js'],
+    extensions: ['.js'],
   },
   plugins: [
     new HtmlWebpackPlugin({

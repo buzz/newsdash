@@ -9,8 +9,8 @@ import useCopyToClipboard from 'newsdash/hooks/useCopyToClipboard'
 import getSettingsExport from 'newsdash/store/selectors/getSettingsExport'
 import { importSettings } from 'newsdash/store/actions/app'
 import ConfirmButton from 'newsdash/components/ConfirmButton'
-import settingsCss from 'newsdash/components/Settings/Settings.sass'
-import css from './ImportSettings.sass'
+import settingsCss from 'newsdash/components/Settings/Settings.sss'
+import css from './ImportSettings.sss'
 
 const ImportExport = ({ setShowModal }) => {
   const copyToClipboard = useCopyToClipboard()

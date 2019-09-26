@@ -12,7 +12,7 @@ import { feedBoxType } from 'newsdash/components/propTypes'
 import List from './List'
 import HueSlider from './HueSlider'
 import Buttons from './Buttons'
-import css from './Edit.sass'
+import css from './Edit.sss'
 
 const Edit = ({ feedBox, onBackClick, onDeleteClick }) => {
   const [addUrl, setAddUrl] = useState('')

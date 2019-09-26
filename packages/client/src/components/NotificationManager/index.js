@@ -8,7 +8,7 @@ import { NOTIFICATION_DURATION } from 'newsdash/constants'
 import { notificationShown } from 'newsdash/store/actions/notification'
 import notificationSelectors from 'newsdash/store/selectors/notification'
 import Notification from './Notification'
-import css from './Notification.sass'
+import css from './Notification.sss'
 
 let notice = null
 RcNotification.newInstance(

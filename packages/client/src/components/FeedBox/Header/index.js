@@ -9,7 +9,7 @@ import { FEED_STATUS } from 'newsdash/constants'
 import { feedBoxType, feedType } from 'newsdash/components/propTypes'
 import { refreshFeed } from 'newsdash/store/actions/feed'
 import Icon from 'newsdash/components/Feed/Icon'
-import css from './Header.sass'
+import css from './Header.sss'
 
 const getTitle = (feed, feedBox, editMode) => {
   if (editMode) {

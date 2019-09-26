@@ -6,7 +6,7 @@ import tinycolor from 'tinycolor2'
 import { feedItemType } from 'newsdash/components/propTypes'
 import useWidthObserver from 'newsdash/hooks/useWidthObserver'
 import Tile from './Tile'
-import css from './Tiles.sass'
+import css from './Tiles.sss'
 
 const MIN_COL_WIDTH = 200
 

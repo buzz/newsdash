@@ -1,4 +1,4 @@
-@import 'newsdash/style/_common.sass'
+@import 'newsdash/style/common'
 
 .notificationContainer
   position: fixed
@@ -12,7 +12,7 @@
     width: 100%
     transition: opacity $transition-speed ease-in
 
-    &[class*='--fade-leave-active'], &[class*='--fade-enter']
+    &[class*='-fade-leave-active'], &[class*='-fade-enter']
       opacity: 0
 
     [class$='notice-close']
@@ -36,7 +36,7 @@
         color: $color-danger
 
         h3
-          color: scale-color($color-danger, $lightness: -30%)
+          color: color($color-danger, shade(-30%))
           font-size: $font-size-md
           margin: 0
 

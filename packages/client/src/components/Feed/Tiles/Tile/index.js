@@ -5,7 +5,7 @@ import { feedItemType } from 'newsdash/components/propTypes'
 import Image from 'newsdash/components/Feed/Image'
 import NoTextTile from './NoTextTile'
 import TextTile from './TextTile'
-import css from './Tile.sass'
+import css from './Tile.sss'
 
 const Tile = ({ color, item }) => {
   const image = item.imageUrl

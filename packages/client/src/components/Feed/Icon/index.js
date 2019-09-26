@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRss } from '@fortawesome/free-solid-svg-icons'
 
 import { feedType } from 'newsdash/components/propTypes'
-import css from './Icon.sass'
+import css from './Icon.sss'
 
 const getFaviconUrl = (url) => {
   const { origin } = new URL(url)

@@ -4,7 +4,7 @@ import ReactModal from 'react-modal'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
-import css from './Modal.sass'
+import css from './Modal.sss'
 
 ReactModal.setAppElement('#root')
 

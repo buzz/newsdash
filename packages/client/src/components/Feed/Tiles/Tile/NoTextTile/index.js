@@ -4,9 +4,9 @@ import classNames from 'classnames'
 
 import { feedItemType } from 'newsdash/components/propTypes'
 import Overlay from 'newsdash/components/Feed/Tiles/Tile/Overlay'
-import tileCss from 'newsdash/components/Feed/Tiles/Tile/Tile.sass'
-import overlayCss from 'newsdash/components/Feed/Tiles/Tile/Overlay/Overlay.sass'
-import css from './NoTextTile.sass'
+import tileCss from 'newsdash/components/Feed/Tiles/Tile/Tile.sss'
+import overlayCss from 'newsdash/components/Feed/Tiles/Tile/Overlay/Overlay.sss'
+import css from './NoTextTile.sss'
 
 const NoTextTile = ({ color, image, item }) => {
   const style = color ? { backgroundColor: color } : null

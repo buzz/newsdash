@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft, faTrash } from '@fortawesome/free-solid-svg-icons'
 
 import ConfirmButton from 'newsdash/components/ConfirmButton'
-import css from './Buttons.sass'
+import css from './Buttons.sss'
 
 const Buttons = ({ onBackClick, onDeleteClick }) => (
   <div className={classNames('nondraggable', css.buttons)}>

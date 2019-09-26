@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import { feedItemType } from 'newsdash/components/propTypes'
 import Date from 'newsdash/components/Feed/Date'
-import css from './Overlay.sass'
+import css from './Overlay.sss'
 
 const Overlay = ({ className, item }) => {
   const date = item.date

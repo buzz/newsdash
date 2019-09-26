@@ -1,9 +1,9 @@
-@import 'newsdash/style/_common.sass'
+@import 'newsdash/style/common.sss'
 
 $slider-h: 25px
 $pointer-h: 5px
 
-\:global(:export)
+:export
   pointerH: $pointer-h
 
 .hueSlider
@@ -19,7 +19,7 @@ $pointer-h: 5px
     border-bottom: $pointer-h solid $color-control-border
     border-left: $pointer-h solid transparent
     border-right: $pointer-h solid transparent
-    bottom: -$pointer-h - 1px
+    bottom: calc(-$pointer-h - 1px)
     height: 0
     position: absolute
     width: 0
