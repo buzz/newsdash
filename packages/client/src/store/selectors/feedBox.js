@@ -2,7 +2,6 @@ import { createSelector } from 'redux-orm'
 import tinycolor from 'tinycolor2'
 
 import orm from 'newsdash/store/orm'
-import getOrm from './orm'
 
 const getColors = (hue, lightness, saturation) => {
   const baseColor = tinycolor({ h: hue, s: 1.0, l: 0.5 })
@@ -18,7 +17,6 @@ const getColors = (hue, lightness, saturation) => {
 
 const getFeedBoxes = createSelector(
   orm,
-  getOrm,
   (session) => {
     const { lightness, saturation } = session.App.first().ref
     return session

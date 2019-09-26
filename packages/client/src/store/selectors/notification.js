@@ -1,10 +1,9 @@
 import { createSelector } from 'redux-orm'
 
 import orm from 'newsdash/store/orm'
-import getOrm from './orm'
 
 const getNotifications = createSelector(
-  orm, getOrm,
+  orm,
   (session) => session
     .Notification
     .all()
