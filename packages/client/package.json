@@ -53,7 +53,7 @@
     "react-sortable-hoc": "^1.10.1",
     "react-transition-group": "^4.2.2",
     "redux": "^4.0.4",
-    "redux-orm": "^0.13.3",
+    "redux-orm": "^0.14.0",
     "redux-saga": "^1.0.5",
     "resize-observer-polyfill": "^1.5.1",
     "rss-parser": "^3.7.2",
