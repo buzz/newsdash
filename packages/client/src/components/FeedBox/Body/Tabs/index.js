@@ -4,13 +4,13 @@ import classNames from 'classnames'
 import Tabs, { TabPane } from 'rc-tabs'
 import TabContent from 'rc-tabs/lib/TabContent'
 import ScrollableTabBar from 'rc-tabs/lib/ScrollableTabBar'
-import Scrollbar from 'react-custom-scrollbars'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExclamationTriangle, faSync } from '@fortawesome/free-solid-svg-icons'
 import 'rc-tabs/assets/index.css'
 
 import { feedBoxType, feedType } from 'newsdash/components/propTypes'
 import { FEED_STATUS } from 'newsdash/constants'
+import Scrollbar from 'newsdash/components/Scrollbar'
 import Feed from 'newsdash/components/Feed'
 import css from './Tabs.sss'
 
@@ -63,7 +63,7 @@ const FeedTabs = ({
             )
             return (
               <TabPane key={feed.id.toString()} tab={tabContent}>
-                <Scrollbar autoHide>
+                <Scrollbar bgColor={feedBox.colors.bg}>
                   <Feed feed={feed} />
                 </Scrollbar>
               </TabPane>

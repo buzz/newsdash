@@ -1,0 +1,31 @@
+@import 'newsdash/style/common.sss'
+
+%fader
+  height: 30px
+  pointer-events: none
+  position: absolute
+  transition: opacity $transition-speed-fast ease-in
+  width: 100%
+  z-index: 1
+
+.scrollWrapper
+  position: relative
+  height: 100%
+  width: 100%
+
+  .track
+    $w: 8px
+    border-radius: calc($w / 2)
+    bottom: 2px
+    right: 2px
+    top: 2px
+    width: $w !important
+    z-index: 5
+
+  .faderTop
+    @extend %fader
+    top: 0
+
+  .faderBottom
+    @extend %fader
+    bottom: 0

@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { useDispatch } from 'react-redux'
-import Scrollbar from 'react-custom-scrollbars'
 
 import { deleteFeedBox } from 'newsdash/store/actions/feedBox'
 import { feedBoxType } from 'newsdash/components/propTypes'
 import Feed from 'newsdash/components/Feed'
+import Scrollbar from 'newsdash/components/Scrollbar'
 import Edit from './Edit'
 import Tabs from './Tabs'
 import css from './Body.sss'
@@ -51,7 +51,7 @@ const Body = ({
 
   if (feeds.length === 1) {
     return (
-      <Scrollbar autoHide>
+      <Scrollbar bgColor={feedBox.colors.bg}>
         <Feed feed={feeds[0]} />
       </Scrollbar>
     )
