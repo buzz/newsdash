@@ -26,12 +26,13 @@
 - 4 different feed layouts: condensed, list, detailed, tiles
 - Tabbed multi-feeds
 - Import/Export of settings and feeds
+- Filter feed items
 - Clean and simple design
 - Carefully handcrafted
 
 ## :thinking: Motivation
 
-I couldn't find a modern and simple web-based feed reader that met my
+I couldn't find a modern and simple web-based feed reader that meets my
 requirements. So I wrote my own.
 
 ## :computer: Installation
