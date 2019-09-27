@@ -1,16 +1,13 @@
-const path = require('path')
 const {
   NodeJsInputFileSystem,
   CachedInputFileSystem,
   ResolverFactory,
 } = require('enhanced-resolve') // eslint-disable-line import/no-extraneous-dependencies
 
-const SRC_DIR = path.join(__dirname, 'src')
+const webpackConfig = require('./webpack.config')
 
 const resolver = ResolverFactory.createResolver({
-  alias: {
-    newsdash: path.join(SRC_DIR),
-  },
+  alias: webpackConfig.resolve.alias,
   extensions: ['.sss'],
   modules: [],
   useSyncFileSystemCalls: true,
