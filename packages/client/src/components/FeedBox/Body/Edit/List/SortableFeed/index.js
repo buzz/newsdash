@@ -32,7 +32,7 @@ const getTitle = (feed) => {
 
 const DragHandle = sortableHandle(() => (
   <span className={css.dragHandle}>
-    <FontAwesomeIcon icon={faBars} />
+    <FontAwesomeIcon fixedWidth icon={faBars} />
   </span>
 ))
 
@@ -192,35 +192,35 @@ const Feed = ({ feed }) => {
           title="Edit title"
           type="button"
         >
-          <FontAwesomeIcon icon={faPen} />
+          <FontAwesomeIcon fixedWidth icon={faPen} />
         </button>
         <button
           onClick={makeEditOnClick(dispatchUrl, FEED_ITEM_DISPLAY.EDIT_URL)}
           title="Edit URL"
           type="button"
         >
-          <FontAwesomeIcon icon={faLink} />
+          <FontAwesomeIcon fixedWidth icon={faLink} />
         </button>
         <button
           onClick={makeEditOnClick(dispatchDisplay, FEED_ITEM_DISPLAY.EDIT_DISPLAY)}
           title="Change display"
           type="button"
         >
-          <FontAwesomeIcon icon={faEye} />
+          <FontAwesomeIcon fixedWidth icon={faEye} />
         </button>
         <button
           onClick={makeEditOnClick(dispatchUrl, FEED_ITEM_DISPLAY.EDIT_FILTER)}
           title="Edit filter"
           type="button"
         >
-          <FontAwesomeIcon icon={faFilter} />
+          <FontAwesomeIcon fixedWidth icon={faFilter} />
         </button>
         <button
           onClick={() => dispatch(deleteFeed(feed.id))}
           title="Remove feed"
           type="button"
         >
-          <FontAwesomeIcon icon={faTrash} />
+          <FontAwesomeIcon fixedWidth icon={faTrash} />
         </button>
       </div>
     </li>
