@@ -81,7 +81,7 @@ const Edit = ({ feedBox, onBackClick, onDeleteClick }) => {
                 title="Add feed"
                 type="button"
               >
-                <FontAwesomeIcon icon={faPlus} />
+                <FontAwesomeIcon fixedWidth icon={faPlus} />
               </button>
             </div>
           </form>

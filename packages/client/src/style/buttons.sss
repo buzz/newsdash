@@ -32,7 +32,7 @@
     background-color: $color-danger-hover !important
     text-shadow: 0 1px 0 color($color-danger-base shade(50%)) !important
 
-@define-mixin make-button-round $size, $button-diameter, $font-size, $padding: 1px 6px
+@define-mixin make-button-round $size, $button-diameter, $font-size
   %button-round-$(size)
     @extend %button-base
     border-radius: 50%
@@ -40,12 +40,12 @@
     font-size: $font-size
     height: $button-diameter
     line-height: $button-diameter
-    padding: $padding
+    padding: 0
     width: $button-diameter
 
 $button-diameter-xs: 20px
 $button-diameter-sm: 25px
 $button-diameter-md: 32px
-@mixin make-button-round xs, $button-diameter-xs, 80%, 1px 0 0
-@mixin make-button-round sm, $button-diameter-sm, 14px
-@mixin make-button-round md, $button-diameter-md, 140%
+@mixin make-button-round xs, $button-diameter-xs, 11px
+@mixin make-button-round sm, $button-diameter-sm, 15px
+@mixin make-button-round md, $button-diameter-md, 20px
