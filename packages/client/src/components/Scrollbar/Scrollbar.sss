@@ -1,10 +1,11 @@
 @import 'newsdash/style/common.sss'
+@import 'newsdash/style/buttons.sss'
 
 %fader
   height: 30px
   pointer-events: none
   position: absolute
-  transition: opacity $transition-speed-fast ease-in
+  transition: opacity $transition-speed-fast ease-in-out
   width: 100%
   z-index: 1
 
@@ -29,3 +30,13 @@
   .faderBottom
     @extend %fader
     bottom: 0
+
+  .scrollToTopButton
+    @extend %button-round-xs
+    background-color: color(black a(0.2))
+    position: absolute
+    left: 50%
+    top: $padding-sm
+    transform: translateX(-50%)
+    transition: opacity $transition-speed-fast ease-in
+    z-index: 3
