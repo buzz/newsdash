@@ -30,7 +30,7 @@ const FeedTabs = ({
         activeKey={activeFeedId.toString()}
         onChange={(key) => setActiveFeedId(parseInt(key, 10))}
         renderTabBar={() => <ScrollableTabBar className={classNames('nondraggable', css.tabBar)} style={scrollableTabBarStyle} />}
-        renderTabContent={() => <TabContent />}
+        renderTabContent={() => <TabContent animated={false} />}
       >
         {
           feeds.map((feed) => {
