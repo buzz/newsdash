@@ -4,7 +4,11 @@
   @extend %text-shadow
 
   &.new
-    background-color: $color-new-item-bg
+
+    .itemTitle:before
+      color: $color-new
+      content: '\25CF'
+      margin-right: $padding-sm
 
   &.condensed
 
