@@ -8,12 +8,7 @@ import css from './Modal.sss'
 
 ReactModal.setAppElement('#root')
 
-const Modal = ({
-  children,
-  contentLabel,
-  isOpen,
-  onRequestClose,
-}) => (
+const Modal = ({ children, contentLabel, isOpen, onRequestClose }) => (
   <ReactModal
     className={css.modal}
     contentLabel={contentLabel}

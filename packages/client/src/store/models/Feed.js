@@ -30,15 +30,11 @@ export default class Feed extends Model {
     switch (action.type) {
       case feedActionTypes.ADD_FEED: {
         // find highest index
-        const feeds = session
-          .FeedBox
-          .withId(action.feedBoxId)
-          .feeds
-          .toRefArray()
+        const feeds = session.FeedBox.withId(
+          action.feedBoxId
+        ).feeds.toRefArray()
         const index = feeds.length
-          ? feeds
-            .map((feed) => feed.index)
-            .sort((a, b) => b - a)[0] + 1
+          ? feeds.map((feed) => feed.index).sort((a, b) => b - a)[0] + 1
           : 0
         feedModel.create({
           feedBox: action.feedBoxId,
@@ -88,22 +84,18 @@ export default class Feed extends Model {
       }
 
       case feedActionTypes.LOAD_FEED_SUCCESS:
-        feedModel
-          .withId(action.id)
-          .update({
-            title: action.data.title,
-            link: action.data.link,
-            status: FEED_STATUS.LOADED,
-            error: undefined,
-            lastFetched: Date.now(),
-          })
+        feedModel.withId(action.id).update({
+          title: action.data.title,
+          link: action.data.link,
+          status: FEED_STATUS.LOADED,
+          error: undefined,
+          lastFetched: Date.now(),
+        })
         break
 
       case appActionTypes.RESTORE_SETTINGS:
         if (action.data.feeds) {
-          action.data.feeds.forEach(
-            (feed) => feedModel.upsert(feed)
-          )
+          action.data.feeds.forEach((feed) => feedModel.upsert(feed))
         }
         break
 

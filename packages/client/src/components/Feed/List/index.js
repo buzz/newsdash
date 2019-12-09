@@ -20,21 +20,17 @@ const onEntering = (node) => {
 
 const List = ({ items, type }) => (
   <TransitionGroup className={css.feedList} component="ul">
-    {
-      items.map(
-        (item) => (
-          <CSSTransition
-            classNames={{ ...transitionClassNames }}
-            key={item.id}
-            timeout={parseInt(transitionSpeed.slice(0, -2), 10)}
-            onEnter={onEnter}
-            onEntering={onEntering}
-          >
-            <Item type={type} item={item} />
-          </CSSTransition>
-        )
-      )
-    }
+    {items.map((item) => (
+      <CSSTransition
+        classNames={{ ...transitionClassNames }}
+        key={item.id}
+        timeout={parseInt(transitionSpeed.slice(0, -2), 10)}
+        onEnter={onEnter}
+        onEntering={onEntering}
+      >
+        <Item type={type} item={item} />
+      </CSSTransition>
+    ))}
   </TransitionGroup>
 )
 

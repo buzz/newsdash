@@ -17,9 +17,10 @@ const getButtonStyle = (top) => ({
 
 const getFaderStyle = (type, bgColor, top) => ({
   background: `linear-gradient(to ${type}, transparent, ${bgColor} 90%)`,
-  opacity: (type === 'top' && top === 0.0)
-        || (type === 'bottom' && top === 1.0)
-    ? OPACITY_NONE : OPACITY_FULL,
+  opacity:
+    (type === 'top' && top === 0.0) || (type === 'bottom' && top === 1.0)
+      ? OPACITY_NONE
+      : OPACITY_FULL,
 })
 
 const Track = ({ style }) => <div className={css.track} style={style} />

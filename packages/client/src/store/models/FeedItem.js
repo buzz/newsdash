@@ -3,11 +3,10 @@ import { Model, attr, fk } from 'redux-orm'
 import { MAX_CONTENT_LENGTH } from 'newsdash/constants'
 import { actionTypes as feedItemActionTypes } from 'newsdash/store/actions/feedItem'
 
-const truncate = (text) => (
+const truncate = (text) =>
   text.length > MAX_CONTENT_LENGTH
     ? `${text.substring(0, MAX_CONTENT_LENGTH)}…`
     : text
-)
 
 export default class FeedItem extends Model {
   static get modelName() {
@@ -37,9 +36,9 @@ export default class FeedItem extends Model {
         if (action.items) {
           const feed = session.Feed.withId(action.feedId)
           // set new=false on all old feed items
-          feed.items.toModelArray().forEach(
-            (feedItem) => feedItem.update({ new: false })
-          )
+          feed.items
+            .toModelArray()
+            .forEach((feedItem) => feedItem.update({ new: false }))
 
           action.items.forEach((item) => {
             const feedItem = {
@@ -67,13 +66,10 @@ export default class FeedItem extends Model {
       case feedItemActionTypes.PRUNE: {
         // keep only n items per feed
         const { feedItemsToKeep } = session.App.first().ref
-        session
-          .Feed
-          .all()
+        session.Feed.all()
           .toModelArray()
-          .forEach(
-            (feed) => feed
-              .items
+          .forEach((feed) =>
+            feed.items
               .toModelArray()
               .sort((a, b) => b.date - a.date) // sort by date
               .forEach((feedItem, i) => {

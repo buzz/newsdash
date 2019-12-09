@@ -24,14 +24,12 @@ const fallbackCopyToClipboard = (text) => {
   }
 }
 
-const useCopyToClipboard = () => (
-  (text) => {
-    if (!navigator.clipboard) {
-      fallbackCopyToClipboard(text)
-      return
-    }
-    navigator.clipboard.writeText(text)
+const useCopyToClipboard = () => (text) => {
+  if (!navigator.clipboard) {
+    fallbackCopyToClipboard(text)
+    return
   }
-)
+  navigator.clipboard.writeText(text)
+}
 
 export default useCopyToClipboard

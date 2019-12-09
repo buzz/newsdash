@@ -1,9 +1,4 @@
-import {
-  all,
-  call,
-  put,
-  select,
-} from 'redux-saga/effects'
+import { all, call, put, select } from 'redux-saga/effects'
 
 import { editFeedItem } from 'newsdash/store/actions/feedItem'
 import feedItemSelectors from 'newsdash/store/selectors/feedItem'
@@ -13,7 +8,10 @@ const getFeedItems = feedItemSelectors.makeGetFeedItems()
 
 function* loadImageUrlSaga(id, link) {
   try {
-    const response = yield call(fetch, `api/fetch/image-url/${encodeURIComponent(link)}`)
+    const response = yield call(
+      fetch,
+      `api/fetch/image-url/${encodeURIComponent(link)}`
+    )
     if (response.ok) {
       const { image: imageUrl } = yield call([response, response.json])
       yield put(editFeedItem(id, { imageUrl }))

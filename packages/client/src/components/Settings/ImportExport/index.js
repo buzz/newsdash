@@ -3,7 +3,11 @@ import PropTypes from 'prop-types'
 import { useDispatch, useSelector } from 'react-redux'
 import classNames from 'classnames'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faClipboard, faExclamationTriangle, faFileImport } from '@fortawesome/free-solid-svg-icons'
+import {
+  faClipboard,
+  faExclamationTriangle,
+  faFileImport,
+} from '@fortawesome/free-solid-svg-icons'
 
 import useCopyToClipboard from 'newsdash/hooks/useCopyToClipboard'
 import getSettingsExport from 'newsdash/store/selectors/getSettingsExport'
@@ -31,9 +35,9 @@ const ImportExport = ({ setShowModal }) => {
       <form>
         <div className={classNames(settingsCss.row, settingsCss.rowFull)}>
           <p>
-            Here you can backup your personal settings and all your feeds.
-            Copy the contents of the export field and save it to a file or
-            transfer it to another computer.
+            Here you can backup your personal settings and all your feeds. Copy
+            the contents of the export field and save it to a file or transfer
+            it to another computer.
           </p>
           <p className={css.warning}>
             <FontAwesomeIcon icon={faExclamationTriangle} />
@@ -69,10 +73,7 @@ const ImportExport = ({ setShowModal }) => {
               onChange={(ev) => setImportData(ev.currentTarget.value.trim())}
               type="text"
             />
-            <ConfirmButton
-              icon={faFileImport}
-              onClick={doImport}
-            >
+            <ConfirmButton icon={faFileImport} onClick={doImport}>
               Import
             </ConfirmButton>
           </div>

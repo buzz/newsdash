@@ -12,7 +12,7 @@ import css from './NewsGrid.sss'
 
 const ResponsiveGridLayout = WidthProvider(Responsive)
 
-const generateLayout = (feedBoxes) => (
+const generateLayout = (feedBoxes) =>
   feedBoxes.map((feedBox) => ({
     i: feedBox.id.toString(),
     x: feedBox.x,
@@ -24,7 +24,6 @@ const generateLayout = (feedBoxes) => (
     minH: 2,
     maxH: Infinity,
   }))
-)
 
 const NewsGrid = () => {
   const dispatch = useDispatch()
@@ -33,26 +32,24 @@ const NewsGrid = () => {
   const layout = generateLayout(feedBoxes)
 
   const onLayoutChange = (newLayout) => {
-    newLayout.forEach(
-      (newItem) => {
-        const item = layout.find((layoutItem) => layoutItem.i === newItem.i)
-        if (
-          newItem.x !== item.x
-          || newItem.y !== item.y
-          || newItem.w !== item.w
-          || newItem.h !== item.h
-        ) {
-          dispatch(
-            editFeedBox(
-              parseInt(newItem.i, 10),
-              {
-                x: newItem.x, y: newItem.y, w: newItem.w, h: newItem.h,
-              }
-            )
-          )
-        }
+    newLayout.forEach((newItem) => {
+      const item = layout.find((layoutItem) => layoutItem.i === newItem.i)
+      if (
+        newItem.x !== item.x ||
+        newItem.y !== item.y ||
+        newItem.w !== item.w ||
+        newItem.h !== item.h
+      ) {
+        dispatch(
+          editFeedBox(parseInt(newItem.i, 10), {
+            x: newItem.x,
+            y: newItem.y,
+            w: newItem.w,
+            h: newItem.h,
+          })
+        )
       }
-    )
+    })
   }
 
   return (
@@ -66,13 +63,11 @@ const NewsGrid = () => {
         onLayoutChange={onLayoutChange}
         rowHeight={48}
       >
-        {
-          feedBoxes.map((feedBox) => (
-            <div key={feedBox.id.toString()}>
-              <FeedBox feedBox={feedBox} />
-            </div>
-          ))
-        }
+        {feedBoxes.map((feedBox) => (
+          <div key={feedBox.id.toString()}>
+            <FeedBox feedBox={feedBox} />
+          </div>
+        ))}
       </ResponsiveGridLayout>
     </div>
   )

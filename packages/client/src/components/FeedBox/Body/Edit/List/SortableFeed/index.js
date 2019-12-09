@@ -12,7 +12,11 @@ import {
   faTrash,
 } from '@fortawesome/free-solid-svg-icons'
 
-import { FEED_STATUS, FEED_DISPLAY, FEED_DISPLAY_LABELS } from 'newsdash/constants'
+import {
+  FEED_STATUS,
+  FEED_DISPLAY,
+  FEED_DISPLAY_LABELS,
+} from 'newsdash/constants'
 import { feedType } from 'newsdash/components/propTypes'
 import { deleteFeed, editFeed } from 'newsdash/store/actions/feed'
 import Icon from 'newsdash/components/Feed/Icon'
@@ -47,7 +51,9 @@ const FEED_ITEM_DISPLAY = {
 const Feed = ({ feed }) => {
   const dispatch = useDispatch()
   const title = getTitle(feed)
-  const [feedItemDisplay, setFeedItemDisplay] = useState(FEED_ITEM_DISPLAY.REGULAR)
+  const [feedItemDisplay, setFeedItemDisplay] = useState(
+    FEED_ITEM_DISPLAY.REGULAR
+  )
   const [newCustomTitle, setNewCustomTitle] = useState(feed.customTitle)
   const [newUrl, setNewUrl] = useState(feed.url)
   const [newDisplay, setNewDisplay] = useState(feed.display)
@@ -69,25 +75,21 @@ const Feed = ({ feed }) => {
     dispatch(editFeed(feed.id, { filter: newFilter }))
   }
 
-  const makeInputOnKeyUp = (dispatchValue) => (
-    (ev) => {
-      if (ev.keyCode === 13) {
-        dispatchValue()
-        setFeedItemDisplay(FEED_ITEM_DISPLAY.REGULAR)
-      }
+  const makeInputOnKeyUp = (dispatchValue) => (ev) => {
+    if (ev.keyCode === 13) {
+      dispatchValue()
+      setFeedItemDisplay(FEED_ITEM_DISPLAY.REGULAR)
     }
-  )
+  }
 
-  const makeEditOnClick = (dispatchValue, editFeedItemDisplay) => (
-    () => {
-      if (feedItemDisplay === editFeedItemDisplay) {
-        dispatchValue()
-        setFeedItemDisplay(FEED_ITEM_DISPLAY.REGULAR)
-      } else {
-        setFeedItemDisplay(editFeedItemDisplay)
-      }
+  const makeEditOnClick = (dispatchValue, editFeedItemDisplay) => () => {
+    if (feedItemDisplay === editFeedItemDisplay) {
+      dispatchValue()
+      setFeedItemDisplay(FEED_ITEM_DISPLAY.REGULAR)
+    } else {
+      setFeedItemDisplay(editFeedItemDisplay)
     }
-  )
+  }
 
   const inputRef = useRef()
   useEffect(() => {
@@ -143,13 +145,11 @@ const Feed = ({ feed }) => {
             ref={inputRef}
             value={newDisplay}
           >
-            {
-              Object.values(FEED_DISPLAY).map((displayOption) => (
-                <option key={displayOption} value={displayOption}>
-                  {FEED_DISPLAY_LABELS[displayOption]}
-                </option>
-              ))
-            }
+            {Object.values(FEED_DISPLAY).map((displayOption) => (
+              <option key={displayOption} value={displayOption}>
+                {FEED_DISPLAY_LABELS[displayOption]}
+              </option>
+            ))}
           </select>
         </form>
       </div>
@@ -180,11 +180,7 @@ const Feed = ({ feed }) => {
   return (
     <li className={css.listItem}>
       <DragHandle />
-      <Icon
-        className={css.icon}
-        feed={feed}
-        noLink
-      />
+      <Icon className={css.icon} feed={feed} noLink />
       {feedDisplay}
       <div className={classNames('nondraggable', css.buttons)}>
         <button
@@ -202,7 +198,10 @@ const Feed = ({ feed }) => {
           <FontAwesomeIcon fixedWidth icon={faLink} />
         </button>
         <button
-          onClick={makeEditOnClick(dispatchDisplay, FEED_ITEM_DISPLAY.EDIT_DISPLAY)}
+          onClick={makeEditOnClick(
+            dispatchDisplay,
+            FEED_ITEM_DISPLAY.EDIT_DISPLAY
+          )}
           title="Change display"
           type="button"
         >

@@ -8,25 +8,19 @@ import TextTile from './TextTile'
 import css from './Tile.sss'
 
 const Tile = ({ color, item }) => {
-  const image = item.imageUrl
-    ? (
-      <Image
-        alt={item.title}
-        className={css.tileImage}
-        src={item.imageUrl}
-      />
-    )
-    : null
+  const image = item.imageUrl ? (
+    <Image alt={item.title} className={css.tileImage} src={item.imageUrl} />
+  ) : null
 
-  const tileInner = item.content
-    ? <TextTile color={color} image={image} item={item} />
-    : <NoTextTile color={color} image={image} item={item} />
+  const tileInner = item.content ? (
+    <TextTile color={color} image={image} item={item} />
+  ) : (
+    <NoTextTile color={color} image={image} item={item} />
+  )
 
   return (
     <div className={css.tile}>
-      <div className={css.tileWrapper}>
-        {tileInner}
-      </div>
+      <div className={css.tileWrapper}>{tileInner}</div>
     </div>
   )
 }

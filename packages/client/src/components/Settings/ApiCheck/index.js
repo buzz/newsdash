@@ -13,8 +13,8 @@ const ApiCheck = () => {
 
   const text = apiPresent
     ? 'Feeds and hi-res image URLs will be fetched using API.'
-    : 'Feeds will be fetched using external service (CORS proxy). '
-      + 'Feed images will be in low-res if available at all.'
+    : 'Feeds will be fetched using external service (CORS proxy). ' +
+      'Feed images will be in low-res if available at all.'
 
   return (
     <>
@@ -28,9 +28,7 @@ const ApiCheck = () => {
           {apiPresent ? ' ' : ' not '}
           available.
         </div>
-        <div>
-          {text}
-        </div>
+        <div>{text}</div>
       </div>
     </>
   )

@@ -24,24 +24,16 @@ const getTitle = (feed, feedBox, editMode) => {
   return feed.customTitle || feed.title
 }
 
-const Header = ({
-  feed,
-  feedBox,
-  editMode,
-  onEditClick,
-}) => {
+const Header = ({ feed, feedBox, editMode, onEditClick }) => {
   const dispatch = useDispatch()
   const title = getTitle(feed, feedBox, editMode)
 
   const icon = (
-    <Icon
-      className={css.feedIcon}
-      feed={editMode || !feed ? null : feed}
-    />
+    <Icon className={css.feedIcon} feed={editMode || !feed ? null : feed} />
   )
 
-  const headerTitle = feed && feed.link && !editMode
-    ? (
+  const headerTitle =
+    feed && feed.link && !editMode ? (
       <h2>
         <a
           className="nondraggable"
@@ -52,34 +44,33 @@ const Header = ({
           {title}
         </a>
       </h2>
+    ) : (
+      <h2>{title}</h2>
     )
-    : <h2>{title}</h2>
 
   const isLoading = feed && feed.status === FEED_STATUS.LOADING
 
-  const buttons = editMode
-    ? null
-    : (
-      <div className={classNames('nondraggable', css.buttons)}>
-        <button
-          aria-label="Refresh feed"
-          disabled={isLoading || !feed}
-          title="Refresh"
-          type="button"
-          onClick={() => dispatch(refreshFeed(feed.id))}
-        >
-          <FontAwesomeIcon icon={faSync} spin={isLoading} />
-        </button>
-        <button
-          aria-label="Edit feed"
-          title="Edit"
-          type="button"
-          onClick={onEditClick}
-        >
-          <FontAwesomeIcon icon={faEdit} />
-        </button>
-      </div>
-    )
+  const buttons = editMode ? null : (
+    <div className={classNames('nondraggable', css.buttons)}>
+      <button
+        aria-label="Refresh feed"
+        disabled={isLoading || !feed}
+        title="Refresh"
+        type="button"
+        onClick={() => dispatch(refreshFeed(feed.id))}
+      >
+        <FontAwesomeIcon icon={faSync} spin={isLoading} />
+      </button>
+      <button
+        aria-label="Edit feed"
+        title="Edit"
+        type="button"
+        onClick={onEditClick}
+      >
+        <FontAwesomeIcon icon={faEdit} />
+      </button>
+    </div>
+  )
 
   const headerStyle = {
     backgroundColor: feedBox.colors.headerBg,

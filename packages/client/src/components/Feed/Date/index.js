@@ -5,12 +5,11 @@ import { format } from 'timeago.js'
 
 import css from './Date.sss'
 
-const dateFormat = (date) => (
+const dateFormat = (date) =>
   format(date)
     .replace(/minutes?/, 'min')
     .replace(/hours?/, 'h')
     .replace(' ago', '')
-)
 
 const ItemDate = ({ className, date }) => {
   const [redrawTimer, setRedrawTimer] = useState(0)
@@ -23,9 +22,7 @@ const ItemDate = ({ className, date }) => {
   }, [redrawTimer])
 
   return (
-    <span className={classNames(className, css.date)}>
-      {dateFormat(date)}
-    </span>
+    <span className={classNames(className, css.date)}>{dateFormat(date)}</span>
   )
 }
 

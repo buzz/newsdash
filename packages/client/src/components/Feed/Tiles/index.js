@@ -15,7 +15,7 @@ const getTileColors = (items, prevTileColors) => {
   for (let i = 0; i < items.length; i += 1) {
     if (!tileColors[i]) {
       tileColors[i] = tinycolor({
-        h: Math.round((Math.random() * 360)),
+        h: Math.round(Math.random() * 360),
         s: 0.2,
         l: 0.85,
       }).toHexString()
@@ -50,7 +50,9 @@ const Tiles = ({ items }) => {
         columnClassName={css.gridColumn}
         ref={masonryRef}
       >
-        {items.map((item, i) => <Tile color={tileColors[i]} item={item} key={item.id} />)}
+        {items.map((item, i) => (
+          <Tile color={tileColors[i]} item={item} key={item.id} />
+        ))}
       </Masonry>
     </div>
   )

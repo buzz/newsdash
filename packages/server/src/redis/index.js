@@ -7,7 +7,7 @@ const redis = new Redis(process.env.REDIS_URL || DEFAULT_REDIS_URL, {
   showFriendlyErrorStack: process.env.NODE_ENV !== 'production',
 })
 
-const scan = (pattern) => (
+const scan = (pattern) =>
   new Promise((resolve) => {
     const stream = redis.scanStream({ match: pattern })
     let keys = []
@@ -16,7 +16,6 @@ const scan = (pattern) => (
     })
     stream.on('end', () => resolve(keys))
   })
-)
 
 export const getAllHashes = async (pattern, fields) => {
   const hmFields = getHmFields(fields)
@@ -25,14 +24,12 @@ export const getAllHashes = async (pattern, fields) => {
   for (let i = 0; i < keys.length; i += 1) {
     pipeline.hmget(keys[i], hmFields)
   }
-  return pipeline
-    .exec()
-    .then(
-      (results) => results.reduce((acc, result) => {
-        acc.push(translateRedisHash(result[1], fields))
-        return acc
-      }, [])
-    )
+  return pipeline.exec().then((results) =>
+    results.reduce((acc, result) => {
+      acc.push(translateRedisHash(result[1], fields))
+      return acc
+    }, [])
+  )
 }
 
 export const getHash = async (key, fields) => {

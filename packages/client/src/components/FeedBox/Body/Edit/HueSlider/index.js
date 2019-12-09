@@ -1,9 +1,4 @@
-import React, {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import { feedBoxType } from 'newsdash/components/propTypes'
@@ -22,7 +17,10 @@ const HueSlider = ({ feedBox, onChange }) => {
   const div = useRef()
 
   const updatePointerPos = useCallback(
-    () => setPointerLeft(pos * div.current.getBoundingClientRect().width - pointerH),
+    () =>
+      setPointerLeft(
+        pos * div.current.getBoundingClientRect().width - pointerH
+      ),
     [pos]
   )
 

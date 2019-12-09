@@ -14,26 +14,24 @@ const getFaviconUrl = (url) => {
 
 const Icon = ({ className, feed, noLink }) => {
   const faviconUrl = feed && feed.link ? getFaviconUrl(feed.link) : null
-  const icon = faviconUrl
-    ? <img alt={feed.title} src={faviconUrl} title={feed.title} />
-    : <FontAwesomeIcon icon={faRss} />
+  const icon = faviconUrl ? (
+    <img alt={feed.title} src={faviconUrl} title={feed.title} />
+  ) : (
+    <FontAwesomeIcon icon={faRss} />
+  )
 
-  return feed && feed.link && !noLink
-    ? (
-      <a
-        className={classNames('nondraggable', className, css.feedIcon)}
-        href={feed.link}
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        {icon}
-      </a>
-    )
-    : (
-      <span className={classNames(className, css.feedIcon)}>
-        {icon}
-      </span>
-    )
+  return feed && feed.link && !noLink ? (
+    <a
+      className={classNames('nondraggable', className, css.feedIcon)}
+      href={feed.link}
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      {icon}
+    </a>
+  ) : (
+    <span className={classNames(className, css.feedIcon)}>{icon}</span>
+  )
 }
 
 Icon.defaultProps = {

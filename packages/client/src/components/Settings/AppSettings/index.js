@@ -23,24 +23,38 @@ const gridColMarks = makeSliderMarks(gridColMin, gridColMax, gridColStep)
 const fetchIntervalMin = 5
 const fetchIntervalMax = 60
 const fetchIntervalStep = 5
-const fetchIntervalMarks = makeSliderMarks(fetchIntervalMin, fetchIntervalMax, fetchIntervalStep)
+const fetchIntervalMarks = makeSliderMarks(
+  fetchIntervalMin,
+  fetchIntervalMax,
+  fetchIntervalStep
+)
 
 const feedItemsToKeepMin = 20
 const feedItemsToKeepMax = 200
 const feedItemsToKeepStep = 20
 const feedItemsToKeepMarks = makeSliderMarks(
-  feedItemsToKeepMin, feedItemsToKeepMax, feedItemsToKeepStep
+  feedItemsToKeepMin,
+  feedItemsToKeepMax,
+  feedItemsToKeepStep
 )
 
 const lightnessMin = 0
 const lightnessMax = 100
 const lightnessStep = 10
-const lightnessMarks = makeSliderMarks(lightnessMin, lightnessMax, lightnessStep)
+const lightnessMarks = makeSliderMarks(
+  lightnessMin,
+  lightnessMax,
+  lightnessStep
+)
 
 const saturationMin = 0
 const saturationMax = 100
 const saturationStep = 10
-const saturationMarks = makeSliderMarks(saturationMin, saturationMax, saturationStep)
+const saturationMarks = makeSliderMarks(
+  saturationMin,
+  saturationMax,
+  saturationStep
+)
 
 const AppSettings = () => {
   const {
