@@ -26,29 +26,19 @@ const filterItems = (items, pattern) => {
   })
 }
 
-const getAllFeedItems = createSelector(
-  orm,
-  (session) => session
-    .FeedItem
-    .all()
-    .toRefArray()
+const getAllFeedItems = createSelector(orm, (session) =>
+  session.FeedItem.all().toRefArray()
 )
 
-const makeGetFeedItems = () => createSelector(
-  orm,
-  selectId,
-  (session, id) => {
+const makeGetFeedItems = () =>
+  createSelector(orm, selectId, (session, id) => {
     const feed = session.Feed.withId(id)
     if (!feed) {
       return []
     }
-    const items = feed
-      .items
-      .toRefArray()
-      .sort((a, b) => b.date - a.date) // sort by date
+    const items = feed.items.toRefArray().sort((a, b) => b.date - a.date) // sort by date
     return feed.filter ? filterItems(items, feed.filter) : items
-  }
-)
+  })
 
 export default {
   getAllFeedItems,

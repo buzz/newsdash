@@ -1,11 +1,5 @@
 import { buffers } from 'redux-saga'
-import {
-  actionChannel,
-  delay,
-  flush,
-  fork,
-  take,
-} from 'redux-saga/effects'
+import { actionChannel, delay, flush, fork, take } from 'redux-saga/effects'
 
 export default function* trailingThrottle(ms, pattern, worker, ...args) {
   const task = yield fork(function* trailingThrottleTask() {

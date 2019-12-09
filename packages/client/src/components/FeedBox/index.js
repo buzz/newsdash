@@ -9,7 +9,9 @@ const FeedBox = ({ feedBox }) => {
   const { feeds } = feedBox
   const [editMode, setEditMode] = useState(false)
 
-  const [activeFeedId, setActiveFeedId] = useState(feeds.length ? feeds[0].id : null)
+  const [activeFeedId, setActiveFeedId] = useState(
+    feeds.length ? feeds[0].id : null
+  )
   useEffect(() => {
     // feed got deleted?
     if (!feeds.find((feed) => feed.id === activeFeedId)) {

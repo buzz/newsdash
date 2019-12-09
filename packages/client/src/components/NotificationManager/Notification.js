@@ -7,13 +7,12 @@ import css from './Notification.sss'
 
 const Notification = ({ message, title, type }) => (
   <div
-    className={classNames(
-      css.notification,
-      { [css.danger]: type === NOTIFICATION_TYPES.ERROR }
-    )}
+    className={classNames(css.notification, {
+      [css.danger]: type === NOTIFICATION_TYPES.ERROR,
+    })}
   >
     <h3>{title}</h3>
-    { message ? <p>{message}</p> : null }
+    {message ? <p>{message}</p> : null}
   </div>
 )
 

@@ -9,9 +9,5 @@ import restoreStateSaga from './state/restoreStateSaga'
 export default function* rootSaga() {
   yield call(checkApiPresenceSaga)
   yield call(restoreStateSaga)
-  yield all([
-    ...feedItemSagas,
-    ...feedSagas,
-    ...stateSagas,
-  ])
+  yield all([...feedItemSagas, ...feedSagas, ...stateSagas])
 }

@@ -10,7 +10,9 @@ import Tiles from './Tiles'
 
 const Feed = ({ feed }) => {
   const getFeedItems = useMemo(feedItemSelectors.makeGetFeedItems, [])
-  const feedItems = useSelector((state) => getFeedItems(state, feed ? feed.id : null))
+  const feedItems = useSelector((state) =>
+    getFeedItems(state, feed ? feed.id : null)
+  )
 
   if (feed.status === FEED_STATUS.ERROR && !feedItems.length) {
     return (
@@ -19,8 +21,7 @@ const Feed = ({ feed }) => {
           <strong>Sorry, unable to retrieve the feed!</strong>
         </p>
         <p>
-          URL:
-          {' '}
+          URL:{' '}
           <a
             className="nondraggable"
             href={feed.url}
@@ -30,9 +31,7 @@ const Feed = ({ feed }) => {
             <code>{feed.url}</code>
           </a>
           <br />
-          Error message:
-          {' '}
-          <code>{feed.error}</code>
+          Error message: <code>{feed.error}</code>
         </p>
       </div>
     )

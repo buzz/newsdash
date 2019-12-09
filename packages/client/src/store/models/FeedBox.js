@@ -42,8 +42,8 @@ export default class FeedBox extends Model {
 
       case appActionTypes.RESTORE_SETTINGS:
         if (action.data.feedBoxes) {
-          action.data.feedBoxes.forEach(
-            (feedBox) => feedBoxModel.upsert(feedBox)
+          action.data.feedBoxes.forEach((feedBox) =>
+            feedBoxModel.upsert(feedBox)
           )
         }
         break

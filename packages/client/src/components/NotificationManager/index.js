@@ -28,24 +28,22 @@ const NotificationManager = () => {
 
   useEffect(() => {
     if (notice) {
-      notifications.forEach(
-        (notification) => {
-          notice({
-            closable: true,
-            content: (
-              <Notification
-                message={notification.message}
-                title={notification.title}
-                type={notification.type}
-              />
-            ),
-            duration: NOTIFICATION_DURATION / 1000,
-            key: notification.id.toString(),
-            style: {},
-          })
-          dispatch(notificationShown(notification.id))
-        }
-      )
+      notifications.forEach((notification) => {
+        notice({
+          closable: true,
+          content: (
+            <Notification
+              message={notification.message}
+              title={notification.title}
+              type={notification.type}
+            />
+          ),
+          duration: NOTIFICATION_DURATION / 1000,
+          key: notification.id.toString(),
+          style: {},
+        })
+        dispatch(notificationShown(notification.id))
+      })
     }
   }, [dispatch, notifications])
 

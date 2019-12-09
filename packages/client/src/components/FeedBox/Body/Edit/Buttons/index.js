@@ -9,10 +9,7 @@ import css from './Buttons.sss'
 
 const Buttons = ({ onBackClick, onDeleteClick }) => (
   <div className={classNames('nondraggable', css.buttons)}>
-    <button
-      onClick={onBackClick}
-      type="button"
-    >
+    <button onClick={onBackClick} type="button">
       <FontAwesomeIcon icon={faArrowLeft} />
       Back
     </button>

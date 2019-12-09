@@ -11,17 +11,9 @@ import css from './List.sss'
 
 const SortableFeedList = SortableContainer(({ feeds }) => (
   <ul className={classNames('nondraggable', css.feeds)}>
-    {
-      feeds.map(
-        (feed) => (
-          <SortableFeed
-            feed={feed}
-            index={feed.index}
-            key={feed.id.toString()}
-          />
-        )
-      )
-    }
+    {feeds.map((feed) => (
+      <SortableFeed feed={feed} index={feed.index} key={feed.id.toString()} />
+    ))}
   </ul>
 ))
 

@@ -24,23 +24,31 @@ function* postStateToApiSaga(settingsJson) {
       method: 'POST',
     })
   } catch (err) {
-    yield put(showNotification({
-      message: `The settings could not be saved to server. ${err.message}`,
-      title: 'Could not save state to server!',
-      type: NOTIFICATION_TYPES.error,
-    }))
+    yield put(
+      showNotification({
+        message: `The settings could not be saved to server. ${err.message}`,
+        title: 'Could not save state to server!',
+        type: NOTIFICATION_TYPES.error,
+      })
+    )
   }
 }
 
 function* saveSettingsToLocalStorageSaga(settingsJson) {
   try {
-    yield call([localStorage, localStorage.setItem], LOCALSTORAGE_SETTINGS_KEY, settingsJson)
+    yield call(
+      [localStorage, localStorage.setItem],
+      LOCALSTORAGE_SETTINGS_KEY,
+      settingsJson
+    )
   } catch (err) {
-    yield put(showNotification({
-      message: `The settings could not be saved to the local browser storage. ${err.message}`,
-      title: 'Could not save state to browser!',
-      type: NOTIFICATION_TYPES.error,
-    }))
+    yield put(
+      showNotification({
+        message: `The settings could not be saved to the local browser storage. ${err.message}`,
+        title: 'Could not save state to browser!',
+        type: NOTIFICATION_TYPES.error,
+      })
+    )
   }
 }
 

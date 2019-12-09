@@ -11,26 +11,17 @@ const ConfirmButton = ({ children, icon, onClick }) => {
     setActivated(false)
     onClick()
   }
-  return activated
-    ? (
-      <button
-        className={css.confirm}
-        onClick={onConfirmed}
-        type="button"
-      >
-        {faIcon}
-        Really?
-      </button>
-    )
-    : (
-      <button
-        onClick={() => setActivated(true)}
-        type="button"
-      >
-        {faIcon}
-        {children}
-      </button>
-    )
+  return activated ? (
+    <button className={css.confirm} onClick={onConfirmed} type="button">
+      {faIcon}
+      Really?
+    </button>
+  ) : (
+    <button onClick={() => setActivated(true)} type="button">
+      {faIcon}
+      {children}
+    </button>
+  )
 }
 
 ConfirmButton.defaultProps = {

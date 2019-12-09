@@ -26,32 +26,40 @@ export default function* loadFeedSaga({ id, url }) {
     }
     const text = yield call([response, response.text])
     try {
-      yield put(loadFeedSuccess(id, yield call([parser, parser.parseString], text)))
+      yield put(
+        loadFeedSuccess(id, yield call([parser, parser.parseString], text))
+      )
     } catch (err) {
       const message = `Could not parse feed XML: ${err.message}`
       yield put(loadFeedFailure(id, message))
-      yield put(showNotification({
-        message: `Failed to parse data for ${feedUrl}. ${message}`,
-        title: 'Failed to fetch feed!',
-        type: NOTIFICATION_TYPES.ERROR,
-      }))
+      yield put(
+        showNotification({
+          message: `Failed to parse data for ${feedUrl}. ${message}`,
+          title: 'Failed to fetch feed!',
+          type: NOTIFICATION_TYPES.ERROR,
+        })
+      )
     }
   } catch (err) {
     if (err.response) {
       const message = `${err.response.status} ${err.response.statusText}`
       yield put(loadFeedFailure(id, message))
-      yield put(showNotification({
-        message: `Failed to fetch URL ${feedUrl}. ${message}`,
-        title: 'Failed to fetch feed!',
-        type: NOTIFICATION_TYPES.ERROR,
-      }))
+      yield put(
+        showNotification({
+          message: `Failed to fetch URL ${feedUrl}. ${message}`,
+          title: 'Failed to fetch feed!',
+          type: NOTIFICATION_TYPES.ERROR,
+        })
+      )
     } else {
       yield put(loadFeedFailure(id, err.message))
-      yield put(showNotification({
-        message: `Failed to fetch URL ${feedUrl}. ${err.message}`,
-        title: 'Failed to fetch feed!',
-        type: NOTIFICATION_TYPES.ERROR,
-      }))
+      yield put(
+        showNotification({
+          message: `Failed to fetch URL ${feedUrl}. ${err.message}`,
+          title: 'Failed to fetch feed!',
+          type: NOTIFICATION_TYPES.ERROR,
+        })
+      )
     }
   }
 }

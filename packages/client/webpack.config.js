@@ -13,9 +13,7 @@ const SRC_DIR = path.join(__dirname, 'src')
 const DIST_DIR = path.join(__dirname, 'dist')
 
 const config = {
-  entry: [
-    path.join(SRC_DIR, 'index.js'),
-  ],
+  entry: [path.join(SRC_DIR, 'index.js')],
   output: {
     path: DIST_DIR,
     publicPath: '/',
@@ -75,10 +73,7 @@ const config = {
       },
       {
         test: /\.svg$/,
-        use: [
-          '@svgr/webpack',
-          'file-loader',
-        ],
+        use: ['@svgr/webpack', 'file-loader'],
       },
     ],
   },

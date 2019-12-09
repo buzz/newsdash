@@ -7,14 +7,12 @@ const useWidthObserver = () => {
 
   useEffect(() => {
     const { current: element } = ref
-    const resizeObserver = new ResizeObserver(
-      (entries) => {
-        if (!Array.isArray(entries) || !entries.length) {
-          return
-        }
-        setWidth(entries[0].contentRect.width)
+    const resizeObserver = new ResizeObserver((entries) => {
+      if (!Array.isArray(entries) || !entries.length) {
+        return
       }
-    )
+      setWidth(entries[0].contentRect.width)
+    })
     resizeObserver.observe(element)
     return () => resizeObserver.unobserve(element)
   }, [])

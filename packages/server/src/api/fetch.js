@@ -8,20 +8,19 @@ import { FETCH_TIMEOUT, USER_AGENT } from '../constants'
 
 const cache = new QuickLRU({ maxSize: 1000 })
 
-const fetch = (url, opts = {}) => got(
-  url,
-  {
+const fetch = (url, opts = {}) =>
+  got(url, {
     cache,
     decompress: false,
     headers: { 'User-Agent': USER_AGENT },
     timeout: FETCH_TIMEOUT,
     ...opts,
-  }
-)
+  })
 
 const imageScraper = metascraper([metascraperImage()])
 
-export default express.Router()
+export default express
+  .Router()
   .get('/feed/:requestedUrl', (req, res, next) => {
     const { requestedUrl } = req.params
     fetch(requestedUrl, { stream: true })

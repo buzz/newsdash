@@ -19,11 +19,11 @@ const Edit = ({ feedBox, onBackClick, onDeleteClick }) => {
   const [feedBoxTitle, setFeedBoxTitle] = useState(feedBox.title || '')
   const dispatch = useDispatch()
   const inputRef = useRef()
-  useEffect(() => { inputRef.current.focus() }, [])
+  useEffect(() => {
+    inputRef.current.focus()
+  }, [])
 
-  const feedList = feedBox.feeds.length
-    ? <List feeds={feedBox.feeds} />
-    : null
+  const feedList = feedBox.feeds.length ? <List feeds={feedBox.feeds} /> : null
 
   const onAddFeedClick = () => {
     const urlWithProtocol = addUrl.match(/https?:\/\//)
@@ -38,7 +38,8 @@ const Edit = ({ feedBox, onBackClick, onDeleteClick }) => {
     }
   }
 
-  const dispatchTitle = () => dispatch(editFeedBox(feedBox.id, { title: feedBoxTitle.trim() }))
+  const dispatchTitle = () =>
+    dispatch(editFeedBox(feedBox.id, { title: feedBoxTitle.trim() }))
 
   return (
     <div className={css.edit}>
@@ -59,9 +60,7 @@ const Edit = ({ feedBox, onBackClick, onDeleteClick }) => {
             <div className={classNames('nondraggable', css.row)}>
               <HueSlider
                 feedBox={feedBox}
-                onChange={
-                  (hue) => dispatch(editFeedBox(feedBox.id, { hue }))
-                }
+                onChange={(hue) => dispatch(editFeedBox(feedBox.id, { hue }))}
               />
             </div>
           </form>
@@ -76,11 +75,7 @@ const Edit = ({ feedBox, onBackClick, onDeleteClick }) => {
                 type="text"
                 value={addUrl}
               />
-              <button
-                onClick={onAddFeedClick}
-                title="Add feed"
-                type="button"
-              >
+              <button onClick={onAddFeedClick} title="Add feed" type="button">
                 <FontAwesomeIcon fixedWidth icon={faPlus} />
               </button>
             </div>

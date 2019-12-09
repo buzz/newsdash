@@ -35,11 +35,11 @@ export default class App extends Model {
         break
 
       case appActionTypes.CLEAR_STATE:
-        [appModel, session.Feed, session.FeedBox, session.FeedItem].forEach(
-          (EntityModel) => EntityModel
-            .all()
-            .toModelArray()
-            .forEach((instance) => instance.delete())
+        ;[appModel, session.Feed, session.FeedBox, session.FeedItem].forEach(
+          (EntityModel) =>
+            EntityModel.all()
+              .toModelArray()
+              .forEach((instance) => instance.delete())
         )
         break
 

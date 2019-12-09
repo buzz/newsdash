@@ -6,16 +6,10 @@ import Date from 'newsdash/components/Feed/Date'
 import css from './Overlay.sss'
 
 const Overlay = ({ className, item }) => {
-  const date = item.date
-    ? <Date className={css.date} date={item.date} />
-    : null
-  const content = item.content
-    ? (
-      <p className={css.content}>
-        {item.content}
-      </p>
-    )
-    : null
+  const date = item.date ? <Date className={css.date} date={item.date} /> : null
+  const content = item.content ? (
+    <p className={css.content}>{item.content}</p>
+  ) : null
 
   return (
     <div className={className}>

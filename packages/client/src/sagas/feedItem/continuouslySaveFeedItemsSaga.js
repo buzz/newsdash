@@ -14,13 +14,19 @@ function* saveFeedItemsToLocalStorageSaga() {
   const feedItems = yield select(feedItemSelectors.getAllFeedItems)
   const feedItemsJson = yield call([JSON, JSON.stringify], feedItems)
   try {
-    yield call([localStorage, localStorage.setItem], LOCALSTORAGE_FEEDITEMS_KEY, feedItemsJson)
+    yield call(
+      [localStorage, localStorage.setItem],
+      LOCALSTORAGE_FEEDITEMS_KEY,
+      feedItemsJson
+    )
   } catch (err) {
-    yield put(showNotification({
-      message: `The feed items could not be saved to the local browser storage. ${err.message}`,
-      title: 'Could not save feed items to browser!',
-      type: NOTIFICATION_TYPES.error,
-    }))
+    yield put(
+      showNotification({
+        message: `The feed items could not be saved to the local browser storage. ${err.message}`,
+        title: 'Could not save feed items to browser!',
+        type: NOTIFICATION_TYPES.error,
+      })
+    )
   }
 }
 

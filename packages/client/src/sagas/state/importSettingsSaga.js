@@ -15,10 +15,12 @@ export default function* importSettingsSaga({ data }) {
       throw new Error('JSON data needs three keys: app, feedBoxes and feeds.')
     }
   } catch (err) {
-    yield put(showNotification({
-      message: err.message,
-      title: 'Could not import settings!',
-      type: NOTIFICATION_TYPES.ERROR,
-    }))
+    yield put(
+      showNotification({
+        message: err.message,
+        title: 'Could not import settings!',
+        type: NOTIFICATION_TYPES.ERROR,
+      })
+    )
   }
 }
