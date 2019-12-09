@@ -27,6 +27,7 @@
     "client:build:bundle-analyze": "BUNDLE_ANALYZE=1 yarn build",
     "client:build": "yarn workspace @newsdash/client build",
     "client:dev": "yarn workspace @newsdash/client dev",
+    "format": "prettier --write \"*.js\" \"packages/**/*.js\"",
     "lint": "eslint .",
     "server:build": "yarn workspace @newsdash/server build",
     "server:dev": "yarn workspace @newsdash/server dev",
@@ -47,7 +48,10 @@
     "babel-eslint": "^10.0.1",
     "eslint": "^6.2.2",
     "eslint-config-airbnb": "^18.0.1",
-    "eslint-plugin-import": "^2.18.0"
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "prettier": "^1.19.1"
   },
   "resolutions": {
     "favicons": "5.5.0"
