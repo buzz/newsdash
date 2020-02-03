@@ -61,7 +61,7 @@ const NewsGrid = () => {
         layouts={{ lg: layout }}
         margin={[16, 16]}
         onLayoutChange={onLayoutChange}
-        rowHeight={48}
+        rowHeight={16}
       >
         {feedBoxes.map((feedBox) => (
           <div key={feedBox.id.toString()}>
