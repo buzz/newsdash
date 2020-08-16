@@ -42,7 +42,6 @@ const config = {
               modules: {
                 mode: 'local',
                 localIdentName: '[local]__[hash:base64:5]',
-                context: path.join(__dirname, 'src'),
               },
               sourceMap: devMode,
             },
