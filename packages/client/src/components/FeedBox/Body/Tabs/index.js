@@ -2,8 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import Tabs, { TabPane } from 'rc-tabs'
-import TabContent from 'rc-tabs/lib/TabContent'
-import ScrollableTabBar from 'rc-tabs/lib/ScrollableTabBar'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faExclamationTriangle,
@@ -17,6 +15,14 @@ import Scrollbar from 'newsdash/components/Scrollbar'
 import Feed from 'newsdash/components/Feed'
 import css from './Tabs.sss'
 
+const renderTabBar = (props, TabBar, style) => (
+  <TabBar
+    {...props}
+    className={classNames('nondraggable', css.tabBar)}
+    style={style}
+  />
+)
+
 const FeedTabs = ({ activeFeedId, feedBox, feeds, setActiveFeedId }) => {
   const scrollableTabBarStyle = {
     backgroundColor: feedBox.colors.tabsBg,
@@ -26,14 +32,11 @@ const FeedTabs = ({ activeFeedId, feedBox, feeds, setActiveFeedId }) => {
     <div className={css.tabs}>
       <Tabs
         activeKey={activeFeedId.toString()}
+        animated={true}
         onChange={(key) => setActiveFeedId(parseInt(key, 10))}
-        renderTabBar={() => (
-          <ScrollableTabBar
-            className={classNames('nondraggable', css.tabBar)}
-            style={scrollableTabBarStyle}
-          />
-        )}
-        renderTabContent={() => <TabContent animated={false} />}
+        renderTabBar={(props, TabBar) =>
+          renderTabBar(props, TabBar, scrollableTabBarStyle)
+        }
       >
         {feeds.map((feed) => {
           let tabIcon = null
