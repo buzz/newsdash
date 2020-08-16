@@ -13,12 +13,17 @@ export default function* loadFeedSaga({ id, url }) {
   const { apiPresent, corsProxy } = yield select(getApp)
   const feed = yield select(feedSelectors.getFeed, id)
   const feedUrl = url || feed.url
-  const fetchUrl = apiPresent
-    ? `api/fetch/feed/${yield call(encodeURIComponent, feedUrl)}`
-    : `${corsProxy}${feedUrl}`
+  const fetchUrl = apiPresent ? 'api/proxy/feed' : `${corsProxy}${feedUrl}`
+  const fetchOpts = apiPresent
+    ? {
+        body: JSON.stringify({ url: feedUrl }),
+        headers: { 'Content-Type': 'application/json' },
+        method: 'POST',
+      }
+    : {}
 
   try {
-    const response = yield call(fetch, fetchUrl)
+    const response = yield call(fetch, fetchUrl, fetchOpts)
     if (!response.ok) {
       const err = new Error()
       err.response = response

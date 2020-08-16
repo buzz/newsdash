@@ -8,10 +8,11 @@ const getFeedItems = feedItemSelectors.makeGetFeedItems()
 
 function* loadImageUrlSaga(id, link) {
   try {
-    const response = yield call(
-      fetch,
-      `api/fetch/image-url/${encodeURIComponent(link)}`
-    )
+    const response = yield call(fetch, 'api/proxy/meta-image', {
+      body: JSON.stringify({ url: link }),
+      headers: { 'Content-Type': 'application/json' },
+      method: 'POST',
+    })
     if (response.ok) {
       const { image: imageUrl } = yield call([response, response.json])
       yield put(editFeedItem(id, { imageUrl }))
