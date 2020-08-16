@@ -57,11 +57,11 @@ const NewsGrid = () => {
       <ResponsiveGridLayout
         breakpoints={{ lg: 1200 }}
         cols={{ lg: gridCols }}
+        containerPadding={[8, 8]}
         draggableCancel=".nondraggable"
         layouts={{ lg: layout }}
-        margin={[16, 16]}
         onLayoutChange={onLayoutChange}
-        rowHeight={16}
+        rowHeight={8}
       >
         {feedBoxes.map((feedBox) => (
           <div key={feedBox.id.toString()}>
