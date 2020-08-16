@@ -20,15 +20,15 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "got": "^9.6.0",
-    "ioredis": "^4.14.1",
-    "metascraper": "^5.7.4",
-    "metascraper-image": "^5.7.4",
-    "quick-lru": "^4.0.1"
+    "got": "^11.3.0",
+    "ioredis": "^4.17.3",
+    "metascraper": "^5.12.6",
+    "metascraper-image": "^5.11.21",
+    "quick-lru": "^5.1.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.6.0",
-    "@babel/node": "^7.6.1",
-    "nodemon": "^1.19.2"
+    "@babel/cli": "^7.10.3",
+    "@babel/node": "^7.10.3",
+    "nodemon": "^2.0.4"
   }
 }
