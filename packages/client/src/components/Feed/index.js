@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
 
 import { feedType } from 'newsdash/components/propTypes'
@@ -8,8 +8,9 @@ import css from 'newsdash/components/FeedBox/Body/Body.sss'
 import List from './List'
 import Tiles from './Tiles'
 
+const getFeedItems = feedItemSelectors.makeGetFeedItems()
+
 const Feed = ({ feed }) => {
-  const getFeedItems = useMemo(feedItemSelectors.makeGetFeedItems, [])
   const feedItems = useSelector((state) =>
     getFeedItems(state, feed ? feed.id : null)
   )
