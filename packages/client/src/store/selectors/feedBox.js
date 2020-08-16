@@ -3,24 +3,18 @@ import tinycolor from 'tinycolor2'
 
 import orm from 'newsdash/store/orm'
 
+const cloneDarken = (baseColor, amount) =>
+  baseColor.clone().darken(amount).toHexString()
+
 const getColors = (hue, lightness, saturation) => {
   const baseColor = tinycolor({ h: hue, s: 1.0, l: 0.5 })
     .desaturate(100 - saturation)
     .lighten(25 + 25 * (lightness / 100))
   return {
     bg: baseColor.toHexString(),
-    border: baseColor
-      .clone()
-      .darken(20)
-      .toHexString(),
-    headerBg: baseColor
-      .clone()
-      .darken(9)
-      .toHexString(),
-    tabsBg: baseColor
-      .clone()
-      .darken(4)
-      .toHexString(),
+    border: cloneDarken(baseColor, 20),
+    headerBg: cloneDarken(baseColor, 9),
+    tabsBg: cloneDarken(baseColor, 4),
   }
 }
 
