@@ -29,12 +29,14 @@ const FeedTabs = ({ activeFeedId, feedBox, feeds, setActiveFeedId }) => {
     backgroundColor: feedBox.colors.tabsBg,
     borderColor: feedBox.colors.border,
   }
+
   return (
     <div className={css.tabs}>
       <Tabs
         activeKey={activeFeedId.toString()}
-        animated
+        animated={false}
         onChange={(key) => setActiveFeedId(parseInt(key, 10))}
+        moreIcon={null}
         renderTabBar={(props, TabBar) =>
           renderTabBar(props, TabBar, scrollableTabBarStyle)
         }

@@ -4,6 +4,7 @@
   flex-grow: 1
 
   :global(.rc-tabs)
+    border: none
     display: flex
     flex-direction: column
     height: 100%
@@ -13,30 +14,49 @@
       border-bottom-style: solid
       border-bottom-width: 1px
 
-      :global(.rc-tabs-nav-container)
-        padding: 0 $padding-md
+      :global(.rc-tabs-nav-wrap)
 
-        :global(.rc-tabs-tab-prev)
-          display: none
+        &:global(.rc-tabs-nav-measure-ping-left), &:global(.rc-tabs-nav-wrap-ping-left), &:global(.rc-tabs-nav-measure-ping-right), &:global(.rc-tabs-nav-wrap-ping-right)
 
-        :global(.rc-tabs-tab-next)
-          display: none
+          &::after, &::before
+            display: none
 
-        :global(.rc-tabs-tab)
-          color: $color-text-bright
-          font-size: 100%
-          margin: 0
-          padding: $padding-sm $padding-md calc($padding-sm / 2)
+        :global(.rc-tabs-nav-list)
 
-          &:hover
-            color: black
+          :global(.rc-tabs-ink-bar)
+            display: none
 
-        :global(.rc-tabs-tab-active)
-          color: black
-          text-decoration: underline
+          :global(.rc-tabs-tab)
+            background: inherit
+            font-size: inherit
+
+            :global(.rc-tabs-tab-btn)
+              color: $color-text-bright
+              font-size: 100%
+              font-weight: 500
+              line-height: inherit
+              margin: 0
+              outline: none
+              padding: 6px $padding-sm 4px
+              transition: color $transition-speed-fast ease-in
+
+              &:hover
+                color: black
+
+            &:first-child :global(.rc-tabs-tab-btn)
+              padding-left: $padding-lg
+
+          :global(.rc-tabs-tab-active)
+
+            :global(.rc-tabs-tab-btn)
+              color: black
+              text-decoration: underline
+
+      :global(.rc-tabs-nav-operations)
+        display: none
 
     :global(.rc-tabs-content)
-      flex-grow: 1
+      height: 100%
 
       [role=tabpanel]
         height: 100%
