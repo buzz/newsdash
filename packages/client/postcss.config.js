@@ -1,29 +1,29 @@
-const {
-  NodeJsInputFileSystem,
-  CachedInputFileSystem,
-  ResolverFactory,
-} = require('enhanced-resolve') // eslint-disable-line import/no-extraneous-dependencies
+// eslint-disable-next-line import/no-extraneous-dependencies
+const resolver = require('postcss-import-resolver')
 
 const webpackConfig = require('./webpack.config')
 
-const resolver = ResolverFactory.createResolver({
-  alias: webpackConfig.resolve.alias,
-  extensions: ['.sss'],
-  modules: [],
-  useSyncFileSystemCalls: true,
-  fileSystem: new CachedInputFileSystem(new NodeJsInputFileSystem(), 60000),
-})
-
-module.exports = ({ env }) => ({
-  parser: 'sugarss',
-  plugins: {
-    'postcss-import': {
-      resolve: (id, basedir) => resolver.resolveSync({}, basedir, id),
+const plugins = [
+  [
+    require.resolve('postcss-import'),
+    {
+      resolve: resolver({
+        alias: webpackConfig.resolve.alias,
+        modules: [],
+      }),
     },
-    'postcss-mixins': {},
-    precss: {},
-    'postcss-color-function': {},
-    'postcss-preset-env': {},
-    cssnano: env === 'production' ? {} : false,
-  },
-})
+  ],
+  require.resolve('postcss-mixins'),
+  require.resolve('precss'),
+  require.resolve('postcss-color-function'),
+  require.resolve('postcss-preset-env'),
+]
+
+if (process.env.NODE_ENV === 'production') {
+  plugins.push(require.resolve('cssnano'))
+}
+
+module.exports = {
+  parser: require.resolve('sugarss'),
+  plugins,
+}
