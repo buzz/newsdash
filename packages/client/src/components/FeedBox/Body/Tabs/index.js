@@ -17,6 +17,7 @@ import css from './Tabs.sss'
 
 const renderTabBar = (props, TabBar, style) => (
   <TabBar
+    // eslint-disable-next-line react/jsx-props-no-spreading
     {...props}
     className={classNames('nondraggable', css.tabBar)}
     style={style}
@@ -32,7 +33,7 @@ const FeedTabs = ({ activeFeedId, feedBox, feeds, setActiveFeedId }) => {
     <div className={css.tabs}>
       <Tabs
         activeKey={activeFeedId.toString()}
-        animated={true}
+        animated
         onChange={(key) => setActiveFeedId(parseInt(key, 10))}
         renderTabBar={(props, TabBar) =>
           renderTabBar(props, TabBar, scrollableTabBarStyle)
