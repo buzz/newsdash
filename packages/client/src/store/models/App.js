@@ -41,6 +41,7 @@ export default class App extends Model {
               .toModelArray()
               .forEach((instance) => instance.delete())
         )
+        appModel.create({})
         break
 
       case appActionTypes.RESTORE_SETTINGS:
