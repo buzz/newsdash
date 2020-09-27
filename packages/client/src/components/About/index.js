@@ -5,6 +5,8 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import logoNewsdashUrl from 'newsdash/static/logo-newsdash.svg'
 import css from './About.sss'
 
+import pkgInfo from '../../../../../package.json'
+
 const About = () => (
   <div className={css.about}>
     <img src={logoNewsdashUrl} alt="newsdash" />
@@ -19,6 +21,7 @@ const About = () => (
         github.com/buzz/newsdash
       </a>
     </p>
+    <p className={css.big}>Version {pkgInfo.version}</p>
     <p>
       Licensed under the
       <br />
