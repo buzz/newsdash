@@ -61,7 +61,7 @@ const NewsGrid = () => {
         draggableCancel=".nondraggable"
         layouts={{ lg: layout }}
         onLayoutChange={onLayoutChange}
-        rowHeight={8}
+        rowHeight={1}
       >
         {feedBoxes.map((feedBox) => (
           <div key={feedBox.id.toString()}>
