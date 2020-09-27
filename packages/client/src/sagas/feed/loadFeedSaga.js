@@ -10,7 +10,7 @@ import feedSelectors from 'newsdash/store/selectors/feed'
 const parser = new Parser()
 
 export default function* loadFeedSaga({ id, url }) {
-  const { apiPresent, corsProxy } = yield select(getApp)
+  const { apiPresent, corsProxy, feedItemsToKeep } = yield select(getApp)
   const feed = yield select(feedSelectors.getFeed, id)
   const feedUrl = url || feed.url
   const fetchUrl = apiPresent ? 'api/proxy/feed' : `${corsProxy}${feedUrl}`
@@ -23,6 +23,7 @@ export default function* loadFeedSaga({ id, url }) {
     : {}
 
   try {
+    // Fetch items using proxy
     const response = yield call(fetch, fetchUrl, fetchOpts)
     if (!response.ok) {
       const err = new Error()
@@ -30,10 +31,19 @@ export default function* loadFeedSaga({ id, url }) {
       throw err
     }
     const text = yield call([response, response.text])
+
     try {
-      yield put(
-        loadFeedSuccess(id, yield call([parser, parser.parseString], text))
-      )
+      // Parse XML
+      const parsedFeed = yield call([parser, parser.parseString], text)
+      if (parsedFeed.items.length > feedItemsToKeep) {
+        // Don't load more items than we actually keep
+        parsedFeed.items = yield call(
+          [parsedFeed.items, parsedFeed.items.slice],
+          0,
+          feedItemsToKeep
+        )
+      }
+      yield put(loadFeedSuccess(id, parsedFeed))
     } catch (err) {
       const message = `Could not parse feed XML: ${err.message}`
       yield put(loadFeedFailure(id, message))
