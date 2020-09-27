@@ -4,6 +4,9 @@ LABEL maintainer="buzz <buzz@users.noreply.github.com>"
 WORKDIR /newsdash
 COPY . .
 RUN set -xe && \
+  apk add --update --no-cache \
+    build-base \
+    python3 && \
   yarn install \
     --non-interactive \
     --pure-lockfile && \
