@@ -17,6 +17,7 @@ const NoTextTile = ({ color, image, item }) => {
       href={item.link}
       rel="noopener noreferrer"
       target="_blank"
+      title={item.title}
     >
       <Overlay className={overlayCss.overlay} item={item} />
       <div className={tileCss.tileImageWrapper} style={style}>
