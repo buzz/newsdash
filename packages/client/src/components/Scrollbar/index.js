@@ -23,9 +23,9 @@ const getFaderStyle = (type, bgColor, top) => ({
       : OPACITY_FULL,
 })
 
-const Track = ({ style }) => <div className={css.track} style={style} />
+const VTrack = ({ style }) => <div className={css.vtrack} style={style} />
 
-Track.propTypes = {
+VTrack.propTypes = {
   style: PropTypes.shape({
     opacity: PropTypes.number.isRequired,
     position: PropTypes.string.isRequired,
@@ -33,6 +33,8 @@ Track.propTypes = {
     width: PropTypes.number.isRequired,
   }).isRequired,
 }
+
+const HTrack = () => <div className={css.htrack} />
 
 const Scrollbar = ({ bgColor, children }) => {
   const scrollbar = useRef()
@@ -44,7 +46,8 @@ const Scrollbar = ({ bgColor, children }) => {
         autoHide
         onScrollFrame={({ top: newTop }) => setTop(newTop)}
         ref={scrollbar}
-        renderTrackVertical={Track}
+        renderTrackHorizontal={HTrack}
+        renderTrackVertical={VTrack}
       >
         {children}
       </ReactCustomScrollbars>
