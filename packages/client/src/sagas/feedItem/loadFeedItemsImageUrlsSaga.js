@@ -4,6 +4,8 @@ import { editFeedItem } from 'newsdash/store/actions/feedItem'
 import feedItemSelectors from 'newsdash/store/selectors/feedItem'
 import getApp from 'newsdash/store/selectors/app'
 
+import { addToQueueSaga } from '../fetchQueue'
+
 const getFeedItems = feedItemSelectors.makeGetFeedItems()
 
 function* loadImageUrlSaga(id, link) {
@@ -30,7 +32,7 @@ export default function* loadFeedItemsImageUrlsSaga({ feedId }) {
     for (let i = 0; i < items.length; i += 1) {
       const { id: itemId, imageUrl, link } = items[i]
       if (link && !imageUrl) {
-        effects.push(call(loadImageUrlSaga, itemId, link))
+        effects.push(call(addToQueueSaga, loadImageUrlSaga, itemId, link))
       }
     }
     yield all(effects)
