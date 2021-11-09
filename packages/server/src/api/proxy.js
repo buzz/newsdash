@@ -6,7 +6,7 @@ import metascraperImage from 'metascraper-image'
 import got from 'got'
 import QuickLRU from 'quick-lru'
 
-import { FETCH_TIMEOUT, USER_AGENT } from '../constants'
+import { FETCH_TIMEOUT, USER_AGENT } from '../constants.js'
 
 const pipeline = promisify(stream.pipeline)
 const cache = new QuickLRU({ maxSize: 1000 })

@@ -3,9 +3,8 @@
     "browser": true,
     "es6": true
   },
-  "plugins": [
-    "react-hooks"
-  ],
+  "extends": ["airbnb", "prettier"],
+  "plugins": ["react-hooks"],
   "rules": {
     "react/jsx-filename-extension": ["error", { "extensions": [".js"] }],
     "react/forbid-prop-types": ["off"],

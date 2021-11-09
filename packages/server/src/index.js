@@ -1,8 +1,8 @@
 import express from 'express'
 
-import { CLIENT_DIST_DIR, DEFAULT_PORT } from './constants'
-import apiRouter from './api'
-import errorHandlers from './errorHandlers'
+import { CLIENT_DIST_DIR, DEFAULT_PORT } from './constants.js'
+import apiRouter from './api/index.js'
+import errorHandlers from './errorHandlers.js'
 
 express()
   .use(express.json())

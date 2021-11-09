@@ -1,5 +1,7 @@
 {
   "rules": {
+    "no-underscore-dangle": ["error", { "allow": ["__dirname"] }],
+    "import/extensions": ["error", "always"],
     "no-console": ["off"]
   }
 }

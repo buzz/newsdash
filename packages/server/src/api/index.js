@@ -1,8 +1,8 @@
 import express from 'express'
 
-import { PKG_NAME, PKG_VERSION } from '../constants'
-import proxyRouter from './proxy'
-import userRouter from './user'
+import { PKG_NAME, PKG_VERSION } from '../constants.js'
+import proxyRouter from './proxy.js'
+import userRouter from './user.js'
 
 export default express
   .Router()

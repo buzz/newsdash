@@ -1,10 +1,16 @@
+import fs from 'fs'
 import path from 'path'
+import { fileURLToPath } from 'url'
 
-import pkg from '../../../package.json'
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-export const PKG_NAME = pkg.name
-export const PKG_VERSION = pkg.version
-export const PKG_HOMEPAGE = pkg.homepage
+const pkgData = JSON.parse(
+  fs.readFileSync(path.resolve(__dirname, '..', '..', '..', 'package.json'))
+)
+
+export const PKG_NAME = pkgData.name
+export const PKG_VERSION = pkgData.version
+export const PKG_HOMEPAGE = pkgData.homepage
 
 export const CLIENT_DIST_DIR = path.resolve(
   __dirname,

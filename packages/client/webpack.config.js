@@ -34,7 +34,7 @@ const config = {
       },
       {
         test: /\.sss$/,
-        loaders: [
+        use: [
           devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
@@ -51,7 +51,7 @@ const config = {
       },
       {
         test: /\.css$/,
-        loaders: [
+        use: [
           devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',

@@ -1,7 +1,11 @@
 import Redis from 'ioredis'
 
-import { DEFAULT_REDIS_URL } from '../constants'
-import { getHmFields, objToHmData, translateRedisHash } from './dataConversion'
+import { DEFAULT_REDIS_URL } from '../constants.js'
+import {
+  getHmFields,
+  objToHmData,
+  translateRedisHash,
+} from './dataConversion.js'
 
 const redis = new Redis(process.env.REDIS_URL || DEFAULT_REDIS_URL, {
   showFriendlyErrorStack: process.env.NODE_ENV !== 'production',

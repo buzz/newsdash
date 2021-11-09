@@ -1,12 +1,12 @@
 import express from 'express'
 
-import { FIELDS_APP, FIELDS_FEEDBOX, FIELDS_FEED } from '../constants'
+import { FIELDS_APP, FIELDS_FEEDBOX, FIELDS_FEED } from '../constants.js'
 import {
   getAllHashes,
   getHash,
   setHash,
   updateHashesDeleteOthers,
-} from '../redis'
+} from '../redis/index.js'
 
 export default express
   .Router()
