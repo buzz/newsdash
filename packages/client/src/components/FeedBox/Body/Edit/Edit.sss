@@ -7,7 +7,7 @@
   height: 100%
 
   .forms
-    @extend %text-shadow
+    @include text-shadow
     flex-grow: 1
     height: 100%
     margin-top: $padding-lg
@@ -39,5 +39,5 @@
             width: auto
 
           button
-            @extend %button-round-sm
+            @include button-round-sm
             min-width: $button-diameter-sm

@@ -14,7 +14,10 @@ const plugins = [
     },
   ],
   require.resolve('postcss-mixins'),
-  require.resolve('precss'),
+  // until new version of postcss-advanced-variables
+  require.resolve('@knagis/postcss-advanced-variables'),
+  require.resolve('postcss-nested'),
+  // using PostCSS8-fork from https://github.com/onigoetz/postcss-color-function
   require.resolve('postcss-color-function'),
   require.resolve('postcss-preset-env'),
 ]

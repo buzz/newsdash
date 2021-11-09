@@ -3,5 +3,6 @@
   "targets": {
     "esmodules": true,
     "node": "current"
-  }
+  },
+  "babelrcRoots": [".", "./packages/*"]
 }

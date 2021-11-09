@@ -2,10 +2,9 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 
+import pkgInfo from 'newsdash-root/package.json'
 import logoNewsdashUrl from 'newsdash/static/logo-newsdash.svg'
 import css from './About.sss'
-
-import pkgInfo from '../../../../../package.json'
 
 const About = () => (
   <div className={css.about}>

@@ -1,5 +1,4 @@
 const path = require('path')
-const webpack = require('webpack')
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -17,7 +16,7 @@ const config = {
   output: {
     path: DIST_DIR,
     publicPath: '/',
-    filename: devMode ? 'newsdash.js' : 'newsdash.[hash].js',
+    filename: devMode ? 'newsdash.js' : 'newsdash.[contenthash].js',
   },
   optimization: {
     minimize: !devMode,
@@ -41,7 +40,7 @@ const config = {
             options: {
               modules: {
                 mode: 'local',
-                localIdentName: '[local]__[hash:base64:5]',
+                localIdentName: '[local]__[contenthash:base64:5]',
               },
               sourceMap: devMode,
             },
@@ -78,9 +77,17 @@ const config = {
   },
   resolve: {
     alias: {
+      'newsdash-root': path.join(SRC_DIR, '..', '..', '..'),
       newsdash: path.join(SRC_DIR),
     },
     extensions: ['.js'],
+    fallback: {
+      // for rss-parser -> sax
+      http: require.resolve('stream-http'),
+      https: require.resolve('https-browserify'),
+      stream: require.resolve('stream-browserify'),
+      timers: require.resolve('timers-browserify'),
+    },
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -88,8 +95,8 @@ const config = {
       filename: './index.html',
     }),
     new MiniCssExtractPlugin({
-      filename: devMode ? '[name].css' : '[name].[hash].css',
-      chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+      filename: devMode ? '[name].css' : '[name].[contenthash].css',
+      chunkFilename: devMode ? '[id].css' : '[id].[contenthash].css',
     }),
     new FaviconsWebpackPlugin({
       logo: path.join(SRC_DIR, 'static', 'logo.svg'),
@@ -120,9 +127,10 @@ if (process.env.BUNDLE_ANALYZE) {
 }
 
 if (devMode) {
-  config.plugins.push(new webpack.HotModuleReplacementPlugin())
   config.devServer = {
-    contentBase: DIST_DIR,
+    static: {
+      directory: DIST_DIR,
+    },
     hot: true,
     port: 3000,
     proxy: {

@@ -1,7 +1,7 @@
 @import 'newsdash/style/common.sss'
 @import 'newsdash/style/buttons.sss'
 
-%fader
+@mixin fader
   height: 30px
   pointer-events: none
   position: absolute
@@ -27,15 +27,15 @@
     z-index: 5
 
   .faderTop
-    @extend %fader
+    @include fader
     top: 0
 
   .faderBottom
-    @extend %fader
+    @include fader
     bottom: 0
 
   .scrollToTopButton
-    @extend %button-round-xs
+    @include button-round-xs
     background-color: color(black a(0.2))
     position: absolute
     left: 50%

@@ -3,7 +3,7 @@
 :export
   transitionSpeed: $transition-speed
 
-.overlayShadow
+@mixin overlay-shadow
   $padding: $padding-md
   visibility: hidden
   display: flex
@@ -25,9 +25,12 @@
     flex-grow: 0
     margin: $padding-sm 0 0
 
+.overlayShadow
+  @include overlay-shadow
+
 .overlay
-  @extend .overlayShadow
-  @extend %text-shadow-inv
+  @include overlay-shadow
+  @include text-shadow-inv
   background-color: color(black a(0.6))
   bottom: 0
   color: $color-text-inv
