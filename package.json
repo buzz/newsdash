@@ -23,20 +23,18 @@
     "url": "https://github.com/buzz/newsdash.git"
   },
   "scripts": {
-    "build": "yarn client:build && yarn server:build",
+    "build": "yarn client:build",
     "client:build:bundle-analyze": "BUNDLE_ANALYZE=1 yarn build",
     "client:build": "yarn workspace @newsdash/client build",
     "client:dev": "yarn workspace @newsdash/client dev",
     "format": "prettier --write \"*.js\" \"packages/**/*.js\"",
     "lint": "eslint .",
-    "server:build": "yarn workspace @newsdash/server build",
     "server:dev": "yarn workspace @newsdash/server dev",
     "server:start": "yarn workspace @newsdash/server start",
     "start": "yarn server:start"
   },
   "eslintIgnore": [
-    "/packages/client/dist",
-    "/packages/server/dist"
+    "/packages/client/dist"
   ],
   "dependencies": {},
   "devDependencies": {
