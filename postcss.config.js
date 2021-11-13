@@ -1,6 +1,2 @@
-module.exports = ({ env }) => ({
-  plugins: {
-    'postcss-preset-env': {},
-    cssnano: env === 'production' ? {} : false,
-  },
-})
+// Dummy config to prevent warnings
+module.exports = { parser: null, plugins: null }
