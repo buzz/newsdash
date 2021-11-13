@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
 
+import { feedBoxType } from '../propTypes'
 import css from './FeedBox.sss'
 import Body from './Body'
 import Header from './Header'
@@ -48,7 +48,7 @@ const FeedBox = ({ feedBox }) => {
 }
 
 FeedBox.propTypes = {
-  feedBox: PropTypes.object.isRequired,
+  feedBox: feedBoxType.isRequired,
 }
 
 export default FeedBox

@@ -30,7 +30,7 @@ ConfirmButton.defaultProps = {
 
 ConfirmButton.propTypes = {
   children: PropTypes.node.isRequired,
-  icon: PropTypes.object,
+  icon: PropTypes.elementType,
   onClick: PropTypes.func.isRequired,
 }
 

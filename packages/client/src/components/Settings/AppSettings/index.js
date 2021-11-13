@@ -77,119 +77,117 @@ const AppSettings = () => {
   const [saturation, setSaturation] = useState(oldSaturation)
 
   return (
-    <>
-      <form>
-        <h1>Appearance</h1>
+    <form>
+      <h1>Appearance</h1>
 
-        <div className={css.row}>
-          <span>Grid columns</span>
-          <div className={css.sliderWrapper}>
-            <Slider
-              className={css.slider}
-              defaultValue={gridCols}
-              marks={gridColMarks}
-              max={gridColMax}
-              min={gridColMin}
-              step={gridColStep}
-              onChange={(val) => {
-                setGridCols(val)
-                dispatch(editApp({ gridCols: val }))
-              }}
-            />
-          </div>
-        </div>
-
-        <div className={css.row}>
-          <span>Feed box lightness</span>
-          <div className={css.sliderWrapper}>
-            <Slider
-              className={css.slider}
-              defaultValue={lightness}
-              marks={lightnessMarks}
-              max={lightnessMax}
-              min={lightnessMin}
-              step={lightnessStep}
-              onChange={(val) => {
-                setLightness(val)
-                dispatch(editApp({ lightness: val }))
-              }}
-            />
-          </div>
-        </div>
-
-        <div className={css.row}>
-          <span>Feed box saturation</span>
-          <div className={css.sliderWrapper}>
-            <Slider
-              className={css.slider}
-              defaultValue={saturation}
-              marks={saturationMarks}
-              max={saturationMax}
-              min={saturationMin}
-              step={saturationStep}
-              onChange={(val) => {
-                setSaturation(val)
-                dispatch(editApp({ saturation: val }))
-              }}
-            />
-          </div>
-        </div>
-
-        <h1>Feed settings</h1>
-
-        <div className={css.row}>
-          <span>Feed fetch interval (min)</span>
-          <div className={css.sliderWrapper}>
-            <Slider
-              className={css.slider}
-              defaultValue={fetchInterval / 60 / 1000}
-              marks={fetchIntervalMarks}
-              max={fetchIntervalMax}
-              min={fetchIntervalMin}
-              step={fetchIntervalStep}
-              onChange={(val) => {
-                const valMilli = val * 60 * 1000
-                setFetchInterval(valMilli)
-                dispatch(editApp({ fetchInterval: valMilli }))
-              }}
-            />
-          </div>
-        </div>
-
-        <div className={css.row}>
-          <span>Keep feed items</span>
-          <div className={css.sliderWrapper}>
-            <Slider
-              className={css.slider}
-              defaultValue={feedItemsToKeep}
-              marks={feedItemsToKeepMarks}
-              max={feedItemsToKeepMax}
-              min={feedItemsToKeepMin}
-              step={feedItemsToKeepStep}
-              onChange={(val) => {
-                setFeedItemsToKeep(val)
-                dispatch(editApp({ feedItemsToKeep: val }))
-              }}
-            />
-          </div>
-        </div>
-
-        <div className={css.row}>
-          <label htmlFor="corsProxyInput">CORS proxy</label>
-          <input
-            disabled={apiPresent}
-            id="corsProxyInput"
-            onChange={(ev) => {
-              const val = ev.currentTarget.value.trim()
-              setCorsProxy(val)
-              dispatch(editApp({ corsProxy: val }))
+      <div className={css.row}>
+        <span>Grid columns</span>
+        <div className={css.sliderWrapper}>
+          <Slider
+            className={css.slider}
+            defaultValue={gridCols}
+            marks={gridColMarks}
+            max={gridColMax}
+            min={gridColMin}
+            step={gridColStep}
+            onChange={(val) => {
+              setGridCols(val)
+              dispatch(editApp({ gridCols: val }))
             }}
-            type="text"
-            value={corsProxy}
           />
         </div>
-      </form>
-    </>
+      </div>
+
+      <div className={css.row}>
+        <span>Feed box lightness</span>
+        <div className={css.sliderWrapper}>
+          <Slider
+            className={css.slider}
+            defaultValue={lightness}
+            marks={lightnessMarks}
+            max={lightnessMax}
+            min={lightnessMin}
+            step={lightnessStep}
+            onChange={(val) => {
+              setLightness(val)
+              dispatch(editApp({ lightness: val }))
+            }}
+          />
+        </div>
+      </div>
+
+      <div className={css.row}>
+        <span>Feed box saturation</span>
+        <div className={css.sliderWrapper}>
+          <Slider
+            className={css.slider}
+            defaultValue={saturation}
+            marks={saturationMarks}
+            max={saturationMax}
+            min={saturationMin}
+            step={saturationStep}
+            onChange={(val) => {
+              setSaturation(val)
+              dispatch(editApp({ saturation: val }))
+            }}
+          />
+        </div>
+      </div>
+
+      <h1>Feed settings</h1>
+
+      <div className={css.row}>
+        <span>Feed fetch interval (min)</span>
+        <div className={css.sliderWrapper}>
+          <Slider
+            className={css.slider}
+            defaultValue={fetchInterval / 60 / 1000}
+            marks={fetchIntervalMarks}
+            max={fetchIntervalMax}
+            min={fetchIntervalMin}
+            step={fetchIntervalStep}
+            onChange={(val) => {
+              const valMilli = val * 60 * 1000
+              setFetchInterval(valMilli)
+              dispatch(editApp({ fetchInterval: valMilli }))
+            }}
+          />
+        </div>
+      </div>
+
+      <div className={css.row}>
+        <span>Keep feed items</span>
+        <div className={css.sliderWrapper}>
+          <Slider
+            className={css.slider}
+            defaultValue={feedItemsToKeep}
+            marks={feedItemsToKeepMarks}
+            max={feedItemsToKeepMax}
+            min={feedItemsToKeepMin}
+            step={feedItemsToKeepStep}
+            onChange={(val) => {
+              setFeedItemsToKeep(val)
+              dispatch(editApp({ feedItemsToKeep: val }))
+            }}
+          />
+        </div>
+      </div>
+
+      <div className={css.row}>
+        <label htmlFor="corsProxyInput">CORS proxy</label>
+        <input
+          disabled={apiPresent}
+          id="corsProxyInput"
+          onChange={(ev) => {
+            const val = ev.currentTarget.value.trim()
+            setCorsProxy(val)
+            dispatch(editApp({ corsProxy: val }))
+          }}
+          type="text"
+          value={corsProxy}
+        />
+      </div>
+    </form>
   )
 }
 
