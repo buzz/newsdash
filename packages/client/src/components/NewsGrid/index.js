@@ -1,4 +1,5 @@
 import React from 'react'
+import usePrefersColorScheme from 'use-prefers-color-scheme'
 import { useDispatch, useSelector } from 'react-redux'
 import { Responsive, WidthProvider } from 'react-grid-layout'
 import 'react-grid-layout/css/styles.css'
@@ -26,9 +27,12 @@ const generateLayout = (feedBoxes) =>
   }))
 
 const NewsGrid = () => {
+  const colorSchema = usePrefersColorScheme()
   const dispatch = useDispatch()
   const { gridCols } = useSelector(getApp)
-  const feedBoxes = useSelector(feedBoxSelectors.getFeedBoxes)
+  const feedBoxes = useSelector((state) =>
+    feedBoxSelectors.getFeedBoxes(state, colorSchema)
+  )
   const layout = generateLayout(feedBoxes)
 
   const onLayoutChange = (newLayout) => {

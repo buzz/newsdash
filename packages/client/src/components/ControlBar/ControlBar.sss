@@ -3,18 +3,22 @@
 
 .controlBar
   --num-buttons: 4
-  background-color: color-mod(var(--color-button-bg-opaque) tint(15%))
+  background-color: var(--color-controlbar-bg)
   border-radius: calc(var(--button-diameter-md) / 2 + var(--padding-sm))
   bottom: var(--padding-lg)
   display: flex
   flex-direction: column-reverse
   height: calc(var(--num-buttons) * var(--button-diameter-md) + 2 * var(--padding-sm) + (var(--num-buttons) - 1) * var(--padding-sm))
   left: var(--padding-lg)
+  opacity: 0.4
   overflow: hidden
   padding: var(--padding-sm)
   position: absolute
-  transition: height var(--transition-speed) ease-in
+  transition: height var(--transition-speed) ease-in, opacity var(--transition-speed-fast) ease-in
   z-index: 999
+
+  &:hover
+    opacity: 1.0
 
   &.hidden
     height: calc(var(--button-diameter-md) + 2 * var(--padding-sm))

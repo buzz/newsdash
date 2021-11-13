@@ -31,17 +31,17 @@
             font-size: inherit
 
             :global(.rc-tabs-tab-btn)
-              color: var(--color-text-bright)
+              color: var(--color-text)
               font-size: 100%
               font-weight: 500
               line-height: inherit
               margin: 0
               outline: none
-              padding: 6px var(--padding-sm) 4px
+              padding: 4px var(--padding-sm) 5px
               transition: color var(--transition-speed-fast) ease-in
 
               &:hover
-                color: black
+                color: var(--color-text-highlight)
 
             &:first-child :global(.rc-tabs-tab-btn)
               padding-left: var(--padding-lg)
@@ -49,7 +49,7 @@
           :global(.rc-tabs-tab-active)
 
             :global(.rc-tabs-tab-btn)
-              color: black
+              color: var(--color-text-highlight)
               text-decoration: underline
 
       :global(.rc-tabs-nav-operations)

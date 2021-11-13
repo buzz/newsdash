@@ -3,12 +3,15 @@
   --font-size-sm: 90%
   --font-size-md: 110%
 
-  --color-good: rgb(48, 115, 38)
-
   --lightness-highlight: 35%
 
+  --color-page-bg: white
+
+  --color-modal-bg: rgb(250, 250, 250)
+  --color-modal-border: rgb(10, 10, 10)
+
   --color-text: rgb(36, 36, 36)
-  --color-text-bright: rgb(69, 69, 69)
+  --color-text-highlight: rgb(9, 9, 9)
   --color-text-hover: color-mod(var(--color-text) l(var(--lightness-highlight)))
   --color-text-visited: rgb(98, 98, 98)
   --color-text-inv: rgb(221, 221, 221)
@@ -23,12 +26,15 @@
   --color-control-border: rgba(0, 0, 0, 0.5)
   --color-notification-bg: rgba(255, 255, 255, 0.9)
 
+  --color-controlbar-bg: color-mod(var(--color-button-bg-opaque) tint(15%))
+
   --color-button-text: white
   --color-button-bg-opaque: color-mod(black l(40%))
   --color-button-bg-opaque-hover: color-mod(var(--color-button-bg-opaque) l(var(--lightness-highlight)))
   --color-button-bg: color-mod(black a(60%))
   --color-button-bg-hover: color-mod(black a(50%))
 
+  --color-good: rgb(48, 115, 38)
   --color-new: rgb(30, 111, 207)
 
   --border-radius: 2px
@@ -48,8 +54,32 @@
   --transition-speed-fast: 100ms
   --transition-speed: 200ms
 
+@media (prefers-color-scheme: dark)
+  :root
+    --color-page-bg: rgb(20, 20, 20)
+
+    --color-modal-bg: rgb(30, 30, 30)
+    --color-modal-border: rgb(14, 14, 14)
+
+    --color-text: rgb(221, 221, 221)
+    --color-text-highlight: rgb(245, 245, 245)
+    --color-text-hover: color-mod(var(--color-text) l(var(--lightness-highlight)))
+    --color-text-visited: rgb(180, 180, 180)
+    --color-text-inv: rgb(221, 221, 221)
+
+    --color-controlbar-bg: color-mod(var(--color-button-bg-opaque) tint(15%))
+
+    --color-button-text: white
+    --color-button-bg-opaque: color-mod(black l(32%))
+    --color-button-bg-opaque-hover: color-mod(var(--color-button-bg-opaque) l(var(--lightness-highlight)))
+    --color-button-bg: color-mod(white a(30%))
+    --color-button-bg-hover: color-mod(white a(50%))
+
 @mixin text-shadow
-  text-shadow: 0 1px 0 var(--color-text-inv)
+  text-shadow: 0 1px 0 color-mod(var(--color-text-inv) shade(15%))
+
+  @media (prefers-color-scheme: dark)
+    text-shadow: 0 1px 0 color-mod(var(--color-text) shade(15%))
 
 @mixin text-shadow-inv
-  text-shadow: 0 1px 0 var(--color-text)
+  text-shadow: 0 1px 0 color-mod(var(--color-text) shade(15%))

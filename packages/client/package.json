@@ -65,7 +65,8 @@
     "stream-http": "^3.2.0",
     "timeago.js": "^4.0.2",
     "timers-browserify": "^2.0.12",
-    "tinycolor2": "^1.4.2"
+    "tinycolor2": "^1.4.2",
+    "use-prefers-color-scheme": "^0.1.1"
   },
   "devDependencies": {
     "@babel/runtime": "^7.16.3",
