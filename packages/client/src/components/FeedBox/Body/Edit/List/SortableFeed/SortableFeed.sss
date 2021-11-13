@@ -1,13 +1,13 @@
-@import 'newsdash/style/common.sss'
-@import 'newsdash/style/buttons.sss'
+@import 'newsdash/style/_common.sss'
+@import 'newsdash/style/_buttons.sss'
 
 .listItem
   display: flex
   line-height: 24px
-  margin: calc($padding-sm / 2) 0
+  margin: calc(var(--padding-sm) / 2) 0
 
   .icon
-    margin-right: $padding-sm
+    margin-right: var(--padding-sm)
     width: 16px
 
     > img
@@ -15,13 +15,13 @@
       margin-top: 2px
 
   .dragHandle
-    color: $color-text-bright
-    padding-right: $padding-md
+    color: var(--color-text-bright)
+    padding-right: var(--padding-md)
 
   .title
     flex-grow: 1
     overflow: hidden
-    padding-right: $padding-sm
+    padding-right: var(--padding-sm)
     text-overflow: ellipsis
     white-space: nowrap
 
@@ -36,4 +36,4 @@
 
     button
       @include button-round-xs
-      margin-left: $padding-sm
+      margin-left: var(--padding-sm)

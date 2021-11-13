@@ -1,11 +1,11 @@
-@import 'newsdash/style/common.sss'
-@import 'newsdash/style/buttons.sss'
+@import 'newsdash/style/_common.sss'
+@import 'newsdash/style/_buttons.sss'
 
 @mixin fader
   height: 30px
   pointer-events: none
   position: absolute
-  transition: opacity $transition-speed-fast ease-in-out
+  transition: opacity var(--transition-speed-fast) ease-in-out
   width: 100%
   z-index: 1
 
@@ -18,12 +18,12 @@
     display: none
 
   .vtrack
-    $w: 8px
-    border-radius: calc($w / 2)
+    --w: 8px
+    border-radius: calc(var(--w) / 2)
     bottom: 2px
     right: 2px
     top: 2px
-    width: $w !important
+    width: var(--w) !important
     z-index: 5
 
   .faderTop
@@ -36,10 +36,10 @@
 
   .scrollToTopButton
     @include button-round-xs
-    background-color: color(black a(0.2))
+    background-color: color-mod(black a(0.2))
     position: absolute
     left: 50%
-    top: $padding-sm
+    top: var(--padding-sm)
     transform: translateX(-50%)
-    transition: opacity $transition-speed-fast ease-in
+    transition: opacity var(--transition-speed-fast) ease-in
     z-index: 3

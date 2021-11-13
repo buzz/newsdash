@@ -1,11 +1,11 @@
-@import 'newsdash/style/common.sss'
+@import 'newsdash/style/_common.sss'
 
 :export
-  transitionSpeed: $transition-speed
+  transitionSpeed: var(--transition-speed)
 
 .enter
   opacity: 0
 
 .enterActive
-  transition: opacity $transition-speed cubic-bezier(1, 0, 0.8, 0.05), margin $transition-speed ease-in
+  transition: opacity var(--transition-speed) cubic-bezier(1, 0, 0.8, 0.05), margin var(--transition-speed) ease-in
   opacity: 1

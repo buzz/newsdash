@@ -1,38 +1,36 @@
-@import 'newsdash/style/common.sss'
-@import 'newsdash/style/buttons.sss'
+@import 'newsdash/style/_common.sss'
+@import 'newsdash/style/_buttons.sss'
 
 .controlBar
-  $num-buttons: 4
-  $control-bar-padding: $padding-sm
-  $margin-button: $padding-sm
-  background-color: color($color-button-bg-opaque tint(15%))
-  border-radius: calc($button-diameter-md / 2 + $control-bar-padding)
-  bottom: $padding-lg
+  --num-buttons: 4
+  background-color: color-mod(var(--color-button-bg-opaque) tint(15%))
+  border-radius: calc(var(--button-diameter-md) / 2 + var(--padding-sm))
+  bottom: var(--padding-lg)
   display: flex
   flex-direction: column-reverse
-  height: calc($num-buttons * $button-diameter-md + 2 * $control-bar-padding + ($num-buttons - 1) * $margin-button)
-  left: $padding-lg
+  height: calc(var(--num-buttons) * var(--button-diameter-md) + 2 * var(--padding-sm) + (var(--num-buttons) - 1) * var(--padding-sm))
+  left: var(--padding-lg)
   overflow: hidden
-  padding: $control-bar-padding
+  padding: var(--padding-sm)
   position: absolute
-  transition: height $transition-speed ease-in
+  transition: height var(--transition-speed) ease-in
   z-index: 999
 
   &.hidden
-    height: calc($button-diameter-md + 2 * $control-bar-padding)
+    height: calc(var(--button-diameter-md) + 2 * var(--padding-sm))
 
     button
       opacity: 0.0
 
   button
     @include button-round-md
-    background-color: $color-button-bg-opaque
-    margin-bottom: $margin-button
+    background-color: var(--color-button-bg-opaque)
+    margin-bottom: var(--padding-sm)
     opacity: 1.0
-    transition: opacity $transition-speed ease-in
+    transition: opacity var(--transition-speed) ease-in
 
     &:hover
-      background-color: $color-button-bg-opaque-hover
+      background-color: var(--color-button-bg-opaque-hover)
 
     &:first-child
       margin-bottom: 0

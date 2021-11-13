@@ -1,4 +1,4 @@
-@import 'newsdash/style/common.sss'
+@import 'newsdash/style/_common.sss'
 
 .tabs
   flex-grow: 1
@@ -31,20 +31,20 @@
             font-size: inherit
 
             :global(.rc-tabs-tab-btn)
-              color: $color-text-bright
+              color: var(--color-text-bright)
               font-size: 100%
               font-weight: 500
               line-height: inherit
               margin: 0
               outline: none
-              padding: 6px $padding-sm 4px
-              transition: color $transition-speed-fast ease-in
+              padding: 6px var(--padding-sm) 4px
+              transition: color var(--transition-speed-fast) ease-in
 
               &:hover
                 color: black
 
             &:first-child :global(.rc-tabs-tab-btn)
-              padding-left: $padding-lg
+              padding-left: var(--padding-lg)
 
           :global(.rc-tabs-tab-active)
 
@@ -62,8 +62,8 @@
         height: 100%
 
     .tabIcon
-      font-size: $font-size-xs
-      margin-left: $padding-sm
+      font-size: var(--font-size-xs)
+      margin-left: var(--padding-sm)
 
       &.error
-        color: $color-danger-base
+        color: var(--color-danger-base)

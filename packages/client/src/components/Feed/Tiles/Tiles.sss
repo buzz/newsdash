@@ -1,12 +1,11 @@
-@import 'newsdash/style/common.sss'
-@import './tile-vars.sss'
+@import 'newsdash/style/_common.sss'
 
 .tiles
-  margin: $tiles-padding $tiles-padding 0 $tiles-padding
+  margin: var(--tiles-padding) var(--tiles-padding) 0 var(--tiles-padding)
 
   .masonryGrid
     display: flex
-    margin-left: -$gutter-size
+    margin-left: -var(--gutter-size)
 
     .gridColumn
-      padding-left: $gutter-size
+      padding-left: var(--gutter-size)

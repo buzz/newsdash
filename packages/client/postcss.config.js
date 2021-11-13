@@ -1,6 +1,6 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
+/* eslint-disable import/no-extraneous-dependencies */
 const resolver = require('postcss-import-resolver')
-
+const postcssPresetEnv = require('postcss-preset-env')
 const webpackConfig = require('./webpack.config')
 
 const plugins = [
@@ -17,9 +17,11 @@ const plugins = [
   // until new version of postcss-advanced-variables
   require.resolve('@knagis/postcss-advanced-variables'),
   require.resolve('postcss-nested'),
-  // using PostCSS8-fork from https://github.com/onigoetz/postcss-color-function
-  require.resolve('postcss-color-function'),
-  require.resolve('postcss-preset-env'),
+  postcssPresetEnv({
+    features: {
+      'color-mod-function': { unresolved: 'throw' },
+    },
+  }),
 ]
 
 if (process.env.NODE_ENV === 'production') {

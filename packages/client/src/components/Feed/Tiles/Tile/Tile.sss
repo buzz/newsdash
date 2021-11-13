@@ -1,9 +1,8 @@
-@import 'newsdash/style/common.sss'
-@import 'newsdash/components/Feed/Tiles/tile-vars.sss'
+@import 'newsdash/style/_common.sss'
 
 .tile
-  margin-bottom: $gutter-size
-  transition: height $transition-speed ease-in
+  margin-bottom: var(--gutter-size)
+  transition: height var(--transition-speed) ease-in
 
   .tileWrapper
     height: 100%
@@ -11,7 +10,7 @@
     width: 100%
 
     .tileInner
-      border-radius: $border-radius
+      border-radius: var(--border-radius)
       display: block
       height: 100%
       overflow: hidden
@@ -19,7 +18,7 @@
       width: 100%
 
       .tileImageWrapper
-        box-shadow: 0 0 60px color(black a(0.5)) inset
+        box-shadow: 0 0 60px color-mod(black a(0.5)) inset
         height: 100%
         left: 0
         position: absolute

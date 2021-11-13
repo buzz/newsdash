@@ -1,4 +1,4 @@
-@import 'newsdash/style/common.sss'
+@import 'newsdash/style/_common.sss'
 
 $headerHeight: 24px
 
@@ -11,7 +11,7 @@ $headerHeight: 24px
   height: $headerHeight
 
   .feedIcon
-    margin: $padding-sm 0 0 $padding-md
+    margin: var(--padding-sm) 0 0 var(--padding-md)
 
   h2
     flex-grow: 1
@@ -20,22 +20,22 @@ $headerHeight: 24px
     line-height: $headerHeight
     margin: 0
     overflow: hidden
-    padding-left: $padding-md
+    padding-left: var(--padding-md)
     text-overflow: ellipsis
     white-space: nowrap
 
     a:hover
-      color: $color-text-bright
+      color: var(--color-text-bright)
 
   .buttons
-    margin: 0 $padding-sm
+    margin: 0 var(--padding-sm)
     white-space: nowrap
 
     button
       background-color: transparent
       border: none
-      margin-top: $padding-sm
-      padding: 0 $padding-sm
+      margin-top: var(--padding-sm)
+      padding: 0 var(--padding-sm)
 
       &:enabled
         cursor: pointer
@@ -44,7 +44,7 @@ $headerHeight: 24px
         opacity: 0.5
 
       svg
-        color: $color-text
+        color: var(--color-text)
 
       &:hover:enabled svg
-        color: $color-text-bright
+        color: var(--color-text-bright)

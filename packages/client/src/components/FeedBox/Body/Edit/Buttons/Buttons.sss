@@ -1,11 +1,11 @@
-@import 'newsdash/style/common.sss'
-@import 'newsdash/style/buttons.sss'
+@import 'newsdash/style/_common.sss'
+@import 'newsdash/style/_buttons.sss'
 
 .buttons
   display: flex
-  padding: $padding-lg 0 $padding-lg $padding-lg
+  padding: var(--padding-lg) 0 var(--padding-lg) var(--padding-lg)
 
   button
     @include button
     flex-grow: 1
-    margin-right: $padding-lg
+    margin-right: var(--padding-lg)

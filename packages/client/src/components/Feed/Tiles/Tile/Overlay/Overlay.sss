@@ -1,14 +1,13 @@
-@import 'newsdash/style/common.sss'
+@import 'newsdash/style/_common.sss'
 
 :export
-  transitionSpeed: $transition-speed
+  transitionSpeed: var(--transition-speed)
 
 @mixin overlay-shadow
-  $padding: $padding-md
   visibility: hidden
   display: flex
   flex-direction: column
-  padding: $padding-md
+  padding: var(--padding-md)
   width: 100%
 
   .caption
@@ -23,7 +22,7 @@
 
   .content
     flex-grow: 0
-    margin: $padding-sm 0 0
+    margin: var(--padding-sm) 0 0
 
 .overlayShadow
   @include overlay-shadow
@@ -31,18 +30,18 @@
 .overlay
   @include overlay-shadow
   @include text-shadow-inv
-  background-color: color(black a(0.6))
+  background-color: color-mod(black a(0.6))
   bottom: 0
-  color: $color-text-inv
+  color: var(--color-text-inv)
   height: 32px
   position: absolute
-  transition: height $transition-speed ease-in, background-color $transition-speed ease-in
+  transition: height var(--transition-speed) ease-in, background-color var(--transition-speed) ease-in
   visibility: inherit
   z-index: 1
 
   .content
     opacity: 0
-    transition: opacity $transition-speed ease-in
+    transition: opacity var(--transition-speed) ease-in
 
   .title
     overflow: hidden
@@ -50,11 +49,11 @@
     white-space: nowrap !important
 
   .date
-    color: $color-text-inv
-    font-size: $font-size-sm
+    color: var(--color-text-inv)
+    font-size: var(--font-size-sm)
 
   &.enterActive, &.enterDone
-    background-color: color(black a(0.75)) !important
+    background-color: color-mod(black a(0.75)) !important
     height: 100% !important
 
     .content

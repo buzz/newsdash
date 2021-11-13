@@ -1,15 +1,15 @@
-@import 'newsdash/style/common.sss'
-@import 'newsdash/style/buttons.sss'
+@import 'newsdash/style/_common.sss'
+@import 'newsdash/style/_buttons.sss'
 
 .modal
   background-color: white
-  border-radius: $border-radius
+  border-radius: var(--border-radius)
   border: 1px solid
   left: 50%
   max-width: 650px
   min-width: 350px
   outline: none
-  padding: $padding-lg
+  padding: var(--padding-lg)
   position: fixed
   top: 50%
   transform: translate(-50%, -50%)
@@ -18,8 +18,8 @@
   .buttonClose
     @include button-round-sm
     position: absolute
-    right: $padding-lg
-    top: $padding-lg
+    right: var(--padding-lg)
+    top: var(--padding-lg)
 
 .overlay
   background-color: rgba(0, 0, 0, 0.7)

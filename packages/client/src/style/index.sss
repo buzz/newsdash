@@ -1,4 +1,4 @@
-@import './common.sss'
+@import './_common.sss'
 
 html
   box-sizing: border-box
@@ -15,19 +15,19 @@ body
   overflow-x: hidden
 
 a
-  color: $color-text
+  color: var(--color-text)
   text-decoration: none
 
   &:hover
-    color: $color-text-hover
+    color: var(--color-text-hover)
 
 input, select
-  background-color: $color-control-bg
-  border-radius: $border-radius
-  border: 1px solid $color-control-border
+  background-color: var(--color-control-bg)
+  border-radius: var(--border-radius)
+  border: 1px solid var(--color-control-border)
 
 input
-  padding: $padding-sm
+  padding: var(--padding-sm)
   height: 24px
 
 select
@@ -39,7 +39,7 @@ select
 :global(.react-grid-placeholder)
   border: 2px dashed black
   background-color: grey !important
-  border-radius: $border-radius
+  border-radius: var(--border-radius)
 
 :global(.react-resizable-handle)
   z-index: 10

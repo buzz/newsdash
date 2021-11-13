@@ -1,10 +1,10 @@
-@import 'newsdash/style/common.sss'
-@import 'newsdash/style/buttons.sss'
+@import 'newsdash/style/_common.sss'
+@import 'newsdash/style/_buttons.sss'
 
 .settings
 
   h1
-    font-size: $font-size-md
+    font-size: var(--font-size-md)
 
     &:first-child
       margin-top: 0
@@ -12,8 +12,8 @@
   .row
     $h: 25px
     display: flex
-    padding: calc($padding-md / 2) 0
-    margin-bottom: $padding-lg
+    padding: calc(var(--padding-md) / 2) 0
+    margin-bottom: var(--padding-lg)
 
     &.rowFull
       flex-direction: column
@@ -25,7 +25,7 @@
         white-space: inherit
 
       p
-        margin: $padding-md 0
+        margin: var(--padding-md) 0
         width: 100%
 
     &:last-child
@@ -53,18 +53,18 @@
       button
         @include button
         height: $h
-        margin-left: $padding-md
+        margin-left: var(--padding-md)
 
 .sliderWrapper
-  padding: 0 $padding-lg
+  padding: 0 var(--padding-lg)
 
   .slider
 
     :global(.rc-slider-track)
-      background-color: $color-control-border
+      background-color: var(--color-control-border)
 
     :global(.rc-slider-dot-active)
-      border-color: $color-control-border
+      border-color: var(--color-control-border)
 
     :global(.rc-slider-handle)
-      border-color: $color-control-border
+      border-color: var(--color-control-border)

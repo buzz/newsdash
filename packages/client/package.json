@@ -86,7 +86,6 @@
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.4.4",
     "postcss": "8.3.11",
-    "postcss-color-function": "https://github.com/onigoetz/postcss-color-function.git",
     "postcss-import": "^14.0.2",
     "postcss-import-resolver": "^2.0.0",
     "postcss-loader": "^6.2.0",
