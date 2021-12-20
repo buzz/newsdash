@@ -12,9 +12,10 @@ export default express
   .Router()
   .get('/state', async (req, res, next) => {
     try {
+      const feedBoxes = await getAllHashes('newsdash:feedBox:*', FIELDS_FEEDBOX)
       res.json({
         app: await getHash('newsdash:app', FIELDS_APP),
-        feedBoxes: await getAllHashes('newsdash:feedBox:*', FIELDS_FEEDBOX),
+        feedBoxes,
         feeds: await getAllHashes('newsdash:feed:*', FIELDS_FEED),
       })
     } catch (err) {

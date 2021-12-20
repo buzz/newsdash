@@ -67,7 +67,8 @@ export default function* continuouslySaveSettingsSaga() {
     [
       appActionTypes.CLEAR_STATE,
       appActionTypes.EDIT_APP,
-      appActionTypes.RESTORE_SETTINGS,
+      appActionTypes.RESTORE_APP_SETTINGS,
+      appActionTypes.RESTORE_FEEDS,
       feedActionTypes.ADD_FEED,
       feedActionTypes.EDIT_FEED,
       feedActionTypes.LOAD_FEED_SUCCESS,

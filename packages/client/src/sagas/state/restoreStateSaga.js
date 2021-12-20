@@ -6,8 +6,16 @@ import {
 } from 'newsdash/constants'
 import { showNotification } from 'newsdash/store/actions/notification'
 import restoreFeedItemsFromLocalStorageSaga from 'newsdash/sagas/feedItem/restoreFeedItemsFromLocalStorageSaga'
-import { restoreSettings } from 'newsdash/store/actions/app'
+import { restoreAppSettings, restoreFeeds } from 'newsdash/store/actions/app'
 import getApp from 'newsdash/store/selectors/app'
+
+// Restore app settings first, so grid columns update before grid boxes (#63)
+function* restoreSettingsSaga(settings) {
+  yield put(restoreAppSettings({ app: settings.app }))
+  yield put(
+    restoreFeeds({ feeds: settings.feeds, feedBoxes: settings.feedBoxes })
+  )
+}
 
 function* restoreSettingsFromApiSaga() {
   try {
@@ -15,7 +23,7 @@ function* restoreSettingsFromApiSaga() {
       headers: { Accept: 'application/json' },
     })
     const settings = yield call([response, response.json])
-    yield put(restoreSettings(settings))
+    yield restoreSettingsSaga(settings)
   } catch (err) {
     yield put(
       showNotification({
@@ -35,7 +43,7 @@ function* restoreSettingsFromLocalStorageSaga() {
     )
     const settings = yield call([JSON, JSON.parse], settingsJson)
     if (settings) {
-      yield put(restoreSettings(settings))
+      yield restoreSettingsSaga(settings)
     }
   } catch (err) {
     yield put(

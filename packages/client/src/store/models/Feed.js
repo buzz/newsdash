@@ -93,7 +93,7 @@ export default class Feed extends Model {
         })
         break
 
-      case appActionTypes.RESTORE_SETTINGS:
+      case appActionTypes.RESTORE_FEEDS:
         if (action.data.feeds) {
           action.data.feeds.forEach((feed) => feedModel.upsert(feed))
         }

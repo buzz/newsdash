@@ -44,9 +44,9 @@ export default class App extends Model {
         appModel.create({})
         break
 
-      case appActionTypes.RESTORE_SETTINGS:
-        if (action.data.app) {
-          appModel.upsert({ ...action.data.app, id: 0 })
+      case appActionTypes.RESTORE_APP_SETTINGS:
+        if (action.data) {
+          appModel.upsert({ ...action.data, id: 0 })
         }
         break
 

@@ -40,7 +40,7 @@ export default class FeedBox extends Model {
         feedBoxModel.withId(action.id).update(action.attrs)
         break
 
-      case appActionTypes.RESTORE_SETTINGS:
+      case appActionTypes.RESTORE_FEEDS:
         if (action.data.feedBoxes) {
           action.data.feedBoxes.forEach((feedBox) =>
             feedBoxModel.upsert(feedBox)
