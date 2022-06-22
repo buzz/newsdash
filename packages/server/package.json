@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "got": "^11.8.2",
+    "got": "^11.8.5",
     "ioredis": "^4.28.0",
     "metascraper": "^5.25.0",
     "metascraper-image": "^5.25.0",
