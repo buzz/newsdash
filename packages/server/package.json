@@ -19,7 +19,7 @@
     "start": "NODE_ENV=production node src/index.js"
   },
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "got": "^11.8.2",
     "ioredis": "^4.28.0",
     "metascraper": "^5.25.0",
