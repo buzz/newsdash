@@ -9,9 +9,8 @@ import restoreFeedItemsFromLocalStorageSaga from 'newsdash/sagas/feedItem/restor
 import { restoreAppSettings, restoreFeeds } from 'newsdash/store/actions/app'
 import getApp from 'newsdash/store/selectors/app'
 
-// Restore app settings first, so grid columns update before grid boxes (#63)
 function* restoreSettingsSaga(settings) {
-  yield put(restoreAppSettings({ app: settings.app }))
+  yield put(restoreAppSettings(settings.app))
   yield put(
     restoreFeeds({ feeds: settings.feeds, feedBoxes: settings.feedBoxes })
   )
