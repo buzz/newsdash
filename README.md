@@ -144,19 +144,6 @@ $ yarn server:dev
 Kudos to [Netvibes](https://www.netvibes.com/) and defunct iGoogle. That's
 where this project drew its inspiration.
 
-The following packages are used:
-
-- [Babel](https://babeljs.io/)
-- [Font Awesome](https://fontawesome.com/)
-- [Node.js](https://nodejs.org/)
-- [PostCSS](https://postcss.org/)
-- [React-Grid-Layout](https://github.com/STRML/react-grid-layout)
-- [React](https://reactjs.org/)
-- [Redux](https://redux.js.org/)
-- [rss-parser](https://github.com/rbren/rss-parser)
-- [webpack](https://webpack.js.org/)
-- and many more…
-
 ## License
 
 [GNU Affero General Public License v3.0](https://www.gnu.org/licenses/agpl-3.0.en.html)

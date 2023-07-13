@@ -1,0 +1,22 @@
+- migrate to typescript
+
+- migrate to new layout manager
+  - react-mosaic
+  - https://github.com/caplin/FlexLayout
+    has tabs and many more stuff, react-mosaic lacks
+  - https://github.com/ticlo/rc-dock
+    cool!
+  - golden layout
+    non-react but can be used with it
+  - https://github.com/jupyterlab/lumino
+    schönes application toolkit, aber nicht-react und umfasst menus etc.
+
+- react-virtualized
+- ui lib
+  - mui
+  - mantine
+  - chakra
+
+- fix xkcd.com: description html
+- faster image loading, throttling per host
+- dark theme
