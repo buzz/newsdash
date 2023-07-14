@@ -30,6 +30,7 @@ function Header() {
       <Transition
         duration={theme.other.transition.duration.default}
         mounted={headerVisible}
+        timingFunction={theme.transitionTimingFunction}
         transition="slide-down"
       >
         {(styles) => (
