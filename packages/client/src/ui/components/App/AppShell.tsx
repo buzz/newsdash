@@ -10,7 +10,6 @@ function AppShell({ children }: AppShellProps) {
     <>
       <MantineAppShell
         header={<Header />}
-        fixed
         padding={0}
         sx={(theme) => ({
           main: {

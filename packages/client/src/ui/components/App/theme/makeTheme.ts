@@ -13,6 +13,14 @@ function makeTheme(colorScheme: ColorScheme): MantineThemeOverride {
       'body, html': { overflow: 'hidden' },
       ...rcDockTheme,
     }),
+    other: {
+      transition: {
+        duration: {
+          default: 250,
+          fast: 100,
+        },
+      },
+    },
   }
 }
 

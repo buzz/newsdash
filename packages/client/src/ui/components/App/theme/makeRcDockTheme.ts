@@ -1,5 +1,7 @@
 import { DEFAULT_THEME as dt, type ColorScheme, rem } from '@mantine/styles'
 
+// TODO: add mantine focusStyles, fontStyles
+
 type DeciderFn = <T>(d: T, l: T) => T
 
 function makeRcDockTheme(colorScheme: ColorScheme, cs: DeciderFn) {
@@ -50,6 +52,7 @@ function makeRcDockTheme(colorScheme: ColorScheme, cs: DeciderFn) {
       '&-tab': {
         borderBottomColor: panelBorderColor,
         background: tabBg,
+
         '& > div': {
           outlineColor: primaryColor,
         },
