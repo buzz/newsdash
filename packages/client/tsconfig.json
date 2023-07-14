@@ -22,7 +22,9 @@
 
     /* Path aliases */
     "paths": {
+      "#assets/*": ["./src/assets/*"],
       "#constants": ["./src/constants.ts"],
+      "#pkg-info": ["../../package.json"],
       "#store/*": ["./src/store/*"],
       "#types/*": ["./src/types/*"],
       "#ui/*": ["./src/ui/*"],

@@ -1,15 +1,8 @@
-import {
-  ActionIcon,
-  Box,
-  createStyles,
-  Transition,
-  rem,
-  Tooltip,
-  useMantineTheme,
-} from '@mantine/core'
+import { ActionIcon, Box, createStyles, Transition, rem, useMantineTheme } from '@mantine/core'
 import { IconArrowBigDownLinesFilled } from '@tabler/icons-react'
 
 import { changeHeaderVisibile } from '#store/slices/appSlice'
+import Tooltip from '#ui/components/common/Tooltip'
 import { useDispatch } from '#ui/hooks/store'
 
 const useStyles = createStyles((theme) => ({
@@ -24,20 +17,32 @@ const useStyles = createStyles((theme) => ({
   },
 
   btnWrapper: {
-    opacity: 0.5,
     paddingTop: rem(3),
     paddingRight: rem(12),
     paddingBottom: rem(5),
     paddingLeft: rem(12),
     pointerEvents: 'all',
     position: 'relative',
-    top: rem(-18),
+    top: rem(-24),
     transitionDuration: `${theme.other.transition.duration.fast}ms`,
-    transitionProperty: 'top, opacity',
+    transitionProperty: 'top',
     transitionTimingFunction: 'ease-in',
+
+    '& .mantine-ActionIcon-root': {
+      backgroundColor: 'transparent',
+      color: theme.colorScheme === 'dark' ? theme.colors.gray[6] : theme.colors.gray[5],
+      transitionDuration: `${theme.other.transition.duration.fast}ms`,
+      transitionProperty: 'background-color, color',
+      transitionTimingFunction: 'ease-in',
+    },
+
     '&:hover': {
-      opacity: 1.0,
       top: 0,
+
+      '& .mantine-ActionIcon-root': {
+        backgroundColor: theme.fn.primaryColor(),
+        color: theme.colorScheme === 'dark' ? theme.colors.gray[0] : theme.white,
+      },
     },
   },
 }))
@@ -57,7 +62,7 @@ function HeaderToggleButton({ hide }: HeaderToggleButtonProps) {
         {(styles) => (
           <Box style={styles}>
             <Box className={classes.btnWrapper}>
-              <Tooltip label="Open header" position="bottom" withArrow>
+              <Tooltip label="Open header">
                 <ActionIcon
                   aria-label="Open header"
                   color="primary"

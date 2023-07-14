@@ -1,5 +1,4 @@
 import {
-  ActionIcon,
   createStyles,
   Group,
   Header as MantineHeader,
@@ -7,18 +6,16 @@ import {
   useMantineColorScheme,
   useMantineTheme,
 } from '@mantine/core'
-import { IconSun, IconMoonStars, IconSettings, IconX } from '@tabler/icons-react'
+import { IconInfoSmall, IconMoonStars, IconSettings, IconSun, IconX } from '@tabler/icons-react'
 
-import {
-  changeHeaderVisibile,
-  changeSettingsModalOpened,
-  selectHeaderVisibile,
-} from '#store/slices/appSlice'
+import { changeHeaderVisibile, openModal, selectHeaderVisibile } from '#store/slices/appSlice'
+import Logo from '#ui/components/common/Logo'
 import { useDispatch, useSelector } from '#ui/hooks/store'
 
+import HeaderButton from './HeaderButton'
 import HeaderToggleButton from './HeaderToggleButton'
 
-const useStyles = createStyles({ group: { height: '100%' } })
+const useStyles = createStyles({ headerChild: { height: '100%' } })
 
 function Header() {
   const dispatch = useDispatch()
@@ -37,26 +34,27 @@ function Header() {
       >
         {(styles) => (
           <MantineHeader height={60} p="xs" style={styles}>
-            <Group className={classes.group} px={20} position="apart">
-              Logo
-              <Group className={classes.group} pl={20} position="right" grow={false}>
-                <ActionIcon variant="default" onClick={() => toggleColorScheme()} size={30}>
+            <Group className={classes.headerChild} px={20} position="apart">
+              <Logo className={classes.headerChild} />
+              <Group className={classes.headerChild} pl={20} position="right" grow={false}>
+                <HeaderButton onClick={() => dispatch(openModal('about'))} tooltip="About newsdash">
+                  <IconInfoSmall size={32} />
+                </HeaderButton>
+                <HeaderButton onClick={() => toggleColorScheme()} tooltip="Toggle color scheme">
                   {colorScheme === 'dark' ? <IconSun size="1rem" /> : <IconMoonStars size="1rem" />}
-                </ActionIcon>
-                <ActionIcon
-                  variant="default"
-                  onClick={() => dispatch(changeSettingsModalOpened(true))}
-                  size={30}
+                </HeaderButton>
+                <HeaderButton
+                  onClick={() => dispatch(openModal('settings'))}
+                  tooltip="Open settings"
                 >
                   <IconSettings />
-                </ActionIcon>
-                <ActionIcon
-                  variant="default"
+                </HeaderButton>
+                <HeaderButton
                   onClick={() => dispatch(changeHeaderVisibile(false))}
-                  size={30}
+                  tooltip="Close header"
                 >
                   <IconX />
-                </ActionIcon>
+                </HeaderButton>
               </Group>
             </Group>
           </MantineHeader>

@@ -1,4 +1,4 @@
-import type { DropDirection, LayoutBase, TabBase, TabData, TabGroup } from 'rc-dock'
+import type { LayoutBase, TabBase, TabData, TabGroup } from 'rc-dock'
 import DockLayout from 'rc-dock'
 import 'rc-dock/dist/rc-dock.css'
 
@@ -30,9 +30,9 @@ function Dock() {
   const layout = useSelector(selectLayout)
 
   const onLayoutChange = (
-    newLayout: LayoutBase,
-    currentTabId?: string,
-    direction?: DropDirection
+    newLayout: LayoutBase
+    // currentTabId?: string,
+    // direction?: DropDirection
   ) => {
     // console.log(`onLayoutChange`, newLayout, currentTabId, direction)
     dispatch(changeLayout(newLayout))

@@ -1,7 +1,8 @@
 import { AppShell as MantineAppShell } from '@mantine/core'
 import type { ReactNode } from 'react'
 
-import SettingsModal from '#ui/components/Settings/SettingsModal'
+import AboutModal from '#ui/components/modals/AboutModal/AboutModal'
+import SettingsModal from '#ui/components/modals/SettingsModal/SettingsModal'
 
 import Header from './Header/Header'
 
@@ -22,6 +23,7 @@ function AppShell({ children }: AppShellProps) {
       >
         {children}
       </MantineAppShell>
+      <AboutModal />
       <SettingsModal />
     </>
   )

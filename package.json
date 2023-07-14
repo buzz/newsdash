@@ -22,7 +22,7 @@
   "scripts": {
     "build": "yarn client:build",
     "client:build:bundle-analyze": "BUNDLE_ANALYZE=1 yarn build",
-    "client:build": "yarn workspace @newsdash/client build",
+    "client:build": "pnpm --filter @newsdash/client build",
     "client:dev": "pnpm --filter @newsdash/client dev",
     "format": "prettier --write \"*.js\" \"packages/**/*.js\"",
     "lint": "eslint .",
