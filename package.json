@@ -20,14 +20,14 @@
     "url": "https://github.com/buzz/newsdash.git"
   },
   "scripts": {
-    "build": "yarn client:build",
-    "client:build:bundle-analyze": "BUNDLE_ANALYZE=1 yarn build",
+    "build": "pnpm client:build && pnpm server:build",
+    "client:build:visualize-analyze": "BUNDLE_ANALYZE=1 pnpm client:build",
     "client:build": "pnpm --filter @newsdash/client build",
     "client:dev": "pnpm --filter @newsdash/client dev",
     "lint": "eslint .",
-    "server:dev": "yarn workspace @newsdash/server dev",
-    "server:start": "yarn workspace @newsdash/server start",
-    "start": "yarn server:start",
+    "server:dev": "pnpm --filter @newsdash/server dev",
+    "server:start": "pnpm --filter @newsdash/server start",
+    "start": "pnpm server:start",
     "type-check": "tsc -p ."
   },
   "eslintIgnore": [
@@ -49,6 +49,7 @@
     "eslint-plugin-react-redux": "^4.0.0",
     "eslint-plugin-regexp": "^1.15.0",
     "prettier": "^3.0.0",
+    "ts-node": "^10.9.1",
     "typescript": "^5.1.6"
   }
 }

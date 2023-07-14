@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "module": "ESNext",
+    "declaration": false,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+
+    /* Path aliases */
+    "paths": {
+      "#constants": ["./src/constants.ts"],
+      "#redis/*": ["./src/redis/*"]
+    }
+  },
+  "include": ["src"],
+  "references": [{ "path": "../../tsconfig.json" }],
+  "ts-node": {
+    "esm": true,
+    "experimentalResolver": true,
+    "experimentalSpecifierResolution": "node",
+    "transpileOnly": true
+  }
+}

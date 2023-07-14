@@ -1,14 +1,9 @@
 import express from 'express'
 
-import { FIELDS_APP, FIELDS_FEEDBOX, FIELDS_FEED } from '../constants.js'
-import {
-  getAllHashes,
-  getHash,
-  setHash,
-  updateHashesDeleteOthers,
-} from '../redis/index.js'
+import { FIELDS_APP, FIELDS_FEEDBOX, FIELDS_FEED } from '#constants'
+import { getAllHashes, getHash, setHash, updateHashesDeleteOthers } from '#redis/redis'
 
-export default express
+const userRouter = express
   .Router()
   .get('/state', async (req, res, next) => {
     try {
@@ -28,14 +23,12 @@ export default express
       if (app) {
         await setHash('newsdash:app', app, FIELDS_APP)
       }
-      await updateHashesDeleteOthers(
-        'newsdash:feedBox:*',
-        feedBoxes,
-        FIELDS_FEEDBOX
-      )
+      await updateHashesDeleteOthers('newsdash:feedBox:*', feedBoxes, FIELDS_FEEDBOX)
       await updateHashesDeleteOthers('newsdash:feed:*', feeds, FIELDS_FEED)
       res.json({ result: 'ok' })
     } catch (err) {
       next(err)
     }
   })
+
+export default userRouter

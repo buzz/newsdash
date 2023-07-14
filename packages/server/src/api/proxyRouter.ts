@@ -1,12 +1,13 @@
 import stream from 'stream'
 import { promisify } from 'util'
+
 import express from 'express'
+import got from 'got'
 import metascraper from 'metascraper'
 import metascraperImage from 'metascraper-image'
-import got from 'got'
 import QuickLRU from 'quick-lru'
 
-import { FETCH_TIMEOUT, USER_AGENT } from '../constants.js'
+import { FETCH_TIMEOUT, USER_AGENT } from '#constants'
 
 const pipeline = promisify(stream.pipeline)
 const cache = new QuickLRU({ maxSize: 1000 })
@@ -23,7 +24,7 @@ const fetchFile = (url, opts = {}) =>
 
 const imageScraper = metascraper([metascraperImage()])
 
-export default express
+const proxyRouter = express
   .Router()
   .post('/feed', async (req, res, next) => {
     const { url } = req.body
@@ -53,3 +54,5 @@ export default express
       next(err)
     }
   })
+
+export default proxyRouter

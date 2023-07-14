@@ -3,6 +3,8 @@ env:
   es6: true
   node: true
 
+root: true
+
 ignorePatterns:
   - '**/dist'
   - '**/node_modules'
@@ -29,9 +31,11 @@ overrides:
     parser: '@typescript-eslint/parser'
     parserOptions:
       ecmaVersion: 2023
+      sourceType: module
       project:
         - ./tsconfig.json
         - ./packages/client/tsconfig.json
+        - ./packages/server/tsconfig.json
     plugins:
       - '@typescript-eslint'
     rules:
@@ -94,8 +98,6 @@ plugins:
   - react-redux
   - jsx-a11y
   - prettier
-
-root: true
 
 rules:
   # Enforce all block statements to be wrapped in curly braces

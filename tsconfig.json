@@ -1,11 +1,25 @@
 {
   "compilerOptions": {
-    "composite": true,
-    "skipLibCheck": true,
+    "target": "ES2022",
     "module": "ESNext",
+    "composite": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
     "moduleResolution": "bundler",
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
   },
   "include": ["./**/*.ts", "./package.json"],
-  "exclude": ["./packages/client/src/**/*.ts", "./packages/client/src/**/*.tsx"]
+  "exclude": [
+    "./packages/client/src/**/*.ts",
+    "./packages/client/src/**/*.tsx",
+    "./packages/server/src/**/*.ts"
+  ]
 }
