@@ -24,11 +24,11 @@
     "client:build:bundle-analyze": "BUNDLE_ANALYZE=1 yarn build",
     "client:build": "pnpm --filter @newsdash/client build",
     "client:dev": "pnpm --filter @newsdash/client dev",
-    "format": "prettier --write \"*.js\" \"packages/**/*.js\"",
     "lint": "eslint .",
     "server:dev": "yarn workspace @newsdash/server dev",
     "server:start": "yarn workspace @newsdash/server start",
-    "start": "yarn server:start"
+    "start": "yarn server:start",
+    "type-check": "tsc -p ."
   },
   "eslintIgnore": [
     "/packages/client/dist"

@@ -1,9 +1,22 @@
+import { Box, createStyles } from '@mantine/core'
 import type { LayoutBase, TabBase, TabData, TabGroup } from 'rc-dock'
 import DockLayout from 'rc-dock'
 import 'rc-dock/dist/rc-dock.css'
 
 import { changeLayout, selectLayout } from '#store/slices/layoutSlice'
 import { useDispatch, useSelector } from '#ui/hooks/store'
+
+const useStyles = createStyles((theme) => ({
+  wrapper: {
+    display: 'flex',
+    flexGrow: 1,
+    padding: theme.spacing.xs,
+
+    '& > .dock-layout': {
+      flexGrow: 1,
+    },
+  },
+}))
 
 const groups: Record<string, TabGroup> = {
   news: {
@@ -28,18 +41,21 @@ function loadTab({ id }: TabBase): TabData {
 function Dock() {
   const dispatch = useDispatch()
   const layout = useSelector(selectLayout)
+  const { classes } = useStyles()
 
-  const onLayoutChange = (
-    newLayout: LayoutBase
-    // currentTabId?: string,
-    // direction?: DropDirection
-  ) => {
-    // console.log(`onLayoutChange`, newLayout, currentTabId, direction)
+  const onLayoutChange = (newLayout: LayoutBase) => {
     dispatch(changeLayout(newLayout))
   }
 
   return (
-    <DockLayout layout={layout} groups={groups} loadTab={loadTab} onLayoutChange={onLayoutChange} />
+    <Box className={classes.wrapper}>
+      <DockLayout
+        layout={layout}
+        groups={groups}
+        loadTab={loadTab}
+        onLayoutChange={onLayoutChange}
+      />
+    </Box>
   )
 }
 

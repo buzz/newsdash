@@ -22,7 +22,6 @@ const layoutSlice = createSlice({
   reducers: {
     /** Change current layout */
     changeLayout(state, action: PayloadAction<LayoutBase>) {
-      console.log('changeLayout', action.payload)
       state.layout = action.payload
     },
   },

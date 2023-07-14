@@ -17,7 +17,6 @@ function AppShell({ children }: AppShellProps) {
             backgroundColor:
               theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
             display: 'flex',
-            '> .dock-layout': { flexGrow: 1 },
           },
         })}
       >

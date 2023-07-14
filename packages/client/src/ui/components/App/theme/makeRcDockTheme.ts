@@ -14,9 +14,9 @@ function makeRcDockTheme(colorScheme: ColorScheme, cs: DeciderFn) {
   const textColor = cs(col.dark[0], dt.black)
   const textDisabledColor = cs(col.dark[8], col.dark[3])
 
-  const tabBg = cs(col.dark[4], dt.white)
+  const tabBg = cs(col.dark[5], dt.fn.lighten(col.dark[1], 0.8))
   const componentBg = cs(col.dark[7], dt.white)
-  const panelBorderColor = cs(col.dark[5], col.gray[2])
+  const panelBorderColor = cs(col.dark[4], dt.fn.darken(tabBg, 0.1))
   const navColorSplit = panelBorderColor
   const dropIndicatorBg = cs(col.dark[5], col.dark[0])
 
@@ -114,7 +114,12 @@ function makeRcDockTheme(colorScheme: ColorScheme, cs: DeciderFn) {
     '.dock-panel': {
       background: componentBg,
       borderColor: panelBorderColor,
+      borderRadius: dt.radius[typeof dt.defaultRadius === 'string' ? dt.defaultRadius : 'sm'],
       color: textColor,
+    },
+
+    '.dock-divider': {
+      flexBasis: dt.spacing.xs,
     },
 
     '.dock-fbox > .dock-panel': {
