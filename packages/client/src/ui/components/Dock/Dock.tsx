@@ -13,7 +13,6 @@ const groups: Record<string, TabGroup> = {
 }
 
 function loadTab({ id }: TabBase): TabData {
-  console.log('loadTab id=', id)
   return {
     id,
     content: (
@@ -30,15 +29,12 @@ function Dock() {
   const dispatch = useDispatch()
   const layout = useSelector(selectLayout)
 
-  console.log('Dock RENDER', layout)
-
   const onLayoutChange = (
     newLayout: LayoutBase,
     currentTabId?: string,
     direction?: DropDirection
   ) => {
-    console.log(`onLayoutChange`, newLayout, currentTabId, direction)
-
+    // console.log(`onLayoutChange`, newLayout, currentTabId, direction)
     dispatch(changeLayout(newLayout))
   }
 

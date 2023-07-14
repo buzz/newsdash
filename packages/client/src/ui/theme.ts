@@ -5,10 +5,6 @@ const theme: MantineThemeOverride = {
     '*, *::before, *::after': {
       boxSizing: 'border-box',
     },
-    'body, html, #root': {
-      height: '100%',
-      overflow: 'hidden',
-    },
   }),
 }
 

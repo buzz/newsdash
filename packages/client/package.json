@@ -10,15 +10,20 @@
     "preview": "vite preview"
   },
   "imports": {
+    "#constants": "./src/constants.ts",
     "#store/*": "./src/store/*",
-    "#ui/*": "./src/ui/*"
+    "#types/*": "./src/types/*",
+    "#ui/*": "./src/ui/*",
+    "#utils": "./src/utils.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@mantine/core": "^6.0.16",
-    "@mantine/hooks": "^6.0.16",
+    "@mantine/form": "^6.0.16",
     "@mantine/styles": "^6.0.16",
     "@reduxjs/toolkit": "^1.9.5",
+    "@tabler/icons-react": "^2.25.0",
     "rc-dock": "^3.2.18",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

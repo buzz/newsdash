@@ -39,6 +39,9 @@ overrides:
       # https://typescript-eslint.io/rules/indent/
       '@typescript-eslint/indent': off
 
+      # Gives some false positives
+      '@typescript-eslint/unbound-method': off
+
       # Prefer interfaces for type definitions
       '@typescript-eslint/consistent-type-definitions':
         - error

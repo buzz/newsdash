@@ -22,8 +22,11 @@
 
     /* Path aliases */
     "paths": {
+      "#constants": ["./src/constants.ts"],
       "#store/*": ["./src/store/*"],
-      "#ui/*": ["./src/ui/*"]
+      "#types/*": ["./src/types/*"],
+      "#ui/*": ["./src/ui/*"],
+      "#utils": ["./src/utils.ts"]
     }
   },
   "include": ["src"],
