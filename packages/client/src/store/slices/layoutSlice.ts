@@ -9,7 +9,7 @@ const initialLayout: LayoutBase = {
     mode: 'horizontal',
     children: [
       {
-        tabs: [{ id: 't1' }, { id: 't2' }],
+        tabs: [{ id: 't1' }, { id: 't2' }, { id: 't3' }, { id: 't4' }],
       },
     ],
   },

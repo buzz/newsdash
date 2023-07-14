@@ -1,11 +1,12 @@
 import { type ColorScheme, ColorSchemeProvider, MantineProvider } from '@mantine/core'
-import { useEffect, type ReactNode } from 'react'
+import { useEffect, type ReactNode, useMemo } from 'react'
 
 import { changeColorSchemeMode, selectColorSchemeMode } from '#store/slices/settingsSlice'
 import type { ColorSchemeMode } from '#types/types'
 import { useDispatch, useSelector } from '#ui/hooks/store'
-import theme from '#ui/theme'
 import { colorSchemeFromMode } from '#utils'
+
+import makeTheme from './theme/makeTheme'
 
 function ThemeProvider({ children, earlyColorSchemeMode }: ThemeProviderProps) {
   const dispatch = useDispatch()
@@ -22,15 +23,11 @@ function ThemeProvider({ children, earlyColorSchemeMode }: ThemeProviderProps) {
 
   const colorSchemeMode = storeColorSchemeMode ?? earlyColorSchemeMode
   const colorScheme = colorSchemeFromMode(colorSchemeMode)
+  const theme = useMemo(() => makeTheme(colorScheme), [colorScheme])
 
   return (
     <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
-      <MantineProvider
-        theme={{ ...theme, colorScheme }}
-        withCSSVariables
-        withGlobalStyles
-        withNormalizeCSS
-      >
+      <MantineProvider theme={theme} withCSSVariables withGlobalStyles withNormalizeCSS>
         {children}
       </MantineProvider>
     </ColorSchemeProvider>
