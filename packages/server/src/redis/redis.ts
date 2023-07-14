@@ -33,7 +33,7 @@ export const getAllHashes = async (pattern, fields) => {
   )
 }
 
-export const getHash = async (key, fields) => {
+export const getHash = async (key: string, fields) => {
   const exists = await redis.exists(key)
   if (exists === 1) {
     const hmFields = getHmFields(fields)
