@@ -15,8 +15,9 @@ function Modal({ children, name, title }: ModalProps) {
   return (
     <MantineModal
       centered
-      opened={opened}
+      keepMounted={false}
       onClose={() => dispatch(closeModal(name))}
+      opened={opened}
       size="md"
       title={title}
       overlayProps={{

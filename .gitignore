@@ -5,3 +5,5 @@ tsconfig.tsbuildinfo
 /deploy.sh
 /packages/client/dist
 .DS_Store
+/.env*.local
+

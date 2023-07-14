@@ -71,6 +71,9 @@ importers:
       '@mantine/form':
         specifier: ^6.0.16
         version: 6.0.16(react@18.2.0)
+      '@mantine/notifications':
+        specifier: ^6.0.16
+        version: 6.0.16(@mantine/core@6.0.16)(@mantine/hooks@6.0.16)(react-dom@18.2.0)(react@18.2.0)
       '@mantine/styles':
         specifier: ^6.0.16
         version: 6.0.16(@emotion/react@11.11.1)(react-dom@18.2.0)(react@18.2.0)
@@ -117,6 +120,9 @@ importers:
       '@keyv/redis':
         specifier: ^2.7.0
         version: 2.7.0
+      cors:
+        specifier: ^2.8.5
+        version: 2.8.5
       express:
         specifier: ^4.18.2
         version: 4.18.2
@@ -139,6 +145,9 @@ importers:
         specifier: ^5.34.7
         version: 5.34.7
     devDependencies:
+      '@types/cors':
+        specifier: ^2.8.13
+        version: 2.8.13
       '@types/express':
         specifier: ^4.17.17
         version: 4.17.17
@@ -1227,6 +1236,22 @@ packages:
       react: 18.2.0
     dev: false
 
+  /@mantine/notifications@6.0.16(@mantine/core@6.0.16)(@mantine/hooks@6.0.16)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-KqlPW51sxgQoJmIC2lEWMVlwPqy04D35iRMkCSget8aNgzk0K5csJppXo6qwMFn2GHKVGXFKJMBUp06IXQbiig==}
+    peerDependencies:
+      '@mantine/core': 6.0.16
+      '@mantine/hooks': 6.0.16
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+    dependencies:
+      '@mantine/core': 6.0.16(@emotion/react@11.11.1)(@mantine/hooks@6.0.16)(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0)
+      '@mantine/hooks': 6.0.16(react@18.2.0)
+      '@mantine/utils': 6.0.16(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-transition-group: 4.4.2(react-dom@18.2.0)(react@18.2.0)
+    dev: false
+
   /@mantine/styles@6.0.16(@emotion/react@11.11.1)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-0rDE3BzJOKVdPAbnL3XokVWNYgo1z323UgAURdB+WvzwZY7PhblwvrxUDwvvV77qCUENg2vU0LKHqTQD1DDLTg==}
     peerDependencies:
@@ -1799,6 +1824,12 @@ packages:
 
   /@types/connect@3.4.35:
     resolution: {integrity: sha512-cdeYyv4KWoEgpBISTxWvqYsVy444DOqehiF3fM3ne10AmJ62RSyNkUnxMJXHQWRQQX2eR94m5y1IZyDwBjV9FQ==}
+    dependencies:
+      '@types/node': 20.4.2
+    dev: true
+
+  /@types/cors@2.8.13:
+    resolution: {integrity: sha512-RG8AStHlUiV5ysZQKq97copd2UmVYw3/pRMLefISZ3S1hK104Cwm7iLQ3fTKx+lsUH2CE8FlLaYeEA2LSeqYUA==}
     dependencies:
       '@types/node': 20.4.2
     dev: true
@@ -2784,6 +2815,14 @@ packages:
     resolution: {integrity: sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==}
     dev: true
 
+  /cors@2.8.5:
+    resolution: {integrity: sha512-KIHbLJqu73RGr/hnbrO9uBeixNGuvSQjul/jdFvS/KFSIH1hWVd1ng7zOHx+YrEfInLG7q4n6GHQ9cDtxv/P6g==}
+    engines: {node: '>= 0.10'}
+    dependencies:
+      object-assign: 4.1.1
+      vary: 1.1.2
+    dev: false
+
   /cosmiconfig@7.1.0:
     resolution: {integrity: sha512-AdmX6xUzdNASswsFtmwSt7Vj8po9IuqXm0UXz7QKPuEUmPB4XyjGfaAr2PSuELMwkRMVH1EpIkX5bTZGRB3eCA==}
     engines: {node: '>=10'}
@@ -3032,6 +3071,13 @@ packages:
 
   /dom-align@1.12.4:
     resolution: {integrity: sha512-R8LUSEay/68zE5c8/3BDxiTEvgb4xZTF0RKmAHfiEVN3klfIpXfi2/QCoiWPccVQ0J/ZGdz9OjzL4uJEP/MRAw==}
+    dev: false
+
+  /dom-helpers@5.2.1:
+    resolution: {integrity: sha512-nRCa7CK3VTrM2NmGkIy4cbK7IZlgBE/PYMn55rrXefr5xXDP0LdtfPnblFDoVdcAfslJ7or6iqAUnx0CCGIWQA==}
+    dependencies:
+      '@babel/runtime': 7.22.6
+      csstype: 3.1.2
     dev: false
 
   /dom-serializer@2.0.0:
@@ -6177,6 +6223,20 @@ packages:
       use-latest: 1.2.1(@types/react@18.2.14)(react@18.2.0)
     transitivePeerDependencies:
       - '@types/react'
+    dev: false
+
+  /react-transition-group@4.4.2(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-/RNYfRAMlZwDSr6z4zNKV6xu53/e2BuaBbGhbyYIXTrmgu/bGHzmqOs7mJSJBHy9Ud+ApHx3QjrkKSp1pxvlFg==}
+    peerDependencies:
+      react: '>=16.6.0'
+      react-dom: '>=16.6.0'
+    dependencies:
+      '@babel/runtime': 7.22.6
+      dom-helpers: 5.2.1
+      loose-envify: 1.4.0
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /react@18.2.0:

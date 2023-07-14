@@ -2,8 +2,7 @@ import { Group, Text } from '@mantine/core'
 import { createStyles } from '@mantine/styles'
 import { IconBrandGithub, IconScale } from '@tabler/icons-react'
 
-// eslint-disable-next-line import/no-unresolved
-import pkgInfo from '#pkg-info' assert { type: 'json' }
+import { useGetVersionQuery } from '#store/slices/api/version'
 import Logo from '#ui/components/common/Logo'
 import Modal from '#ui/components/common/Modal'
 
@@ -23,6 +22,7 @@ const useStyles = createStyles((theme) => ({
 
 function AboutModal() {
   const { classes } = useStyles()
+  const { data, isSuccess } = useGetVersionQuery(undefined)
 
   return (
     <Modal name="about">
@@ -34,10 +34,13 @@ function AboutModal() {
         inspired by iGoogle and Netvibes
       </Text>
       <Text className={classes.text} fz="sm" ta="center">
-        Version {pkgInfo.version}
+        Version {isSuccess ? data.version : ''}
       </Text>
       <Group className={classes.links} position="center">
-        <IconButton href={pkgInfo.homepage} tooltip={pkgInfo.homepage}>
+        <IconButton
+          href="https://github.com/buzz/newsdash"
+          tooltip="https://github.com/buzz/newsdash"
+        >
           <IconBrandGithub />
         </IconButton>
         <IconButton

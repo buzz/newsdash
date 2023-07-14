@@ -1,4 +1,4 @@
-// import { useLocalStorage } from '@mantine/hooks'
+import { Notifications } from '@mantine/notifications'
 import { Provider as ReduxProvider } from 'react-redux'
 
 import type { Store } from '#store/makeStore'
@@ -9,15 +9,10 @@ import AppShell from './AppShell'
 import ThemeProvider from './ThemeProvider'
 
 function App({ earlyColorSchemeMode, store }: AppProps) {
-  // const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
-  //   key: 'newsdash-color-scheme',
-  //   defaultValue: 'system',
-  //   getInitialValueInEffect: true,
-  // })
-
   return (
     <ReduxProvider store={store}>
       <ThemeProvider earlyColorSchemeMode={earlyColorSchemeMode}>
+        <Notifications />
         <AppShell>
           <Dock />
         </AppShell>

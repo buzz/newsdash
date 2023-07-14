@@ -6,6 +6,8 @@ import svgr from 'vite-plugin-svgr'
 import pkgInfo from '../../package.json' assert { type: 'json' }
 
 export default defineConfig({
+  envDir: '../..',
+  envPrefix: 'NEWSDASH_', // Exposed to client
   plugins: [
     react(),
     svgr({

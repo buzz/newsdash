@@ -1,11 +1,12 @@
 import { type PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 import type { RootState } from '#store/makeStore'
-import type { AppState, ModalName } from '#types/types'
+import type { AppState, ModalName, VersionInfo } from '#types/types'
 
 const initialState: AppState = {
   headerVisible: false,
   modalOpened: null,
+  versionInfo: null,
 }
 
 const appSlice = createSlice({
@@ -31,6 +32,11 @@ const appSlice = createSlice({
         state.modalOpened = null
       }
     },
+
+    /** Change version info */
+    changeVersionInfo(state, { payload }: PayloadAction<VersionInfo>) {
+      state.versionInfo = payload
+    },
   },
 })
 
@@ -44,5 +50,5 @@ export const selectHeaderVisibile = (state: RootState) => selectAppSlice(state).
 export const selectIsModalOpen = (state: RootState, name: ModalName) =>
   selectAppSlice(state).modalOpened === name
 
-export const { changeHeaderVisibile, closeModal, openModal } = appSlice.actions
+export const { changeHeaderVisibile, closeModal, openModal, changeVersionInfo } = appSlice.actions
 export default appSlice
