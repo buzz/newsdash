@@ -1,7 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
-import type { RootState } from '#store/makeStore'
+import createSlice from '#store/createSlice'
 import type { ColorSchemeMode, Settings } from '#types/types'
 
 const initialState: Settings = {
@@ -20,12 +19,5 @@ const settingsSlice = createSlice({
   },
 })
 
-/** Select settings slice */
-const selectSettingsSlice = (state: RootState) => state[settingsSlice.name]
-
-/** Select current color scheme mode */
-export const selectColorSchemeMode = (state: RootState) =>
-  selectSettingsSlice(state).colorSchemeMode
-
-export const { changeColorSchemeMode } = settingsSlice.actions
+export const { reducer } = settingsSlice
 export default settingsSlice

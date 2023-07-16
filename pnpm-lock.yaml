@@ -83,6 +83,9 @@ importers:
       '@tabler/icons-react':
         specifier: ^2.25.0
         version: 2.25.0(react@18.2.0)
+      nanoid:
+        specifier: ^4.0.2
+        version: 4.0.2
       rc-dock:
         specifier: ^3.2.18
         version: 3.2.18(react-dom@18.2.0)(react@18.2.0)
@@ -95,6 +98,9 @@ importers:
       react-redux:
         specifier: ^8.1.1
         version: 8.1.1(@types/react-dom@18.2.6)(@types/react@18.2.14)(react-dom@18.2.0)(react@18.2.0)(redux@4.2.1)
+      reduce-reducers:
+        specifier: ^1.0.4
+        version: 1.0.4
     devDependencies:
       '@types/react':
         specifier: ^18.2.14
@@ -5301,6 +5307,12 @@ packages:
     hasBin: true
     dev: true
 
+  /nanoid@4.0.2:
+    resolution: {integrity: sha512-7ZtY5KTCNheRGfEFxnedV5zFiORN1+Y1N6zvPTnHQd8ENUvfaDBeuJDZb2bN/oXwXxu3qkTXDzy57W5vAmDTBw==}
+    engines: {node: ^14 || ^16 || >=18}
+    hasBin: true
+    dev: false
+
   /napi-build-utils@1.0.2:
     resolution: {integrity: sha512-ONmRUqK7zj7DWX0D9ADe03wbwOBZxNAfF20PlGfCWQcD3+/MakShIHrMqx9YwPTfxDdF1zLeL+RGZiR9kGMLdg==}
     dev: true
@@ -6295,6 +6307,10 @@ packages:
     engines: {node: '>=4'}
     dependencies:
       redis-errors: 1.2.0
+    dev: false
+
+  /reduce-reducers@1.0.4:
+    resolution: {integrity: sha512-Mb2WZ2bJF597exiqX7owBzrqJ74DHLK3yOQjCyPAaNifRncE8OD0wFIuoMhXxTnHK07+8zZ2SJEKy/qtiyR7vw==}
     dev: false
 
   /redux-thunk@2.4.2(redux@4.2.1):

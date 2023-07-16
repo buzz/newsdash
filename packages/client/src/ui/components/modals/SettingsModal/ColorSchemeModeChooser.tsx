@@ -1,7 +1,8 @@
 import { Box, Center, SegmentedControl } from '@mantine/core'
 import { type Icon, IconDeviceDesktop, IconMoonStars, IconSun } from '@tabler/icons-react'
 
-import { changeColorSchemeMode, selectColorSchemeMode } from '#store/slices/settingsSlice'
+import { changeColorSchemeMode } from '#store/slices/settings/actions'
+import { selectColorSchemeMode } from '#store/slices/settings/selectors'
 import { isColorSchemeMode } from '#types/typeGuards'
 import { useDispatch, useSelector } from '#ui/hooks/store'
 

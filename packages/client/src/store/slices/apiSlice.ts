@@ -11,4 +11,5 @@ const apiSlice = createApi({
   endpoints: () => ({}),
 })
 
+export const { reducer } = apiSlice
 export default apiSlice

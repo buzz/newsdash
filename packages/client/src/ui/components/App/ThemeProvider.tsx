@@ -1,7 +1,8 @@
 import { type ColorScheme, ColorSchemeProvider, MantineProvider } from '@mantine/core'
 import { useEffect, type ReactNode, useMemo } from 'react'
 
-import { changeColorSchemeMode, selectColorSchemeMode } from '#store/slices/settingsSlice'
+import { changeColorSchemeMode } from '#store/slices/settings/actions'
+import { selectColorSchemeMode } from '#store/slices/settings/selectors'
 import type { ColorSchemeMode } from '#types/types'
 import { useDispatch, useSelector } from '#ui/hooks/store'
 import { colorSchemeFromMode } from '#utils'

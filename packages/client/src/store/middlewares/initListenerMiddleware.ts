@@ -2,9 +2,8 @@ import { notifications } from '@mantine/notifications'
 import { createListenerMiddleware } from '@reduxjs/toolkit'
 
 import { CONNECTIVITY_CHECK_INTERVAL } from '#constants'
-import { init } from '#store/action'
 import version from '#store/slices/api/version'
-import { changeVersionInfo } from '#store/slices/appSlice'
+import { appInit, changeVersionInfo } from '#store/slices/app/actions'
 
 import type { AppStartListening } from './types'
 
@@ -13,8 +12,9 @@ const startListening = initListenerMiddleware.startListening as AppStartListenin
 
 const NOTIFICATION_ID = 'connectivity'
 
+// Connectivity check
 startListening({
-  actionCreator: init,
+  actionCreator: appInit,
   effect: async (action, listenerApi) => {
     while (true) {
       const getVersionAction = version.endpoints.getVersion.initiate(undefined)

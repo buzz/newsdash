@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 
-import { init } from '#store/action'
 import makeStore from '#store/makeStore.ts'
+import { appInit } from '#store/slices/app/actions'
 import App from '#ui/components/App/App.tsx'
 import { earlyColorSchemeMode } from '#utils'
 
@@ -15,7 +15,7 @@ if (rootElem === null) {
 }
 
 const store = makeStore()
-store.dispatch(init())
+store.dispatch(appInit())
 
 ReactDOM.createRoot(rootElem).render(
   <React.StrictMode>

@@ -1,11 +1,17 @@
 import { ActionIcon } from '@mantine/core'
-import type { MouseEventHandler, ReactNode } from 'react'
+import type { ActionIconProps } from '@mantine/core'
+import type { MouseEventHandler } from 'react'
 
 import Tooltip from '#ui/components/common/Tooltip'
 
-function HeaderButton({ children, onClick, tooltip }: HeaderButtonProps) {
+function HeaderButton({ children, color, tooltip, variant, ...otherProps }: HeaderButtonProps) {
+  let _variant = variant
+  if (variant === undefined) {
+    _variant = color ? 'filled' : 'default'
+  }
+
   const btn = (
-    <ActionIcon variant="default" onClick={onClick} size={32}>
+    <ActionIcon color={color} variant={_variant} size={32} {...otherProps}>
       {children}
     </ActionIcon>
   )
@@ -13,8 +19,7 @@ function HeaderButton({ children, onClick, tooltip }: HeaderButtonProps) {
   return tooltip ? <Tooltip label={tooltip}>{btn}</Tooltip> : btn
 }
 
-interface HeaderButtonProps {
-  children: ReactNode
+interface HeaderButtonProps extends ActionIconProps {
   onClick?: MouseEventHandler<HTMLButtonElement>
   tooltip?: string
 }

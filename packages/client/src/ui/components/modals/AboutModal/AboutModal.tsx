@@ -28,10 +28,10 @@ function AboutModal() {
     <Modal name="about">
       <Logo className={classes.logo} />
       <Text className={classes.text} fz="lg" ta="center">
-        A news dashboard
+        A News Dashboard
       </Text>
       <Text fz="md" ta="center">
-        inspired by iGoogle and Netvibes
+        A Modern Tribute to iGoogle and Netvibes
       </Text>
       <Text className={classes.text} fz="sm" ta="center">
         Version {isSuccess ? data.version : ''}

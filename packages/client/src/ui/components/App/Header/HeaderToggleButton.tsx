@@ -1,7 +1,7 @@
 import { ActionIcon, Box, createStyles, Transition, rem, useMantineTheme } from '@mantine/core'
 import { IconArrowBigDownLinesFilled } from '@tabler/icons-react'
 
-import { changeHeaderVisibile } from '#store/slices/appSlice'
+import { changeHeaderVisibile } from '#store/slices/app/actions'
 import Tooltip from '#ui/components/common/Tooltip'
 import { useDispatch } from '#ui/hooks/store'
 
@@ -62,14 +62,13 @@ function HeaderToggleButton({ hide }: HeaderToggleButtonProps) {
         {(styles) => (
           <Box style={styles}>
             <Box className={classes.btnWrapper}>
-              <Tooltip label="Open header">
+              <Tooltip label="Expand navigation bar">
                 <ActionIcon
-                  aria-label="Open header"
+                  aria-label="Expand navigation bar"
                   color="primary"
                   onClick={() => dispatch(changeHeaderVisibile(true))}
                   radius="xl"
                   size="lg"
-                  title=" bar"
                   variant="filled"
                 >
                   <IconArrowBigDownLinesFilled />

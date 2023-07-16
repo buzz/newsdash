@@ -62,6 +62,10 @@ overrides:
                 - useSelector
                 - useDispatch
               message: Use typed hooks `useDispatch` and `useSelector` from app instead.
+            - name: '@reduxjs/toolkit'
+              importNames:
+                - createSlice
+              message: Use extended `createSlice` from app instead.
 
       # Consistent use of type imports
       '@typescript-eslint/consistent-type-imports':

@@ -4,6 +4,11 @@ export type ColorSchemeMode = ColorScheme | 'system'
 
 export type ModalName = 'about' | 'settings'
 
+/** Arbitrary object */
+export interface ArbitraryObject {
+  [key: string]: unknown
+}
+
 export interface AppState {
   /** Header visibility state */
   headerVisible: boolean

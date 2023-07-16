@@ -1,61 +1,36 @@
-import { Box, createStyles } from '@mantine/core'
-import type { LayoutBase, TabBase, TabData, TabGroup } from 'rc-dock'
 import DockLayout from 'rc-dock'
+import { useCallback } from 'react'
 import 'rc-dock/dist/rc-dock.css'
 
-import { changeLayout, selectLayout } from '#store/slices/layoutSlice'
+import { handleLayoutChange, layoutReady } from '#store/slices/layout/actions'
+import { selectDenormalizedLayout } from '#store/slices/layout/selectors'
 import { useDispatch, useSelector } from '#ui/hooks/store'
 
-const useStyles = createStyles((theme) => ({
-  wrapper: {
-    display: 'flex',
-    flexGrow: 1,
-    padding: theme.spacing.xs,
-
-    '& > .dock-layout': {
-      flexGrow: 1,
-    },
-  },
-}))
-
-const groups: Record<string, TabGroup> = {
-  news: {
-    maximizable: true,
-    floatable: false,
-  },
-}
-
-function loadTab({ id }: TabBase): TabData {
-  return {
-    id,
-    content: (
-      <div>
-        Tab Content <code>ID={id}</code>
-      </div>
-    ),
-    group: 'news',
-    title: id ?? 'Default title',
-  }
-}
+import groups from './groups'
+import loadTab from './loadTab'
 
 function Dock() {
   const dispatch = useDispatch()
-  const layout = useSelector(selectLayout)
-  const { classes } = useStyles()
+  const layout = useSelector(selectDenormalizedLayout)
 
-  const onLayoutChange = (newLayout: LayoutBase) => {
-    dispatch(changeLayout(newLayout))
-  }
+  // useCallback, otherwise ref callback gets fired multiple times
+  const setRcDockRef = useCallback(
+    (ref: DockLayout) => {
+      if (ref) {
+        dispatch(layoutReady())
+      }
+    },
+    [dispatch]
+  )
 
   return (
-    <Box className={classes.wrapper}>
-      <DockLayout
-        layout={layout}
-        groups={groups}
-        loadTab={loadTab}
-        onLayoutChange={onLayoutChange}
-      />
-    </Box>
+    <DockLayout
+      groups={groups}
+      layout={layout}
+      loadTab={loadTab}
+      onLayoutChange={(newLayout) => dispatch(handleLayoutChange(newLayout))}
+      ref={setRcDockRef}
+    />
   )
 }
 

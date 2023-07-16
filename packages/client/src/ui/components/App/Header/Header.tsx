@@ -6,9 +6,18 @@ import {
   useMantineColorScheme,
   useMantineTheme,
 } from '@mantine/core'
-import { IconInfoSmall, IconMoonStars, IconSettings, IconSun, IconX } from '@tabler/icons-react'
+import {
+  IconInfoSmall,
+  IconMoonStars,
+  IconPlus,
+  IconSettings,
+  IconSun,
+  IconX,
+} from '@tabler/icons-react'
 
-import { changeHeaderVisibile, openModal, selectHeaderVisibile } from '#store/slices/appSlice'
+import { changeHeaderVisibile, openModal } from '#store/slices/app/actions'
+import { selectHeaderVisibile } from '#store/slices/app/selectors'
+import { requestNewTab } from '#store/slices/layout/actions'
 import Logo from '#ui/components/common/Logo'
 import { useDispatch, useSelector } from '#ui/hooks/store'
 
@@ -38,11 +47,23 @@ function Header() {
             <Group className={classes.headerChild} px={20} position="apart">
               <Logo className={classes.headerChild} />
               <Group className={classes.headerChild} pl={20} position="right" grow={false}>
+                <HeaderButton
+                  color="primary"
+                  onClick={() => dispatch(requestNewTab())}
+                  tooltip="Add Feed"
+                  variant="gradient"
+                >
+                  <IconPlus />
+                </HeaderButton>
                 <HeaderButton onClick={() => dispatch(openModal('about'))} tooltip="About newsdash">
-                  <IconInfoSmall size={32} />
+                  <IconInfoSmall size="2rem" />
                 </HeaderButton>
                 <HeaderButton onClick={() => toggleColorScheme()} tooltip="Toggle color scheme">
-                  {colorScheme === 'dark' ? <IconSun size="1rem" /> : <IconMoonStars size="1rem" />}
+                  {colorScheme === 'dark' ? (
+                    <IconSun size="1.3rem" />
+                  ) : (
+                    <IconMoonStars size="1rem" />
+                  )}
                 </HeaderButton>
                 <HeaderButton
                   onClick={() => dispatch(openModal('settings'))}
@@ -51,8 +72,9 @@ function Header() {
                   <IconSettings />
                 </HeaderButton>
                 <HeaderButton
+                  color="red"
                   onClick={() => dispatch(changeHeaderVisibile(false))}
-                  tooltip="Close header"
+                  tooltip="Collapse navigation bar"
                 >
                   <IconX />
                 </HeaderButton>

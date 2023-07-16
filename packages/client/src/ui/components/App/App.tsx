@@ -1,9 +1,9 @@
 import { Notifications } from '@mantine/notifications'
 import { Provider as ReduxProvider } from 'react-redux'
 
-import type { Store } from '#store/makeStore'
+import type { Store } from '#store/types'
 import type { ColorSchemeMode } from '#types/types'
-import Dock from '#ui/components/Dock/Dock'
+import Dock from '#ui/components/Dock/DockWrapper'
 
 import AppShell from './AppShell'
 import ThemeProvider from './ThemeProvider'
