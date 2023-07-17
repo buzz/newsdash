@@ -10,10 +10,9 @@ const userRouter = express
   .get(
     '/state',
     asyncWrapper(async (req, res) => {
-      const feedBoxes = await getAllHashes('newsdash:feedBox:*', FIELDS_FEEDBOX)
       res.json({
         app: await getHash('newsdash:app', FIELDS_APP),
-        feedBoxes,
+        feedBoxes: await getAllHashes('newsdash:feedBox:*', FIELDS_FEEDBOX),
         feeds: await getAllHashes('newsdash:feed:*', FIELDS_FEED),
       })
     })

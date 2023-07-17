@@ -46,13 +46,8 @@ function AddFeedForm() {
   return (
     <Box maw={640} mx="auto">
       <form onSubmit={form.onSubmit((values) => dispatch(addTab()))}>
-        <TextInput label="Url" placeholder="Url" required {...form.getInputProps('url')} />
-        <TextInput
-          label="Custom title"
-          mt="sm"
-          placeholder="Custom title"
-          {...form.getInputProps('customTitle')}
-        />
+        <TextInput label="URL" required {...form.getInputProps('url')} />
+        <TextInput label="Custom title" mt="sm" {...form.getInputProps('customTitle')} />
         <ColorInput
           format="hex"
           label="Color"

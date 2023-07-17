@@ -1,10 +1,10 @@
-import { DEFAULT_THEME as dt, type ColorScheme, rem } from '@mantine/styles'
+import type { MantineThemeOther } from '@mantine/core'
+import { type ColorScheme, DEFAULT_THEME as dt, rem } from '@mantine/styles'
 
 // TODO: add mantine focusStyles, fontStyles
 
-type DeciderFn = <T>(d: T, l: T) => T
-
-function makeRcDockTheme(colorScheme: ColorScheme, cs: DeciderFn) {
+function makeRcDockTheme(colorScheme: ColorScheme, other: MantineThemeOther) {
+  const cs = <T>(...args: T[]) => (colorScheme === 'dark' ? args[0] : args[1])
   const { colors: col } = dt
 
   const primaryShade =
@@ -27,6 +27,21 @@ function makeRcDockTheme(colorScheme: ColorScheme, cs: DeciderFn) {
   const boxShadow = dt.shadows.sm
 
   return {
+    // fade-in panel extras on hover
+    '.dock-nav': {
+      '> .dock-extra-content': {
+        opacity: 0,
+        transitionProperty: 'opacity',
+        transitionDelay: `${other.transition.duration.default}ms`,
+        transitionDuration: `${other.transition.duration.default}ms`,
+        transitionTimingFunction: dt.transitionTimingFunction,
+      },
+
+      '&:hover > .dock-extra-content': {
+        opacity: 1,
+      },
+    },
+
     // dragging.less
 
     'body > .dragging-layer': {

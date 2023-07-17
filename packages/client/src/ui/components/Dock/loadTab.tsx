@@ -1,27 +1,24 @@
-import type { TabBase, TabData } from 'rc-dock'
+import type { TabData } from 'rc-dock'
 
 import { PLACEHOLDER_TAB_ID } from '#constants'
+import NewsFeed from '#ui/components/NewsFeed/NewsFeed'
 
 import Placeholder from './Placeholder'
 
-function loadTab(tab: TabBase): TabData {
-  if (tab.id === PLACEHOLDER_TAB_ID) {
+function loadTab({ id, title }: TabData): TabData {
+  if (id === PLACEHOLDER_TAB_ID) {
     return {
-      id: tab.id,
+      id,
       content: <Placeholder />,
       title: '', // not used
     }
   }
 
   return {
-    id: tab.id,
-    content: (
-      <div>
-        Tab Content <code>ID={tab.id}</code>
-      </div>
-    ),
+    id,
+    content: <NewsFeed id={id} title={typeof title === 'string' ? title : undefined} />,
     group: 'news',
-    title: tab.id ?? 'Default title',
+    title: title ?? 'Default title',
   }
 }
 

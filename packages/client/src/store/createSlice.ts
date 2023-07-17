@@ -1,6 +1,11 @@
 // eslint-disable-next-line @typescript-eslint/no-restricted-imports
 import { createAction, createSlice as rtkCreateSlice } from '@reduxjs/toolkit'
-import type { CreateSliceOptions, Slice as RtkSlice, SliceCaseReducers } from '@reduxjs/toolkit'
+import type {
+  CreateSliceOptions,
+  PrepareAction,
+  Slice as RtkSlice,
+  SliceCaseReducers,
+} from '@reduxjs/toolkit'
 
 interface Slice<
   State,
@@ -19,7 +24,12 @@ function createSlice<
   Name extends string = string,
 >(options: CreateSliceOptions<State, CaseReducers, Name>): Slice<State, CaseReducers, Name> {
   const slice = rtkCreateSlice(options) as Slice<State, CaseReducers, Name>
-  slice.createAction = (type: string) => createAction(`${slice.name}/${type}`)
+
+  slice.createAction = (type: string, prepareAction?: PrepareAction<unknown>) => {
+    const actionType = `${slice.name}/${type}`
+    return prepareAction ? createAction(actionType, prepareAction) : createAction(actionType)
+  }
+
   return slice
 }
 
