@@ -7,8 +7,8 @@ import { hideNotification, showNotification } from '#store/slices/notifications/
 
 import type { AppStartListening } from './types'
 
-const initListenerMiddleware = createListenerMiddleware()
-const startListening = initListenerMiddleware.startListening as AppStartListening
+const connectivityCheckListenerMiddleware = createListenerMiddleware()
+const startListening = connectivityCheckListenerMiddleware.startListening as AppStartListening
 
 let notificationId: string
 
@@ -43,4 +43,4 @@ startListening({
   },
 })
 
-export default initListenerMiddleware
+export default connectivityCheckListenerMiddleware

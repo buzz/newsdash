@@ -13,10 +13,6 @@ function ThemeProvider({ children, earlyColorSchemeMode }: ThemeProviderProps) {
   const dispatch = useDispatch()
   const storeColorSchemeMode = useSelector(selectColorSchemeMode)
 
-  const toggleColorScheme = (value?: ColorScheme) => {
-    dispatch(changeColorSchemeMode(value || (colorScheme === 'dark' ? 'light' : 'dark')))
-  }
-
   // Pass early color scheme mode to store
   useEffect(() => {
     dispatch(changeColorSchemeMode(earlyColorSchemeMode))
@@ -25,6 +21,10 @@ function ThemeProvider({ children, earlyColorSchemeMode }: ThemeProviderProps) {
   const colorSchemeMode = storeColorSchemeMode ?? earlyColorSchemeMode
   const colorScheme = colorSchemeFromMode(colorSchemeMode)
   const theme = useMemo(() => makeTheme(colorScheme), [colorScheme])
+
+  const toggleColorScheme = (value?: ColorScheme) => {
+    dispatch(changeColorSchemeMode(value || (colorScheme === 'dark' ? 'light' : 'dark')))
+  }
 
   return (
     <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>

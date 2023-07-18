@@ -1,6 +1,7 @@
 import type { CurriedGetDefaultMiddleware } from '@reduxjs/toolkit/dist/getDefaultMiddleware'
 
-import initListenerMiddleware from './middlewares/initListenerMiddleware'
+import colorThemeModeListenerMiddleware from './middlewares/colorThemeModeListenerMiddleware'
+import connectivityCheckListenerMiddleware from './middlewares/connectivityCheckListenerMiddleware'
 import layoutListenerMiddleware from './middlewares/layoutListenerMiddleware/layoutListenerMiddleware'
 import apiSlice from './slices/apiSlice'
 import type { RootState } from './types'
@@ -8,7 +9,8 @@ import type { RootState } from './types'
 function middleware(getDefaultMiddleware: CurriedGetDefaultMiddleware<RootState>) {
   return getDefaultMiddleware().concat([
     apiSlice.middleware,
-    initListenerMiddleware.middleware,
+    colorThemeModeListenerMiddleware.middleware,
+    connectivityCheckListenerMiddleware.middleware,
     layoutListenerMiddleware.middleware,
   ])
 }
