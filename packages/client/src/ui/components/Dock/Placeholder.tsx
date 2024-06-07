@@ -20,11 +20,9 @@ function Placeholder() {
         p="xl"
         variant="outline"
       >
-        <Text mt="xs">
-          Let&apos;s personalize your experience by adding your first news feed.&nbsp;📰
-        </Text>
+        <Text mt="xs">📰 Add your first news feed to get started.</Text>
         <Space h="md" />
-        🌍 Simply click the button below and enter the URL of your preferred RSS feed.
+        🌍 Click the button below and enter the URL of your preferred RSS feed.
         <Space h="md" />✨ <em>Happy reading!</em>&nbsp;📚
         <Group>
           <Button

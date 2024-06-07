@@ -1,9 +1,9 @@
-import type { AppStartListening } from '#store/middlewares/types'
 import { handleLayoutChange, updateLayout } from '#store/slices/layout/actions'
 import { globalizedBoxesSelectors } from '#store/slices/layout/entities/boxes/selectors'
 import { globalizedPanelsSelectors } from '#store/slices/layout/entities/panels/selectors'
 import { globalizedTabsSelectors } from '#store/slices/layout/entities/tabs/selectors'
 import LayoutNormalizer from '#store/utils/LayoutNormalizer'
+import type { AppStartListening } from '#store/middlewares/types'
 
 /**
  * Handle update from rc-dock component

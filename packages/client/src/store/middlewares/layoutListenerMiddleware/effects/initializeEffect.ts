@@ -1,6 +1,6 @@
 import { PLACEHOLDER_LAYOUT } from '#constants'
-import type { AppStartListening } from '#store/middlewares/types'
 import { handleLayoutChange, layoutReady } from '#store/slices/layout/actions'
+import type { AppStartListening } from '#store/middlewares/types'
 
 // Show placeholder when ready
 function initializeEffect(startListening: AppStartListening) {

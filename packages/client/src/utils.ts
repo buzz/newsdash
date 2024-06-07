@@ -7,11 +7,13 @@ import type { ColorSchemeMode } from '#types/types'
 /** Get color scheme mode from local storage */
 export function earlyColorSchemeMode(): ColorSchemeMode {
   try {
-    const mode = localStorage.getItem(LOCAL_STORAGE_COLOR_THEME_KEY) || 'system'
+    const mode = localStorage.getItem(LOCAL_STORAGE_COLOR_THEME_KEY) ?? 'system'
     if (isColorSchemeMode(mode)) {
       return mode
     }
-  } catch (e) {}
+  } catch (error) {
+    console.error(error)
+  }
   return 'system'
 }
 

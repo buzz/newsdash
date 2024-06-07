@@ -28,6 +28,7 @@
     "nanoid": "^4.0.2",
     "rc-dock": "^3.2.18",
     "react": "^18.2.0",
+    "react-custom-scrollbars-2": "^4.5.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.1.1",
     "reduce-reducers": "^1.0.4"

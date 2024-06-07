@@ -7,7 +7,7 @@ function makeTheme(colorScheme: ColorScheme): MantineThemeOverride {
     transition: {
       duration: {
         default: 250,
-        fast: 100,
+        short: 100,
       },
     },
   }

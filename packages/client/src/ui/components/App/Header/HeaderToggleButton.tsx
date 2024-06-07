@@ -1,4 +1,4 @@
-import { ActionIcon, Box, createStyles, Transition, rem, useMantineTheme } from '@mantine/core'
+import { ActionIcon, Box, createStyles, rem, Transition, useMantineTheme } from '@mantine/core'
 import { IconArrowBigDownLinesFilled } from '@tabler/icons-react'
 
 import { changeHeaderVisibile } from '#store/slices/app/actions'
@@ -24,14 +24,14 @@ const useStyles = createStyles((theme) => ({
     pointerEvents: 'all',
     position: 'relative',
     top: rem(-24),
-    transitionDuration: `${theme.other.transition.duration.fast}ms`,
+    transitionDuration: `${theme.other.transition.duration.short}ms`,
     transitionProperty: 'top',
     transitionTimingFunction: 'ease-in',
 
     '& .mantine-ActionIcon-root': {
       backgroundColor: 'transparent',
       color: theme.colorScheme === 'dark' ? theme.colors.gray[6] : theme.colors.gray[5],
-      transitionDuration: `${theme.other.transition.duration.fast}ms`,
+      transitionDuration: `${theme.other.transition.duration.short}ms`,
       transitionProperty: 'background-color, color',
       transitionTimingFunction: 'ease-in',
     },

@@ -3,9 +3,9 @@ import type { ReactNode } from 'react'
 
 import { closeModal } from '#store/slices/app/actions'
 import { selectIsModalOpen } from '#store/slices/app/selectors'
+import { useDispatch, useSelector } from '#ui/hooks/store'
 import type { RootState } from '#store/types'
 import type { ModalName } from '#types/types'
-import { useDispatch, useSelector } from '#ui/hooks/store'
 
 function Modal({ children, icon, name, title }: ModalProps) {
   const dispatch = useDispatch()

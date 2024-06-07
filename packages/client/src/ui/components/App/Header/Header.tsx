@@ -58,7 +58,12 @@ function Header() {
                 <HeaderButton onClick={() => dispatch(openModal('about'))} tooltip="About newsdash">
                   <IconInfoSmall size="2rem" />
                 </HeaderButton>
-                <HeaderButton onClick={() => toggleColorScheme()} tooltip="Toggle color scheme">
+                <HeaderButton
+                  onClick={() => {
+                    toggleColorScheme()
+                  }}
+                  tooltip="Toggle color scheme"
+                >
                   {colorScheme === 'dark' ? (
                     <IconSun size="1.3rem" />
                   ) : (

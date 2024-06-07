@@ -1,7 +1,5 @@
-import type { ListenerEffectAPI } from '@reduxjs/toolkit'
 import { nanoid } from 'nanoid'
 
-import type { AppStartListening } from '#store/middlewares/types'
 import { requestNewTab } from '#store/slices/layout/actions'
 import { selectDockbox } from '#store/slices/layout/entities/boxes/selectors'
 import { addPanel, removePanel, setActiveTab } from '#store/slices/layout/entities/panels/actions'
@@ -11,7 +9,10 @@ import {
 } from '#store/slices/layout/entities/panels/selectors'
 import { addTab } from '#store/slices/layout/entities/tabs/actions'
 import { selectMaxTabOrder } from '#store/slices/layout/entities/tabs/selectors'
+import type { AppStartListening } from '#store/middlewares/types'
 import type { AppDispatch, RootState } from '#store/types'
+
+import type { ListenerEffectAPI } from '@reduxjs/toolkit'
 
 // New tab requested by user
 function requestNewTabEffect(startListening: AppStartListening) {
@@ -35,7 +36,6 @@ function requestNewTabEffect(startListening: AppStartListening) {
           id: tabId,
           order,
           parentId: panelId,
-          title: 'Empty tab',
         })
       )
       listenerApi.dispatch(setActiveTab({ panelId, tabId }))

@@ -1,9 +1,9 @@
 import { createEntityAdapter } from '@reduxjs/toolkit'
 
 import sortOrderComparer from '#store/utils/sortOrderComparer'
-import type { NormalizedTab } from '#types/layout'
+import type { Tab } from '#types/layout'
 
-const tabsEntityAdapter = createEntityAdapter<NormalizedTab>({ sortComparer: sortOrderComparer })
+const tabsEntityAdapter = createEntityAdapter<Tab>({ sortComparer: sortOrderComparer })
 
 export const tabsInitialState = tabsEntityAdapter.getInitialState()
 

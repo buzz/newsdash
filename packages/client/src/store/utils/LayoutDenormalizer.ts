@@ -2,16 +2,16 @@ import { EMPTY_LAYOUT } from '#constants'
 import { selectChildBoxes, selectDockbox } from '#store/slices/layout/entities/boxes/selectors'
 import { selectChildPanels } from '#store/slices/layout/entities/panels/selectors'
 import { selectChildTabs } from '#store/slices/layout/entities/tabs/selectors'
+import { isNormalizedBox } from '#types/typeGuards'
 import type { RootState } from '#store/types'
 import type {
+  Box,
   DenormalizedBox,
   DenormalizedPanel,
   DenormalizedTab,
-  NormalizedBox,
-  NormalizedPanel,
-  NormalizedTab,
+  Panel,
+  Tab,
 } from '#types/layout'
-import { isNormalizedBox } from '#types/typeGuards'
 
 import sortOrderComparer from './sortOrderComparer'
 
@@ -37,7 +37,7 @@ class LayoutDenormalizer {
    * Denormalize box by including children and removing `parentId` and `order`
    * fields.
    */
-  private denormalizeBox(box: NormalizedBox): DenormalizedBox {
+  private denormalizeBox(box: Box): DenormalizedBox {
     const childBoxes = this.getChildBoxes(box.id)
     const childPanels = this.getChildPanels(box.id)
 
@@ -63,7 +63,7 @@ class LayoutDenormalizer {
     return selector(this.state)
   }
 
-  private denormalizePanel(panel: NormalizedPanel): DenormalizedPanel {
+  private denormalizePanel(panel: Panel): DenormalizedPanel {
     const denormalizedPanel = {
       ...panel,
       tabs: this.denormalizeTabs(panel.id),
@@ -79,7 +79,7 @@ class LayoutDenormalizer {
     return selector(this.state).map((t) => this.denormalizeTab(t))
   }
 
-  private denormalizeTab(tab: NormalizedTab): DenormalizedTab {
+  private denormalizeTab(tab: Tab): DenormalizedTab {
     const denormalizedTab = { ...tab }
     delete denormalizedTab.parentId
     delete denormalizedTab.order

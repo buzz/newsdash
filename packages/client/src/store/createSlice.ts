@@ -1,11 +1,11 @@
-// eslint-disable-next-line @typescript-eslint/no-restricted-imports
-import { createAction, createSlice as rtkCreateSlice } from '@reduxjs/toolkit'
 import type {
   CreateSliceOptions,
   PrepareAction,
   Slice as RtkSlice,
   SliceCaseReducers,
 } from '@reduxjs/toolkit'
+// eslint-disable-next-line @typescript-eslint/no-restricted-imports
+import { createAction, createSlice as rtkCreateSlice } from '@reduxjs/toolkit'
 
 interface Slice<
   State,

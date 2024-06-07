@@ -1,23 +1,46 @@
 import type { BoxData, PanelData, TabData } from 'rc-dock'
 
-type RemoveFields = 'cacheContext' | 'children' | 'content' | 'panelLock' | 'parent' | 'tabs'
+/** Fields that are removed during normalization */
+type RemoveFields =
+  | 'cacheContext'
+  | 'children'
+  | 'content'
+  | 'panelLock'
+  | 'parent'
+  | 'tabs'
+  | 'title'
 
-export type Entity = BoxData | PanelData | TabData
+/** Entities in rc-dock data */
+export type RcDockEntity = BoxData | PanelData | TabData
 
 export interface Orderable {
   /** Order in layout */
   order: number
 }
 
-export type NormalizedEntity<T extends Entity = Entity> = Omit<T, RemoveFields> &
+/** Entity as saved in store */
+export type NormalizedEntity<T extends RcDockEntity> = Omit<T, RemoveFields> &
   Orderable & {
     /** ID of parent */
     parentId: string
   }
 
-export type NormalizedBox = NormalizedEntity<BoxData>
-export type NormalizedPanel = NormalizedEntity<PanelData>
-export type NormalizedTab = NormalizedEntity<TabData>
+export type Box = NormalizedEntity<BoxData>
+export type Panel = NormalizedEntity<PanelData>
+
+export type TabEditMode = 'edit' | 'create' | 'off'
+
+/** Feed tab */
+export interface Tab extends NormalizedEntity<TabData> {
+  /** Custom title */
+  customTitle?: string
+
+  /** Feed URL */
+  url?: string
+
+  /** Edit mode */
+  editMode: TabEditMode
+}
 
 export interface DenormalizedBox extends Omit<BoxData, 'children'> {
   children: (DenormalizedBox | DenormalizedPanel)[]

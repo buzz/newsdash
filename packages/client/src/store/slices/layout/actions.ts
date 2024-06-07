@@ -11,7 +11,7 @@ export const handleLayoutChange = layoutSlice.createAction<LayoutBase>('handleLa
 export const updateLayout = layoutSlice.createAction<NormalizedLayoutState>('updateLayout')
 
 /** Request new tab */
-export const requestNewTab = layoutSlice.createAction<string>('requestNewTab')
+export const requestNewTab = layoutSlice.createAction<string | undefined>('requestNewTab')
 
 /** Signal rc-dock is ready to process layouts */
 export const layoutReady = layoutSlice.createAction('layoutReady')

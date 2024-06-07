@@ -1,6 +1,6 @@
 import type { BoxData, PanelData } from 'rc-dock'
 
-import type { NormalizedBox } from './layout'
+import type { Box } from './layout'
 import type { ArbitraryObject, ColorSchemeMode } from './types'
 
 /** Type guard for arbitrary object */
@@ -20,6 +20,6 @@ export function isBoxData(obj: unknown): obj is BoxData {
   return isArbitraryObject(obj) && Array.isArray(obj.children)
 }
 
-export function isNormalizedBox(obj: unknown): obj is NormalizedBox {
+export function isNormalizedBox(obj: unknown): obj is Box {
   return isArbitraryObject(obj) && typeof obj.mode === 'string'
 }

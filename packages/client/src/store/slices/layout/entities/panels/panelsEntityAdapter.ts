@@ -1,9 +1,9 @@
 import { createEntityAdapter } from '@reduxjs/toolkit'
 
 import sortOrderComparer from '#store/utils/sortOrderComparer'
-import type { NormalizedPanel } from '#types/layout'
+import type { Panel } from '#types/layout'
 
-const panelsEntityAdapter = createEntityAdapter<NormalizedPanel>({
+const panelsEntityAdapter = createEntityAdapter<Panel>({
   sortComparer: sortOrderComparer,
 })
 

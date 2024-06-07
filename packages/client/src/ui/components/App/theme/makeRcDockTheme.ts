@@ -26,13 +26,15 @@ function makeRcDockTheme(colorScheme: ColorScheme, other: MantineThemeOther) {
 
   const boxShadow = dt.shadows.sm
 
+  const panelActiveColor = cs(col[dt.primaryColor][4], col[dt.primaryColor][7])
+
   return {
     // fade-in panel extras on hover
     '.dock-nav': {
       '> .dock-extra-content': {
         opacity: 0,
         transitionProperty: 'opacity',
-        transitionDelay: `${other.transition.duration.default}ms`,
+        transitionDelay: `${other.transition.duration.short}ms`,
         transitionDuration: `${other.transition.duration.default}ms`,
         transitionTimingFunction: dt.transitionTimingFunction,
       },
@@ -46,10 +48,15 @@ function makeRcDockTheme(colorScheme: ColorScheme, other: MantineThemeOther) {
 
     'body > .dragging-layer': {
       '--default-background-color': componentBg,
-      opacity: 0.8,
+      opacity: 0.6,
 
       '& > *:first-child': {
+        backgroundColor: cs(col.gray[7], col.dark[0]),
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
         boxShadow,
+        borderRadius: dt.radius.xs,
       },
     },
 
@@ -57,7 +64,7 @@ function makeRcDockTheme(colorScheme: ColorScheme, other: MantineThemeOther) {
 
     '.dock': {
       '&-ink-bar': {
-        backgroundColor: primaryColor,
+        backgroundColor: panelActiveColor,
       },
 
       '&-tab-btn-disabled': {
@@ -65,8 +72,8 @@ function makeRcDockTheme(colorScheme: ColorScheme, other: MantineThemeOther) {
       },
 
       '&-tab': {
-        borderBottomColor: panelBorderColor,
         background: tabBg,
+        borderBottomColor: panelBorderColor,
 
         '& > div': {
           outlineColor: primaryColor,
@@ -78,7 +85,7 @@ function makeRcDockTheme(colorScheme: ColorScheme, other: MantineThemeOther) {
       },
 
       '&-tab-active, &-tab-active:hover': {
-        color: primaryColor,
+        color: panelActiveColor,
       },
 
       '&-tab-disabled': {

@@ -1,6 +1,7 @@
+import 'rc-dock/dist/rc-dock.css'
+
 import DockLayout from 'rc-dock'
 import { useCallback } from 'react'
-import 'rc-dock/dist/rc-dock.css'
 
 import { handleLayoutChange, layoutReady } from '#store/slices/layout/actions'
 import { selectDenormalizedLayout } from '#store/slices/layout/selectors'

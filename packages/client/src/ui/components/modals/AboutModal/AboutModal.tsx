@@ -22,7 +22,7 @@ const useStyles = createStyles((theme) => ({
 
 function AboutModal() {
   const { classes } = useStyles()
-  const { data, isSuccess } = useGetVersionQuery(undefined)
+  const { data, isSuccess } = useGetVersionQuery(undefined, {})
 
   return (
     <Modal name="about">

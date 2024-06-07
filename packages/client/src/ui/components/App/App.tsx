@@ -1,8 +1,8 @@
 import { Provider as ReduxProvider } from 'react-redux'
 
+import Dock from '#ui/components/Dock/DockWrapper'
 import type { Store } from '#store/types'
 import type { ColorSchemeMode } from '#types/types'
-import Dock from '#ui/components/Dock/DockWrapper'
 
 import AppShell from './AppShell'
 import Notifications from './notifications/Notifications'

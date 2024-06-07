@@ -5,7 +5,7 @@ declare module '@mantine/core' {
     transition: {
       duration: {
         default: number
-        fast: number
+        short: number
       }
     }
   }

@@ -1,6 +1,6 @@
 import createSlice from '#store/createSlice'
 
-import { addTab, removeTab } from './actions'
+import { addTab, editTab, removeTab } from './actions'
 import tabsEntityAdapter, { tabsInitialState } from './tabsEntityAdapter'
 
 export const tabsSlice = createSlice({
@@ -16,6 +16,11 @@ export const tabsSlice = createSlice({
     // Remove tab
     builder.addCase(removeTab, (state, { payload: tabId }) => {
       tabsEntityAdapter.removeOne(state, tabId)
+    })
+
+    // Edit tab
+    builder.addCase(editTab, (state, { payload: { id, changes } }) => {
+      tabsEntityAdapter.updateOne(state, { id, changes })
     })
   },
 })

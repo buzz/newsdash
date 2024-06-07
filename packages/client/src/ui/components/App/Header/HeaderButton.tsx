@@ -1,5 +1,5 @@
-import { ActionIcon } from '@mantine/core'
 import type { ActionIconProps } from '@mantine/core'
+import { ActionIcon } from '@mantine/core'
 import type { MouseEventHandler } from 'react'
 
 import Tooltip from '#ui/components/common/Tooltip'

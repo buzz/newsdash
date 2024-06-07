@@ -5,6 +5,7 @@
     "declaration": false,
     "target": "ES2022",
     "module": "ESNext",
+    "strict": true,
 
     /* Bundler mode */
     "moduleResolution": "bundler",

@@ -1,6 +1,6 @@
-import type { AppStartListening } from '#store/middlewares/types'
 import { setActiveTab, updatePanel } from '#store/slices/layout/entities/panels/actions'
 import { globalizedTabsSelectors } from '#store/slices/layout/entities/tabs/selectors'
+import type { AppStartListening } from '#store/middlewares/types'
 
 // Set active tab on panel (if tab exists)
 function handleSetActiveTabEffect(startListening: AppStartListening) {

@@ -1,4 +1,4 @@
-import { notifications, Notifications as MantineNotifications } from '@mantine/notifications'
+import { Notifications as MantineNotifications, notifications } from '@mantine/notifications'
 import { useEffect } from 'react'
 
 import { notificationProcessed } from '#store/slices/notifications/actions'

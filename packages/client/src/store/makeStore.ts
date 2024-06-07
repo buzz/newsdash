@@ -1,16 +1,23 @@
 import { configureStore } from '@reduxjs/toolkit'
-import type { PreloadedState } from '@reduxjs/toolkit'
 
-import middleware from './middleware'
+import colorThemeModeListenerMiddleware from './middlewares/colorThemeModeListenerMiddleware'
+import connectivityCheckListenerMiddleware from './middlewares/connectivityCheckListenerMiddleware'
+import layoutListenerMiddleware from './middlewares/layoutListenerMiddleware/layoutListenerMiddleware'
 import reducer from './reducer'
-import type { RootState } from './types'
+import apiSlice from './slices/apiSlice'
 
 /** Store factory */
-function makeStore(preloadedState?: PreloadedState<RootState>) {
+function makeStore() {
   return configureStore({
     devTools: import.meta.env.DEV,
-    middleware,
-    preloadedState,
+    middleware: (getDefaultMiddleware) =>
+      // eslint-disable-next-line unicorn/prefer-spread
+      getDefaultMiddleware().concat([
+        apiSlice.middleware,
+        colorThemeModeListenerMiddleware.middleware,
+        connectivityCheckListenerMiddleware.middleware,
+        layoutListenerMiddleware.middleware,
+      ]),
     reducer,
   })
 }

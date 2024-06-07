@@ -1,13 +1,13 @@
 import type { EntityId } from '@reduxjs/toolkit'
-import type { BoxData, LayoutBase, PanelData, TabData } from 'rc-dock'
+import type { BoxData, LayoutBase, PanelData } from 'rc-dock'
 
-import type { Entity, NormalizedEntity } from '#types/layout'
 import { isBoxData, isPanelData } from '#types/typeGuards'
+import type { Box, NormalizedEntity, Panel, RcDockEntity, Tab } from '#types/layout'
 
 interface NormalizedEntities {
-  boxes: NormalizedEntity<BoxData>[]
-  panels: NormalizedEntity<PanelData>[]
-  tabs: NormalizedEntity<TabData>[]
+  boxes: Box[]
+  panels: Panel[]
+  tabs: Tab[]
 }
 
 export type NormalizedLayoutState = ReturnType<LayoutNormalizer['normalizeLayout']>
@@ -75,7 +75,7 @@ class LayoutNormalizer {
    * Normalize entity by removing included objects, some other cruft and adding
    * `parentId` and `order` field.
    */
-  private normalizeEntity<T extends Entity>(entity: T, order: number, parentId: string) {
+  private normalizeEntity<T extends RcDockEntity>(entity: T, order: number, parentId: string) {
     return Object.entries(entity).reduce(
       (acc, [key, val]) =>
         typeof val === 'string' || typeof val === 'number' ? { ...acc, [key]: val } : acc,
