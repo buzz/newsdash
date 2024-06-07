@@ -15,4 +15,6 @@ app
   .use(express.json())
   .use('/api', apiRouter)
   .use(errorHandlers)
-  .listen(DEFAULT_PORT, () => console.log(`Listening on port ${DEFAULT_PORT}`))
+  .listen(DEFAULT_PORT, () => {
+    console.log(`Listening on port ${DEFAULT_PORT}`)
+  })

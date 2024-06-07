@@ -15,7 +15,7 @@
     "directory": "packages/server"
   },
   "scripts": {
-    "dev": "nodemon --exec ts-node src/startServer.ts",
+    "dev": "nodemon --exec tsx src/startServer.ts",
     "start": "NODE_ENV=production node dist/startServer.js"
   },
   "imports": {
@@ -37,6 +37,7 @@
     "@types/cors": "^2.8.13",
     "@types/express": "^4.17.17",
     "@types/got": "^9.6.12",
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "tsx": "^4.12.0"
   }
 }

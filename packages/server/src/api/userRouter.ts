@@ -1,6 +1,6 @@
 import express from 'express'
 
-import { FIELDS_APP, FIELDS_FEEDBOX, FIELDS_FEED } from '#constants'
+import { FIELDS_APP, FIELDS_FEED, FIELDS_FEEDBOX } from '#constants'
 import { getAllHashes, getHash, setHash, updateHashesDeleteOthers } from '#redis/redis'
 
 import asyncWrapper from './asyncWrapper'

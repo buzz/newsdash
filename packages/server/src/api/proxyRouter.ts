@@ -1,5 +1,5 @@
-import stream from 'stream'
-import { promisify } from 'util'
+import stream from 'node:stream'
+import { promisify } from 'node:util'
 
 import express, { type Request } from 'express'
 import { body } from 'express-validator'

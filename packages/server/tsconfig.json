@@ -5,6 +5,7 @@
     "declaration": false,
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
+    "strict": true,
 
     /* Path aliases */
     "paths": {
@@ -13,11 +14,5 @@
     }
   },
   "include": ["src"],
-  "references": [{ "path": "../../tsconfig.json" }],
-  "ts-node": {
-    "esm": true,
-    "experimentalResolver": true,
-    "experimentalSpecifierResolution": "node",
-    "transpileOnly": true
-  }
+  "references": [{ "path": "../../tsconfig.json" }]
 }

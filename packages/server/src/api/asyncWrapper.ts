@@ -6,7 +6,6 @@ import type { NextFunction, Request, Response } from 'express'
  */
 function asyncWrapper(asyncFn: (req: Request, res: Response) => Promise<void>) {
   return function (req: Request, res: Response, next: NextFunction) {
-    // eslint-disable-next-line promise/no-callback-in-promise
     asyncFn(req, res).catch(next)
   }
 }
