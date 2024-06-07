@@ -16,7 +16,11 @@ function PanelExtra({ panel }: PanelExtraProps) {
       <IconButton
         color="red.5"
         icon={<IconTrash />}
-        onClick={() => dispatch(removeTab(panel.activeId))}
+        onClick={() => {
+          if (panel.activeId) {
+            dispatch(removeTab(panel.activeId))
+          }
+        }}
       />
     </Flex>
   )

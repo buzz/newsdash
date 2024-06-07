@@ -1,0 +1,43 @@
+.headerChild {
+  height: 100%;
+}
+
+.floatingBox {
+  display: flex;
+  justify-content: center;
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  z-index: var(--mantine-z-index-max);
+}
+
+.btnWrapper {
+  padding-top: rem(3);
+  padding-right: rem(12);
+  padding-bottom: rem(5);
+  padding-left: rem(12);
+  pointer-events: all;
+  position: relative;
+  top: rem(-24);
+  transition-duration: var(--transition-duration-short);
+  transition-property: top;
+  transition-timing-function: ease-in;
+
+  &:hover {
+    top: 0;
+
+    & > button {
+      background-color: var(--mantine-primary-color-filled-hover);
+      color: var(--ai-color) !important;
+    }
+  }
+
+  & > button {
+    background-color: transparent;
+    color: light-dark(var(--mantine-color-gray-6), var(--mantine-color-gray-5));
+    transition-duration: var(--transition-duration-short);
+    transition-property: background-color, color;
+    transition-timing-function: ease-in;
+  }
+}

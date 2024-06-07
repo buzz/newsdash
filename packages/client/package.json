@@ -18,11 +18,9 @@
     "#utils": "./src/utils.ts"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.1",
-    "@mantine/core": "^6.0.16",
-    "@mantine/form": "^6.0.16",
-    "@mantine/notifications": "^6.0.16",
-    "@mantine/styles": "^6.0.16",
+    "@mantine/core": "^7.10.1",
+    "@mantine/form": "^7.10.1",
+    "@mantine/notifications": "^7.10.1",
     "@reduxjs/toolkit": "^2.2.5",
     "@tabler/icons-react": "^3.5.0",
     "nanoid": "^5.0.7",

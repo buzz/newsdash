@@ -1,23 +1,13 @@
-import { Box, createStyles, useMantineTheme } from '@mantine/core'
+import { Box, useMantineTheme } from '@mantine/core'
 import { Scrollbars } from 'react-custom-scrollbars-2'
 
-const useStyles = createStyles((theme) => ({
-  wrapper: {
-    display: 'flex',
-    height: '100%',
-  },
-
-  innerWrapper: {
-    padding: theme.spacing.xs,
-  },
-}))
+import classes from './Feed.module.css'
 
 function HTrack() {
   return <div style={{ display: 'none' }} />
 }
 
 function Feed({ id }: FeedProps) {
-  const { classes } = useStyles()
   const theme = useMantineTheme()
 
   return (

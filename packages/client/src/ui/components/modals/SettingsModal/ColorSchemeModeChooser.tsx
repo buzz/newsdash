@@ -1,15 +1,12 @@
-import { Box, Center, SegmentedControl } from '@mantine/core'
+import { Box, Center, SegmentedControl, useMantineColorScheme } from '@mantine/core'
 import { type Icon, IconDeviceDesktop, IconMoonStars, IconSun } from '@tabler/icons-react'
 
-import { changeColorSchemeMode } from '#store/slices/settings/actions'
-import { selectColorSchemeMode } from '#store/slices/settings/selectors'
-import { isColorSchemeMode } from '#types/typeGuards'
-import { useDispatch, useSelector } from '#ui/hooks/store'
+import { isColorScheme } from '#types/typeGuards'
 
 const data = [
   {
-    label: <Label icon={IconDeviceDesktop} text="System" />,
-    value: 'system',
+    label: <Label icon={IconDeviceDesktop} text="Auto" />,
+    value: 'auto',
   },
   {
     label: <Label icon={IconSun} text="Light" />,
@@ -36,16 +33,15 @@ interface LabelProps {
 }
 
 function ColorSchemeModeChooser() {
-  const dispatch = useDispatch()
-  const colorSchemeMode = useSelector(selectColorSchemeMode)
+  const { setColorScheme, colorScheme } = useMantineColorScheme()
 
   const handleChange = (value: string) => {
-    if (isColorSchemeMode(value)) {
-      dispatch(changeColorSchemeMode(value))
+    if (isColorScheme(value)) {
+      setColorScheme(value)
     }
   }
 
-  return <SegmentedControl data={data} fullWidth onChange={handleChange} value={colorSchemeMode} />
+  return <SegmentedControl data={data} fullWidth onChange={handleChange} value={colorScheme} />
 }
 
 export default ColorSchemeModeChooser

@@ -1,0 +1,210 @@
+/* TODO: add mantine focusStyles, fontStyles */
+
+:root[data-mantine-color-scheme='light'] {
+  --dock-panel-color-border: var(--mantine-color-dark-0);
+  --popover-border-color: var(--mantine-color-gray-2);
+  --popover-fill-color: var(--mantine-color-white);
+  --menu-item-hover: var(--mantine-color-gray-1);
+}
+
+:root[data-mantine-color-scheme='dark'] {
+  --dock-panel-color-border: var(--mantine-color-dark-4);
+  --popover-border-color: var(--mantine-color-dark-4);
+  --popover-fill-color: var(--mantine-color-dark-6);
+  --menu-item-hover: var(--mantine-color-dark-4);
+}
+
+.dock-layout {
+  flex-grow: 1;
+
+  /**************** fade-in panel extras on hover ****************/
+
+  .dock-nav {
+    > .dock-extra-content {
+      border-left: 1px solid var(--dock-panel-color-border);
+      max-width: 0;
+      opacity: 0;
+      position: relative;
+      transition-delay: var(--transition-duration-short);
+      transition-duration: var(--transition-duration);
+      transition-property: opacity, max-width;
+      transition-timing-function: var(--transition-timing-function);
+
+      &::after {
+        position: absolute;
+        z-index: 1;
+        content: '';
+        pointer-events: none;
+        width: 30px;
+        height: 30px;
+        left: -30px;
+        top: 0;
+        box-shadow: inset -10px 0 8px -8px rgba(0, 0, 0, 0.08);
+      }
+    }
+
+    &:hover > .dock-extra-content {
+      max-width: 100px;
+      opacity: 1;
+    }
+  }
+
+  /**************** panel.less ****************/
+
+  /* Panel styles */
+  .dock-panel {
+    background-color: var(--mantine-color-body);
+    border-color: var(--dock-panel-color-border);
+    border-radius: var(--mantine-radius-sm);
+    /* border-radius: dt.radius[typeof dt.defaultRadius === 'string' ? dt.defaultRadius : 'sm']; */
+    color: var(--mantine-color-text);
+  }
+
+  /* Divider styles */
+  .dock-divider {
+    flex-basis: calc(var(--mantine-spacing-xs) * 0.75);
+  }
+
+  /* Styles for dock-panel within specific containers */
+  .dock-fbox .dock-panel,
+  .dock-mbox .dock-panel {
+    box-shadow: var(--mantine-shadow-sm);
+  }
+
+  /* Drop indicator styles */
+  & > .dock-drop-indicator {
+    background-color: var(--mantine-primary-color-3);
+    border-color: var(--mantine-primary-color-9);
+    border-style: dashed;
+    border-width: rem(5);
+    box-shadow: none;
+    opacity: 0.25;
+  }
+
+  /* Drop layer styles */
+  .dock-drop-layer {
+    background-color: rgba(0 0 0 / 10%);
+    z-index: 150;
+
+    .dock-drop-square {
+      background: transparent;
+      color: var(--mantine-color-text);
+
+      .dock-drop-square-box {
+        background-color: var(--mantine-color-body);
+        border-color: var(--dock-panel-color-border);
+        border-radius: var(--mantine-radius-default);
+      }
+    }
+
+    .dock-drop-square-dropping .dock-drop-square-box {
+      border-color: var(--mantine-primary-color-6);
+    }
+  }
+
+  .dock-content {
+    padding: var(--mantine-spacing-sm);
+  }
+}
+
+/**************** tabs.less ****************/
+
+.dock-layout,
+body > .dragging-layer {
+  .dock-ink-bar {
+    background-color: var(--mantine-primary-color-6);
+  }
+
+  .dock-tab-btn-disabled {
+    color: var(--mantine-color-dimmed);
+  }
+
+  .dock-tab {
+    background: transparent;
+    border-bottom-color: transparent;
+
+    /* Nested rule for child element */
+    > div {
+      outline-color: var(--mantine-primary-color-6);
+    }
+  }
+
+  /* Hover state for regular tab */
+  .dock-tab:hover {
+    color: var(--mantine-primary-color-6);
+  }
+
+  /* Active and active hover state for tab */
+  .dock-tab-active,
+  .dock-tab-active:hover {
+    color: var(--mantine-primary-color-6);
+  }
+
+  /* Disabled and disabled hover state for tab */
+  .dock-tab-disabled,
+  .dock-tab-disabled:hover {
+    color: var(--mantine-color-dimmed);
+  }
+
+  /* Top bar styles */
+  .dock-top .dock-bar {
+    background: rgba(0 0 0 / 3%);
+    border-bottom-color: var(--dock-panel-color-border);
+  }
+
+  .dock-nav-operations {
+    border-left: 1px solid var(--dock-panel-color-border);
+
+    &.dock-nav-operations-hidden {
+      display: none;
+    }
+
+    .dock-nav-more {
+      color: var(--mantine-color-text);
+    }
+  }
+}
+
+/**************** dragging.less ****************/
+
+body > .dragging-layer {
+  opacity: 0.8;
+
+  & > *:first-child {
+    background-color: var(--mantine-color-body) !important;
+    border-color: var(--popover-border-color);
+    border-radius: var(--mantine-radius-xs);
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: var(--mantine-shadow-md);
+  }
+}
+
+/**************** Dropdown styles ****************/
+
+.dock-dropdown {
+  color: var(--mantine-color-text);
+
+  .dock-dropdown-menu {
+    background-color: var(--popover-fill-color);
+    border-color: var(--popover-border-color);
+    border-radius: var(--mantine-radius-default);
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: var(--mantine-shadow-sm);
+  }
+
+  .dock-dropdown-menu-item {
+    color: var(--mantine-color-text);
+  }
+
+  .dock-dropdown-menu-item:hover {
+    background: var(--menu-item-hover);
+  }
+
+  /* Disabled and disabled hover state for dropdown menu item */
+  .dock-dropdown-menu-item-disabled,
+  .dock-dropdown-menu-item-disabled:hover {
+    color: var(--mantine-color-dimmed);
+  }
+}

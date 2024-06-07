@@ -1,4 +1,5 @@
 import 'rc-dock/dist/rc-dock.css'
+import './Dock.css'
 
 import DockLayout from 'rc-dock'
 import { useCallback } from 'react'
@@ -15,14 +16,9 @@ function Dock() {
   const layout = useSelector(selectDenormalizedLayout)
 
   // useCallback, otherwise ref callback gets fired multiple times
-  const setRcDockRef = useCallback(
-    (ref: DockLayout) => {
-      if (ref) {
-        dispatch(layoutReady())
-      }
-    },
-    [dispatch]
-  )
+  const setRcDockRef = useCallback(() => {
+    dispatch(layoutReady())
+  }, [dispatch])
 
   return (
     <DockLayout

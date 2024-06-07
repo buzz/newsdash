@@ -1,12 +1,13 @@
+import '@mantine/core/styles.css'
+import '@mantine/notifications/styles.css'
+import './ui/global.css'
+
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import makeStore from '#store/makeStore'
 import { appInit } from '#store/slices/app/actions'
 import App from '#ui/components/App/App'
-import { earlyColorSchemeMode } from '#utils'
-
-const colorSchemeMode = earlyColorSchemeMode() // Do first to prevent FART
 
 const rootElem = document.querySelector('#root')
 
@@ -19,6 +20,6 @@ store.dispatch(appInit())
 
 ReactDOM.createRoot(rootElem).render(
   <React.StrictMode>
-    <App earlyColorSchemeMode={colorSchemeMode} store={store} />
+    <App store={store} />
   </React.StrictMode>
 )

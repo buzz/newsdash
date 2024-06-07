@@ -1,3 +1,4 @@
+import type { ListenerEffectAPI } from '@reduxjs/toolkit'
 import { nanoid } from 'nanoid'
 
 import { requestNewTab } from '#store/slices/layout/actions'
@@ -11,8 +12,6 @@ import { addTab } from '#store/slices/layout/entities/tabs/actions'
 import { selectMaxTabOrder } from '#store/slices/layout/entities/tabs/selectors'
 import type { AppStartListening } from '#store/middlewares/types'
 import type { AppDispatch, RootState } from '#store/types'
-
-import type { ListenerEffectAPI } from '@reduxjs/toolkit'
 
 // New tab requested by user
 function requestNewTabEffect(startListening: AppStartListening) {

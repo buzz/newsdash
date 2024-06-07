@@ -1,8 +1,4 @@
-import type { ColorScheme } from '@mantine/styles'
-
 import type { notificationTypes } from '#ui/components/App/notifications/getNotificationProps'
-
-export type ColorSchemeMode = ColorScheme | 'system'
 
 export type ModalName = 'about' | 'settings'
 
@@ -20,9 +16,7 @@ export interface AppState {
   versionInfo: VersionInfo | null
 }
 
-export interface Settings {
-  colorSchemeMode?: ColorSchemeMode
-}
+export interface Settings {}
 
 export interface VersionInfo {
   name: string
@@ -31,6 +25,6 @@ export interface VersionInfo {
 
 export interface Notification {
   id: string
-  type?: keyof typeof notificationTypes
+  type: keyof typeof notificationTypes
   instruction: 'hide' | 'show'
 }

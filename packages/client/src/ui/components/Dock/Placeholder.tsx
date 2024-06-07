@@ -9,7 +9,7 @@ function Placeholder() {
   const { colorScheme } = useMantineColorScheme()
 
   return (
-    <Center maw="50%" mx="auto" sx={{ height: '100%' }}>
+    <Center maw="50%" mx="auto" style={{ height: '100%' }}>
       <Alert
         color={colorScheme === 'light' ? 'dark' : undefined}
         title={
@@ -26,7 +26,7 @@ function Placeholder() {
         <Space h="md" />✨ <em>Happy reading!</em>&nbsp;📚
         <Group>
           <Button
-            leftIcon={<IconPlus />}
+            leftSection={<IconPlus />}
             mt="lg"
             onClick={() => dispatch(requestNewTab())}
             variant="gradient"

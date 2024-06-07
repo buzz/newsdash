@@ -5,7 +5,7 @@ import { notificationProcessed } from '#store/slices/notifications/actions'
 import { globalizedNotificationsSelectors } from '#store/slices/notifications/selectors'
 import { useDispatch, useSelector } from '#ui/hooks/store'
 
-import getNotificationProps from './getNotificationProps'
+import getNotificationData from './getNotificationProps'
 
 function Notifications() {
   const dispatch = useDispatch()
@@ -18,7 +18,7 @@ function Notifications() {
         notifications.hide(notification.id)
       } else {
         // show
-        notifications.show(getNotificationProps(notification))
+        notifications.show(getNotificationData(notification))
       }
       dispatch(notificationProcessed(notification.id))
     }

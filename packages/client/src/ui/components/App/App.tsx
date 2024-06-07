@@ -1,28 +1,27 @@
+import { MantineProvider } from '@mantine/core'
 import { Provider as ReduxProvider } from 'react-redux'
 
-import Dock from '#ui/components/Dock/DockWrapper'
+import Dock from '#ui/components/Dock/Dock'
 import type { Store } from '#store/types'
-import type { ColorSchemeMode } from '#types/types'
 
 import AppShell from './AppShell'
 import Notifications from './notifications/Notifications'
-import ThemeProvider from './ThemeProvider'
+import theme, { resolver } from './theme'
 
-function App({ earlyColorSchemeMode, store }: AppProps) {
+function App({ store }: AppProps) {
   return (
     <ReduxProvider store={store}>
-      <ThemeProvider earlyColorSchemeMode={earlyColorSchemeMode}>
+      <MantineProvider cssVariablesResolver={resolver} defaultColorScheme="auto" theme={theme}>
         <Notifications />
         <AppShell>
           <Dock />
         </AppShell>
-      </ThemeProvider>
+      </MantineProvider>
     </ReduxProvider>
   )
 }
 
 interface AppProps {
-  earlyColorSchemeMode: ColorSchemeMode
   store: Store
 }
 

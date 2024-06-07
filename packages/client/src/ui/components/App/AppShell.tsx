@@ -8,27 +8,21 @@ import { useSelector } from '#ui/hooks/store'
 
 import Header from './Header/Header'
 
+import classes from './AppShell.module.css'
+
 function AppShell({ children }: AppShellProps) {
   const headerVisible = useSelector(selectHeaderVisibile)
 
   return (
     <>
-      <MantineAppShell
-        header={<Header />}
-        padding={0}
-        sx={(theme) => ({
-          main: {
-            backgroundColor:
-              theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0],
-            display: 'flex',
-            paddingTop: headerVisible ? 'calc(var(--mantine-header-height, 0px) + 0rem)' : 0,
-            transitionDuration: `${theme.other.transition.duration.default}ms`,
-            transitionProperty: 'padding-top',
-            transitionTimingFunction: theme.transitionTimingFunction,
-          },
-        })}
-      >
-        {children}
+      <MantineAppShell header={{ height: 60 }} padding={0}>
+        <Header />
+        <MantineAppShell.Main
+          className={classes.main}
+          data-header={headerVisible ? 'visible' : 'hidden'}
+        >
+          {children}
+        </MantineAppShell.Main>
       </MantineAppShell>
       <AboutModal />
       <SettingsModal />

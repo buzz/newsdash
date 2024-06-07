@@ -30,16 +30,19 @@ function loadTab(tabData: InputTabData) {
   else {
     tab.group = 'news'
     switch (tab.editMode) {
-      case 'edit':
+      case 'edit': {
         tab.content = <EditFeedForm id={tab.id} mode="edit" />
         tab.title = 'Edit feed'
         break
-      case 'create':
+      }
+      case 'create': {
         tab.content = <EditFeedForm id={tab.id} mode="create" />
         tab.title = 'New feed'
         break
-      default:
+      }
+      default: {
         tab.content = <Feed id={tab.id} />
+      }
     }
   }
 

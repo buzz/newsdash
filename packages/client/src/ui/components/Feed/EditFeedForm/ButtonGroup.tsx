@@ -5,11 +5,11 @@ import type { TabEditMode } from '#types/layout'
 
 function ButtonGroup({ mode, onCancel }: ButtonGroupProps) {
   return (
-    <Group mt="xl" position="right">
-      <Button color="red" leftIcon={<IconArrowBack />} onClick={onCancel}>
+    <Group mt="xl" justify="flex-end">
+      <Button color="red" leftSection={<IconArrowBack />} onClick={onCancel}>
         Cancel
       </Button>
-      <Button leftIcon={mode === 'create' ? <IconPlus /> : <IconEdit />}>
+      <Button leftSection={mode === 'create' ? <IconPlus /> : <IconEdit />}>
         {mode === 'create' ? 'Create' : 'Save'}
       </Button>
     </Group>

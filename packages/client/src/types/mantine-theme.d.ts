@@ -7,6 +7,7 @@ declare module '@mantine/core' {
         default: number
         short: number
       }
+      timingFunction: string
     }
   }
 }

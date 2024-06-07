@@ -1,0 +1,11 @@
+.logo {
+  padding: 0 var(--mantine-spacing-xl) var(--mantine-spacing-xl);
+}
+
+.text {
+  padding-top: var(--mantine-spacing-xs);
+}
+
+.links {
+  padding-top: var(--mantine-spacing-xl);
+}

@@ -1,4 +1,4 @@
-import { Modal as MantineModal, useMantineTheme } from '@mantine/core'
+import { Modal as MantineModal } from '@mantine/core'
 import type { ReactNode } from 'react'
 
 import { closeModal } from '#store/slices/app/actions'
@@ -11,7 +11,6 @@ function Modal({ children, icon, name, title }: ModalProps) {
   const dispatch = useDispatch()
   const selectIsOpen = (state: RootState) => selectIsModalOpen(state, name)
   const opened = useSelector(selectIsOpen)
-  const theme = useMantineTheme()
 
   return (
     <MantineModal.Root
@@ -21,11 +20,7 @@ function Modal({ children, icon, name, title }: ModalProps) {
       opened={opened}
       size="md"
     >
-      <MantineModal.Overlay
-        color={theme.colorScheme === 'dark' ? theme.colors.gray[8] : theme.colors.gray[9]}
-        opacity={0.7}
-        blur={3}
-      />
+      <MantineModal.Overlay blur={2} />
       <MantineModal.Content>
         <MantineModal.Header>
           {icon}

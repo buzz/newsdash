@@ -1,0 +1,22 @@
+.wrapper {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+}
+
+.content {
+  max-width: rem(500);
+  width: 100%;
+  padding: var(--mantine-spacing-xs);
+}
+
+title {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--mantine-spacing-sm);
+
+  & > svg {
+    margin-right: var(--mantine-spacing-xs);
+  }
+}

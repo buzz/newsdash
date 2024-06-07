@@ -1,11 +1,4 @@
-import {
-  createStyles,
-  Group,
-  Header as MantineHeader,
-  Transition,
-  useMantineColorScheme,
-  useMantineTheme,
-} from '@mantine/core'
+import { AppShell, Group, Transition, useMantineColorScheme, useMantineTheme } from '@mantine/core'
 import {
   IconInfoSmall,
   IconMoonStars,
@@ -24,13 +17,12 @@ import { useDispatch, useSelector } from '#ui/hooks/store'
 import HeaderButton from './HeaderButton'
 import HeaderToggleButton from './HeaderToggleButton'
 
-const useStyles = createStyles({ headerChild: { height: '100%' } })
+import classes from './Header.module.css'
 
 function Header() {
   const dispatch = useDispatch()
   const headerVisible = useSelector(selectHeaderVisibile)
   const { colorScheme, toggleColorScheme } = useMantineColorScheme()
-  const { classes } = useStyles()
   const theme = useMantineTheme()
 
   return (
@@ -39,14 +31,14 @@ function Header() {
       <Transition
         duration={theme.other.transition.duration.default}
         mounted={headerVisible}
-        timingFunction={theme.transitionTimingFunction}
+        timingFunction={theme.other.transition.timingFunction}
         transition="slide-down"
       >
         {(styles) => (
-          <MantineHeader height={60} p="xs" style={styles}>
-            <Group className={classes.headerChild} px={20} position="apart">
+          <AppShell.Header p="xs" style={styles}>
+            <Group className={classes.headerChild} px={20} justify="space-between" wrap="nowrap">
               <Logo className={classes.headerChild} />
-              <Group className={classes.headerChild} pl={20} position="right" grow={false}>
+              <Group className={classes.headerChild} pl={20} justify="flex-end" wrap="nowrap">
                 <HeaderButton
                   color="primary"
                   onClick={() => dispatch(requestNewTab())}
@@ -85,7 +77,7 @@ function Header() {
                 </HeaderButton>
               </Group>
             </Group>
-          </MantineHeader>
+          </AppShell.Header>
         )}
       </Transition>
     </>

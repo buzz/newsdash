@@ -1,11 +1,9 @@
-import type { NotificationProps as MantineNotificationProps } from '@mantine/notifications'
+import type { NotificationData } from '@mantine/notifications'
 import { IconCloudDataConnection, IconWorldBolt } from '@tabler/icons-react'
 
 import type { Notification } from '#types/types'
 
-type NotificationProps = Omit<MantineNotificationProps, 'id' | 'onClose' | 'onOpen'>
-
-export const notificationTypes: Record<string, NotificationProps> = {
+export const notificationTypes: Record<string, NotificationData> = {
   disconnect: {
     autoClose: false,
     color: 'red',
@@ -23,7 +21,7 @@ export const notificationTypes: Record<string, NotificationProps> = {
   },
 }
 
-function getNotificationProps(notification: Notification) {
+function getNotificationData(notification: Notification): NotificationData {
   return {
     id: notification.id,
     autoClose: 5000,
@@ -31,4 +29,4 @@ function getNotificationProps(notification: Notification) {
   }
 }
 
-export default getNotificationProps
+export default getNotificationData

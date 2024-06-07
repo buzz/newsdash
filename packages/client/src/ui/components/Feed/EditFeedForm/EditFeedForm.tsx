@@ -1,13 +1,4 @@
-import {
-  ActionIcon,
-  Box,
-  ColorInput,
-  createStyles,
-  rem,
-  TextInput,
-  Title,
-  useMantineTheme,
-} from '@mantine/core'
+import { ActionIcon, Box, ColorInput, TextInput, Title, useMantineTheme } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { IconRefresh, IconRss } from '@tabler/icons-react'
 
@@ -19,36 +10,12 @@ import type { TabEditMode } from '#types/layout'
 import ButtonGroup from './ButtonGroup'
 import { isValidUrl, randomColor } from './utils'
 
-const useStyles = createStyles((theme) => ({
-  wrapper: {
-    alignItems: 'center',
-    display: 'flex',
-    height: '100%',
-    justifyContent: 'center',
-  },
-
-  content: {
-    maxWidth: rem(500),
-    width: '100%',
-    padding: theme.spacing.xs,
-  },
-
-  title: {
-    display: 'flex',
-    alignItems: 'center',
-    marginBottom: theme.spacing.sm,
-
-    '& > svg': {
-      marginRight: theme.spacing.xs,
-    },
-  },
-}))
+import classes from './EditFeedForm.module.css'
 
 function EditFeedForm({ id, mode }: EditFeedFormProps) {
   const dispatch = useDispatch()
-  const { classes } = useStyles()
   const theme = useMantineTheme()
-  const swatchColors = Object.values(theme.colors).map((c) => c[6])
+  const swatchColors = Object.values(theme.colors).map((color) => color[6])
 
   const form = useForm({
     initialValues: {
@@ -88,7 +55,11 @@ function EditFeedForm({ id, mode }: EditFeedFormProps) {
             swatchesPerRow={7}
             rightSection={
               <Tooltip label="Random color">
-                <ActionIcon onClick={() => form.setFieldValue('color', randomColor())}>
+                <ActionIcon
+                  onClick={() => {
+                    form.setFieldValue('color', randomColor())
+                  }}
+                >
                   <IconRefresh size="1rem" />
                 </ActionIcon>
               </Tooltip>

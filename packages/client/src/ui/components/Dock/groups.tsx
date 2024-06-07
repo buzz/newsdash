@@ -6,7 +6,7 @@ const groups: Record<string, TabGroup> = {
   news: {
     floatable: false,
     maximizable: false,
-    panelExtra: (panel, context) => <PanelExtra panel={panel} />,
+    panelExtra: (panel) => <PanelExtra panel={panel} />,
   },
 }
 

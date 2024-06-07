@@ -1,0 +1,12 @@
+.main {
+  background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-gray-8));
+  display: flex;
+  padding: var(--mantine-spacing-xs);
+  transition-duration: var(--transition-duration);
+  transition-property: padding-top;
+  transition-timing-function: var(--transition-timing-function);
+
+  &[data-header='visible'] {
+    padding-top: calc(var(--app-shell-header-height) + var(--mantine-spacing-xs));
+  }
+}

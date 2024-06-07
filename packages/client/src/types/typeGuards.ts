@@ -1,15 +1,16 @@
+import type { MantineColorScheme } from '@mantine/core'
 import type { BoxData, PanelData } from 'rc-dock'
 
 import type { Box } from './layout'
-import type { ArbitraryObject, ColorSchemeMode } from './types'
+import type { ArbitraryObject } from './types'
 
 /** Type guard for arbitrary object */
 export function isArbitraryObject(obj: unknown): obj is ArbitraryObject {
   return typeof obj === 'object' && obj !== null
 }
 
-export function isColorSchemeMode(mode: unknown): mode is ColorSchemeMode {
-  return typeof mode === 'string' && ['light', 'dark', 'system'].includes(mode)
+export function isColorScheme(mode: unknown): mode is MantineColorScheme {
+  return typeof mode === 'string' && ['light', 'dark', 'auto'].includes(mode)
 }
 
 export function isPanelData(obj: unknown): obj is PanelData {

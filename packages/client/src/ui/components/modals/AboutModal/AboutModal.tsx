@@ -1,5 +1,4 @@
 import { Group, Text } from '@mantine/core'
-import { createStyles } from '@mantine/styles'
 import { IconBrandGithub, IconScale } from '@tabler/icons-react'
 
 import { useGetVersionQuery } from '#store/slices/api/version'
@@ -8,20 +7,9 @@ import Modal from '#ui/components/common/Modal'
 
 import IconButton from './IconButton'
 
-const useStyles = createStyles((theme) => ({
-  logo: {
-    padding: `0 ${theme.spacing.xl} ${theme.spacing.xl}`,
-  },
-  text: {
-    paddingTop: theme.spacing.xs,
-  },
-  links: {
-    paddingTop: theme.spacing.xl,
-  },
-}))
+import classes from './AboutModal.module.css'
 
 function AboutModal() {
-  const { classes } = useStyles()
   const { data, isSuccess } = useGetVersionQuery(undefined, {})
 
   return (
@@ -36,7 +24,7 @@ function AboutModal() {
       <Text className={classes.text} fz="sm" ta="center">
         Version {isSuccess ? data.version : ''}
       </Text>
-      <Group className={classes.links} position="center">
+      <Group className={classes.links} justify="center">
         <IconButton
           href="https://github.com/buzz/newsdash"
           tooltip="https://github.com/buzz/newsdash"

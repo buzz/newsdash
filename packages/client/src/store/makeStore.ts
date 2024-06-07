@@ -1,6 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
 
-import colorThemeModeListenerMiddleware from './middlewares/colorThemeModeListenerMiddleware'
 import connectivityCheckListenerMiddleware from './middlewares/connectivityCheckListenerMiddleware'
 import layoutListenerMiddleware from './middlewares/layoutListenerMiddleware/layoutListenerMiddleware'
 import reducer from './reducer'
@@ -14,7 +13,6 @@ function makeStore() {
       // eslint-disable-next-line unicorn/prefer-spread
       getDefaultMiddleware().concat([
         apiSlice.middleware,
-        colorThemeModeListenerMiddleware.middleware,
         connectivityCheckListenerMiddleware.middleware,
         layoutListenerMiddleware.middleware,
       ]),
