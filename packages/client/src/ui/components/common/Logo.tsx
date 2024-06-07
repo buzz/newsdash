@@ -1,7 +1,7 @@
 import { useMantineTheme } from '@mantine/styles'
 
-import { ReactComponent as LogoDarkSvg } from '#assets/logo-dark.svg'
-import { ReactComponent as LogoLightSvg } from '#assets/logo-light.svg'
+import LogoDarkSvg from '#assets/logo-dark.svg?react'
+import LogoLightSvg from '#assets/logo-light.svg?react'
 
 function Logo({ className }: LogoProps) {
   const theme = useMantineTheme()

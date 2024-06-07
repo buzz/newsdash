@@ -23,21 +23,21 @@
     "#redis/*": "./src/redis/*"
   },
   "dependencies": {
-    "@keyv/redis": "^2.7.0",
+    "@keyv/redis": "^2.8.5",
     "cors": "^2.8.5",
-    "express": "^4.18.2",
-    "express-validator": "^7.0.1",
-    "got": "^13.0.0",
-    "ioredis": "^5.3.2",
-    "keyv": "^4.5.2",
-    "metascraper": "^5.34.8",
-    "metascraper-image": "^5.34.7"
+    "express": "^4.19.2",
+    "express-validator": "^7.1.0",
+    "got": "^14.4.1",
+    "ioredis": "^5.4.1",
+    "keyv": "^4.5.4",
+    "metascraper": "^5.45.10",
+    "metascraper-image": "^5.45.10"
   },
   "devDependencies": {
-    "@types/cors": "^2.8.13",
-    "@types/express": "^4.17.17",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
     "@types/got": "^9.6.12",
-    "nodemon": "^3.0.1",
-    "tsx": "^4.12.0"
+    "nodemon": "^3.1.3",
+    "tsx": "^4.13.2"
   }
 }
