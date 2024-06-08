@@ -2,9 +2,9 @@ import 'rc-dock/dist/rc-dock.css'
 import './Dock.css'
 
 import DockLayout from 'rc-dock'
-import { useCallback } from 'react'
+import { useCallback, useEffect } from 'react'
 
-import { handleLayoutChange, layoutReady } from '#store/slices/layout/actions'
+import { layoutChange, rcLayoutReady, rcLayoutChange } from '#store/slices/layout/actions'
 import { selectDenormalizedLayout } from '#store/slices/layout/selectors'
 import { useDispatch, useSelector } from '#ui/hooks/store'
 
@@ -17,8 +17,12 @@ function Dock() {
 
   // useCallback, otherwise ref callback gets fired multiple times
   const setRcDockRef = useCallback(() => {
-    dispatch(layoutReady())
+    dispatch(rcLayoutReady())
   }, [dispatch])
+
+  useEffect(() => {
+    dispatch(layoutChange(layout))
+  }, [layout])
 
   return (
     <DockLayout
@@ -26,7 +30,7 @@ function Dock() {
       groups={groups}
       layout={layout}
       loadTab={loadTab}
-      onLayoutChange={(newLayout) => dispatch(handleLayoutChange(newLayout))}
+      onLayoutChange={(newLayout) => dispatch(rcLayoutChange(newLayout))}
       ref={setRcDockRef}
     />
   )

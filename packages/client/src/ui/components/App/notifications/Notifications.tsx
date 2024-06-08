@@ -6,7 +6,7 @@ import {
 import { useEffect } from 'react'
 
 import { notificationProcessed } from '#store/slices/notifications/actions'
-import { globalizedNotificationsSelectors } from '#store/slices/notifications/selectors'
+import notificationsSelectors from '#store/slices/notifications/selectors'
 import { useDispatch, useSelector } from '#ui/hooks/store'
 import type { Notification, ShowNotification } from '#types/types'
 
@@ -26,7 +26,7 @@ function getNotificationData(notification: ShowNotification): NotificationData {
 
 function Notifications() {
   const dispatch = useDispatch()
-  const storeNotifications = useSelector(globalizedNotificationsSelectors.selectAll)
+  const storeNotifications = useSelector(notificationsSelectors.selectAll)
 
   useEffect(() => {
     for (const notification of storeNotifications) {

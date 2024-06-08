@@ -3,11 +3,8 @@ import { nanoid } from 'nanoid'
 
 import { requestNewTab } from '#store/slices/layout/actions'
 import { selectDockbox } from '#store/slices/layout/entities/boxes/selectors'
-import { addPanel, removePanel, setActiveTab } from '#store/slices/layout/entities/panels/actions'
-import {
-  selectPanelForTab,
-  selectPlaceholderPanel,
-} from '#store/slices/layout/entities/panels/selectors'
+import { addPanel, setActiveTab } from '#store/slices/layout/entities/panels/actions'
+import { selectPanelForTab } from '#store/slices/layout/entities/panels/selectors'
 import { addTab } from '#store/slices/layout/entities/tabs/actions'
 import { selectMaxTabOrder } from '#store/slices/layout/entities/tabs/selectors'
 import type { AppStartListening } from '#store/middlewares/types'
@@ -46,13 +43,6 @@ function findPanelId(listenerApi: ListenerEffectAPI<RootState, AppDispatch>): st
   if (panel) {
     return panel.id
   }
-
-  // Remove placeholder
-  const placeholder = selectPlaceholderPanel(listenerApi.getState())
-  if (!placeholder) {
-    throw new Error("Couldn't get placeholder when there should be one")
-  }
-  listenerApi.dispatch(removePanel(placeholder.id))
 
   // Add empty panel
   const panelId = nanoid()

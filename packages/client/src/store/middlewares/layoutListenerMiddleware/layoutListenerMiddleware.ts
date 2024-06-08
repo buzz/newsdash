@@ -2,21 +2,21 @@ import { createListenerMiddleware } from '@reduxjs/toolkit'
 
 import type { AppStartListening } from '#store/middlewares/types'
 
-import handleLayoutChangeEffect from './effects/handleLayoutChangeEffect'
+import handleRcLayoutChangeEffect from './effects/handleRcLayoutChangeEffect'
 import removeTabsOnCascadeEffect from './effects/handleRemovePanelEffect'
 import handleSetActiveTabEffect from './effects/handleSetActiveTabEffect'
-import initializeEffect from './effects/initializeEffect'
+import managePlaceholderEffect from './effects/managePlaceholderEffect'
 import requestNewTabEffect from './effects/requestNewTabEffect'
 
 const layoutListenerMiddleware = createListenerMiddleware()
 const startListening = layoutListenerMiddleware.startListening as AppStartListening
 
 const effects = [
-  initializeEffect,
+  managePlaceholderEffect,
   requestNewTabEffect,
   removeTabsOnCascadeEffect,
   handleSetActiveTabEffect,
-  handleLayoutChangeEffect,
+  handleRcLayoutChangeEffect,
 ]
 
 for (const effect of effects) {

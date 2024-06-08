@@ -56,3 +56,7 @@ export interface DenormalizedPanel extends Omit<PanelData, 'tabs'> {
 }
 
 export type DenormalizedTab = Omit<TabData, 'content'> & TabCustomFields
+
+export interface DenormalizedLayout {
+  dockbox: DenormalizedBox
+}

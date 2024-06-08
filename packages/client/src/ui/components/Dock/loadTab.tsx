@@ -13,8 +13,6 @@ type OutputTab = Tab & Pick<TabData, 'content' | 'title'>
 
 /** Get tab component */
 function loadTab(tabData: InputTabData) {
-  console.log('loadTab', tabData)
-
   const tab: OutputTab = {
     ...tabData,
     title: '',

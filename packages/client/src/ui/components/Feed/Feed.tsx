@@ -1,7 +1,7 @@
 import { Box, useMantineTheme } from '@mantine/core'
 import { Scrollbars } from 'react-custom-scrollbars-2'
 
-import { globalizedTabsSelectors } from '#store/slices/layout/entities/tabs/selectors'
+import tabsSelectors from '#store/slices/layout/entities/tabs/selectors'
 import { useSelector } from '#ui/hooks/store'
 import type { RootState } from '#store/types'
 
@@ -13,7 +13,7 @@ function HTrack() {
 
 function Feed({ id }: FeedProps) {
   const theme = useMantineTheme()
-  const selectTab = (state: RootState) => globalizedTabsSelectors.selectById(state, id)
+  const selectTab = (state: RootState) => tabsSelectors.selectById(state, id)
   const tab = useSelector(selectTab)
 
   return (

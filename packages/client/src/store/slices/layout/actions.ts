@@ -1,11 +1,15 @@
 import type { LayoutBase } from 'rc-dock'
 
 import type { NormalizedLayoutState } from '#store/utils/LayoutNormalizer'
+import type { DenormalizedLayout } from '#types/layout'
 
 import layoutSlice from './layoutSlice'
 
 /** Handle rc-dock layout update */
-export const handleLayoutChange = layoutSlice.createAction<LayoutBase>('handleLayoutChange')
+export const rcLayoutChange = layoutSlice.createAction<LayoutBase>('rcLayoutChange')
+
+/** Store Layout changed */
+export const layoutChange = layoutSlice.createAction<DenormalizedLayout>('layoutChange')
 
 /** Process normalized layout data */
 export const updateLayout = layoutSlice.createAction<NormalizedLayoutState>('updateLayout')
@@ -14,4 +18,4 @@ export const updateLayout = layoutSlice.createAction<NormalizedLayoutState>('upd
 export const requestNewTab = layoutSlice.createAction<string | undefined>('requestNewTab')
 
 /** Signal rc-dock is ready to process layouts */
-export const layoutReady = layoutSlice.createAction('layoutReady')
+export const rcLayoutReady = layoutSlice.createAction('rcLayoutReady')

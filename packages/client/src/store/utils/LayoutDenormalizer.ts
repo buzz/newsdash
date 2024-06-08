@@ -7,6 +7,7 @@ import type { RootState } from '#store/types'
 import type {
   Box,
   DenormalizedBox,
+  DenormalizedLayout,
   DenormalizedPanel,
   DenormalizedTab,
   Panel,
@@ -25,7 +26,7 @@ class LayoutDenormalizer {
     this.state = state
   }
 
-  denormalizeLayout() {
+  denormalizeLayout(): DenormalizedLayout {
     const dockbox = selectDockbox(this.state)
 
     // Return empty layout if we don't have one yet
