@@ -1,0 +1,21 @@
+.placeholder {
+  background-color: light-dark(var(--mantine-color-gray-3), var(--mantine-color-gray-filled));
+
+  .heading {
+    @mixin dark {
+      --text-gradient: linear-gradient(
+        45deg,
+        var(--mantine-color-yellow-filled) 0%,
+        var(--mantine-color-red-filled) 100%
+      ) !important;
+    }
+
+    @mixin light {
+      --text-gradient: linear-gradient(
+        45deg,
+        darken(var(--mantine-color-yellow-filled), 0.15) 0%,
+        darken(var(--mantine-color-red-filled), 0.1) 100%
+      ) !important;
+    }
+  }
+}

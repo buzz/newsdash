@@ -13,4 +13,4 @@ export const addTab = tabsSlice.createAction('addTab', (tab: Omit<Tab, 'editMode
 export const removeTab = tabsSlice.createAction<string>('removeTab')
 
 /** Edit tab */
-export const editTab = tabsSlice.createAction<Update<Tab>>('editTab')
+export const editTab = tabsSlice.createAction<Update<Tab, string>>('editTab')

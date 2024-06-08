@@ -1,5 +1,3 @@
-import type { StateFromReducersMapObject } from '@reduxjs/toolkit'
-
 import type makeStore from './makeStore'
 import type reducer from './reducer'
 
@@ -7,7 +5,7 @@ import type reducer from './reducer'
 export type Store = ReturnType<typeof makeStore>
 
 /** Root state */
-export type RootState = StateFromReducersMapObject<typeof reducer>
+export type RootState = ReturnType<typeof reducer>
 
 /** Dispatch type */
 export type AppDispatch = Store['dispatch']

@@ -17,11 +17,8 @@ import type { AppDispatch, RootState } from '#store/types'
 function requestNewTabEffect(startListening: AppStartListening) {
   startListening({
     actionCreator: requestNewTab,
-    effect: ({ payload }, listenerApi) => {
-      let panelId = payload
-      if (panelId === undefined) {
-        panelId = findPanelId(listenerApi)
-      }
+    effect: ({ payload: requestedPanelId }, listenerApi) => {
+      const panelId = requestedPanelId ?? findPanelId(listenerApi)
 
       // Find tab order
       const selectOrder = (state: RootState) => selectMaxTabOrder(state, panelId)
@@ -43,7 +40,7 @@ function requestNewTabEffect(startListening: AppStartListening) {
 }
 
 // Find a panel for new tab
-function findPanelId(listenerApi: ListenerEffectAPI<RootState, AppDispatch>) {
+function findPanelId(listenerApi: ListenerEffectAPI<RootState, AppDispatch>): string {
   const panel = selectPanelForTab(listenerApi.getState())
 
   if (panel) {

@@ -8,8 +8,8 @@ const globalizedSelectors = boxesEntityAdapter.getSelectors(
 )
 
 /** Select child boxes */
-export const selectChildBoxes = (state: RootState, parentId: string) =>
-  globalizedSelectors.selectAll(state).filter((b) => b.parentId === parentId)
+export const selectChildBoxes = (state: RootState, parentId: string | null) =>
+  globalizedSelectors.selectAll(state).filter((box) => box.parentId === parentId)
 
 /** Select root box */
 export const selectDockbox = (state: RootState) => selectChildBoxes(state, null).at(0)

@@ -1,17 +1,19 @@
 /* TODO: add mantine focusStyles, fontStyles */
 
-:root[data-mantine-color-scheme='light'] {
-  --dock-panel-color-border: var(--mantine-color-dark-0);
-  --popover-border-color: var(--mantine-color-gray-2);
-  --popover-fill-color: var(--mantine-color-white);
-  --menu-item-hover: var(--mantine-color-gray-1);
-}
-
 :root[data-mantine-color-scheme='dark'] {
   --dock-panel-color-border: var(--mantine-color-dark-4);
+  --dock-tabs-color-fill: var(--mantine-color-gray-9);
   --popover-border-color: var(--mantine-color-dark-4);
   --popover-fill-color: var(--mantine-color-dark-6);
   --menu-item-hover: var(--mantine-color-dark-4);
+}
+
+:root[data-mantine-color-scheme='light'] {
+  --dock-panel-color-border: var(--mantine-color-dark-0);
+  --dock-tabs-color-fill: var(--mantine-color-gray-1);
+  --popover-border-color: var(--mantine-color-gray-2);
+  --popover-fill-color: var(--mantine-color-white);
+  --menu-item-hover: var(--mantine-color-gray-1);
 }
 
 .dock-layout {
@@ -56,13 +58,46 @@
     background-color: var(--mantine-color-body);
     border-color: var(--dock-panel-color-border);
     border-radius: var(--mantine-radius-sm);
-    /* border-radius: dt.radius[typeof dt.defaultRadius === 'string' ? dt.defaultRadius : 'sm']; */
     color: var(--mantine-color-text);
+    overflow: hidden;
   }
 
   /* Divider styles */
   .dock-divider {
-    flex-basis: calc(var(--mantine-spacing-xs) * 0.75);
+    flex-basis: calc(var(--mantine-spacing-xs) * 0.5);
+    position: relative;
+
+    &:hover::after {
+      background-color: rgba(255 255 255 / 0.08);
+    }
+
+    &::after {
+      box-shadow: inset -10px 0 8px -8px rgba(0, 0, 0, 0.08);
+      content: '';
+      height: 100%;
+      left: 0;
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      z-index: 1;
+    }
+  }
+
+  .dock-vbox > .dock-divider {
+    transform: scaleY(4);
+
+    &::after {
+      transform: scaleY(0.25);
+    }
+  }
+
+  .dock-hbox > .dock-divider {
+    transform: scaleX(4);
+
+    &::after {
+      transform: scaleX(0.25);
+    }
   }
 
   /* Styles for dock-panel within specific containers */
@@ -102,7 +137,7 @@
     }
   }
 
-  .dock-content {
+  .dock-tabpane {
     padding: var(--mantine-spacing-sm);
   }
 }
@@ -148,7 +183,7 @@ body > .dragging-layer {
 
   /* Top bar styles */
   .dock-top .dock-bar {
-    background: rgba(0 0 0 / 3%);
+    background: var(--dock-tabs-color-fill);
     border-bottom-color: var(--dock-panel-color-border);
   }
 

@@ -17,11 +17,8 @@ export const notificationsSlice = createSlice({
     })
 
     // Hide notification instruction
-    builder.addCase(hideNotification, (state, { payload: notification }) => {
-      notificationsEntityAdapter.addOne(state, {
-        id: notification,
-        instruction: 'hide',
-      })
+    builder.addCase(hideNotification, (state, { payload: id }) => {
+      notificationsEntityAdapter.addOne(state, { id, instruction: 'hide' })
     })
 
     // Remove notification that was handled by Mantine system

@@ -1,19 +1,20 @@
-import { Alert, Button, Center, Group, Space, Text, useMantineColorScheme } from '@mantine/core'
+import { Alert, Button, Center, Group, Space, Text } from '@mantine/core'
 import { IconPlus } from '@tabler/icons-react'
 
 import { requestNewTab } from '#store/slices/layout/actions'
 import { useDispatch } from '#ui/hooks/store'
 
+import classes from './Placeholder.module.css'
+
 function Placeholder() {
   const dispatch = useDispatch()
-  const { colorScheme } = useMantineColorScheme()
 
   return (
     <Center maw="50%" mx="auto" style={{ height: '100%' }}>
       <Alert
-        color={colorScheme === 'light' ? 'dark' : undefined}
+        className={classes.placeholder}
         title={
-          <Text variant="gradient" gradient={{ from: 'yellow', to: 'red', deg: 45 }} fz="xl">
+          <Text component="h1" className={classes.heading} variant="gradient" fz="xl">
             Welcome to newsdash
           </Text>
         }

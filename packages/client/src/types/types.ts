@@ -1,4 +1,4 @@
-import type { notificationTypes } from '#ui/components/App/notifications/getNotificationProps'
+import type { notificationTypes } from '#ui/components/App/notifications/notificationTypes'
 
 export type ModalName = 'about' | 'settings'
 
@@ -16,15 +16,29 @@ export interface AppState {
   versionInfo: VersionInfo | null
 }
 
-export interface Settings {}
+export interface Settings {
+  // TODO:
+  // colors
+  //   - lightness
+  //   - saturation
+  // fetch interval
+  // feed items to keep
+}
 
 export interface VersionInfo {
   name: string
   version: string
 }
 
-export interface Notification {
+export interface HideNotification {
+  id: string
+  instruction: 'hide'
+}
+
+export interface ShowNotification {
   id: string
   type: keyof typeof notificationTypes
-  instruction: 'hide' | 'show'
+  instruction: 'show'
 }
+
+export type Notification = HideNotification | ShowNotification

@@ -30,12 +30,12 @@ function EditFeedForm({ id, mode }: EditFeedFormProps) {
   })
 
   const handleCancel = () => {
-    dispatch(mode === 'create' ? removeTab(id) : editTab({ id, changes: { editMode: 'off' } }))
+    dispatch(mode === 'create' ? removeTab(id) : editTab({ id, changes: { editMode: undefined } }))
   }
 
-  const handleSubmit = () => {
-    dispatch(editTab({ id, changes: { editMode: 'off' } }))
-  }
+  const handleSubmit = form.onSubmit((values) => {
+    dispatch(editTab({ id, changes: { ...values, editMode: undefined } }))
+  })
 
   return (
     <Box className={classes.wrapper}>
@@ -44,7 +44,7 @@ function EditFeedForm({ id, mode }: EditFeedFormProps) {
           <IconRss />
           {mode === 'create' ? 'New feed' : 'Edit feed'}
         </Title>
-        <form onSubmit={form.onSubmit(handleSubmit)}>
+        <form onSubmit={handleSubmit}>
           <TextInput label="URL" required {...form.getInputProps('url')} />
           <TextInput label="Custom title" mt="sm" {...form.getInputProps('customTitle')} />
           <ColorInput
@@ -75,7 +75,7 @@ function EditFeedForm({ id, mode }: EditFeedFormProps) {
 
 interface EditFeedFormProps {
   id: string
-  mode: Exclude<TabEditMode, 'off'>
+  mode: TabEditMode
 }
 
 export default EditFeedForm

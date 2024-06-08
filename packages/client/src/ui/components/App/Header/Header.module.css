@@ -1,5 +1,19 @@
-.headerChild {
-  height: 100%;
+.header {
+  background-color: light-dark(var(--mantine-color-gray-3), var(--mantine-color-gray-9));
+  border-color: light-dark(var(--mantine-color-gray-5), var(--mantine-color-default-border));
+  padding: var(--mantine-spacing-xs) calc(var(--mantine-spacing-xs) + rem(1));
+
+  > * {
+    height: 100%;
+  }
+
+  .logo {
+    height: calc(2rem * var(--mantine-scale));
+  }
+
+  button[data-variant='default'] {
+    border-color: light-dark(var(--mantine-color-gray-5), var(--mantine-color-default-border));
+  }
 }
 
 .floatingBox {

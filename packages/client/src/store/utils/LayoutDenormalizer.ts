@@ -15,6 +15,9 @@ import type {
 
 import sortOrderComparer from './sortOrderComparer'
 
+/**
+ * Transform layout to by rc-dock's nested structure.
+ */
 class LayoutDenormalizer {
   private state: RootState
 
@@ -34,8 +37,7 @@ class LayoutDenormalizer {
   }
 
   /**
-   * Denormalize box by including children and removing `parentId` and `order`
-   * fields.
+   * Denormalize box by including `children` and removing `parentId` and `order` fields.
    */
   private denormalizeBox(box: Box): DenormalizedBox {
     const childBoxes = this.getChildBoxes(box.id)
@@ -47,10 +49,14 @@ class LayoutDenormalizer {
         isNormalizedBox(child) ? this.denormalizeBox(child) : this.denormalizePanel(child)
       )
 
-    const denormalizedBox = { ...box, children }
-    delete denormalizedBox.parentId
-    delete denormalizedBox.order
-    return denormalizedBox
+    return {
+      id: box.id,
+      children: children,
+      mode: box.mode,
+      size: box.size,
+      widthFlex: box.widthFlex,
+      heightFlex: box.heightFlex,
+    }
   }
 
   private getChildBoxes(parentId: string) {
@@ -63,27 +69,50 @@ class LayoutDenormalizer {
     return selector(this.state)
   }
 
+  /**
+   * Denormalize panel by including `tabs` and removing `parentId` and `order` fields.
+   */
   private denormalizePanel(panel: Panel): DenormalizedPanel {
-    const denormalizedPanel = {
-      ...panel,
+    return {
+      id: panel.id,
+      size: panel.size,
+      activeId: panel.activeId,
+      group: panel.group,
+      x: panel.x,
+      y: panel.y,
+      z: panel.z,
+      w: panel.w,
+      h: panel.h,
+      widthFlex: panel.widthFlex,
+      heightFlex: panel.heightFlex,
       tabs: this.denormalizeTabs(panel.id),
     }
-
-    delete denormalizedPanel.parentId
-    delete denormalizedPanel.order
-    return denormalizedPanel
   }
 
+  /**
+   * Denormalize tabs.
+   */
   private denormalizeTabs(parentId: string) {
     const selector = (state: RootState) => selectChildTabs(state, parentId)
-    return selector(this.state).map((t) => this.denormalizeTab(t))
+    return selector(this.state).map((tab) => this.denormalizeTab(tab))
   }
 
+  /**
+   * Denormalize tab by removing `parentId`, `order` and custom fields.
+   */
   private denormalizeTab(tab: Tab): DenormalizedTab {
-    const denormalizedTab = { ...tab }
-    delete denormalizedTab.parentId
-    delete denormalizedTab.order
-    return denormalizedTab
+    return {
+      id: tab.id,
+      group: tab.group,
+      closable: tab.closable,
+      cached: tab.cached,
+      minWidth: tab.minWidth,
+      minHeight: tab.minHeight,
+      title: '',
+      customTitle: tab.customTitle,
+      editMode: tab.editMode,
+      url: tab.url,
+    }
   }
 }
 

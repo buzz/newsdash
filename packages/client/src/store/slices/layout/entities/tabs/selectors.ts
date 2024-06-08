@@ -7,7 +7,7 @@ const globalizedSelectors = tabsEntityAdapter.getSelectors((state: RootState) =>
 
 /** Select panel tabs */
 export const selectChildTabs = (state: RootState, panelId: string) =>
-  globalizedSelectors.selectAll(state).filter((t) => t.parentId === panelId)
+  globalizedSelectors.selectAll(state).filter((tab) => tab.parentId === panelId)
 
 /** Get max tab order for panel */
 export const selectMaxTabOrder = (state: RootState, panelId: string) =>

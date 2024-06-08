@@ -1,10 +1,11 @@
-import apiSlice from '#store/slices/apiSlice'
 import type { VersionInfo } from '#types/types'
+
+import apiSlice from './apiSlice'
 
 export const version = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     /** Fetch backend version info */
-    getVersion: builder.query<VersionInfo, undefined>({
+    getVersion: builder.query<VersionInfo, void>({
       query: () => 'version',
     }),
   }),

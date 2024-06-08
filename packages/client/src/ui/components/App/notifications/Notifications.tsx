@@ -1,11 +1,28 @@
-import { Notifications as MantineNotifications, notifications } from '@mantine/notifications'
+import type { NotificationData } from '@mantine/notifications'
+import {
+  Notifications as MantineNotifications,
+  notifications as mantineNotifications,
+} from '@mantine/notifications'
 import { useEffect } from 'react'
 
 import { notificationProcessed } from '#store/slices/notifications/actions'
 import { globalizedNotificationsSelectors } from '#store/slices/notifications/selectors'
 import { useDispatch, useSelector } from '#ui/hooks/store'
+import type { Notification, ShowNotification } from '#types/types'
 
-import getNotificationData from './getNotificationProps'
+import notificationTypes from './notificationTypes'
+
+function isShowNotification(notification: Notification): notification is ShowNotification {
+  return notification.instruction === 'show'
+}
+
+function getNotificationData(notification: ShowNotification): NotificationData {
+  return {
+    id: notification.id,
+    autoClose: 5000,
+    ...notificationTypes[notification.type],
+  }
+}
 
 function Notifications() {
   const dispatch = useDispatch()
@@ -13,14 +30,15 @@ function Notifications() {
 
   useEffect(() => {
     for (const notification of storeNotifications) {
-      if (notification.instruction === 'hide') {
-        // hide
-        notifications.hide(notification.id)
-      } else {
-        // show
-        notifications.show(getNotificationData(notification))
+      try {
+        if (isShowNotification(notification)) {
+          mantineNotifications.show(getNotificationData(notification))
+        } else {
+          mantineNotifications.hide(notification.id)
+        }
+      } finally {
+        dispatch(notificationProcessed(notification.id))
       }
-      dispatch(notificationProcessed(notification.id))
     }
   }, [dispatch, storeNotifications])
 

@@ -11,7 +11,7 @@ export const addPanel = panelsSlice.createAction<Panel>('addPanel')
 export const removePanel = panelsSlice.createAction<string>('removePanel')
 
 /** Update panel */
-export const updatePanel = panelsSlice.createAction<Update<Panel>>('updatePanel')
+export const updatePanel = panelsSlice.createAction<Update<Panel, string>>('updatePanel')
 
 /** Set active tab */
 export const setActiveTab = panelsSlice.createAction<{ panelId: string; tabId: string }>(

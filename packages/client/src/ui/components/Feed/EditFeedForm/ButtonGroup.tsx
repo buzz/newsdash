@@ -9,7 +9,7 @@ function ButtonGroup({ mode, onCancel }: ButtonGroupProps) {
       <Button color="red" leftSection={<IconArrowBack />} onClick={onCancel}>
         Cancel
       </Button>
-      <Button leftSection={mode === 'create' ? <IconPlus /> : <IconEdit />}>
+      <Button type="submit" leftSection={mode === 'create' ? <IconPlus /> : <IconEdit />}>
         {mode === 'create' ? 'Create' : 'Save'}
       </Button>
     </Group>
@@ -17,7 +17,7 @@ function ButtonGroup({ mode, onCancel }: ButtonGroupProps) {
 }
 
 interface ButtonGroupProps {
-  mode: Exclude<TabEditMode, 'off'>
+  mode: TabEditMode
   onCancel: () => void
 }
 

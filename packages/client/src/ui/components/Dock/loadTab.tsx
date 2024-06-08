@@ -6,6 +6,7 @@ import Feed from '#ui/components/Feed/Feed'
 import type { Tab } from '#types/layout'
 
 import Placeholder from './Placeholder'
+import { Icon2fa } from '@tabler/icons-react'
 
 type InputTabData = Tab & Pick<TabData, 'content'>
 type OutputTab = Tab & Pick<TabData, 'content' | 'title'>
@@ -15,9 +16,7 @@ function loadTab(tabData: InputTabData) {
   console.log('loadTab', tabData)
 
   const tab: OutputTab = {
-    editMode: 'off',
     ...tabData,
-    content: null,
     title: '',
   }
 

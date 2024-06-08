@@ -11,6 +11,8 @@ function HeaderToggleButton({ hide }: HeaderToggleButtonProps) {
   const dispatch = useDispatch()
   const theme = useMantineTheme()
 
+  const label = 'Open navigation bar'
+
   return (
     <Box className={classes.floatingBox}>
       <Transition
@@ -21,9 +23,9 @@ function HeaderToggleButton({ hide }: HeaderToggleButtonProps) {
         {(styles) => (
           <Box style={styles}>
             <Box className={classes.btnWrapper}>
-              <Tooltip label="Expand navigation bar">
+              <Tooltip label={label}>
                 <ActionIcon
-                  aria-label="Expand navigation bar"
+                  aria-label={label}
                   color="primary"
                   onClick={() => dispatch(changeHeaderVisibile(true))}
                   radius="xl"

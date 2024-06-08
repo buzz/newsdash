@@ -12,7 +12,7 @@ const globalizedSelectors = panelsEntityAdapter.getSelectors(
 
 /** Select all panels (excluding placeholder) */
 const selectAllPanels = createSelector([globalizedSelectors.selectAll], (panels) =>
-  panels.filter((p) => p.group !== placeholderGroup)
+  panels.filter((panel) => panel.group !== placeholderGroup)
 )
 
 /** Select child panels */
@@ -24,9 +24,6 @@ export const selectPlaceholderPanel = (state: RootState) =>
   globalizedSelectors.selectAll(state).find((p) => p.group === placeholderGroup)
 
 /** Select panel for tab insertion */
-export const selectPanelForTab = (state: RootState) => {
-  const panels = selectAllPanels(state)
-  return panels.length > 0 ? panels.at(0) : undefined
-}
+export const selectPanelForTab = (state: RootState) => selectAllPanels(state).at(0)
 
 export { globalizedSelectors as globalizedPanelsSelectors }

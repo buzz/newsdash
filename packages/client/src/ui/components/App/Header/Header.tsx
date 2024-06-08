@@ -35,10 +35,10 @@ function Header() {
         transition="slide-down"
       >
         {(styles) => (
-          <AppShell.Header p="xs" style={styles}>
-            <Group className={classes.headerChild} px={20} justify="space-between" wrap="nowrap">
-              <Logo className={classes.headerChild} />
-              <Group className={classes.headerChild} pl={20} justify="flex-end" wrap="nowrap">
+          <AppShell.Header className={classes.header} style={styles}>
+            <Group justify="space-between" wrap="nowrap">
+              <Logo className={classes.logo} />
+              <Group pl={20} justify="flex-end" wrap="nowrap">
                 <HeaderButton
                   color="primary"
                   onClick={() => dispatch(requestNewTab())}
@@ -46,9 +46,6 @@ function Header() {
                   variant="gradient"
                 >
                   <IconPlus />
-                </HeaderButton>
-                <HeaderButton onClick={() => dispatch(openModal('about'))} tooltip="About newsdash">
-                  <IconInfoSmall size="2rem" />
                 </HeaderButton>
                 <HeaderButton
                   onClick={() => {
@@ -68,10 +65,13 @@ function Header() {
                 >
                   <IconSettings />
                 </HeaderButton>
+                <HeaderButton onClick={() => dispatch(openModal('about'))} tooltip="About newsdash">
+                  <IconInfoSmall size="2rem" />
+                </HeaderButton>
                 <HeaderButton
                   color="red"
                   onClick={() => dispatch(changeHeaderVisibile(false))}
-                  tooltip="Collapse navigation bar"
+                  tooltip="Close navigation bar"
                 >
                   <IconX />
                 </HeaderButton>

@@ -8,13 +8,13 @@ import tabsEntityAdapter from './entities/tabs/tabsEntityAdapter'
 import type { LayoutState } from './layoutSlice'
 
 /** Handle update of normalized layout, also remove remaining entities */
-export const updateLayoutReducer: CaseReducer = (
-  state: LayoutState,
-  { payload: { entities, remainingIds } }: PayloadAction<NormalizedLayoutState>
+export const updateLayoutReducer: CaseReducer<LayoutState, PayloadAction<NormalizedLayoutState>> = (
+  state,
+  { payload: { entities, removeIds } }
 ) => {
-  boxesEntityAdapter.removeMany(state.boxes, remainingIds.boxIds)
-  panelsEntityAdapter.removeMany(state.panels, remainingIds.panelIds)
-  tabsEntityAdapter.removeMany(state.tabs, remainingIds.tabIds)
+  boxesEntityAdapter.removeMany(state.boxes, removeIds.boxIds)
+  panelsEntityAdapter.removeMany(state.panels, removeIds.panelIds)
+  tabsEntityAdapter.removeMany(state.tabs, removeIds.tabIds)
 
   boxesEntityAdapter.upsertMany(state.boxes, entities.boxes)
   panelsEntityAdapter.upsertMany(state.panels, entities.panels)

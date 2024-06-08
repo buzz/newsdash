@@ -1,8 +1,6 @@
 import type { NotificationData } from '@mantine/notifications'
 import { IconCloudDataConnection, IconWorldBolt } from '@tabler/icons-react'
 
-import type { Notification } from '#types/types'
-
 export const notificationTypes: Record<string, NotificationData> = {
   disconnect: {
     autoClose: false,
@@ -21,12 +19,4 @@ export const notificationTypes: Record<string, NotificationData> = {
   },
 }
 
-function getNotificationData(notification: Notification): NotificationData {
-  return {
-    id: notification.id,
-    autoClose: 5000,
-    ...notificationTypes[notification.type],
-  }
-}
-
-export default getNotificationData
+export default notificationTypes

@@ -1,4 +1,4 @@
-import type { CombinedState, EntityState } from '@reduxjs/toolkit'
+import type { EntityState } from '@reduxjs/toolkit'
 
 import createSlice from '#store/createSlice'
 import type { Box, Panel, Tab } from '#types/layout'
@@ -9,11 +9,11 @@ import { panelsInitialState } from './entities/panels/panelsEntityAdapter'
 import { tabsInitialState } from './entities/tabs/tabsEntityAdapter'
 import { updateLayoutReducer } from './extraReducers'
 
-export type LayoutState = CombinedState<{
-  boxes: EntityState<Box>
-  panels: EntityState<Panel>
-  tabs: EntityState<Tab>
-}>
+export interface LayoutState {
+  boxes: EntityState<Box, string>
+  panels: EntityState<Panel, string>
+  tabs: EntityState<Tab, string>
+}
 
 const initialState: LayoutState = {
   boxes: boxesInitialState,

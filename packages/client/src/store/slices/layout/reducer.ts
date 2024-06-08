@@ -6,8 +6,7 @@ import panelsSlice from './entities/panels/panelsSlice'
 import tabsSlice from './entities/tabs/tabsSlice'
 import layoutSlice from './layoutSlice'
 
-// Run layout reducer on whole layout slice, then sub-slice reducers on each
-// sub-slice
+// Run layout reducer on whole layout slice, then sub-slice reducers on each sub-slice
 const reducer = reduceReducers(
   layoutSlice.reducer,
   combineReducers({

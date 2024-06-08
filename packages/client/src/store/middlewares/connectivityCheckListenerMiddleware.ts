@@ -10,7 +10,7 @@ import type { AppStartListening } from './types'
 const connectivityCheckListenerMiddleware = createListenerMiddleware()
 const startListening = connectivityCheckListenerMiddleware.startListening as AppStartListening
 
-let notificationId: string
+let notificationId: string | undefined
 
 // Connectivity check
 startListening({

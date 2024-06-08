@@ -10,7 +10,7 @@ import IconButton from './IconButton'
 import classes from './AboutModal.module.css'
 
 function AboutModal() {
-  const { data, isSuccess } = useGetVersionQuery(undefined, {})
+  const { data, isSuccess } = useGetVersionQuery()
 
   return (
     <Modal name="about">

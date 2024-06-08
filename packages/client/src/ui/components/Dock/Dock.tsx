@@ -22,6 +22,7 @@ function Dock() {
 
   return (
     <DockLayout
+      dropMode="edge"
       groups={groups}
       layout={layout}
       loadTab={loadTab}
