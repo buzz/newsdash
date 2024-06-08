@@ -16,7 +16,8 @@
   },
   "scripts": {
     "dev": "nodemon --exec tsx src/startServer.ts",
-    "start": "NODE_ENV=production node dist/startServer.js"
+    "start": "NODE_ENV=production node dist/startServer.js",
+    "typecheck": "tsc --noEmit -p ."
   },
   "imports": {
     "#constants": "./src/constants.ts",

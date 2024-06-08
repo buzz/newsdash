@@ -21,15 +21,15 @@
     "url": "https://github.com/buzz/newsdash.git"
   },
   "scripts": {
-    "build": "pnpm client:build && pnpm server:build",
-    "client:build:visualize-analyze": "BUNDLE_ANALYZE=1 pnpm client:build",
-    "client:build": "pnpm --filter @newsdash/client build",
-    "client:dev": "pnpm --filter @newsdash/client dev",
+    "build": "pnpm run client:build && pnpm run server:build",
+    "client:build:visualize-analyze": "BUNDLE_ANALYZE=1 pnpm run client:build",
+    "client:build": "pnpm run --filter @newsdash/client build",
+    "client:dev": "pnpm run --filter @newsdash/client dev",
     "lint": "eslint .",
-    "server:dev": "pnpm --filter @newsdash/server dev",
-    "server:start": "pnpm --filter @newsdash/server start",
-    "start": "pnpm server:start",
-    "type-check": "tsc -p ."
+    "server:dev": "pnpm run --filter @newsdash/server dev",
+    "server:start": "pnpm run --filter @newsdash/server start",
+    "start": "pnpm run server:start",
+    "typecheck": "pnpm run --filter '*' typecheck"
   },
   "eslintIgnore": [
     "/packages/client/dist"
