@@ -2,7 +2,7 @@ import createSlice from '#store/createSlice'
 
 import { boxesInitialState } from './boxesEntityAdapter'
 
-export const boxesSlice = createSlice({
+const boxesSlice = createSlice({
   name: 'boxes',
   initialState: boxesInitialState,
   reducers: {},

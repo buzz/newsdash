@@ -14,14 +14,15 @@ const selectAllPanels = createSelector([panelsSelectors.selectAll], (panels) =>
 )
 
 /** Select child panels */
-export const selectChildPanels = (state: RootState, parentId: string) =>
-  panelsSelectors.selectAll(state).filter((p) => p.parentId === parentId)
+const selectChildPanels = (state: RootState, parentId: string) =>
+  panelsSelectors.selectAll(state).filter((panel) => panel.parentId === parentId)
 
 /** Select placeholder panel */
-export const selectPlaceholderPanel = (state: RootState) =>
-  panelsSelectors.selectAll(state).find((p) => p.group === placeholderGroup)
+const selectPlaceholderPanel = (state: RootState) =>
+  panelsSelectors.selectAll(state).find((panel) => panel.group === placeholderGroup)
 
 /** Select panel for tab insertion */
-export const selectPanelForTab = (state: RootState) => selectAllPanels(state).at(0)
+const selectPanelForTab = (state: RootState) => selectAllPanels(state).at(0)
 
+export { selectChildPanels, selectPanelForTab, selectPlaceholderPanel }
 export default panelsSelectors

@@ -1,21 +1,21 @@
-import type { LayoutBase } from 'rc-dock'
-
-import type { NormalizedLayoutState } from '#store/utils/LayoutNormalizer'
-import type { DenormalizedLayout } from '#types/layout'
+import type { NormalizedEntities, NormalizedLayoutState } from '#store/utils/LayoutNormalizer'
+import type { CustomLayoutBase } from '#types/layout'
 
 import layoutSlice from './layoutSlice'
 
 /** Handle rc-dock layout update */
-export const rcLayoutChange = layoutSlice.createAction<LayoutBase>('rcLayoutChange')
+const rcLayoutChange = layoutSlice.createAction<CustomLayoutBase>('rcLayoutChange')
 
-/** Store Layout changed */
-export const layoutChange = layoutSlice.createAction<DenormalizedLayout>('layoutChange')
+/** Update layout */
+const updateLayout = layoutSlice.createAction<NormalizedLayoutState>('updateLayout')
 
-/** Process normalized layout data */
-export const updateLayout = layoutSlice.createAction<NormalizedLayoutState>('updateLayout')
+/** Restore layout */
+const restoreLayout = layoutSlice.createAction<NormalizedEntities>('restoreLayout')
 
 /** Request new tab */
-export const requestNewTab = layoutSlice.createAction<string | undefined>('requestNewTab')
+const requestNewTab = layoutSlice.createAction<string | undefined>('requestNewTab')
 
 /** Signal rc-dock is ready to process layouts */
-export const rcLayoutReady = layoutSlice.createAction('rcLayoutReady')
+const rcLayoutReady = layoutSlice.createAction('rcLayoutReady')
+
+export { rcLayoutChange, rcLayoutReady, requestNewTab, restoreLayout, updateLayout }

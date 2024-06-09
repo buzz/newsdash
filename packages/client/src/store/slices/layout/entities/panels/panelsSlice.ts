@@ -3,7 +3,7 @@ import createSlice from '#store/createSlice'
 import { addPanel, removePanel, updatePanel } from './actions'
 import panelsEntityAdapter, { panelsInitialState } from './panelsEntityAdapter'
 
-export const panelsSlice = createSlice({
+const panelsSlice = createSlice({
   name: 'panels',
   initialState: panelsInitialState,
   reducers: {},

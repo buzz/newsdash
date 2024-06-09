@@ -1,18 +1,29 @@
 import { nanoid } from 'nanoid'
+import type { NotificationData } from '@mantine/notifications'
 
 import notificationsSlice from './notificationsSlice'
 
+const AUTO_CLOSE_DEFAULT = 5000
+
 /** Request creation of new notification */
-export const showNotification = notificationsSlice.createAction(
+const showNotification = notificationsSlice.createAction(
   'showNotification',
-  (type: string) => ({
-    payload: { id: nanoid(), type },
+  (data: NotificationData) => ({
+    payload: {
+      id: nanoid(),
+      command: 'show' as const,
+      data: {
+        autoClose: AUTO_CLOSE_DEFAULT,
+        ...data,
+      },
+    },
   })
 )
 
 /** Hide a notification in Mantine notification system */
-export const hideNotification = notificationsSlice.createAction<string>('hideNotification')
+const hideNotification = notificationsSlice.createAction<string>('hideNotification')
 
 /** Signal notification has been passed to Mantine notification system */
-export const notificationProcessed =
-  notificationsSlice.createAction<string>('notificationProcessed')
+const notificationProcessed = notificationsSlice.createAction<string>('notificationProcessed')
+
+export { hideNotification, notificationProcessed, showNotification }

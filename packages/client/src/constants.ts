@@ -1,20 +1,17 @@
 import { nanoid } from 'nanoid'
 import { type LayoutBase, placeHolderStyle as placeholderGroup } from 'rc-dock'
 
-export const LOCAL_STORAGE_COLOR_THEME_KEY = 'newdash-color-scheme'
+const FETCH_TIMEOUT = 5000
 
-export const FETCH_TIMEOUT = 5000
+const TAB_MIN_WIDTH = 300
+const TAB_MIN_HEIGHT = 300
 
-export const CONNECTIVITY_CHECK_INTERVAL = 60_000
+const PLACEHOLDER_TAB_ID = '__placeholdertab__'
 
-export const PLACEHOLDER_TAB_ID = '__placeholdertab__'
-
-export const PLACEHOLDER_LAYOUT: LayoutBase = {
+const PLACEHOLDER_LAYOUT: LayoutBase = {
   dockbox: {
-    id: nanoid(),
     children: [
       {
-        id: nanoid(),
         group: placeholderGroup,
         tabs: [{ id: PLACEHOLDER_TAB_ID }],
       },
@@ -23,9 +20,20 @@ export const PLACEHOLDER_LAYOUT: LayoutBase = {
   },
 }
 
-export const EMPTY_LAYOUT = {
+const EMPTY_LAYOUT = {
   dockbox: {
+    id: nanoid(),
+    children: [],
     mode: 'horizontal' as const,
-    children: [{ tabs: [] }],
+    order: 0,
   },
+}
+
+export {
+  EMPTY_LAYOUT,
+  FETCH_TIMEOUT,
+  PLACEHOLDER_LAYOUT,
+  PLACEHOLDER_TAB_ID,
+  TAB_MIN_HEIGHT,
+  TAB_MIN_WIDTH,
 }

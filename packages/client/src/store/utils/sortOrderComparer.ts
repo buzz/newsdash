@@ -1,4 +1,6 @@
-import type { Orderable } from '#types/layout'
+interface Orderable {
+  order: number
+}
 
 function sortOrderComparer<T extends Orderable>(a: T, b: T) {
   return a.order - b.order

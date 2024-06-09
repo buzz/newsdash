@@ -1,16 +1,23 @@
 import type { Update } from '@reduxjs/toolkit'
 
-import type { Tab } from '#types/layout'
+import { randomColor } from '#utils'
+import type { CustomTab } from '#types/layout'
 
 import tabsSlice from './tabsSlice'
 
 /** Add new tab */
-export const addTab = tabsSlice.createAction('addTab', (tab: Omit<Tab, 'editMode'>) => ({
-  payload: { ...tab, editMode: 'create' as const },
+const addTab = tabsSlice.createAction('addTab', (tab: Omit<CustomTab, 'color'>) => ({
+  payload: {
+    color: randomColor(),
+    editMode: 'create' as const,
+    ...tab,
+  },
 }))
 
 /** Remove tab */
-export const removeTab = tabsSlice.createAction<string>('removeTab')
+const removeTab = tabsSlice.createAction<string>('removeTab')
 
 /** Edit tab */
-export const editTab = tabsSlice.createAction<Update<Tab, string>>('editTab')
+const editTab = tabsSlice.createAction<Update<CustomTab, string>>('editTab')
+
+export { addTab, editTab, removeTab }

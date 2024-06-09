@@ -1,44 +1,25 @@
-import type { notificationTypes } from '#ui/components/App/notifications/notificationTypes'
+import type { NotificationData } from '@mantine/notifications'
 
-export type ModalName = 'about' | 'settings'
+type ModalName = 'about' | 'settings'
 
 /** Arbitrary object */
-export type ArbitraryObject = Record<string, unknown>
+type ArbitraryObject = Record<string, unknown>
 
-export interface AppState {
+interface AppState {
   /** Header visibility state */
   headerVisible: boolean
 
   /** Name of currently opened modal */
   modalOpened: ModalName | null
 
-  /** Version string as reported by API */
-  versionInfo: VersionInfo | null
+  /** App is restoring state from storage */
+  isLoadingInitialState: boolean
 }
 
-export interface Settings {
-  // TODO:
-  // colors
-  //   - lightness
-  //   - saturation
-  // fetch interval
-  // feed items to keep
-}
-
-export interface VersionInfo {
-  name: string
-  version: string
-}
-
-export interface HideNotification {
+interface Notification {
   id: string
-  instruction: 'hide'
+  command: 'show' | 'hide'
+  data?: NotificationData
 }
 
-export interface ShowNotification {
-  id: string
-  type: keyof typeof notificationTypes
-  instruction: 'show'
-}
-
-export type Notification = HideNotification | ShowNotification
+export type { AppState, ArbitraryObject, ModalName, Notification }

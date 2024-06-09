@@ -1,4 +1,4 @@
-export function isValidUrl(urlString: string) {
+function isValidUrl(urlString: string) {
   try {
     const url = new URL(urlString)
     if (url.protocol === 'http:' || url.protocol === 'https:') {
@@ -10,4 +10,6 @@ export function isValidUrl(urlString: string) {
   return 'Invalid URL'
 }
 
-export const randomColor = () => `#${Math.floor(Math.random() * 16_777_215).toString(16)}`
+const randomColor = () => `#${Math.floor(Math.random() * 16_777_215).toString(16)}`
+
+export { isValidUrl, randomColor }

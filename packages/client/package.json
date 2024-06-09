@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "typecheck": "tsc -p ."
+    "typecheck": "tsc --project ."
   },
   "imports": {
     "#assets/*": "./src/assets/*",
@@ -22,6 +22,7 @@
     "@mantine/core": "^7.10.1",
     "@mantine/form": "^7.10.1",
     "@mantine/notifications": "^7.10.1",
+    "@newsdash/schema": "link:../schema",
     "@reduxjs/toolkit": "^2.2.5",
     "@tabler/icons-react": "^3.5.0",
     "nanoid": "^5.0.7",

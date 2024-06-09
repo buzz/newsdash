@@ -4,6 +4,7 @@ import type { Notification } from '#types/types'
 
 const notificationsEntityAdapter = createEntityAdapter<Notification>()
 
-export const notificationsInitialState = notificationsEntityAdapter.getInitialState()
+const notificationsInitialState = notificationsEntityAdapter.getInitialState()
 
+export { notificationsInitialState }
 export default notificationsEntityAdapter

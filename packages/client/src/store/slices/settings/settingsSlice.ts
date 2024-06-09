@@ -1,7 +1,13 @@
-import createSlice from '#store/createSlice'
-import type { Settings } from '#types/types'
+import type { Settings } from '@newsdash/schema'
 
-const initialState: Settings = {}
+import createSlice from '#store/createSlice'
+
+const initialState: Settings = {
+  saturation: 50,
+  lightness: 50,
+  fetchInterval: 10,
+  itemsToKeep: 100,
+}
 
 const settingsSlice = createSlice({
   name: 'settings',

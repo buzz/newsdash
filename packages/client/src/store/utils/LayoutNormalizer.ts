@@ -1,19 +1,26 @@
-import type { BoxData, LayoutBase, PanelData } from 'rc-dock'
+import { layout } from '@newsdash/schema'
+import type { Box, Panel } from '@newsdash/schema'
 
-import { isBoxData, isPanelData } from '#types/typeGuards'
-import type { Box, NormalizedEntity, Panel, RcDockEntity, Tab } from '#types/layout'
+import { isCustomBoxData, isCustomPanelData } from '#types/typeGuards'
+import type {
+  CustomBoxData,
+  CustomLayoutBase,
+  CustomPanelData,
+  CustomTab,
+  CustomTabData,
+} from '#types/layout'
 
 /**
  * Transform layout to be saved in store.
  */
 class LayoutNormalizer {
-  private layout: LayoutBase
+  private layout: CustomLayoutBase
   private boxIds: string[]
   private panelIds: string[]
   private tabIds: string[]
   private entities: NormalizedEntities = { boxes: [], panels: [], tabs: [] }
 
-  constructor(layout: LayoutBase, boxIds: string[], panelIds: string[], tabIds: string[]) {
+  constructor(layout: CustomLayoutBase, boxIds: string[], panelIds: string[], tabIds: string[]) {
     this.layout = layout
     // Copy arrays, so they become configurable
     this.boxIds = [...boxIds]
@@ -24,7 +31,7 @@ class LayoutNormalizer {
   normalizeLayout(): NormalizedLayoutState {
     const { dockbox } = this.layout
 
-    if (!isBoxData(dockbox)) {
+    if (!isCustomBoxData(dockbox)) {
       throw new Error('Expected `layout.dockbox` to be `BoxData`')
     }
 
@@ -41,30 +48,32 @@ class LayoutNormalizer {
   }
 
   /** Handle `BoxData` */
-  private handleBoxData(boxData: BoxData, order: number, parentId: string | null) {
+  private handleBoxData(boxData: CustomBoxData, order: number, parentId: string | null) {
     if (!boxData.id) {
       throw new Error('Expected boxData ID')
     }
 
-    this.entities.boxes.push(this.normalizeEntity(boxData, order, parentId))
+    const box = layout.boxSchema.parse(this.normalizeEntity(boxData, order, parentId))
+    this.entities.boxes.push(box)
     LayoutNormalizer.removeId(boxData.id, this.boxIds)
 
     for (const [i, child] of boxData.children.entries()) {
-      if (isBoxData(child)) {
+      if (isCustomBoxData(child)) {
         this.handleBoxData(child, i, boxData.id)
-      } else if (isPanelData(child)) {
+      } else if (isCustomPanelData(child)) {
         this.handlePanelData(child, i, boxData.id)
       }
     }
   }
 
   /** Handle `PanelData` */
-  private handlePanelData(panelData: PanelData, order: number, parentId: string) {
+  private handlePanelData(panelData: CustomPanelData, order: number, parentId: string) {
     if (!panelData.id) {
       throw new Error('Expected panelData ID')
     }
 
-    this.entities.panels.push(this.normalizeEntity(panelData, order, parentId))
+    const panel = layout.panelSchema.parse(this.normalizeEntity(panelData, order, parentId))
+    this.entities.panels.push(panel)
     LayoutNormalizer.removeId(panelData.id, this.panelIds)
 
     for (const [i, tabData] of panelData.tabs.entries()) {
@@ -72,7 +81,7 @@ class LayoutNormalizer {
         throw new Error('Expected tabData ID')
       }
 
-      const tab = this.normalizeEntity(tabData, i, panelData.id)
+      const tab = layout.tabSchema.parse(this.normalizeEntity(tabData, i, panelData.id))
       this.entities.tabs.push(tab)
       LayoutNormalizer.removeId(tabData.id, this.tabIds)
     }
@@ -82,7 +91,7 @@ class LayoutNormalizer {
    * Normalize entity by removing included objects, some other cruft and adding
    * `parentId` and `order` field.
    */
-  private normalizeEntity<T extends RcDockEntity>(
+  private normalizeEntity<T extends RcEntityData>(
     entity: T,
     order: number,
     parentId: string | null
@@ -90,12 +99,12 @@ class LayoutNormalizer {
     const normalizedEntity: Record<string, unknown> = { parentId, order }
 
     for (const [key, value] of Object.entries(entity)) {
-      if (typeof value === 'string' || typeof value === 'number') {
+      if (typeof value === 'string' || typeof value === 'number' || value === null) {
         normalizedEntity[key] = value
       }
     }
 
-    return normalizedEntity as NormalizedEntity<T>
+    return normalizedEntity
   }
 
   private static removeId(id: string, arr: string[]) {
@@ -109,10 +118,12 @@ class LayoutNormalizer {
 interface NormalizedEntities {
   boxes: Box[]
   panels: Panel[]
-  tabs: Tab[]
+  tabs: CustomTab[]
 }
 
-export interface NormalizedLayoutState {
+type RcEntityData = CustomBoxData | CustomPanelData | CustomTabData
+
+interface NormalizedLayoutState {
   entities: NormalizedEntities
   removeIds: {
     boxIds: readonly string[]
@@ -121,4 +132,5 @@ export interface NormalizedLayoutState {
   }
 }
 
+export type { NormalizedEntities, NormalizedLayoutState }
 export default LayoutNormalizer

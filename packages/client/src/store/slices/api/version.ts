@@ -1,8 +1,8 @@
-import type { VersionInfo } from '#types/types'
+import type { VersionInfo } from '@newsdash/schema'
 
 import apiSlice from './apiSlice'
 
-export const version = apiSlice.injectEndpoints({
+const version = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     /** Fetch backend version info */
     getVersion: builder.query<VersionInfo, void>({

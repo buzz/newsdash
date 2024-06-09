@@ -3,7 +3,7 @@ import createSlice from '#store/createSlice'
 import { addTab, editTab, removeTab } from './actions'
 import tabsEntityAdapter, { tabsInitialState } from './tabsEntityAdapter'
 
-export const tabsSlice = createSlice({
+const tabsSlice = createSlice({
   name: 'tabs',
   initialState: tabsInitialState,
   reducers: {},
@@ -20,7 +20,13 @@ export const tabsSlice = createSlice({
 
     // Edit tab
     builder.addCase(editTab, (state, { payload: { id, changes } }) => {
-      tabsEntityAdapter.updateOne(state, { id, changes })
+      tabsEntityAdapter.updateOne(state, {
+        id,
+        changes: {
+          ...changes,
+          customTitle: changes.customTitle === '' ? undefined : changes.customTitle,
+        },
+      })
     })
   },
 })

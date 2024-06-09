@@ -1,49 +1,55 @@
-import type { TabData } from 'rc-dock'
-
 import { PLACEHOLDER_TAB_ID } from '#constants'
 import EditFeedForm from '#ui/components/Feed/EditFeedForm/EditFeedForm'
 import Feed from '#ui/components/Feed/Feed'
-import type { Tab } from '#types/layout'
+import type { CustomTabData } from '#types/layout'
 
 import Placeholder from './Placeholder'
-import { Icon2fa } from '@tabler/icons-react'
-
-type InputTabData = Tab & Pick<TabData, 'content'>
-type OutputTab = Tab & Pick<TabData, 'content' | 'title'>
 
 /** Get tab component */
-function loadTab(tabData: InputTabData) {
-  const tab: OutputTab = {
-    ...tabData,
-    title: '',
+function loadTab(tabData: CustomTabData) {
+  if (!tabData.id) {
+    throw new Error('Expected tab ID')
   }
 
   // Placeholder
   if (tabData.id === PLACEHOLDER_TAB_ID) {
-    tab.content = <Placeholder />
+    return {
+      ...tabData,
+      content: <Placeholder />,
+      title: 'Welcome to newsdash',
+    }
   }
 
   // News feed
   else {
-    tab.group = 'news'
-    switch (tab.editMode) {
+    switch (tabData.editMode) {
       case 'edit': {
-        tab.content = <EditFeedForm id={tab.id} mode="edit" />
-        tab.title = 'Edit feed'
-        break
+        return {
+          ...tabData,
+          content: <EditFeedForm id={tabData.id} mode="edit" />,
+          group: 'news',
+          title: 'Edit feed',
+        }
       }
       case 'create': {
-        tab.content = <EditFeedForm id={tab.id} mode="create" />
-        tab.title = 'New feed'
+        return {
+          ...tabData,
+          content: <EditFeedForm id={tabData.id} mode="create" />,
+          group: 'news',
+          title: 'New feed',
+        }
         break
       }
       default: {
-        tab.content = <Feed id={tab.id} />
+        return {
+          ...tabData,
+          content: <Feed id={tabData.id} />,
+          // TODO: title
+          title: 'TODO',
+        }
       }
     }
   }
-
-  return tab
 }
 
 export default loadTab

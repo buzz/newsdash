@@ -1,18 +1,20 @@
 import type { EntityState } from '@reduxjs/toolkit'
 
-import createSlice from '#store/createSlice'
-import type { Box, Panel, Tab } from '#types/layout'
+import type { Box, Panel } from '@newsdash/schema'
 
-import { updateLayout } from './actions'
+import createSlice from '#store/createSlice'
+import type { CustomTab } from '#types/layout'
+
+import { restoreLayout, updateLayout } from './actions'
 import { boxesInitialState } from './entities/boxes/boxesEntityAdapter'
 import { panelsInitialState } from './entities/panels/panelsEntityAdapter'
 import { tabsInitialState } from './entities/tabs/tabsEntityAdapter'
-import { updateLayoutReducer } from './extraReducers'
+import { restoreLayoutReducer, updateLayoutReducer } from './extraReducers'
 
-export interface LayoutState {
+interface LayoutState {
   boxes: EntityState<Box, string>
   panels: EntityState<Panel, string>
-  tabs: EntityState<Tab, string>
+  tabs: EntityState<CustomTab, string>
 }
 
 const initialState: LayoutState = {
@@ -27,7 +29,9 @@ const layoutSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(updateLayout, updateLayoutReducer)
+    builder.addCase(restoreLayout, restoreLayoutReducer)
   },
 })
 
+export type { LayoutState }
 export default layoutSlice

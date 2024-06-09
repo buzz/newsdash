@@ -2,10 +2,12 @@ import type makeStore from './makeStore'
 import type reducer from './reducer'
 
 /** Store type */
-export type Store = ReturnType<typeof makeStore>
+type Store = ReturnType<typeof makeStore>
 
 /** Root state */
-export type RootState = ReturnType<typeof reducer>
+type RootState = ReturnType<typeof reducer>
 
 /** Dispatch type */
-export type AppDispatch = Store['dispatch']
+type AppDispatch = Store['dispatch']
+
+export type { AppDispatch, RootState, Store }

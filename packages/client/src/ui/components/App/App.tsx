@@ -5,7 +5,7 @@ import Dock from '#ui/components/Dock/Dock'
 import type { Store } from '#store/types'
 
 import AppShell from './AppShell'
-import Notifications from './notifications/Notifications'
+import Notifications from './Notifications'
 import theme, { resolver } from './theme'
 
 function App({ store }: AppProps) {

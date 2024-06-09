@@ -1,12 +1,14 @@
 import { createEntityAdapter } from '@reduxjs/toolkit'
 
+import type { Panel } from '@newsdash/schema'
+
 import sortOrderComparer from '#store/utils/sortOrderComparer'
-import type { Panel } from '#types/layout'
 
 const panelsEntityAdapter = createEntityAdapter<Panel>({
   sortComparer: sortOrderComparer,
 })
 
-export const panelsInitialState = panelsEntityAdapter.getInitialState()
+const panelsInitialState = panelsEntityAdapter.getInitialState()
 
+export { panelsInitialState }
 export default panelsEntityAdapter

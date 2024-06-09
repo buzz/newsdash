@@ -1,39 +1,39 @@
-import type { NotificationData } from '@mantine/notifications'
 import {
   Notifications as MantineNotifications,
   notifications as mantineNotifications,
 } from '@mantine/notifications'
+import { IconCloudDataConnection, IconWorldBolt } from '@tabler/icons-react'
 import { useEffect } from 'react'
+import type { NotificationData } from '@mantine/notifications'
 
 import { notificationProcessed } from '#store/slices/notifications/actions'
 import notificationsSelectors from '#store/slices/notifications/selectors'
 import { useDispatch, useSelector } from '#ui/hooks/store'
-import type { Notification, ShowNotification } from '#types/types'
 
-import notificationTypes from './notificationTypes'
-
-function isShowNotification(notification: Notification): notification is ShowNotification {
-  return notification.instruction === 'show'
+const icons: Record<string, JSX.Element> = {
+  'connection-error': <IconWorldBolt />,
+  reconnect: <IconCloudDataConnection />,
 }
 
-function getNotificationData(notification: ShowNotification): NotificationData {
-  return {
-    id: notification.id,
-    autoClose: 5000,
-    ...notificationTypes[notification.type],
+function addIcon(data: NotificationData): NotificationData {
+  const dataWithIcon = { ...data }
+  if (typeof data.icon === 'string') {
+    dataWithIcon.icon = icons[data.icon]
   }
+  return dataWithIcon
 }
 
 function Notifications() {
   const dispatch = useDispatch()
   const storeNotifications = useSelector(notificationsSelectors.selectAll)
 
+  // Pass notifications one-by-one to Mantine system
   useEffect(() => {
     for (const notification of storeNotifications) {
       try {
-        if (isShowNotification(notification)) {
-          mantineNotifications.show(getNotificationData(notification))
-        } else {
+        if (notification.command === 'show' && notification.data) {
+          mantineNotifications.show(addIcon(notification.data))
+        } else if (notification.command === 'hide') {
           mantineNotifications.hide(notification.id)
         }
       } finally {

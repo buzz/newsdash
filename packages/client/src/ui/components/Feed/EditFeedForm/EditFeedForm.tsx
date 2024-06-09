@@ -5,10 +5,10 @@ import { IconRefresh, IconRss } from '@tabler/icons-react'
 import { editTab, removeTab } from '#store/slices/layout/entities/tabs/actions'
 import Tooltip from '#ui/components/common/Tooltip'
 import { useDispatch } from '#ui/hooks/store'
+import { isValidUrl, randomColor } from '#utils'
 import type { TabEditMode } from '#types/layout'
 
 import ButtonGroup from './ButtonGroup'
-import { isValidUrl, randomColor } from './utils'
 
 import classes from './EditFeedForm.module.css'
 

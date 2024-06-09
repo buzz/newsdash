@@ -1,19 +1,19 @@
 import type { Update } from '@reduxjs/toolkit'
 
-import type { Panel } from '#types/layout'
+import type { Panel } from '@newsdash/schema'
 
 import panelsSlice from './panelsSlice'
 
 /** Add panel to layout */
-export const addPanel = panelsSlice.createAction<Panel>('addPanel')
+const addPanel = panelsSlice.createAction<Panel>('addPanel')
 
 /** Remove panel */
-export const removePanel = panelsSlice.createAction<string>('removePanel')
+const removePanel = panelsSlice.createAction<string>('removePanel')
 
 /** Update panel */
-export const updatePanel = panelsSlice.createAction<Update<Panel, string>>('updatePanel')
+const updatePanel = panelsSlice.createAction<Update<Panel, string>>('updatePanel')
 
 /** Set active tab */
-export const setActiveTab = panelsSlice.createAction<{ panelId: string; tabId: string }>(
-  'setActiveTab'
-)
+const setActiveTab = panelsSlice.createAction<{ panelId: string; tabId: string }>('setActiveTab')
+
+export { addPanel, removePanel, setActiveTab, updatePanel }

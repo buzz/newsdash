@@ -1,5 +1,5 @@
-import type { ListenerEffectAPI } from '@reduxjs/toolkit'
 import { nanoid } from 'nanoid'
+import type { ListenerEffectAPI } from '@reduxjs/toolkit'
 
 import { requestNewTab } from '#store/slices/layout/actions'
 import { selectDockbox } from '#store/slices/layout/entities/boxes/selectors'
@@ -29,6 +29,7 @@ function requestNewTabEffect(startListening: AppStartListening) {
           id: tabId,
           order,
           parentId: panelId,
+          url: '',
         })
       )
       listenerApi.dispatch(setActiveTab({ panelId, tabId }))
@@ -45,11 +46,11 @@ function findPanelId(listenerApi: ListenerEffectAPI<RootState, AppDispatch>): st
   }
 
   // Add empty panel
-  const panelId = nanoid()
   const dockbox = selectDockbox(listenerApi.getState())
   if (!dockbox) {
     throw new Error("Couldn't get dockbox when there should be one")
   }
+  const panelId = nanoid()
   listenerApi.dispatch(addPanel({ id: panelId, order: 0, parentId: dockbox.id }))
 
   return panelId

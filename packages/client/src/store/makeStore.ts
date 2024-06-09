@@ -1,6 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
 
-import connectivityCheckListenerMiddleware from './middlewares/connectivityCheckListenerMiddleware'
 import layoutListenerMiddleware from './middlewares/layoutListenerMiddleware/layoutListenerMiddleware'
 import reducer from './reducer'
 import apiSlice from './slices/api/apiSlice'
@@ -12,11 +11,7 @@ function makeStore() {
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware()
         // eslint-disable-next-line unicorn/prefer-spread
-        .concat(
-          apiSlice.middleware,
-          connectivityCheckListenerMiddleware.middleware,
-          layoutListenerMiddleware.middleware
-        ),
+        .concat(apiSlice.middleware, layoutListenerMiddleware.middleware),
     reducer,
   })
 }

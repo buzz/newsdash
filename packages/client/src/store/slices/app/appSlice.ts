@@ -1,12 +1,12 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 
 import createSlice from '#store/createSlice'
-import type { AppState, ModalName, VersionInfo } from '#types/types'
+import type { AppState, ModalName } from '#types/types'
 
 const initialState: AppState = {
   headerVisible: false,
   modalOpened: null,
-  versionInfo: null,
+  isLoadingInitialState: true,
 }
 
 const appSlice = createSlice({
@@ -33,9 +33,9 @@ const appSlice = createSlice({
       }
     },
 
-    /** Change version info */
-    changeVersionInfo(state, { payload }: PayloadAction<VersionInfo>) {
-      state.versionInfo = payload
+    /** Set `loadingInitialState` to `false` */
+    loadedInitialState(state) {
+      state.isLoadingInitialState = false
     },
   },
 })
