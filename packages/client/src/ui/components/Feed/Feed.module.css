@@ -1,8 +1,4 @@
-.wrapper {
-  display: flex;
+.scrollWrapper {
   height: 100%;
-}
-
-.innerWrapper {
-  padding: var(--mantine-spacing-xs);
+  width: 100%;
 }

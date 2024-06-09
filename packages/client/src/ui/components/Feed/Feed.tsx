@@ -11,17 +11,15 @@ function Feed({ id }: FeedProps) {
   const tab = useSelector(selectTab)
 
   return (
-    <Box className={classes.wrapper}>
-      <ScrollArea>
-        <Box className={classes.innerWrapper}>
-          {tab.id}
-          <br />
-          {tab.customTitle}
-          <br />
-          {tab.url}
-        </Box>
-      </ScrollArea>
-    </Box>
+    <ScrollArea className={classes.scrollWrapper}>
+      <Box className={classes.innerWrapper}>
+        {tab.id}
+        <br />
+        {tab.customTitle}
+        <br />
+        {tab.url}
+      </Box>
+    </ScrollArea>
   )
 }
 

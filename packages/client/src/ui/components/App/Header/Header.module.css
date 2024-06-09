@@ -43,15 +43,17 @@
 
     & > button {
       background-color: var(--mantine-primary-color-filled-hover);
+      box-shadow: var(--mantine-shadow-lg);
       color: var(--ai-color) !important;
     }
   }
 
   & > button {
     background-color: transparent;
+    box-shadow: none;
     color: light-dark(var(--mantine-color-gray-6), var(--mantine-color-gray-5));
     transition-duration: var(--transition-duration-short);
-    transition-property: background-color, color;
+    transition-property: background-color, box-shadow, color;
     transition-timing-function: ease-in;
   }
 }

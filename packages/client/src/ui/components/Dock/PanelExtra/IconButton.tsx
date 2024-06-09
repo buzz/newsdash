@@ -1,17 +1,18 @@
 import { ActionIcon, type ActionIconProps } from '@mantine/core'
-import type { MouseEvent, ReactNode } from 'react'
+import type { ComponentProps, MouseEvent, ReactNode } from 'react'
 
-function IconButton({ icon, ...otherProps }: IconButtonProps) {
+function IconButton({ icon, label, ...otherProps }: IconButtonProps) {
   return (
-    <ActionIcon size="xs" variant="transparent" {...otherProps}>
+    <ActionIcon aria-label={label} size="xs" title={label} variant="transparent" {...otherProps}>
       {icon}
     </ActionIcon>
   )
 }
 
-interface IconButtonProps {
+interface IconButtonProps extends ComponentProps<typeof ActionIcon> {
   color?: ActionIconProps['color']
   icon: ReactNode
+  label: string
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void
 }
 
