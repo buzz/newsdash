@@ -6,8 +6,8 @@ import { body } from 'express-validator'
 import metascraper from 'metascraper'
 import metascraperImage from 'metascraper-image'
 
-import asyncWrapper from './asyncWrapper'
-import { fetchFile, fetchFileStream } from './fetchFile'
+import asyncWrapper from './asyncWrapper.js'
+import { fetchFile, fetchFileStream } from './fetchFile.js'
 
 const pipeline = promisify(stream.pipeline)
 

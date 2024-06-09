@@ -15,9 +15,10 @@
     "directory": "packages/server"
   },
   "scripts": {
+    "build": "tsc --declaration --outDir dist --project .",
     "dev": "nodemon --exec tsx src/startServer.ts",
     "start": "NODE_ENV=production node dist/startServer.js",
-    "typecheck": "tsc --noEmit -p ."
+    "typecheck": "tsc --noEmit --project ."
   },
   "imports": {
     "#constants": "./src/constants.ts",
@@ -25,6 +26,7 @@
   },
   "dependencies": {
     "@keyv/redis": "^2.8.5",
+    "@newsdash/schema": "link:../schema",
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "express-validator": "^7.1.0",
@@ -32,7 +34,8 @@
     "ioredis": "^5.4.1",
     "keyv": "^4.5.4",
     "metascraper": "^5.45.10",
-    "metascraper-image": "^5.45.10"
+    "metascraper-image": "^5.45.10",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",

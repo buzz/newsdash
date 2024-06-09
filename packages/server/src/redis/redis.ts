@@ -1,75 +1,127 @@
-import Redis from 'ioredis'
+import { Redis } from 'ioredis'
+import type { z } from 'zod'
 
 import { DEFAULT_REDIS_URL } from '#constants'
 
-import { getHmFields, objToHmData, translateRedisHash } from './dataConversion'
+import { getSchemaFields, objToHmData, parseRedisHash } from './dataConversion.js'
 
-const redis = new Redis(process.env.REDIS_URL || DEFAULT_REDIS_URL, {
+const redis = new Redis(process.env.REDIS_URL ?? DEFAULT_REDIS_URL, {
   showFriendlyErrorStack: process.env.NODE_ENV !== 'production',
 })
 
-const scan = (pattern) =>
-  new Promise((resolve) => {
-    const stream = redis.scanStream({ match: pattern })
-    let keys = []
-    stream.on('data', (foundKeys) => {
-      keys = [...keys, ...foundKeys]
-    })
-    stream.on('end', () => resolve(keys))
-  })
-
-export const getAllHashes = async (pattern, fields) => {
-  const hmFields = getHmFields(fields)
-  const keys = await scan(pattern)
-  const pipeline = redis.pipeline()
-  for (let i = 0; i < keys.length; i += 1) {
-    pipeline.hmget(keys[i], hmFields)
+function assertRedisHashResult(thing: unknown): asserts thing is RedisHashResult {
+  if (
+    !Array.isArray(thing) ||
+    thing.some((element) => element !== null && typeof element !== 'string')
+  ) {
+    throw new Error('Expected array of strings/nulls')
   }
-  return pipeline.exec().then((results) =>
-    results.reduce((acc, result) => {
-      acc.push(translateRedisHash(result[1], fields))
-      return acc
-    }, [])
-  )
 }
 
-export const getHash = async (key: string, fields) => {
+function scan(pattern: string): Promise<string[]> {
+  return new Promise((resolve) => {
+    const stream = redis.scanStream({ match: pattern })
+    const keys: string[] = []
+    stream.on('data', (foundKeys) => {
+      if (Array.isArray(foundKeys)) {
+        for (const key of foundKeys) {
+          if (typeof key === 'string') {
+            keys.push(key)
+          }
+        }
+      }
+    })
+    stream.on('end', () => {
+      resolve(keys)
+    })
+  })
+}
+
+async function getHash<T extends z.SomeZodObject>(
+  key: string,
+  schema: T
+): Promise<z.infer<T> | undefined> {
   const exists = await redis.exists(key)
   if (exists === 1) {
-    const hmFields = getHmFields(fields)
-    const data = await redis.hmget(key, hmFields)
-    return translateRedisHash(data, fields)
+    const hmFields = getSchemaFields(schema)
+    const data = await redis.hmget(key, ...hmFields)
+    assertRedisHashResult(data)
+    return parseRedisHash(data, schema)
   }
-  return null
+  return undefined
 }
 
-export const setHash = (key, obj, fields) => {
-  const hmFields = getHmFields(fields)
+async function getAllHashes<T extends z.SomeZodObject>(
+  pattern: string,
+  schema: T
+): Promise<z.infer<T>[]> {
+  const hmFields = getSchemaFields(schema)
+  const keys = await scan(pattern)
+
+  const pipeline = redis.pipeline()
+  for (const key of keys) {
+    pipeline.hmget(key, ...hmFields)
+  }
+
+  const results = await pipeline.exec()
+
+  if (!results) {
+    throw new Error('No results received')
+  }
+
+  const hashes: z.infer<T>[] = []
+
+  for (const [error, data] of results) {
+    if (error) {
+      throw error
+    }
+
+    assertRedisHashResult(data)
+    hashes.push(parseRedisHash(data, schema))
+  }
+
+  return hashes
+}
+
+function setHash(key: string, obj: Record<string, string | number>, schema: z.SomeZodObject) {
+  const hmFields = getSchemaFields(schema)
   const hmData = objToHmData(obj, hmFields)
   return redis.hmset(key, hmData)
 }
 
-export const updateHashesDeleteOthers = async (pattern, objs, fields) => {
-  let i
-  const hmFields = getHmFields(fields)
-  const keysToDelete = await scan(pattern)
-  const keyBase = pattern.slice(0, -1)
+async function updateHashesDeleteOthers(
+  pattern: string,
+  objs: Record<string, string | number | null>[],
+  schema: z.SomeZodObject
+) {
+  const hmFields = getSchemaFields(schema)
+  const deleteSet = await scan(pattern)
+
+  const keyBase = pattern.slice(0, -1) // remove trailing `*`
   const pipeline = redis.pipeline()
-  for (i = 0; i < objs.length; i += 1) {
-    const obj = objs[i]
+
+  for (const obj of objs) {
     const key = `${keyBase}${obj.id}`
-    const idx = keysToDelete.indexOf(key)
+
+    // remove from delete set
+    const idx = deleteSet.indexOf(key)
     if (idx > -1) {
-      keysToDelete.splice(idx, 1)
+      deleteSet.splice(idx, 1)
     }
+
     // update hash
     pipeline.hmset(key, objToHmData(obj, hmFields))
   }
+
   // delete all that are not in update set
-  for (i = 0; i < keysToDelete.length; i += 1) {
-    pipeline.del(keysToDelete[i])
+  for (const key of deleteSet) {
+    pipeline.del(key)
   }
+
   return pipeline.exec()
 }
 
-export default redis
+type RedisHashResult = (string | null)[]
+
+export type { RedisHashResult }
+export { getAllHashes, getHash, redis, setHash, updateHashesDeleteOthers }

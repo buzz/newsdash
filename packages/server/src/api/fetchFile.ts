@@ -3,7 +3,7 @@ import got from 'got'
 import Keyv from 'keyv'
 
 import { FETCH_TIMEOUT, USER_AGENT } from '#constants'
-import redis from '#redis/redis'
+import { redis } from '#redis'
 
 // HTTP client cache
 const keyvRedis = new KeyvRedis(redis)

@@ -1,18 +1,18 @@
 {
   "compilerOptions": {
-    "moduleResolution": "node",
-    "module": "ESNext",
-    "declaration": false,
     "allowSyntheticDefaultImports": true,
+    "declaration": false,
+    "module": "NodeNext",
+    "moduleResolution": "Node16",
     "resolveJsonModule": true,
     "strict": true,
-
+    "target": "ES2022",
     /* Path aliases */
     "paths": {
       "#constants": ["./src/constants.ts"],
-      "#redis/*": ["./src/redis/*"]
+      "#redis": ["./src/redis/redis.ts"],
+      "#schema": ["./src/schema.ts"]
     }
   },
-  "include": ["src"],
-  "references": [{ "path": "../../tsconfig.json" }]
+  "include": ["src"]
 }

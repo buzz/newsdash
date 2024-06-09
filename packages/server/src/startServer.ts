@@ -1,9 +1,9 @@
 import cors from 'cors'
 import express from 'express'
 
-import apiRouter from './api/apiRouter'
-import { DEFAULT_PORT } from './constants'
-import errorHandlers from './errorHandlers'
+import apiRouter from './api/apiRouter.js'
+import { DEFAULT_PORT } from './constants.js'
+import errorHandlers from './errorHandlers.js'
 
 const app = express()
 
