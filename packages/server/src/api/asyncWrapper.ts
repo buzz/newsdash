@@ -6,7 +6,9 @@ import type { NextFunction, Request, Response } from 'express'
  */
 function asyncWrapper(asyncFn: (req: Request, res: Response) => Promise<void>) {
   return function (req: Request, res: Response, next: NextFunction) {
-    asyncFn(req, res).catch(next)
+    asyncFn(req, res).catch((error: unknown) => {
+      next(error)
+    })
   }
 }
 

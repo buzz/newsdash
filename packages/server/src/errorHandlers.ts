@@ -1,42 +1,47 @@
-const consoleLogger = (err, req, res, next) => {
-  console.error(err.stack)
+import type { ErrorRequestHandler } from 'express'
+import type { RequestError } from 'got'
+
+function isArbitraryObject(thing: unknown): thing is object {
+  return typeof thing === 'object' && thing !== null
+}
+
+function isError(thing: unknown): thing is Error {
+  return isArbitraryObject(thing) && typeof (thing as Error).message === 'string'
+}
+
+function isRequestError(thing: unknown): thing is RequestError {
+  return isArbitraryObject(thing) && typeof (thing as RequestError).code === 'string'
+}
+
+const consoleLogger: ErrorRequestHandler = (err, req, res, next) => {
+  if (isError(err)) {
+    console.error(err.stack)
+  }
   next(err)
 }
 
-const errCodeMatcher = (err, req, res, next) => {
-  let statusCode
-  switch (err.code) {
-    case 'ENOTFOUND': {
-      statusCode = 530
-      break
+const errCodeMatcher: ErrorRequestHandler = (err, req, res, next) => {
+  if (isRequestError(err)) {
+    switch (err.code) {
+      case 'ENOTFOUND': {
+        res.status(530)
+        res.json({ error: err.message })
+        break
+      }
+      case 'ETIMEDOUT': {
+        res.status(504)
+        res.json({ error: err.message })
+        break
+      }
+      default: {
+        break
+      }
     }
-    case 'ETIMEDOUT': {
-      statusCode = 504
-      break
-    }
-    default:
-      break
   }
-  if (statusCode) {
-    const newError = new Error()
-    newError.statusCode = statusCode
-    next(newError)
-  } else {
-    next(err)
-  }
+  next(err)
 }
 
-const statusCodeSetter = (err, req, res, next) => {
-  if (res.headersSent) {
-    return next(err)
-  }
-  const statusCode = err.statusCode || 500
-  res.status(statusCode)
-  res.json({ error: err.message })
-  return undefined
-}
-
-const errorHandlers = [errCodeMatcher, statusCodeSetter]
+const errorHandlers = [errCodeMatcher]
 if (process.env.NODE_ENV !== 'production') {
   errorHandlers.unshift(consoleLogger)
 }
