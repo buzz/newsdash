@@ -10,6 +10,7 @@ const addTab = tabsSlice.createAction('addTab', (tab: Omit<CustomTab, 'color'>) 
   payload: {
     color: randomColor(),
     editMode: 'create' as const,
+    group: 'news',
     ...tab,
   },
 }))

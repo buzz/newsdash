@@ -1,9 +1,9 @@
 import { createSelector } from '@reduxjs/toolkit'
+import type { LayoutBase } from 'rc-dock'
 
 import LayoutDenormalizer from '#store/utils/LayoutDenormalizer'
 import LayoutNormalizer from '#store/utils/LayoutNormalizer'
 import type { RootState } from '#store/types'
-import type { CustomLayoutBase } from '#types/layout'
 
 import boxesSelectors from './entities/boxes/selectors'
 import panelsSelectors from './entities/panels/selectors'
@@ -17,14 +17,14 @@ const selectDenormalizedLayout = createSelector([(state: RootState) => state], (
 /** Select denormalized layout */
 const selectNormalizedLayout = createSelector(
   [
-    (_, layout: CustomLayoutBase) => layout,
+    (_, layout: LayoutBase) => layout,
     // Current IDs from store
     boxesSelectors.selectIds,
     panelsSelectors.selectIds,
-    tabsSelectors.selectIds,
+    tabsSelectors.selectAll,
   ],
-  (layout, boxIds, panelIds, tabIds) =>
-    new LayoutNormalizer(layout, boxIds, panelIds, tabIds).normalizeLayout()
+  (layout, boxIds, panelIds, tabs) =>
+    new LayoutNormalizer(layout, boxIds, panelIds, tabs).normalizeLayout()
 )
 
 export { selectDenormalizedLayout, selectNormalizedLayout }

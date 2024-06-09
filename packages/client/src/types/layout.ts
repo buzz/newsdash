@@ -1,4 +1,4 @@
-import type { BoxData, LayoutBase, PanelData, TabData } from 'rc-dock'
+import type { BoxData, PanelData, TabData } from 'rc-dock'
 
 import type { CustomTabFields, Tab } from '@newsdash/schema'
 
@@ -10,10 +10,6 @@ interface EditModeMixin {
 
 interface Orderable {
   order: number
-}
-
-type CustomLayoutBase = Omit<LayoutBase, 'dockbox'> & {
-  dockbox: CustomBoxData
 }
 
 interface CustomBoxChildren {
@@ -41,7 +37,6 @@ interface DenormalizedLayout {
 
 export type {
   CustomBoxData,
-  CustomLayoutBase,
   CustomPanelData,
   CustomTab,
   CustomTabData,

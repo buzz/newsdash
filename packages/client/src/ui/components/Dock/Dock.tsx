@@ -10,7 +10,6 @@ import { rcLayoutChange, rcLayoutReady } from '#store/slices/layout/actions'
 import tabsSelectors from '#store/slices/layout/entities/tabs/selectors'
 import { selectDenormalizedLayout } from '#store/slices/layout/selectors'
 import { useDispatch, useSelector } from '#ui/hooks/store'
-import type { CustomLayoutBase } from '#types/layout'
 
 import groups from './groups'
 import loadTab from './loadTab'
@@ -38,7 +37,7 @@ function Dock() {
       groups={groups}
       layout={layout}
       loadTab={loadTab}
-      onLayoutChange={(newLayout) => dispatch(rcLayoutChange(newLayout as CustomLayoutBase))}
+      onLayoutChange={(newLayout) => dispatch(rcLayoutChange(newLayout))}
       ref={setRcDockRef}
     />
   )

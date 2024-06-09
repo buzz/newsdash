@@ -27,7 +27,6 @@ function loadTab(tabData: CustomTabData) {
         return {
           ...tabData,
           content: <EditFeedForm id={tabData.id} mode="edit" />,
-          group: 'news',
           title: 'Edit feed',
         }
       }
@@ -35,7 +34,6 @@ function loadTab(tabData: CustomTabData) {
         return {
           ...tabData,
           content: <EditFeedForm id={tabData.id} mode="create" />,
-          group: 'news',
           title: 'New feed',
         }
         break

@@ -1,4 +1,7 @@
 import { isAnyOf } from '@reduxjs/toolkit'
+import { isEqual } from 'lodash-es'
+
+import type { PersistLayout } from '@newsdash/schema'
 
 import apiLayout from '#store/slices/api/layout'
 import { selectPersistLayout } from '#store/slices/api/selectors'
@@ -11,6 +14,8 @@ const PERSIST_DELAY = 5000
 
 // Persist layout on change
 function persistLayoutEffect(startListening: AppStartListening) {
+  let lastPersistLayout: PersistLayout | undefined
+
   startListening({
     matcher: isAnyOf(updateLayout, addPanel, updatePanel, removePanel, addTab, editTab, removeTab),
     effect: async (action, listenerApi) => {
@@ -21,8 +26,10 @@ function persistLayoutEffect(startListening: AppStartListening) {
       const state = listenerApi.getState()
       const persistLayout = selectPersistLayout(state)
 
-      if (persistLayout.tabs.length > 0) {
+      // Only persist if layout actually changed
+      if (!isEqual(persistLayout, lastPersistLayout)) {
         await listenerApi.dispatch(apiLayout.endpoints.persistLayout.initiate(persistLayout))
+        lastPersistLayout = persistLayout
       }
     },
   })

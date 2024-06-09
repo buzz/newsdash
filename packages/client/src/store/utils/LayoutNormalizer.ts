@@ -1,37 +1,37 @@
+import type { BoxData, LayoutBase, PanelData, TabData } from 'rc-dock'
+
 import { layout } from '@newsdash/schema'
 import type { Box, Panel } from '@newsdash/schema'
 
-import { isCustomBoxData, isCustomPanelData } from '#types/typeGuards'
-import type {
-  CustomBoxData,
-  CustomLayoutBase,
-  CustomPanelData,
-  CustomTab,
-  CustomTabData,
-} from '#types/layout'
+import { isBoxData, isPanelData } from '#types/typeGuards'
+import type { CustomTab } from '#types/layout'
 
 /**
  * Transform layout to be saved in store.
  */
 class LayoutNormalizer {
-  private layout: CustomLayoutBase
+  private layout: LayoutBase
   private boxIds: string[]
   private panelIds: string[]
   private tabIds: string[]
+  private tabs: CustomTab[]
   private entities: NormalizedEntities = { boxes: [], panels: [], tabs: [] }
 
-  constructor(layout: CustomLayoutBase, boxIds: string[], panelIds: string[], tabIds: string[]) {
+  constructor(layout: LayoutBase, boxIds: string[], panelIds: string[], tabs: CustomTab[]) {
     this.layout = layout
+    this.tabs = tabs
+
     // Copy arrays, so they become configurable
     this.boxIds = [...boxIds]
     this.panelIds = [...panelIds]
-    this.tabIds = [...tabIds]
+
+    this.tabIds = tabs.map((tab) => tab.id)
   }
 
   normalizeLayout(): NormalizedLayoutState {
     const { dockbox } = this.layout
 
-    if (!isCustomBoxData(dockbox)) {
+    if (!isBoxData(dockbox)) {
       throw new Error('Expected `layout.dockbox` to be `BoxData`')
     }
 
@@ -47,67 +47,55 @@ class LayoutNormalizer {
     }
   }
 
-  /** Handle `BoxData` */
-  private handleBoxData(boxData: CustomBoxData, order: number, parentId: string | null) {
+  private handleBoxData({ children, ...boxData }: BoxData, order: number, parentId: string | null) {
     if (!boxData.id) {
       throw new Error('Expected boxData ID')
     }
 
-    const box = layout.boxSchema.parse(this.normalizeEntity(boxData, order, parentId))
+    const box = layout.boxSchema.parse({ ...boxData, order, parentId })
     this.entities.boxes.push(box)
-    LayoutNormalizer.removeId(boxData.id, this.boxIds)
+    LayoutNormalizer.removeFromArray(boxData.id, this.boxIds)
 
-    for (const [i, child] of boxData.children.entries()) {
-      if (isCustomBoxData(child)) {
+    for (const [i, child] of children.entries()) {
+      if (isBoxData(child)) {
         this.handleBoxData(child, i, boxData.id)
-      } else if (isCustomPanelData(child)) {
+      } else if (isPanelData(child)) {
         this.handlePanelData(child, i, boxData.id)
       }
     }
   }
 
-  /** Handle `PanelData` */
-  private handlePanelData(panelData: CustomPanelData, order: number, parentId: string) {
+  private handlePanelData({ tabs, ...panelData }: PanelData, order: number, parentId: string) {
     if (!panelData.id) {
       throw new Error('Expected panelData ID')
     }
 
-    const panel = layout.panelSchema.parse(this.normalizeEntity(panelData, order, parentId))
+    const panel = layout.panelSchema.parse({ ...panelData, order, parentId })
     this.entities.panels.push(panel)
-    LayoutNormalizer.removeId(panelData.id, this.panelIds)
+    LayoutNormalizer.removeFromArray(panelData.id, this.panelIds)
 
-    for (const [i, tabData] of panelData.tabs.entries()) {
-      if (!tabData.id) {
-        throw new Error('Expected tabData ID')
-      }
-
-      const tab = layout.tabSchema.parse(this.normalizeEntity(tabData, i, panelData.id))
-      this.entities.tabs.push(tab)
-      LayoutNormalizer.removeId(tabData.id, this.tabIds)
+    for (const [order, tabData] of tabs.entries()) {
+      this.handleTabData(tabData, order, panelData.id)
     }
   }
 
-  /**
-   * Normalize entity by removing included objects, some other cruft and adding
-   * `parentId` and `order` field.
-   */
-  private normalizeEntity<T extends RcEntityData>(
-    entity: T,
-    order: number,
-    parentId: string | null
-  ) {
-    const normalizedEntity: Record<string, unknown> = { parentId, order }
-
-    for (const [key, value] of Object.entries(entity)) {
-      if (typeof value === 'string' || typeof value === 'number' || value === null) {
-        normalizedEntity[key] = value
-      }
+  private handleTabData(tabData: TabData, order: number, parentId: string) {
+    if (!tabData.id) {
+      throw new Error('Expected tabData ID')
     }
 
-    return normalizedEntity
+    // rc-dock only sends id of tab, so we have to complete fields with store data
+    const storeTab = this.tabs.find((tab) => tab.id === tabData.id)
+    if (!storeTab) {
+      throw new Error(`Could not find corresponding tab in store: ${tabData.id}`)
+    }
+
+    const tab = layout.tabSchema.parse({ ...storeTab, ...tabData, order, parentId })
+    this.entities.tabs.push(tab)
+    LayoutNormalizer.removeFromArray(tabData.id, this.tabIds)
   }
 
-  private static removeId(id: string, arr: string[]) {
+  private static removeFromArray(id: string, arr: string[]) {
     const idx = arr.indexOf(id)
     if (idx >= 0) {
       arr.splice(idx, 1)
@@ -120,8 +108,6 @@ interface NormalizedEntities {
   panels: Panel[]
   tabs: CustomTab[]
 }
-
-type RcEntityData = CustomBoxData | CustomPanelData | CustomTabData
 
 interface NormalizedLayoutState {
   entities: NormalizedEntities

@@ -1,10 +1,11 @@
+import type { LayoutBase } from 'rc-dock'
+
 import type { NormalizedEntities, NormalizedLayoutState } from '#store/utils/LayoutNormalizer'
-import type { CustomLayoutBase } from '#types/layout'
 
 import layoutSlice from './layoutSlice'
 
 /** Handle rc-dock layout update */
-const rcLayoutChange = layoutSlice.createAction<CustomLayoutBase>('rcLayoutChange')
+const rcLayoutChange = layoutSlice.createAction<LayoutBase>('rcLayoutChange')
 
 /** Update layout */
 const updateLayout = layoutSlice.createAction<NormalizedLayoutState>('updateLayout')
