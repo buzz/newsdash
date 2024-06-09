@@ -1,5 +1,4 @@
-import { Box, useMantineTheme } from '@mantine/core'
-import { Scrollbars } from 'react-custom-scrollbars-2'
+import { Box, ScrollArea } from '@mantine/core'
 
 import tabsSelectors from '#store/slices/layout/entities/tabs/selectors'
 import { useSelector } from '#ui/hooks/store'
@@ -7,24 +6,13 @@ import type { RootState } from '#store/types'
 
 import classes from './Feed.module.css'
 
-function HTrack() {
-  return <div style={{ display: 'none' }} />
-}
-
 function Feed({ id }: FeedProps) {
-  const theme = useMantineTheme()
   const selectTab = (state: RootState) => tabsSelectors.selectById(state, id)
   const tab = useSelector(selectTab)
 
   return (
     <Box className={classes.wrapper}>
-      <Scrollbars
-        autoHide
-        autoHideTimeout={1000}
-        autoHideDuration={theme.other.transition.duration.default}
-        hideTracksWhenNotNeeded
-        renderTrackHorizontal={HTrack}
-      >
+      <ScrollArea>
         <Box className={classes.innerWrapper}>
           {tab.id}
           <br />
@@ -32,7 +20,7 @@ function Feed({ id }: FeedProps) {
           <br />
           {tab.url}
         </Box>
-      </Scrollbars>
+      </ScrollArea>
     </Box>
   )
 }
