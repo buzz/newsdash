@@ -3,7 +3,6 @@ node_modules
 npm-debug.log*
 tsconfig.tsbuildinfo
 /deploy.sh
-/packages/client/dist
+/packages/*/dist
 .DS_Store
 /.env*.local
-

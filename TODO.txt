@@ -1,3 +1,5 @@
+- replace express with fastify?
+
 - https://github.com/redis/redis-om-node
 
 - react-virtualized

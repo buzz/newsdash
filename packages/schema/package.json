@@ -1,0 +1,31 @@
+{
+  "name": "@newsdash/schema",
+  "description": "Schema for newsdash",
+  "version": "0.0.0",
+  "license": "AGPL-3.0-or-later",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "author": {
+    "name": "buzz",
+    "url": "https://github.com/buzz"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/buzz/newsdash.git",
+    "directory": "packages/schema"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc --declaration --declarationMap --outDir dist --project .",
+    "typecheck": "tsc --noEmit --project ."
+  },
+  "dependencies": {
+    "zod": "^3.23.8"
+  }
+}

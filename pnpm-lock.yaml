@@ -33,8 +33,8 @@ importers:
         specifier: ^7.34.2
         version: 7.34.2(eslint@9.4.0)
       eslint-plugin-react-hooks:
-        specifier: ^4.6.2
-        version: 4.6.2(eslint@9.4.0)
+        specifier: 5.1.0-rc-cc1ec60d0d-20240607
+        version: 5.1.0-rc-cc1ec60d0d-20240607(eslint@9.4.0)
       eslint-plugin-react-redux:
         specifier: ^4.1.0
         version: 4.1.0(eslint-plugin-react@7.34.2(eslint@9.4.0))(eslint@9.4.0)
@@ -71,6 +71,9 @@ importers:
       '@mantine/notifications':
         specifier: ^7.10.1
         version: 7.10.1(@mantine/core@7.10.1(@mantine/hooks@7.10.1(react@18.3.1))(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.10.1(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@newsdash/schema':
+        specifier: link:../schema
+        version: link:../schema
       '@reduxjs/toolkit':
         specifier: ^2.2.5
         version: 2.2.5(react-redux@9.1.2(@types/react@18.3.3)(react@18.3.1)(redux@5.0.1))(react@18.3.1)
@@ -127,11 +130,20 @@ importers:
         specifier: ^4.2.0
         version: 4.2.0(rollup@4.18.0)(typescript@5.4.5)(vite@5.2.13(@types/node@20.14.2)(sugarss@4.0.1(postcss@8.4.38)))
 
+  packages/schema:
+    dependencies:
+      zod:
+        specifier: ^3.23.8
+        version: 3.23.8
+
   packages/server:
     dependencies:
       '@keyv/redis':
         specifier: ^2.8.5
         version: 2.8.5
+      '@newsdash/schema':
+        specifier: link:../schema
+        version: link:../schema
       cors:
         specifier: ^2.8.5
         version: 2.8.5
@@ -156,6 +168,9 @@ importers:
       metascraper-image:
         specifier: ^5.45.10
         version: 5.45.10
+      zod:
+        specifier: ^3.23.8
+        version: 3.23.8
     devDependencies:
       '@types/cors':
         specifier: ^2.8.17
@@ -1888,11 +1903,11 @@ packages:
     peerDependencies:
       eslint: ^7.0.0 || ^8.0.0 || ^9.0.0
 
-  eslint-plugin-react-hooks@4.6.2:
-    resolution: {integrity: sha512-QzliNJq4GinDBcD8gPB5v0wh6g8q3SUi6EFF0x8N/BL9PoVs0atuGc47ozMRyOWAKdwaZ5OnbOEa3WR+dSGKuQ==}
+  eslint-plugin-react-hooks@5.1.0-rc-cc1ec60d0d-20240607:
+    resolution: {integrity: sha512-XHCmxRcqVyx5/70GsnpEGmOaKkmQxks0o0+u25SCyYQIoJ9tDDLbTNj97FNqWF9aJ0iXehXONEIERqYJO4cl5A==}
     engines: {node: '>=10'}
     peerDependencies:
-      eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0
+      eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
 
   eslint-plugin-react-redux@4.1.0:
     resolution: {integrity: sha512-DBhCj87sdUnlIfjw3HhDzj5nmyuuBIiiokJ1Ybl/gZ3tStAz/uy/ckK7p4rEgXvDGb7R0fupDGa8gSGAYXRrOw==}
@@ -4304,6 +4319,9 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
+  zod@3.23.8:
+    resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
+
 snapshots:
 
   '@ampproject/remapping@2.3.0':
@@ -6198,7 +6216,7 @@ snapshots:
     dependencies:
       eslint: 9.4.0
 
-  eslint-plugin-react-hooks@4.6.2(eslint@9.4.0):
+  eslint-plugin-react-hooks@5.1.0-rc-cc1ec60d0d-20240607(eslint@9.4.0):
     dependencies:
       eslint: 9.4.0
 
@@ -8858,3 +8876,5 @@ snapshots:
   yallist@4.0.0: {}
 
   yocto-queue@0.1.0: {}
+
+  zod@3.23.8: {}

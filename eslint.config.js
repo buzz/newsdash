@@ -97,7 +97,8 @@ export default tsEslint.config(
           groups: [
             [String.raw`^\u0000`], // side-effects
             groupWithTypes('^node:'), // node modules
-            [String.raw`^@?\w`], // packages
+            groupWithTypes(String.raw`^@?(?:(?!newsdash\/))\w`), // 3rd party imports
+            groupWithTypes(String.raw`^@newsdash\/`),
             [String.raw`(?<!\u0000)$`], // absolute imports
             groupWithTypes('^#'), // ts paths exports
             groupWithTypes(String.raw`^\.`), // relative imports
@@ -163,7 +164,7 @@ export default tsEslint.config(
     files: ['packages/server/src/**/*.ts'],
     languageOptions: { globals: globals.node },
     rules: {
-      'import/extensions': ['error', { json: 'always', ts: 'always' }],
+      'import/extensions': ['error', { json: 'always', js: 'always' }],
     },
   },
 
