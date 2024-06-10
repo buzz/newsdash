@@ -6,23 +6,32 @@ import { editTab, removeTab } from '#store/slices/layout/entities/tabs/actions'
 import Tooltip from '#ui/components/common/Tooltip'
 import { useDispatch } from '#ui/hooks/store'
 import { isValidUrl, randomColor } from '#utils'
-import type { TabEditMode } from '#types/layout'
+import type { CustomTabData, TabEditMode } from '#types/layout'
 
 import ButtonGroup from './ButtonGroup'
 
 import classes from './EditFeedForm.module.css'
 
-function EditFeedForm({ id, mode }: EditFeedFormProps) {
+function EditFeedForm({ tab, mode }: EditFeedFormProps) {
   const dispatch = useDispatch()
   const theme = useMantineTheme()
   const swatchColors = Object.values(theme.colors).map((color) => color[6])
 
+  const initialValues =
+    mode === 'create'
+      ? {
+          url: '',
+          customTitle: '',
+          color: randomColor(),
+        }
+      : {
+          url: tab.url,
+          customTitle: tab.customTitle,
+          color: tab.color,
+        }
+
   const form = useForm({
-    initialValues: {
-      url: '',
-      customTitle: '',
-      color: randomColor(),
-    },
+    initialValues,
 
     validate: {
       url: isValidUrl,
@@ -30,11 +39,20 @@ function EditFeedForm({ id, mode }: EditFeedFormProps) {
   })
 
   const handleCancel = () => {
-    dispatch(mode === 'create' ? removeTab(id) : editTab({ id, changes: { editMode: undefined } }))
+    if (tab.id) {
+      dispatch(
+        mode === 'create'
+          ? removeTab(tab.id)
+          : editTab({ id: tab.id, changes: { editMode: undefined } })
+      )
+    }
   }
 
   const handleSubmit = form.onSubmit((values) => {
-    dispatch(editTab({ id, changes: { ...values, editMode: undefined } }))
+    if (tab.id) {
+      console.log(values)
+      dispatch(editTab({ id: tab.id, changes: { ...values, editMode: undefined } }))
+    }
   })
 
   return (
@@ -74,7 +92,7 @@ function EditFeedForm({ id, mode }: EditFeedFormProps) {
 }
 
 interface EditFeedFormProps {
-  id: string
+  tab: CustomTabData
   mode: TabEditMode
 }
 

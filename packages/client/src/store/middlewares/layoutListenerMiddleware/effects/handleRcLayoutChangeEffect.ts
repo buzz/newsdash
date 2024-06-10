@@ -3,7 +3,7 @@ import { selectNormalizedLayout } from '#store/slices/layout/selectors'
 import type { AppStartListening } from '#store/middlewares/types'
 
 /**
- * Handle update from rc-dock component
+ * Handle update from rc-dock component.
  *
  * Normalize layout and pass to reducer.
  */

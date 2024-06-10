@@ -1,11 +1,15 @@
 /* eslint-disable @typescript-eslint/no-restricted-imports */
 import {
-  type TypedUseSelectorHook,
   useDispatch as useDispatchReactRedux,
   useSelector as useSelectorReactRedux,
+  useStore as useStoreReactRedux,
 } from 'react-redux'
+import type { TypedUseSelectorHook } from 'react-redux'
 
-import type { AppDispatch, RootState } from '#store/types'
+import type { AppDispatch, RootState, Store } from '#store/types'
 
-export const useDispatch: () => AppDispatch = useDispatchReactRedux
-export const useSelector: TypedUseSelectorHook<RootState> = useSelectorReactRedux
+const useDispatch: () => AppDispatch = useDispatchReactRedux
+const useSelector: TypedUseSelectorHook<RootState> = useSelectorReactRedux
+const useStore = useStoreReactRedux.withTypes<Store>()
+
+export { useDispatch, useSelector, useStore }

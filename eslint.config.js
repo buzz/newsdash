@@ -65,8 +65,9 @@ export default tsEslint.config(
           paths: [
             {
               name: 'react-redux',
-              importNames: ['useSelector', 'useDispatch'],
-              message: 'Use typed hooks `useDispatch` and `useSelector` from app instead.',
+              importNames: ['useSelector', 'useDispatch', 'useStore'],
+              message:
+                'Use typed hooks `useDispatch`, `useSelector`, and `useStore` from app instead.',
             },
             {
               name: '@reduxjs/toolkit',

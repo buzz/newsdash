@@ -13,8 +13,6 @@ const settingsSchema = z.object({
 
 const persistPanelSchema = panelSchema.omit({ activeId: true })
 
-// const persistTabSchema = tabSchema.omit({ minHeight: true, minWidth: true })
-
 const persistLayoutSchema = z.object({
   boxes: z.array(boxSchema),
   panels: z.array(persistPanelSchema),
@@ -30,11 +28,21 @@ const versionInfoSchema = z.object({
   version: z.string(),
 })
 
+const fetchFeedBodySchema = z.object({ url: z.string().url() })
+
 type Settings = z.infer<typeof settingsSchema>
 type PersistStateSchema = z.infer<typeof persistStateSchema>
 type PersistLayout = z.infer<typeof persistLayoutSchema>
 type Result = z.infer<typeof resultSchema>
 type VersionInfo = z.infer<typeof versionInfoSchema>
+type FetchFeedBody = z.infer<typeof fetchFeedBodySchema>
 
-export type { PersistLayout, PersistStateSchema, Result, Settings, VersionInfo }
-export { persistLayoutSchema, persistStateSchema, resultSchema, settingsSchema, versionInfoSchema }
+export type { FetchFeedBody, PersistLayout, PersistStateSchema, Result, Settings, VersionInfo }
+export {
+  fetchFeedBodySchema,
+  persistLayoutSchema,
+  persistStateSchema,
+  resultSchema,
+  settingsSchema,
+  versionInfoSchema,
+}

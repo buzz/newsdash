@@ -7,6 +7,11 @@ const dockModeSchema = z.union([
   z.literal('window'),
   z.literal('maximize'),
 ])
+
+const feedStatusSchema = z
+  .union([z.literal('new'), z.literal('loaded'), z.literal('loading'), z.literal('error')])
+  .default('loaded')
+
 const groupSchema = z.optional(z.string())
 const sizeSchema = z.optional(z.number().int().min(0))
 const orderSchema = z.number().int().min(0)
@@ -32,6 +37,11 @@ const panelSchema = z.object({
 const customTabFields = z.object({
   color: z.string(),
   customTitle: z.optional(z.string()),
+  error: z.optional(z.instanceof(Error)),
+  feedTitle: z.optional(z.string()),
+  lastFetched: z.number().default(0),
+  link: z.optional(z.string().url()),
+  status: feedStatusSchema,
   url: z.string().url(),
 })
 

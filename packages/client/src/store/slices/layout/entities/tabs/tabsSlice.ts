@@ -24,7 +24,9 @@ const tabsSlice = createSlice({
         id,
         changes: {
           ...changes,
-          customTitle: changes.customTitle === '' ? undefined : changes.customTitle,
+          ...(Object.keys(changes).includes('customTitle')
+            ? { customTitle: changes.customTitle === '' ? undefined : changes.customTitle }
+            : {}),
         },
       })
     })

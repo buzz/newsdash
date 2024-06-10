@@ -1,5 +1,13 @@
-export type { PersistLayout, PersistStateSchema, Result, Settings, VersionInfo } from './api.js'
+export type {
+  FetchFeedBody,
+  PersistLayout,
+  PersistStateSchema,
+  Result,
+  Settings,
+  VersionInfo,
+} from './api.js'
 export {
+  fetchFeedBodySchema,
   persistLayoutSchema,
   persistStateSchema,
   resultSchema,

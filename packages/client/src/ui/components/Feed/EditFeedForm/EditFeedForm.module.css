@@ -11,12 +11,9 @@
   padding: var(--mantine-spacing-xs);
 }
 
-title {
+.title {
   display: flex;
   align-items: center;
+  gap: var(--mantine-spacing-xs);
   margin-bottom: var(--mantine-spacing-sm);
-
-  & > svg {
-    margin-right: var(--mantine-spacing-xs);
-  }
 }

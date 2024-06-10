@@ -1,4 +1,15 @@
-.scrollWrapper {
-  height: 100%;
-  width: 100%;
+.feedItem {
+  color: var(--mantine-color-text);
+  text-decoration: none;
+
+  .text {
+    .title {
+      font-size: var(--mantine-font-size-sm);
+    }
+
+    .teaserText {
+      font-size: var(--mantine-font-size-xs);
+      height: 3lh;
+    }
+  }
 }

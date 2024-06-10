@@ -1,12 +1,14 @@
 import { PLACEHOLDER_TAB_ID } from '#constants'
+import tabsSelectors from '#store/slices/layout/entities/tabs/selectors'
 import EditFeedForm from '#ui/components/Feed/EditFeedForm/EditFeedForm'
 import Feed from '#ui/components/Feed/Feed'
+import type { RootState } from '#store/types'
 import type { CustomTabData } from '#types/layout'
 
 import Placeholder from './Placeholder'
 
 /** Get tab component */
-function loadTab(tabData: CustomTabData) {
+function loadTab(store: RootState, tabData: CustomTabData) {
   if (!tabData.id) {
     throw new Error('Expected tab ID')
   }
@@ -22,28 +24,28 @@ function loadTab(tabData: CustomTabData) {
 
   // News feed
   else {
+    const tab = tabsSelectors.selectById(store, tabData.id)
+
     switch (tabData.editMode) {
       case 'edit': {
         return {
           ...tabData,
-          content: <EditFeedForm id={tabData.id} mode="edit" />,
+          content: <EditFeedForm tab={tab} mode="edit" />,
           title: 'Edit feed',
         }
       }
       case 'create': {
         return {
           ...tabData,
-          content: <EditFeedForm id={tabData.id} mode="create" />,
+          content: <EditFeedForm tab={tab} mode="create" />,
           title: 'New feed',
         }
-        break
       }
       default: {
         return {
           ...tabData,
-          content: <Feed id={tabData.id} />,
-          // TODO: title
-          title: 'TODO',
+          content: <Feed tab={tab} />,
+          title: tab.customTitle ?? tab.feedTitle ?? 'NO TITLE',
         }
       }
     }
