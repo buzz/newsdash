@@ -3,8 +3,8 @@ import { removeTab } from '#store/slices/layout/entities/tabs/actions'
 import { selectChildTabs } from '#store/slices/layout/entities/tabs/selectors'
 import type { AppStartListening } from '#store/middlewares/types'
 
-// Remove tabs when parent panel is removed
-function handleRemovePanelEffect(startListening: AppStartListening) {
+/** Remove tabs when parent panel is removed */
+function removePanelEffect(startListening: AppStartListening) {
   startListening({
     actionCreator: removePanel,
     effect: ({ payload: panelId }, listenerApi) => {
@@ -15,4 +15,4 @@ function handleRemovePanelEffect(startListening: AppStartListening) {
   })
 }
 
-export default handleRemovePanelEffect
+export default removePanelEffect

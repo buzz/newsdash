@@ -8,7 +8,7 @@ import { selectMaxTabOrder } from '#store/slices/layout/entities/tabs/selectors'
 import type { AppStartListening } from '#store/middlewares/types'
 import type { RootState } from '#store/types'
 
-// New tab requested by user
+/** New tab requested by user */
 function requestNewTabEffect(startListening: AppStartListening) {
   startListening({
     actionCreator: requestNewTab,

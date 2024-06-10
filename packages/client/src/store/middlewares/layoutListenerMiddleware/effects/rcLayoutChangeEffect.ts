@@ -7,7 +7,7 @@ import type { AppStartListening } from '#store/middlewares/types'
  *
  * Normalize layout and pass to reducer.
  */
-function handleRcLayoutChangeEffect(startListening: AppStartListening) {
+function rcLayoutChangeEffect(startListening: AppStartListening) {
   startListening({
     actionCreator: rcLayoutChange,
     effect: ({ payload: layout }, listenerApi) => {
@@ -17,4 +17,4 @@ function handleRcLayoutChangeEffect(startListening: AppStartListening) {
   })
 }
 
-export default handleRcLayoutChangeEffect
+export default rcLayoutChangeEffect

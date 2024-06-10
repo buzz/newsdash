@@ -12,7 +12,7 @@ import type { AppStartListening } from '#store/middlewares/types'
 
 const PERSIST_DELAY = 5000
 
-// Persist layout on change
+/** Persist layout on change */
 function persistLayoutEffect(startListening: AppStartListening) {
   let lastPersistLayout: PersistLayout | undefined
 
