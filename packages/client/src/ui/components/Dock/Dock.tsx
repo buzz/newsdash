@@ -3,11 +3,10 @@ import './Dock.css'
 
 import { QueryStatus } from '@reduxjs/toolkit/query'
 import DockLayout, { type LayoutBase } from 'rc-dock'
-import { useCallback } from 'react'
 
 import { PLACEHOLDER_LAYOUT } from '#constants'
 import layoutApi from '#store/slices/api/layoutApi'
-import { rcLayoutChange, rcLayoutReady } from '#store/slices/layout/actions'
+import { rcLayoutChange } from '#store/slices/layout/actions'
 import tabsSelectors from '#store/slices/layout/entities/tabs/selectors'
 import { selectDenormalizedLayout } from '#store/slices/layout/selectors'
 import { useDispatch, useSelector, useStore } from '#ui/hooks/store'
@@ -24,11 +23,6 @@ function Dock() {
   const store = useStore()
   const state = store.getState()
 
-  // useCallback, otherwise ref callback gets fired multiple times
-  const setRcDockRef = useCallback(() => {
-    dispatch(rcLayoutReady())
-  }, [dispatch])
-
   // Avoid placeholder FOUC
   const getLayoutStatus = useSelector(layoutApi.endpoints.getLayout.select())
   const layoutRestored = getLayoutStatus.status === QueryStatus.fulfilled
@@ -43,7 +37,6 @@ function Dock() {
       layout={layout}
       loadTab={(tabData: CustomTabData) => loadTab(state, tabData)}
       onLayoutChange={(newLayout) => dispatch(rcLayoutChange(newLayout))}
-      ref={setRcDockRef}
     />
   )
 }

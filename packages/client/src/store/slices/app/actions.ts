@@ -1,3 +1,6 @@
 import appSlice from './appSlice'
 
-export const { changeHeaderVisibile, closeModal, openModal, loadedInitialState } = appSlice.actions
+const init = appSlice.createAction('init')
+
+export const { changeHeaderVisibile, closeModal, openModal } = appSlice.actions
+export { init }

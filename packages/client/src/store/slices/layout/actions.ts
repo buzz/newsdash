@@ -16,7 +16,4 @@ const restoreLayout = layoutSlice.createAction<NormalizedEntities>('restoreLayou
 /** Request new tab */
 const requestNewTab = layoutSlice.createAction<string | undefined>('requestNewTab')
 
-/** Signal rc-dock is ready to process layouts */
-const rcLayoutReady = layoutSlice.createAction('rcLayoutReady')
-
-export { rcLayoutChange, rcLayoutReady, requestNewTab, restoreLayout, updateLayout }
+export { rcLayoutChange, requestNewTab, restoreLayout, updateLayout }

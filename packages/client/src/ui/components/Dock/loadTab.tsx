@@ -45,7 +45,7 @@ function loadTab(store: RootState, tabData: CustomTabData) {
         return {
           ...tabData,
           content: <Feed tab={tab} />,
-          title: tab.customTitle ?? tab.feedTitle ?? 'NO TITLE',
+          title: tab.customTitle ?? tab.title ?? 'NO TITLE',
         }
       }
     }

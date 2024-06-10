@@ -3,7 +3,6 @@ import { createListenerMiddleware } from '@reduxjs/toolkit'
 import type { AppStartListening } from '#store/middlewares/types'
 
 import handleRcLayoutChangeEffect from './effects/handleRcLayoutChangeEffect'
-import handleRcLayoutReadyEffect from './effects/handleRcLayoutReadyEffect'
 import removeTabsOnCascadeEffect from './effects/handleRemovePanelEffect'
 import handleSetActiveTabEffect from './effects/handleSetActiveTabEffect'
 import persistLayoutEffect from './effects/persistLayoutEffect'
@@ -17,7 +16,6 @@ const effects = [
   removeTabsOnCascadeEffect,
   handleSetActiveTabEffect,
   handleRcLayoutChangeEffect,
-  handleRcLayoutReadyEffect,
   persistLayoutEffect,
 ]
 

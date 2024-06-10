@@ -1,24 +1,22 @@
+import { createListenerMiddleware } from '@reduxjs/toolkit'
+
 import layoutApi from '#store/slices/api/layoutApi'
 import settingsApi from '#store/slices/api/settingsApi'
-import { rcLayoutReady, restoreLayout } from '#store/slices/layout/actions'
+import { init } from '#store/slices/app/actions'
+import { restoreLayout } from '#store/slices/layout/actions'
 import { updateSettings } from '#store/slices/settings/actions'
 import type { AppStartListening } from '#store/middlewares/types'
 
-// TODO: Need to be done late?
+const appInitListenerMiddleware = createListenerMiddleware()
+const startListening = appInitListenerMiddleware.startListening as AppStartListening
 
-/**
- * Handle rc-dock ready action.
- *
- * Initialize with server data or empty layout.
- */
-function handleRcLayoutReadyEffect(startListening: AppStartListening) {
+/** Restore settings from server */
+function restoreSettingsEffect(startListening: AppStartListening) {
   startListening({
-    actionCreator: rcLayoutReady,
+    actionCreator: init,
     effect: async (action, listenerApi) => {
-      // Get settings
       const getSettings = settingsApi.endpoints.getSettings.initiate()
-      const { isSuccess: isSuccessSettings, data: settings } =
-        await listenerApi.dispatch(getSettings)
+      const { isSuccess, data: settings } = await listenerApi.dispatch(getSettings)
 
       // TODO: handle error
       // listenerApi.dispatch(
@@ -32,16 +30,25 @@ function handleRcLayoutReadyEffect(startListening: AppStartListening) {
       //   })
       // )
 
-      if (isSuccessSettings) {
+      if (isSuccess) {
         listenerApi.dispatch(updateSettings(settings))
       }
 
-      // Get layout
+      listenerApi.unsubscribe()
+    },
+  })
+}
+
+/** Restore layout from server */
+function restoreLayoutEffect(startListening: AppStartListening) {
+  startListening({
+    actionCreator: init,
+    effect: async (action, listenerApi) => {
       const getLayout = layoutApi.endpoints.getLayout.initiate()
-      const { isSuccess: isSuccessLayout, data: layout } = await listenerApi.dispatch(getLayout)
+      const { isSuccess, data: layout } = await listenerApi.dispatch(getLayout)
 
       if (
-        isSuccessLayout &&
+        isSuccess &&
         layout.boxes.length > 0 &&
         layout.panels.length > 0 &&
         layout.tabs.length > 0
@@ -60,4 +67,7 @@ function handleRcLayoutReadyEffect(startListening: AppStartListening) {
   })
 }
 
-export default handleRcLayoutReadyEffect
+restoreSettingsEffect(startListening)
+restoreLayoutEffect(startListening)
+
+export default appInitListenerMiddleware
