@@ -1,13 +1,7 @@
-import { Redis } from 'ioredis'
+import type { FastifyRedis } from '@fastify/redis'
 import type { z } from 'zod'
 
-import { DEFAULT_REDIS_URL } from '#constants'
-
 import { getSchemaFields, objToHmData, parseRedisHash } from './dataConversion.js'
-
-const redis = new Redis(process.env.REDIS_URL ?? DEFAULT_REDIS_URL, {
-  showFriendlyErrorStack: process.env.NODE_ENV !== 'production',
-})
 
 function assertRedisHashResult(thing: unknown): asserts thing is RedisHashResult {
   if (
@@ -18,7 +12,7 @@ function assertRedisHashResult(thing: unknown): asserts thing is RedisHashResult
   }
 }
 
-function scan(pattern: string): Promise<string[]> {
+function scan(redis: FastifyRedis, pattern: string): Promise<string[]> {
   return new Promise((resolve) => {
     const stream = redis.scanStream({ match: pattern })
     const keys: string[] = []
@@ -38,6 +32,7 @@ function scan(pattern: string): Promise<string[]> {
 }
 
 async function getHash<T extends z.SomeZodObject>(
+  redis: FastifyRedis,
   key: string,
   schema: T
 ): Promise<z.infer<T> | undefined> {
@@ -52,11 +47,12 @@ async function getHash<T extends z.SomeZodObject>(
 }
 
 async function getAllHashes<T extends z.SomeZodObject>(
+  redis: FastifyRedis,
   pattern: string,
   schema: T
 ): Promise<z.infer<T>[]> {
   const hmFields = getSchemaFields(schema)
-  const keys = await scan(pattern)
+  const keys = await scan(redis, pattern)
 
   const pipeline = redis.pipeline()
   for (const key of keys) {
@@ -83,19 +79,25 @@ async function getAllHashes<T extends z.SomeZodObject>(
   return hashes
 }
 
-function setHash(key: string, obj: Record<string, string | number>, schema: z.SomeZodObject) {
+function setHash(
+  redis: FastifyRedis,
+  key: string,
+  obj: Record<string, string | number>,
+  schema: z.SomeZodObject
+) {
   const hmFields = getSchemaFields(schema)
   const hmData = objToHmData(obj, hmFields)
   return redis.hmset(key, hmData)
 }
 
 async function updateHashesDeleteOthers(
+  redis: FastifyRedis,
   pattern: string,
   objs: Record<string, string | number | null>[],
   schema: z.SomeZodObject
 ) {
   const hmFields = getSchemaFields(schema)
-  const deleteSet = await scan(pattern)
+  const deleteSet = await scan(redis, pattern)
 
   const keyBase = pattern.slice(0, -1) // remove trailing `*`
   const pipeline = redis.pipeline()
@@ -124,4 +126,4 @@ async function updateHashesDeleteOthers(
 type RedisHashResult = (string | null)[]
 
 export type { RedisHashResult }
-export { getAllHashes, getHash, redis, setHash, updateHashesDeleteOthers }
+export { getAllHashes, getHash, setHash, updateHashesDeleteOthers }

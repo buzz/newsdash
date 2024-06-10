@@ -1,20 +1,19 @@
-import cors from 'cors'
-import express from 'express'
+import Fastify from 'fastify'
 
-import apiRouter from './api/apiRouter.js'
-import { DEFAULT_PORT } from './constants.js'
-import errorHandlers from './errorHandlers.js'
+import { DEFAULT_PORT } from '#constants'
 
-const app = express()
+import apiPlugin from './api/api.js'
 
-if (process.env.NODE_ENV !== 'production') {
-  app.use(cors({ origin: '*' }))
-}
+const fastify = Fastify({
+  logger: process.env.NODE_ENV !== 'production',
+})
 
-app
-  .use(express.json())
-  .use('/api', apiRouter)
-  .use(errorHandlers)
-  .listen(DEFAULT_PORT, () => {
-    console.log(`Listening on port ${DEFAULT_PORT}`)
-  })
+await fastify.register(apiPlugin, { prefix: '/api' })
+
+fastify.listen({ port: DEFAULT_PORT }, function (err, address) {
+  if (err) {
+    fastify.log.error(err)
+  } else {
+    fastify.log.info(`Server listening on ${address}`)
+  }
+})

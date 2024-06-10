@@ -9,6 +9,7 @@
     "target": "ES2022",
     /* Path aliases */
     "paths": {
+      "#api/*": ["./src/api/*"],
       "#constants": ["./src/constants.ts"],
       "#redis": ["./src/redis/redis.ts"],
       "#schema": ["./src/schema.ts"]
