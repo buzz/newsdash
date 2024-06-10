@@ -5,6 +5,7 @@
     "module": "NodeNext",
     "moduleResolution": "Node16",
     "resolveJsonModule": true,
+    "skipLibCheck": true,
     "strict": true,
     "target": "ES2022",
     /* Path aliases */

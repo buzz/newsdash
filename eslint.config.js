@@ -19,7 +19,7 @@ export default tsEslint.config(
 
   {
     plugins: {
-      import: eslintPluginImport,
+      import: fixupPluginRules(eslintPluginImport),
       'jsx-a11y': eslintPluginJsxA11y,
       'react-hooks': eslintPluginReactHooks,
       react: eslintPluginReact,

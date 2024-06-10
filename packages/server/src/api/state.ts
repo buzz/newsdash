@@ -6,6 +6,8 @@ import { layout, persistLayoutSchema, settingsSchema } from '@newsdash/schema'
 import { DEFAULT_REDIS_URL } from '#constants'
 import { getAllHashes, getHash, setHash, updateHashesDeleteOthers } from '#redis/redis.js'
 
+import { BadRequest, NotFound } from './errors.js'
+
 const APP_PREFIX = 'newsdash'
 const SETTINGS_KEY = `${APP_PREFIX}:settings`
 const BOXES_KEY = `${APP_PREFIX}:boxes:*`
@@ -14,15 +16,13 @@ const TABS_KEY = `${APP_PREFIX}:tabs:*`
 
 const redisUrl = process.env.REDIS_URL ?? DEFAULT_REDIS_URL
 
-import { BadRequest, NotFound } from './errors.js'
-
 const statePlugin: FastifyPluginAsync = async (app) => {
   await app.register(fastifyRedis, {
     url: redisUrl,
     showFriendlyErrorStack: process.env.NODE_ENV !== 'production',
   })
 
-  app.get('/settings', async (request, reply) => {
+  app.get('/settings', async () => {
     const result = settingsSchema.safeParse(await getHash(app.redis, SETTINGS_KEY, settingsSchema))
 
     if (result.success) {
@@ -44,7 +44,7 @@ const statePlugin: FastifyPluginAsync = async (app) => {
     await reply.send({ result: 'ok ' })
   })
 
-  app.get('/layout', async (request, reply) => {
+  app.get('/layout', async () => {
     const result = persistLayoutSchema.safeParse({
       boxes: await getAllHashes(app.redis, BOXES_KEY, layout.boxSchema),
       panels: await getAllHashes(app.redis, PANELS_KEY, layout.panelSchema),
