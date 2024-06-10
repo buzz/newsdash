@@ -1,18 +1,21 @@
-import RssParser from 'rss-parser'
+import type { SerializedError } from '@reduxjs/toolkit'
+import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 
-import { MAX_CONTENT_LENGTH } from '#constants'
-import feed from '#store/slices/api/feed'
+import feedApi from '#store/slices/api/feedApi'
 import { addFeedItems } from '#store/slices/feedItems/actions'
 import { editTab } from '#store/slices/layout/entities/tabs/actions'
 import tabsSelectors from '#store/slices/layout/entities/tabs/selectors'
 import type { AppStartListening } from '#store/middlewares/types'
-import type { FeedItem } from '#types/feed'
 import type { CustomTab } from '#types/layout'
 
-const rssParser = new RssParser()
-
-function truncate(text: string) {
-  return text.length > MAX_CONTENT_LENGTH ? text.slice(0, Math.max(0, MAX_CONTENT_LENGTH)) : text
+function extractQueryError(error: FetchBaseQueryError | SerializedError): string {
+  if ('error' in error && typeof error.error === 'string') {
+    return error.error
+  }
+  if ('message' in error && typeof error.message === 'string') {
+    return error.message
+  }
+  return 'Unknown error'
 }
 
 /** Fetch feed. */
@@ -28,50 +31,41 @@ function fetchFeedEffect(startListening: AppStartListening) {
       // TODO: check if url is different from before: then always fetch
       // if not: fetch only if lastFetched > fetch interval
 
-      // Fetch feed via CORS proxy
+      // Fetch feed
       const tab = tabsSelectors.selectById(listenerApi.getState(), tabId)
-      const fetchAction = feed.endpoints.fetchFeed.initiate({ url: tab.url })
+      const fetchAction = feedApi.endpoints.fetchFeed.initiate(tab.url)
       const { data, error } = await listenerApi.dispatch(fetchAction)
-      if (!data) {
+      if (error) {
+        // TODO: show notification
         console.log(error)
+        listenerApi.dispatch(
+          editTab({
+            id: tabId,
+            changes: {
+              error: extractQueryError(error),
+              status: 'error',
+            },
+          })
+        )
         return
       }
+      if (!data) {
+        throw new Error('Expected data')
+      }
 
-      // Parse feed
-      const { items, ...feedData } = await rssParser.parseString(data)
-
-      // console.log('feedData:')
-      // console.log(feedData)
-      // console.log('items:')
-      // console.log(items)
+      const { items, ...feedInfo } = data
 
       // Update feed
       const tabUpdate: Partial<CustomTab> = {
+        ...feedInfo,
         error: undefined,
         lastFetched: Date.now(),
-        link: feedData.link,
         status: 'loaded',
-        feedTitle: feedData.title,
       }
       listenerApi.dispatch(editTab({ id: tabId, changes: tabUpdate }))
 
       // Add feed items
-      const feedItems: FeedItem[] = []
-      for (const item of items) {
-        const content = item.summary ?? item.contentSnippet ?? item.content
-        const contentTruncated = content ? truncate(content) : undefined
-        const feedItem: FeedItem = {
-          id: `${tabId}${item.id || item.guid || item.link}`,
-          content: contentTruncated,
-          date: item.isoDate ? Date.parse(item.isoDate) : Date.now(),
-          link: item.link,
-          tabId,
-          title: item.title ?? 'NO TITLE',
-        }
-        feedItems.push(feedItem)
-      }
-
-      listenerApi.dispatch(addFeedItems(feedItems))
+      listenerApi.dispatch(addFeedItems(items.map((item) => ({ ...item, tabId }))))
     },
   })
 }

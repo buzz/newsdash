@@ -8,6 +8,10 @@ import svgr from 'vite-plugin-svgr'
 export default defineConfig({
   envDir: '../..',
   envPrefix: 'NEWSDASH_', // Exposed to client
+  server: {
+    port: 3000,
+    proxy: { '/api': 'http://localhost:3001' },
+  },
   plugins: [
     react(),
     svgr({
@@ -26,5 +30,4 @@ export default defineConfig({
     //   logo: '../../artwork/favicon.svg',
     // }),
   ],
-  server: { port: 3000 },
 })

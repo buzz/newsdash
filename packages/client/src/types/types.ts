@@ -11,9 +11,6 @@ interface AppState {
 
   /** Name of currently opened modal */
   modalOpened: ModalName | null
-
-  /** App is restoring state from storage */
-  isLoadingInitialState: boolean
 }
 
 interface Notification {

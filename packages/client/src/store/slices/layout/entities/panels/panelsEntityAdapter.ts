@@ -1,14 +1,23 @@
 import { createEntityAdapter } from '@reduxjs/toolkit'
+import { nanoid } from 'nanoid'
 
 import type { Panel } from '@newsdash/schema'
 
+import { DOCKBOX_ID } from '#constants'
 import sortOrderComparer from '#store/utils/sortOrderComparer'
 
 const panelsEntityAdapter = createEntityAdapter<Panel>({
   sortComparer: sortOrderComparer,
 })
 
-const panelsInitialState = panelsEntityAdapter.getInitialState()
+const panelsInitialState = panelsEntityAdapter.getInitialState(undefined, [
+  {
+    id: nanoid(),
+    group: 'news',
+    order: 0,
+    parentId: DOCKBOX_ID,
+  },
+])
 
 export { panelsInitialState }
 export default panelsEntityAdapter

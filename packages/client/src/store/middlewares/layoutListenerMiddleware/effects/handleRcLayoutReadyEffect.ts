@@ -1,11 +1,10 @@
-import { EMPTY_LAYOUT } from '#constants'
-import state from '#store/slices/api/state'
-import { loadedInitialState } from '#store/slices/app/actions'
-import { rcLayoutReady, restoreLayout, updateLayout } from '#store/slices/layout/actions'
-import { selectNormalizedLayout } from '#store/slices/layout/selectors'
-import { showNotification } from '#store/slices/notifications/actions'
+import layoutApi from '#store/slices/api/layoutApi'
+import settingsApi from '#store/slices/api/settingsApi'
+import { rcLayoutReady, restoreLayout } from '#store/slices/layout/actions'
 import { updateSettings } from '#store/slices/settings/actions'
 import type { AppStartListening } from '#store/middlewares/types'
+
+// TODO: Need to be done late?
 
 /**
  * Handle rc-dock ready action.
@@ -16,30 +15,42 @@ function handleRcLayoutReadyEffect(startListening: AppStartListening) {
   startListening({
     actionCreator: rcLayoutReady,
     effect: async (action, listenerApi) => {
-      const getState = state.endpoints.getState.initiate()
-      const { isSuccess, data } = await listenerApi.dispatch(getState)
+      // Get settings
+      const getSettings = settingsApi.endpoints.getSettings.initiate()
+      const { isSuccess: isSuccessSettings, data: settings } =
+        await listenerApi.dispatch(getSettings)
 
-      if (isSuccess) {
-        const { settings, ...entities } = data
-        if (settings) {
-          listenerApi.dispatch(updateSettings(settings))
-        }
-        if (entities.tabs.length > 0) {
-          listenerApi.dispatch(restoreLayout(entities))
-        } else {
-          const normalizedLayout = selectNormalizedLayout(listenerApi.getState(), EMPTY_LAYOUT)
-          listenerApi.dispatch(updateLayout(normalizedLayout))
-        }
-        listenerApi.dispatch(loadedInitialState())
-      } else {
+      // TODO: handle error
+      // listenerApi.dispatch(
+      //   showNotification({
+      //     autoClose: false,
+      //     color: 'red',
+      //     icon: 'connection-error',
+      //     message: 'The backend server is not reachable.',
+      //     title: 'No connection!',
+      //     withCloseButton: false,
+      //   })
+      // )
+
+      if (isSuccessSettings) {
+        listenerApi.dispatch(updateSettings(settings))
+      }
+
+      // Get layout
+      const getLayout = layoutApi.endpoints.getLayout.initiate()
+      const { isSuccess: isSuccessLayout, data: layout } = await listenerApi.dispatch(getLayout)
+
+      if (
+        isSuccessLayout &&
+        layout.boxes.length > 0 &&
+        layout.panels.length > 0 &&
+        layout.tabs.length > 0
+      ) {
         listenerApi.dispatch(
-          showNotification({
-            autoClose: false,
-            color: 'red',
-            icon: 'connection-error',
-            message: 'The backend server is not reachable.',
-            title: 'No connection!',
-            withCloseButton: false,
+          restoreLayout({
+            boxes: layout.boxes,
+            panels: layout.panels,
+            tabs: layout.tabs.map((tab) => ({ ...tab, status: 'loaded' })),
           })
         )
       }

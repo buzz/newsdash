@@ -1,10 +1,7 @@
-interface FeedItem {
-  id: string
-  content?: string
-  date: number
-  link?: string
+import type { FeedItem as ApiFeedItem } from '@newsdash/schema'
+
+interface FeedItem extends ApiFeedItem {
   tabId: string
-  title: string
 }
 
 export { FeedItem }

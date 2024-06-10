@@ -3,7 +3,7 @@ import { isEqual } from 'lodash-es'
 
 import type { PersistLayout } from '@newsdash/schema'
 
-import apiLayout from '#store/slices/api/layout'
+import layoutApi from '#store/slices/api/layoutApi'
 import { selectPersistLayout } from '#store/slices/api/selectors'
 import { updateLayout } from '#store/slices/layout/actions'
 import { addPanel, removePanel, updatePanel } from '#store/slices/layout/entities/panels/actions'
@@ -28,7 +28,7 @@ function persistLayoutEffect(startListening: AppStartListening) {
 
       // Only persist if layout actually changed
       if (!isEqual(persistLayout, lastPersistLayout)) {
-        await listenerApi.dispatch(apiLayout.endpoints.persistLayout.initiate(persistLayout))
+        await listenerApi.dispatch(layoutApi.endpoints.persistLayout.initiate(persistLayout))
         lastPersistLayout = persistLayout
       }
     },

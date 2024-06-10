@@ -1,15 +1,17 @@
 export type {
-  FetchFeedBody,
+  Feed,
+  FeedInfo,
+  FeedItem,
   PersistLayout,
-  PersistStateSchema,
   Result,
   Settings,
   VersionInfo,
 } from './api.js'
 export {
-  fetchFeedBodySchema,
+  feedInfoSchema,
+  feedItemSchema,
+  feedSchema,
   persistLayoutSchema,
-  persistStateSchema,
   resultSchema,
   settingsSchema,
   versionInfoSchema,

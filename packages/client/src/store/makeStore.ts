@@ -1,5 +1,6 @@
 // force import order to avoid circular import
-import './slices/feedItems/actions'
+// https://redux-toolkit.js.org/usage/usage-guide#exporting-and-using-slices
+import './slices/notifications/actions'
 
 import { configureStore } from '@reduxjs/toolkit'
 

@@ -6,7 +6,6 @@ import type { AppState, ModalName } from '#types/types'
 const initialState: AppState = {
   headerVisible: false,
   modalOpened: null,
-  isLoadingInitialState: true,
 }
 
 const appSlice = createSlice({
@@ -31,11 +30,6 @@ const appSlice = createSlice({
       if (state.modalOpened === payload) {
         state.modalOpened = null
       }
-    },
-
-    /** Set `loadingInitialState` to `false` */
-    loadedInitialState(state) {
-      state.isLoadingInitialState = false
     },
   },
 })

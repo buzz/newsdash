@@ -12,7 +12,6 @@ const feedStatusSchema = z
   .union([z.literal('new'), z.literal('loaded'), z.literal('loading'), z.literal('error')])
   .default('loaded')
 
-const groupSchema = z.optional(z.string())
 const sizeSchema = z.optional(z.number().int().min(0))
 const orderSchema = z.number().int().min(0)
 const parentIdSchema = z.nullable(z.string())
@@ -28,7 +27,7 @@ const boxSchema = z.object({
 const panelSchema = z.object({
   id: z.string(),
   activeId: z.optional(z.string()),
-  group: groupSchema,
+  group: z.optional(z.string()),
   order: orderSchema,
   parentId: parentIdSchema,
   size: sizeSchema,
@@ -37,8 +36,8 @@ const panelSchema = z.object({
 const customTabFields = z.object({
   color: z.string(),
   customTitle: z.optional(z.string()),
-  error: z.optional(z.instanceof(Error)),
-  feedTitle: z.optional(z.string()),
+  error: z.optional(z.string()),
+  title: z.optional(z.string()),
   lastFetched: z.number().default(0),
   link: z.optional(z.string().url()),
   status: feedStatusSchema,
@@ -47,7 +46,8 @@ const customTabFields = z.object({
 
 const tabSchema = customTabFields.extend({
   id: z.string(),
-  group: groupSchema,
+  description: z.optional(z.string()),
+  group: z.optional(z.string()),
   order: orderSchema,
   parentId: parentIdSchema,
 })

@@ -2,16 +2,19 @@ import type { Result, Settings } from '@newsdash/schema'
 
 import apiSlice from './apiSlice'
 
-const settings = apiSlice.injectEndpoints({
+const settingsApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
+    getSettings: builder.query<Settings, void>({
+      query: () => 'state/settings',
+    }),
     persistSettings: builder.mutation<Result, Settings>({
       query: (body) => ({
         body,
         method: 'POST',
-        url: 'user/state/settings',
+        url: 'state/settings',
       }),
     }),
   }),
 })
 
-export default settings
+export default settingsApi

@@ -1,6 +1,6 @@
 import type { Box, Panel } from '@newsdash/schema'
 
-import { EMPTY_LAYOUT, TAB_MIN_HEIGHT, TAB_MIN_WIDTH } from '#constants'
+import { TAB_MIN_HEIGHT, TAB_MIN_WIDTH } from '#constants'
 import { selectChildBoxes, selectDockbox } from '#store/slices/layout/entities/boxes/selectors'
 import { selectChildPanels } from '#store/slices/layout/entities/panels/selectors'
 import { selectChildTabs } from '#store/slices/layout/entities/tabs/selectors'
@@ -28,12 +28,11 @@ class LayoutDenormalizer {
   denormalizeLayout(): DenormalizedLayout {
     const dockbox = selectDockbox(this.state)
 
-    // Return empty layout if we don't have one yet
-    if (dockbox === undefined) {
-      return EMPTY_LAYOUT
+    return {
+      dockbox: dockbox
+        ? this.denormalizeBox(dockbox)
+        : { mode: 'horizontal', children: [], order: 0 },
     }
-
-    return { dockbox: this.denormalizeBox(dockbox) }
   }
 
   /**
@@ -46,11 +45,8 @@ class LayoutDenormalizer {
     ].sort(sortOrderComparer)
 
     return {
-      id: box.id,
+      ...box,
       children,
-      mode: box.mode,
-      order: box.order,
-      size: box.size,
     }
   }
 
@@ -69,11 +65,7 @@ class LayoutDenormalizer {
    */
   private denormalizePanel(panel: Panel): CustomPanelData {
     return {
-      id: panel.id,
-      activeId: panel.activeId,
-      group: panel.group,
-      order: panel.order,
-      size: panel.size,
+      ...panel,
       tabs: this.denormalizeTabs(panel),
     }
   }
@@ -91,15 +83,9 @@ class LayoutDenormalizer {
    */
   private denormalizeTab(tab: CustomTab): CustomTabData {
     return {
-      id: tab.id,
-      color: tab.color,
-      customTitle: tab.customTitle,
-      editMode: tab.editMode,
-      group: tab.group,
+      ...tab,
       minHeight: TAB_MIN_HEIGHT,
       minWidth: TAB_MIN_WIDTH,
-      order: tab.order,
-      url: tab.url,
     }
   }
 }

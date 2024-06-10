@@ -2,16 +2,19 @@ import type { PersistLayout, Result } from '@newsdash/schema'
 
 import apiSlice from './apiSlice'
 
-const layout = apiSlice.injectEndpoints({
+const layoutApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
+    getLayout: builder.query<PersistLayout, void>({
+      query: () => 'state/layout',
+    }),
     persistLayout: builder.mutation<Result, PersistLayout>({
       query: (body) => ({
         body,
         method: 'POST',
-        url: 'user/state/layout',
+        url: 'state/layout',
       }),
     }),
   }),
 })
 
-export default layout
+export default layoutApi

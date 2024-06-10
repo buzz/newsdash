@@ -1,11 +1,12 @@
 import 'rc-dock/dist/rc-dock.css'
 import './Dock.css'
 
-import DockLayout from 'rc-dock'
+import { QueryStatus } from '@reduxjs/toolkit/query'
+import DockLayout, { type LayoutBase } from 'rc-dock'
 import { useCallback } from 'react'
 
-import { EMPTY_LAYOUT, PLACEHOLDER_LAYOUT } from '#constants'
-import { selectIsLoadingInitialState } from '#store/slices/app/selectors'
+import { PLACEHOLDER_LAYOUT } from '#constants'
+import layoutApi from '#store/slices/api/layoutApi'
 import { rcLayoutChange, rcLayoutReady } from '#store/slices/layout/actions'
 import tabsSelectors from '#store/slices/layout/entities/tabs/selectors'
 import { selectDenormalizedLayout } from '#store/slices/layout/selectors'
@@ -19,20 +20,21 @@ function Dock() {
   const dispatch = useDispatch()
   const denormalizedLayout = useSelector(selectDenormalizedLayout)
   const tabCount = useSelector(tabsSelectors.selectTotal)
-  let layout = tabCount > 0 ? denormalizedLayout : PLACEHOLDER_LAYOUT
+  let layout: LayoutBase = tabCount > 0 ? denormalizedLayout : PLACEHOLDER_LAYOUT
   const store = useStore()
   const state = store.getState()
-
-  const isLoadingInitialState = useSelector(selectIsLoadingInitialState)
-
-  if (isLoadingInitialState) {
-    layout = EMPTY_LAYOUT
-  }
 
   // useCallback, otherwise ref callback gets fired multiple times
   const setRcDockRef = useCallback(() => {
     dispatch(rcLayoutReady())
   }, [dispatch])
+
+  // Avoid placeholder FOUC
+  const getLayoutStatus = useSelector(layoutApi.endpoints.getLayout.select())
+  const layoutRestored = getLayoutStatus.status === QueryStatus.fulfilled
+  if (!layoutRestored) {
+    layout = { dockbox: { children: [], mode: 'horizontal' } }
+  }
 
   return (
     <DockLayout

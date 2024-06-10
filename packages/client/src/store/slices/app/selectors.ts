@@ -11,8 +11,4 @@ const selectHeaderVisibile = (state: RootState) => selectAppSlice(state).headerV
 const selectIsModalOpen = (state: RootState, name: ModalName) =>
   selectAppSlice(state).modalOpened === name
 
-/** Select if loading initial state */
-const selectIsLoadingInitialState = (state: RootState) =>
-  selectAppSlice(state).isLoadingInitialState
-
-export { selectHeaderVisibile, selectIsLoadingInitialState, selectIsModalOpen }
+export { selectHeaderVisibile, selectIsModalOpen }
