@@ -25,7 +25,7 @@
     border-color: var(--dock-panel-color-border);
     border-radius: var(--mantine-radius-sm);
     box-shadow: var(--mantine-shadow-sm);
-    color: var(--mantine-color-text);
+    color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-text));
     overflow: hidden;
   }
 
@@ -50,19 +50,22 @@
     }
   }
 
+  /* Enlarge divider interaction area */
+  --divider-oversize: 2;
+
   .dock-vbox > .dock-divider {
-    transform: scaleY(4);
+    transform: scaleY(var(--divider-oversize));
 
     &::after {
-      transform: scaleY(0.25);
+      transform: scaleY(calc(1 / var(--divider-oversize)));
     }
   }
 
   .dock-hbox > .dock-divider {
-    transform: scaleX(4);
+    transform: scaleX(var(--divider-oversize));
 
     &::after {
-      transform: scaleX(0.25);
+      transform: scaleX(calc(1 / var(--divider-oversize)));
     }
   }
 
@@ -88,7 +91,7 @@
 .dock-layout,
 body > .dragging-layer {
   .dock-ink-bar {
-    background-color: var(--mantine-primary-color-6);
+    background-color: transparent;
   }
 
   .dock-tab-btn-disabled {
@@ -97,23 +100,26 @@ body > .dragging-layer {
 
   .dock-tab {
     background: transparent;
-    border-bottom-color: transparent;
+    border-bottom: none;
+    float: none;
+    font-weight: 500;
+    text-align: left;
 
-    /* Nested rule for child element */
     > div {
       outline-color: var(--mantine-primary-color-6);
+      padding: 0;
     }
   }
 
-  /* Hover state for regular tab */
-  .dock-tab:hover {
-    color: var(--mantine-primary-color-6);
-  }
-
-  /* Active and active hover state for tab */
+  /* Hover/active state */
+  .dock-tab:hover,
   .dock-tab-active,
   .dock-tab-active:hover {
-    color: var(--mantine-primary-color-6);
+    color: light-dark(var(--mantine-color-black), var(--text-color-bright));
+  }
+  .dock-tab-active,
+  .dock-tab-active:hover {
+    text-decoration: underline;
   }
 
   /* Disabled and disabled hover state for tab */
@@ -126,6 +132,8 @@ body > .dragging-layer {
   .dock-top .dock-bar {
     background: var(--dock-tabs-color-fill);
     border-bottom-color: var(--dock-panel-color-border);
+    font-size: var(--mantine-font-size-sm);
+    line-height: 2.2;
   }
 
   .dock-nav-operations {

@@ -14,6 +14,7 @@ const theme = createTheme({
 
 const resolver: CSSVariablesResolver = (theme) => ({
   variables: {
+    '--text-color-bright': '#eee',
     '--transition-duration': `${theme.other.transition.duration.default}ms`,
     '--transition-duration-short': `${theme.other.transition.duration.short}ms`,
     '--transition-timing-function': theme.other.transition.timingFunction,

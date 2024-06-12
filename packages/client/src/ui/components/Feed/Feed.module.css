@@ -50,8 +50,6 @@
 }
 
 .feedItemWrapper {
-  --text-color-bright: #eee;
-
   .feedItem {
     align-items: center;
     border-bottom: 1px solid var(--mantine-color-default-border);

@@ -1,0 +1,7 @@
+.editButton {
+  --ai-color: var(--mantine-color-blue-light-color);
+
+  &:hover {
+    color: light-dark(darken(var(--ai-color), 0.2), lighten(var(--ai-color), 0.25));
+  }
+}
