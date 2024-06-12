@@ -5,7 +5,8 @@ import Feed from '#ui/components/Feed/Feed'
 import type { RootState } from '#store/types'
 import type { CustomTabData } from '#types/layout'
 
-import Placeholder from './Placeholder'
+import TabTitle from './Panel/TabTitle'
+import Placeholder from './Placeholder/Placeholder'
 
 /** Get tab component */
 function loadTab(store: RootState, tabData: CustomTabData) {
@@ -45,7 +46,7 @@ function loadTab(store: RootState, tabData: CustomTabData) {
         return {
           ...tabData,
           content: <Feed tab={tab} />,
-          title: tab.customTitle ?? tab.title ?? 'NO TITLE',
+          title: <TabTitle tab={tab} />,
         }
       }
     }

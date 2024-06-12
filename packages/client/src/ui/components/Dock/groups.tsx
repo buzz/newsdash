@@ -1,6 +1,6 @@
 import type { TabGroup } from 'rc-dock'
 
-import PanelExtra from './PanelExtra'
+import PanelExtra from './Panel/PanelExtra'
 
 const groups: Record<string, TabGroup> = {
   news: {

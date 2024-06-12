@@ -6,7 +6,7 @@ import { editTab } from '#store/slices/layout/entities/tabs/actions'
 import Tooltip from '#ui/components/common/Tooltip'
 import { useDispatch } from '#ui/hooks/store'
 
-import classes from './PanelExtra.module.css'
+import classes from './Panel.module.css'
 
 function PanelExtra({ panel }: PanelExtraProps) {
   const dispatch = useDispatch()
