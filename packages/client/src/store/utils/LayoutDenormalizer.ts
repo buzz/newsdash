@@ -13,7 +13,7 @@ import type {
   DenormalizedLayout,
 } from '#types/layout'
 
-import sortOrderComparer from './sortOrderComparer'
+import { orderSortComparer } from './sortComparer'
 
 /**
  * Transform layout to by rc-dock's nested structure.
@@ -42,7 +42,7 @@ class LayoutDenormalizer {
     const children = [
       ...this.getChildBoxes(box.id).map((child) => this.denormalizeBox(child)),
       ...this.getChildPanels(box.id).map((child) => this.denormalizePanel(child)),
-    ].sort(sortOrderComparer)
+    ].sort(orderSortComparer)
 
     return {
       ...box,

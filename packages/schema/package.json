@@ -23,6 +23,7 @@
   },
   "scripts": {
     "build": "tsc --declaration --declarationMap --outDir dist --project .",
+    "dev": "tsc --watch --declaration --declarationMap --outDir dist --project .",
     "typecheck": "tsc --noEmit --project ."
   },
   "dependencies": {

@@ -10,11 +10,17 @@ import { stripHtml } from 'string-strip-html'
 import { feedSchema } from '@newsdash/schema'
 
 import { BadGateway, BadRequest, isError, NotFound, ParseError, ServerError } from '#api/errors.js'
-import { FETCH_TIMEOUT, IMG_HEIGHT, IMG_QUALITY, IMG_WIDTH, USER_AGENT } from '#constants'
+import {
+  FETCH_TIMEOUT,
+  IMG_HEIGHT,
+  IMG_QUALITY,
+  IMG_WIDTH,
+  MAX_CONTENT_LENGTH,
+  USER_AGENT,
+} from '#constants'
 
 import type { RssParserResult } from './types.js'
 
-const MAX_CONTENT_LENGTH = 200
 const NO_TITLE = 'NO_TITLE'
 const DEFAULT_FETCH_OPTIONS = {
   headers: { 'User-Agent': USER_AGENT },
@@ -38,7 +44,7 @@ function constructFeedResponse(result: RssParserResult) {
       content = stripHtml(content).result
       content =
         content.length > MAX_CONTENT_LENGTH
-          ? content.slice(0, Math.max(0, MAX_CONTENT_LENGTH))
+          ? `${content.slice(0, Math.max(0, MAX_CONTENT_LENGTH))}…`
           : content
     }
 

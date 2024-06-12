@@ -90,7 +90,12 @@ class LayoutNormalizer {
       throw new Error(`Could not find corresponding tab in store: ${tabData.id}`)
     }
 
-    const tab = layout.tabSchema.parse({ ...storeTab, ...tabData, order, parentId })
+    const tab = layout.tabSchema.parse({
+      ...storeTab,
+      ...tabData,
+      order,
+      parentId,
+    })
     this.entities.tabs.push(tab)
     LayoutNormalizer.removeFromArray(tabData.id, this.tabIds)
   }

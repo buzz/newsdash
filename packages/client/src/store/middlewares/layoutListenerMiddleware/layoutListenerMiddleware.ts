@@ -6,6 +6,7 @@ import persistLayoutEffect from './effects/persistLayoutEffect'
 import rcLayoutChangeEffect from './effects/rcLayoutChangeEffect'
 import removeTabsOnCascadeEffect from './effects/removePanelEffect'
 import requestNewTabEffect from './effects/requestNewTabEffect'
+import restoreLayoutEffect from './effects/restoreLayoutEffect'
 import setActiveTabEffect from './effects/setActiveTabEffect'
 
 const layoutListenerMiddleware = createListenerMiddleware()
@@ -16,6 +17,7 @@ const effects = [
   rcLayoutChangeEffect,
   removeTabsOnCascadeEffect,
   requestNewTabEffect,
+  restoreLayoutEffect,
   setActiveTabEffect,
 ]
 

@@ -27,6 +27,7 @@
     "client:dev": "pnpm run --filter @newsdash/client dev",
     "lint": "eslint .",
     "schema:build": "pnpm run --filter @newsdash/schema build",
+    "schema:dev": "pnpm run --filter @newsdash/schema dev",
     "server:build": "pnpm run --filter @newsdash/server build",
     "server:dev": "pnpm run --filter @newsdash/server dev",
     "server:start": "pnpm run --filter @newsdash/server start",

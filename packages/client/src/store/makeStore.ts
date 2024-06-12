@@ -4,7 +4,7 @@ import './slices/notifications/actions'
 
 import { configureStore } from '@reduxjs/toolkit'
 
-import appInitListenerMiddleware from './middlewares/appInitListenerMiddleware'
+import appListenerMiddleware from './middlewares/appListenerMiddleware/appListenerMiddleware'
 import feedListenerMiddleware from './middlewares/feedListenerMiddleware/feedListenerMiddleware'
 import layoutListenerMiddleware from './middlewares/layoutListenerMiddleware/layoutListenerMiddleware'
 import reducer from './reducer'
@@ -19,7 +19,7 @@ function makeStore() {
         // eslint-disable-next-line unicorn/prefer-spread
         .concat(
           apiSlice.middleware,
-          appInitListenerMiddleware.middleware,
+          appListenerMiddleware.middleware,
           feedListenerMiddleware.middleware,
           layoutListenerMiddleware.middleware
         ),

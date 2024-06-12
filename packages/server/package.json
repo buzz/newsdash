@@ -15,7 +15,7 @@
     "directory": "packages/server"
   },
   "scripts": {
-    "build": "tsc --declaration --outDir dist --project .",
+    "build": "tsc --outDir dist --project .",
     "dev": "nodemon --exec tsx src/startServer.ts",
     "start": "NODE_ENV=production node dist/startServer.js",
     "typecheck": "tsc --noEmit --project ."

@@ -1,12 +1,14 @@
 .main {
+  --main-padding: calc(var(--mantine-spacing-xs) * 0.5);
+
   background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-gray-8));
   display: flex;
-  padding: var(--mantine-spacing-xs);
+  padding: var(--main-padding);
   transition-duration: var(--transition-duration);
   transition-property: padding-top;
   transition-timing-function: var(--transition-timing-function);
 
   &[data-header='visible'] {
-    padding-top: calc(var(--app-shell-header-height) + var(--mantine-spacing-xs));
+    padding-top: calc(var(--app-shell-header-height) + var(--main-padding));
   }
 }

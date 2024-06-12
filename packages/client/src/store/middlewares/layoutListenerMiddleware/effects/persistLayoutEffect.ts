@@ -3,6 +3,7 @@ import { isEqual } from 'lodash-es'
 
 import type { PersistLayout } from '@newsdash/schema'
 
+import { debounce } from '#store/middlewares/utils'
 import layoutApi from '#store/slices/api/layoutApi'
 import { selectPersistLayout } from '#store/slices/api/selectors'
 import { updateLayout } from '#store/slices/layout/actions'
@@ -19,9 +20,7 @@ function persistLayoutEffect(startListening: AppStartListening) {
   startListening({
     matcher: isAnyOf(updateLayout, addPanel, updatePanel, removePanel, addTab, editTab, removeTab),
     effect: async (action, listenerApi) => {
-      // Debounce
-      listenerApi.cancelActiveListeners()
-      await listenerApi.delay(PERSIST_DELAY)
+      await debounce(listenerApi, PERSIST_DELAY)
 
       const state = listenerApi.getState()
       const persistLayout = selectPersistLayout(state)

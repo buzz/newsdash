@@ -4,10 +4,10 @@ import { nanoid } from 'nanoid'
 import type { Panel } from '@newsdash/schema'
 
 import { DOCKBOX_ID } from '#constants'
-import sortOrderComparer from '#store/utils/sortOrderComparer'
+import { orderSortComparer } from '#store/utils/sortComparer'
 
 const panelsEntityAdapter = createEntityAdapter<Panel>({
-  sortComparer: sortOrderComparer,
+  sortComparer: orderSortComparer,
 })
 
 const panelsInitialState = panelsEntityAdapter.getInitialState(undefined, [

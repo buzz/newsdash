@@ -1,7 +1,12 @@
-import type { FeedItem as ApiFeedItem } from '@newsdash/schema'
+import { z } from 'zod'
 
-interface FeedItem extends ApiFeedItem {
-  tabId: string
-}
+import { feedItemSchema as apiFeedItemSchema } from '@newsdash/schema'
 
-export { FeedItem }
+const feedItemSchema = apiFeedItemSchema.extend({
+  tabId: z.string(),
+})
+
+type FeedItem = z.infer<typeof feedItemSchema>
+
+export type { FeedItem }
+export { feedItemSchema }
