@@ -36,9 +36,10 @@ function Feed({ tab }: FeedProps) {
             itemData={feedItems}
             itemSize={ITEM_HEIGHT}
             onScroll={({ scrollOffset }) => {
-              if (scrollOffset === 0) {
+              const offset = Math.round(scrollOffset)
+              if (offset === 0) {
                 setIsAt('top')
-              } else if (scrollOffset + height === ITEM_HEIGHT * feedItems.length) {
+              } else if (offset + height === Math.round(ITEM_HEIGHT * feedItems.length)) {
                 setIsAt('bottom')
               } else {
                 setIsAt(undefined)
