@@ -36,7 +36,7 @@ function ListFeedItem({ data, index, style }: FeedItemProps) {
         </HoverCard.Target>
         <HoverCard.Dropdown className={classes.hoverCard}>
           <Group className={classes.flexWrap} wrap="nowrap">
-            <AspectRatio className={classes.image} ratio={20 / 15} w={200}>
+            <AspectRatio className={classes.image} ratio={20 / 15} w={300}>
               <Image src={imageUrl} />
             </AspectRatio>
             <div>
