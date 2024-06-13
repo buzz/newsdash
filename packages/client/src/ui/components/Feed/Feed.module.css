@@ -1,6 +1,17 @@
+@property --scroll-fade-height-top {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 30px;
+}
+
+@property --scroll-fade-height-bottom {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 30px;
+}
+
 .wrapper {
   --feed-item-padding: rem(4);
-  --scroll-fade-height: rem(30);
 
   height: 100%;
   width: 100%;
@@ -9,19 +20,30 @@
   padding-bottom: var(--mantine-spacing-xs);
   padding-left: calc(var(--mantine-spacing-xs) - var(--feed-item-padding));
 
-  mask-image: linear-gradient(transparent, rgb(0 0 0 / 100%) var(--scroll-fade-height));
+  mask-image: linear-gradient(transparent, rgb(0 0 0 / 100%) var(--scroll-fade-height-top));
+  transition-duration: var(--transition-duration);
+  transition-property: --scroll-fade-height-top;
+  transition-timing-function: var(--transition-timing-function);
 
   &.atTop {
-    mask-image: none;
+    --scroll-fade-height-top: 0;
   }
 
   &.atBottom .scroller {
-    mask-image: none;
+    --scroll-fade-height-bottom: 0;
   }
 
   .scroller {
-    mask-image: linear-gradient(to top, transparent, rgb(0 0 0 / 100%) var(--scroll-fade-height));
     overflow: hidden auto !important;
+
+    mask-image: linear-gradient(
+      to top,
+      transparent,
+      rgb(0 0 0 / 100%) var(--scroll-fade-height-bottom)
+    );
+    transition-duration: var(--transition-duration);
+    transition-property: --scroll-fade-height-bottom;
+    transition-timing-function: var(--transition-timing-function);
 
     &::-webkit-scrollbar-track {
       background-color: transparent;
