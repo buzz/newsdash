@@ -1,6 +1,6 @@
 import { AppShell, Group, Transition, useMantineColorScheme, useMantineTheme } from '@mantine/core'
 import {
-  IconInfoSmall,
+  IconInfoSquare,
   IconMoonStars,
   IconPlus,
   IconSettings,
@@ -66,7 +66,7 @@ function Header() {
                   <IconSettings />
                 </HeaderButton>
                 <HeaderButton onClick={() => dispatch(openModal('about'))} tooltip="About newsdash">
-                  <IconInfoSmall size="2rem" />
+                  <IconInfoSquare />
                 </HeaderButton>
                 <HeaderButton
                   color="red"
