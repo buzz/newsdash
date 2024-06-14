@@ -1,8 +1,8 @@
-.editButton {
-  --ai-color: var(--mantine-color-blue-light-color);
+.actionButton {
+  --ai-color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-text)) !important;
 
-  &:hover {
-    color: light-dark(darken(var(--ai-color), 0.2), lighten(var(--ai-color), 0.25));
+  &:not([disabled]):hover {
+    color: light-dark(var(--mantine-color-text), lighten(var(--ai-color), 0.5));
   }
 }
 
@@ -10,10 +10,48 @@
   display: flex;
   align-items: center;
   gap: rem(4);
+}
 
-  img {
+@keyframes spin-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.stackedIcon {
+  display: inline-flex;
+  position: relative;
+  height: rem(16);
+  width: rem(16);
+
+  &.loading {
+    .favicon {
+      transform: scale(0.55);
+    }
+  }
+
+  .favicon {
     height: rem(16);
     width: rem(16);
     object-fit: contain;
+    transition-duration: var(--transition-duration);
+    transition-property: transform;
+    transition-timing-function: var(--transition-timing-function);
+  }
+
+  .loader {
+    animation: spin-animation 2s infinite;
+    animation-timing-function: linear;
+  }
+
+  .error {
+    color: var(--mantine-color-error);
+  }
+
+  > * {
+    position: absolute;
   }
 }

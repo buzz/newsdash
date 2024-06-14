@@ -1,26 +1,46 @@
-import { ActionIcon, Flex } from '@mantine/core'
-import { IconSettings } from '@tabler/icons-react'
+import { ActionIcon } from '@mantine/core'
+import { IconReload, IconSettings } from '@tabler/icons-react'
 import type { PanelData } from 'rc-dock'
 
-import { editTab } from '#store/slices/layout/entities/tabs/actions'
+import { editTab, refreshTab } from '#store/slices/layout/entities/tabs/actions'
+import tabsSelectors from '#store/slices/layout/entities/tabs/selectors'
 import Tooltip from '#ui/components/common/Tooltip'
-import { useDispatch } from '#ui/hooks/store'
+import { useDispatch, useSelector } from '#ui/hooks/store'
+import type { RootState } from '#store/types'
 
 import classes from './Panel.module.css'
 
 function PanelExtra({ panel }: PanelExtraProps) {
   const dispatch = useDispatch()
+  const selectTab = (state: RootState) => tabsSelectors.selectById(state, panel.activeId ?? '')
+  const tab = useSelector(selectTab)
+
+  const refreshDisabled = tab.status === 'loading'
+  const editDisabled = tab.editMode !== undefined
 
   return (
-    <Flex gap="xs" align="center" direction="row" px="xs" wrap="nowrap">
-      <Tooltip label="Edit tab">
+    <>
+      <Tooltip disabled={refreshDisabled} label="Refresh tab">
+        <ActionIcon
+          aria-label="Refresh tab"
+          className={classes.actionButton}
+          disabled={refreshDisabled}
+          onClick={() => {
+            dispatch(refreshTab(tab.id))
+          }}
+          size="xs"
+          variant="transparent"
+        >
+          <IconReload />
+        </ActionIcon>
+      </Tooltip>
+      <Tooltip disabled={editDisabled} label="Edit tab">
         <ActionIcon
           aria-label="Edit tab"
-          className={classes.editButton}
+          className={classes.actionButton}
+          disabled={editDisabled}
           onClick={() => {
-            if (panel.activeId) {
-              dispatch(editTab({ id: panel.activeId, changes: { editMode: 'edit' } }))
-            }
+            dispatch(editTab({ id: tab.id, changes: { editMode: 'edit' } }))
           }}
           size="xs"
           variant="transparent"
@@ -28,7 +48,7 @@ function PanelExtra({ panel }: PanelExtraProps) {
           <IconSettings />
         </ActionIcon>
       </Tooltip>
-    </Flex>
+    </>
   )
 }
 

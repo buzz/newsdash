@@ -1,0 +1,17 @@
+.popover {
+  padding: var(--mantine-spacing-sm);
+
+  .flexWrap {
+    align-items: flex-start;
+
+    .image {
+      border-radius: var(--mantine-radius-sm);
+      border: 1px solid var(--mantine-color-default-border);
+      flex-shrink: 0;
+    }
+
+    .title {
+      line-height: 1.3;
+    }
+  }
+}

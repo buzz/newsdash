@@ -15,6 +15,8 @@
 }
 
 .dock-layout {
+  --dock-tab-height: rem(24);
+
   flex-grow: 1;
 
   /**************** panel.less ****************/
@@ -91,7 +93,7 @@
 .dock-layout,
 body > .dragging-layer {
   .dock-ink-bar {
-    background-color: transparent;
+    display: none;
   }
 
   .dock-tab-btn-disabled {
@@ -103,6 +105,7 @@ body > .dragging-layer {
     border-bottom: none;
     float: none;
     font-weight: 500;
+    height: var(--dock-tab-height);
     text-align: left;
 
     > div {
@@ -133,7 +136,15 @@ body > .dragging-layer {
     background: var(--dock-tabs-color-fill);
     border-bottom-color: var(--dock-panel-color-border);
     font-size: var(--mantine-font-size-sm);
-    line-height: 2.2;
+    line-height: var(--dock-tab-height);
+  }
+
+  .dock-extra-content {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--mantine-spacing-xs) * 0.25);
+    margin-right: calc(var(--mantine-spacing-xs) * 0.5);
+    height: var(--dock-tab-height);
   }
 
   .dock-nav-operations {
@@ -145,6 +156,7 @@ body > .dragging-layer {
 
     .dock-nav-more {
       color: var(--mantine-color-text);
+      height: var(--dock-tab-height);
     }
   }
 }

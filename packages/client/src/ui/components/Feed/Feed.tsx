@@ -8,7 +8,7 @@ import { useSelector } from '#ui/hooks/store'
 import type { RootState } from '#store/types'
 import type { CustomTabData } from '#types/layout'
 
-import ListFeedItem from './ListFeedItem'
+import DetailFeedItem from './DetailFeedItem/DetailFeedItem'
 
 import classes from './Feed.module.css'
 
@@ -36,10 +36,9 @@ function Feed({ tab }: FeedProps) {
             itemData={feedItems}
             itemSize={ITEM_HEIGHT}
             onScroll={({ scrollOffset }) => {
-              const offset = Math.round(scrollOffset)
-              if (offset === 0) {
+              if (scrollOffset < 2) {
                 setIsAt('top')
-              } else if (offset + height === Math.round(ITEM_HEIGHT * feedItems.length)) {
+              } else if (scrollOffset + height > ITEM_HEIGHT * feedItems.length - 2) {
                 setIsAt('bottom')
               } else {
                 setIsAt(undefined)
@@ -47,7 +46,7 @@ function Feed({ tab }: FeedProps) {
             }}
             overscanCount={1}
           >
-            {ListFeedItem}
+            {DetailFeedItem}
           </FixedSizeList>
         )}
       </AutoSizer>
