@@ -10,10 +10,22 @@ const tabsSelectors = tabsEntityAdapter.getSelectors((state: RootState) => state
 /**
  * Select tabs for persisting.
  *
- * Exclude tabs with `editMode` set to `create`.
+ * Exclude tabs with `editMode` set to `create`. Only return fields to persist.
  */
 const selectPersistTabs = createSelector([tabsSelectors.selectAll], (tabs) =>
-  tabs.filter((tab) => tab.editMode !== 'create')
+  tabs
+    .filter((tab) => tab.editMode !== 'create')
+    .map((tab) => ({
+      id: tab.id,
+      color: tab.color,
+      description: tab.description,
+      group: tab.group,
+      link: tab.link,
+      order: tab.order,
+      parentId: tab.parentId,
+      title: tab.title,
+      url: tab.url,
+    }))
 )
 
 /** Select panel tabs */

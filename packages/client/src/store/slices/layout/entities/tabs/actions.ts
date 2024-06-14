@@ -21,4 +21,7 @@ const removeTab = tabsSlice.createAction<string>('removeTab')
 /** Edit tab */
 const editTab = tabsSlice.createAction<Update<CustomTab, string>>('editTab')
 
-export { addTab, editTab, removeTab }
+/** Refresh tab */
+const refreshTab = tabsSlice.createAction<string>('refreshTab')
+
+export { addTab, editTab, refreshTab, removeTab }

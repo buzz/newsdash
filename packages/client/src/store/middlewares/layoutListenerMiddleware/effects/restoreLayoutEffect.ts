@@ -22,7 +22,11 @@ function restoreLayoutEffect(startListening: AppStartListening) {
             restoreLayout({
               boxes: layout.boxes,
               panels: layout.panels,
-              tabs: layout.tabs.map((tab) => ({ ...tab, status: 'loaded' })),
+              tabs: layout.tabs.map((tab) => ({
+                ...tab,
+                lastFetched: 0,
+                status: 'loaded',
+              })),
             })
           )
         }

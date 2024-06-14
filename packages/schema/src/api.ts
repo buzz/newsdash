@@ -25,7 +25,13 @@ const persistPanelSchema = panelSchema.omit({ activeId: true })
 const persistLayoutSchema = z.object({
   boxes: z.array(boxSchema),
   panels: z.array(persistPanelSchema),
-  tabs: z.array(tabSchema.omit({ error: true, group: true, status: true })),
+  tabs: z.array(
+    tabSchema.omit({
+      error: true,
+      lastFetched: true,
+      status: true,
+    })
+  ),
 })
 
 const resultSchema = z.object({ result: z.string() })
