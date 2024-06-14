@@ -26,7 +26,6 @@
     "@reduxjs/toolkit": "^2.2.5",
     "@tabler/icons-react": "^3.5.0",
     "clsx": "^2.1.1",
-    "date-fns": "^3.6.0",
     "lodash-es": "^4.17.21",
     "nanoid": "^5.0.7",
     "rc-dock": "^3.3.0",
