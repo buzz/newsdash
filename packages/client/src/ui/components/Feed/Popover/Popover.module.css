@@ -1,5 +1,10 @@
+.targetWrapper {
+  height: 100%;
+}
+
 .popover {
   padding: var(--mantine-spacing-sm);
+  pointer-events: none;
 
   .flexWrap {
     align-items: flex-start;

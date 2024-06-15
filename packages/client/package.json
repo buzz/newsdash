@@ -21,6 +21,7 @@
   "dependencies": {
     "@mantine/core": "^7.10.1",
     "@mantine/form": "^7.10.1",
+    "@mantine/hooks": "^7.10.2",
     "@mantine/notifications": "^7.10.1",
     "@newsdash/schema": "link:../schema",
     "@reduxjs/toolkit": "^2.2.5",
