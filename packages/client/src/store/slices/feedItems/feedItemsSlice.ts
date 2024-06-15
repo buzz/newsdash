@@ -3,7 +3,7 @@ import type { Update } from '@reduxjs/toolkit'
 import createSlice from '#store/createSlice'
 import type { FeedItem } from '#types/feed'
 
-import { addFeedItems, addFetchedFeedItems } from './actions'
+import { addFeedItems, addFetchedFeedItems, removeFeedItems } from './actions'
 import feedItemsEntityAdapter, { feedItemsInitialState } from './feedItemsEntityAdapter'
 
 export const feedItemsSlice = createSlice({
@@ -45,7 +45,11 @@ export const feedItemsSlice = createSlice({
       }
 
       feedItemsEntityAdapter.updateMany(state, updates)
-      feedItemsEntityAdapter.addMany(state, additions)
+      feedItemsEntityAdapter.upsertMany(state, additions)
+    })
+
+    builder.addCase(removeFeedItems, (state, { payload: ids }) => {
+      feedItemsEntityAdapter.removeMany(state, ids)
     })
   },
 })

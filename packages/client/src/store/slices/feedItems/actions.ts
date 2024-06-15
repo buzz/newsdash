@@ -12,4 +12,7 @@ const addFetchedFeedItems = feedItemsSlice.createAction<{
   tabId: string
 }>('addFetchedFeedItems')
 
-export { addFeedItems, addFetchedFeedItems }
+/** Remove feed items */
+const removeFeedItems = feedItemsSlice.createAction<string[]>('removeFeedItems')
+
+export { addFeedItems, addFetchedFeedItems, removeFeedItems }
