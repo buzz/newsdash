@@ -1,14 +1,13 @@
-import { ActionIcon } from '@mantine/core'
-import { IconReload, IconSettings } from '@tabler/icons-react'
+import { IconReload, IconSettings, IconSquarePlus } from '@tabler/icons-react'
 import type { PanelData } from 'rc-dock'
 
+import { requestNewTab } from '#store/slices/layout/actions'
 import { editTab, refreshTab } from '#store/slices/layout/entities/tabs/actions'
 import tabsSelectors from '#store/slices/layout/entities/tabs/selectors'
-import Tooltip from '#ui/components/common/Tooltip'
 import { useDispatch, useSelector } from '#ui/hooks/store'
 import type { RootState } from '#store/types'
 
-import classes from './Panel.module.css'
+import PanelButton from './PanelButton'
 
 function PanelExtra({ panel }: PanelExtraProps) {
   const dispatch = useDispatch()
@@ -20,34 +19,32 @@ function PanelExtra({ panel }: PanelExtraProps) {
 
   return (
     <>
-      <Tooltip disabled={refreshDisabled} label="Refresh tab">
-        <ActionIcon
-          aria-label="Refresh tab"
-          className={classes.actionButton}
-          disabled={refreshDisabled}
-          onClick={() => {
-            dispatch(refreshTab(tab.id))
-          }}
-          size="xs"
-          variant="transparent"
-        >
-          <IconReload />
-        </ActionIcon>
-      </Tooltip>
-      <Tooltip disabled={editDisabled} label="Tab settings">
-        <ActionIcon
-          aria-label="Tab settings"
-          className={classes.actionButton}
-          disabled={editDisabled}
-          onClick={() => {
-            dispatch(editTab({ id: tab.id, changes: { editMode: 'edit' } }))
-          }}
-          size="xs"
-          variant="transparent"
-        >
-          <IconSettings />
-        </ActionIcon>
-      </Tooltip>
+      <PanelButton
+        label="Add tab"
+        onClick={() => {
+          dispatch(requestNewTab(panel.id))
+        }}
+      >
+        <IconSquarePlus />
+      </PanelButton>
+      <PanelButton
+        disabled={refreshDisabled}
+        label="Refresh tab"
+        onClick={() => {
+          dispatch(refreshTab(tab.id))
+        }}
+      >
+        <IconReload />
+      </PanelButton>
+      <PanelButton
+        disabled={editDisabled}
+        label="Tab settings"
+        onClick={() => {
+          dispatch(editTab({ id: tab.id, changes: { editMode: 'edit' } }))
+        }}
+      >
+        <IconSettings />
+      </PanelButton>
     </>
   )
 }

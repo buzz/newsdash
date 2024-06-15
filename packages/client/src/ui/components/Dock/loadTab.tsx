@@ -32,14 +32,14 @@ function loadTab(store: RootState, tabData: CustomTabData) {
         return {
           ...tabData,
           content: <EditFeedForm tab={tab} mode="edit" />,
-          title: 'Edit feed',
+          title: <TabTitle tab={tab} />,
         }
       }
       case 'create': {
         return {
           ...tabData,
           content: <EditFeedForm tab={tab} mode="create" />,
-          title: 'New feed',
+          title: <TabTitle tab={tab} />,
         }
       }
       default: {

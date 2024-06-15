@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-import { boxSchema, panelSchema, tabSchema } from './layout.js'
+import { boxSchema, panelSchema, storeTabSchema } from './layout.js'
 
 const feedInfoSchema = z.object({
   title: z.string(),
@@ -26,7 +26,7 @@ const persistLayoutSchema = z.object({
   boxes: z.array(boxSchema),
   panels: z.array(persistPanelSchema),
   tabs: z.array(
-    tabSchema.omit({
+    storeTabSchema.omit({
       error: true,
       lastFetched: true,
       status: true,

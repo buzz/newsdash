@@ -7,6 +7,14 @@ html {
   text-shadow: light-dark(0 1px 0 rgba(255 255 255 / 80%), 0 1px 0 rgba(0 0 0 / 28%));
 }
 
+.mantine-Button-label {
+  text-shadow: 0 1px 0 rgba(0 0 0 / 28%);
+}
+
+.mantine-Tooltip-tooltip {
+  text-shadow: none;
+}
+
 @keyframes spin-animation {
   0% {
     transform: rotate(0deg);

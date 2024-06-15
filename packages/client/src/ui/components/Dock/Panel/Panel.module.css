@@ -1,8 +1,12 @@
-.actionButton {
+.panelButton {
   --ai-color: var(--dock-nav-button-color) !important;
 
   &:not([disabled]):hover {
     color: var(--dock-nav-button-color-hover);
+  }
+
+  &[disabled] {
+    background-color: transparent;
   }
 }
 

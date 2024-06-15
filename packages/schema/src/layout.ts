@@ -9,7 +9,7 @@ const dockModeSchema = z.union([
 ])
 
 const feedStatusSchema = z
-  .union([z.literal('new'), z.literal('loaded'), z.literal('loading'), z.literal('error')])
+  .union([z.literal('loaded'), z.literal('loading'), z.literal('error')])
   .default('loaded')
 
 const sizeSchema = z.optional(z.number().int().min(0))
@@ -44,7 +44,7 @@ const customTabFields = z.object({
   url: z.string().url(),
 })
 
-const tabSchema = customTabFields.extend({
+const storeTabSchema = customTabFields.extend({
   id: z.string(),
   description: z.optional(z.string()),
   group: z.optional(z.string()),
@@ -52,8 +52,15 @@ const tabSchema = customTabFields.extend({
   parentId: parentIdSchema,
 })
 
+const newTabSchema = storeTabSchema.omit({ url: true, status: true }).extend({
+  status: z.literal('new'),
+  url: z.string(),
+})
+
+const tabSchema = z.union([storeTabSchema, newTabSchema])
+
 export type Box = z.infer<typeof boxSchema>
 export type Panel = z.infer<typeof panelSchema>
 export type CustomTabFields = z.infer<typeof customTabFields>
 export type Tab = z.infer<typeof tabSchema>
-export { boxSchema, panelSchema, tabSchema }
+export { boxSchema, panelSchema, storeTabSchema, tabSchema }

@@ -1,6 +1,6 @@
 import { ActionIcon, Box, ColorInput, TextInput, Title, useMantineTheme } from '@mantine/core'
 import { useForm } from '@mantine/form'
-import { IconRefresh, IconRss } from '@tabler/icons-react'
+import { IconRefresh, IconRss, IconX } from '@tabler/icons-react'
 
 import { editTab, removeTab } from '#store/slices/layout/entities/tabs/actions'
 import Tooltip from '#ui/components/common/Tooltip'
@@ -26,7 +26,7 @@ function EditFeedForm({ tab, mode }: EditFeedFormProps) {
         }
       : {
           url: tab.url,
-          customTitle: tab.customTitle,
+          customTitle: tab.customTitle ?? '',
           color: tab.color,
         }
 
@@ -60,6 +60,8 @@ function EditFeedForm({ tab, mode }: EditFeedFormProps) {
     }
   })
 
+  const customTitleClearDisabled = form.getValues().customTitle === ''
+
   return (
     <Box className={classes.wrapper}>
       <Box className={classes.content}>
@@ -73,6 +75,19 @@ function EditFeedForm({ tab, mode }: EditFeedFormProps) {
             label="Custom title"
             mt="sm"
             placeholder={tab.title}
+            rightSection={
+              <Tooltip disabled={customTitleClearDisabled} label="Clear">
+                <ActionIcon
+                  color="red"
+                  disabled={customTitleClearDisabled}
+                  onClick={() => {
+                    form.setFieldValue('customTitle', '')
+                  }}
+                >
+                  <IconX size="1rem" />
+                </ActionIcon>
+              </Tooltip>
+            }
             {...form.getInputProps('customTitle')}
           />
           <ColorInput

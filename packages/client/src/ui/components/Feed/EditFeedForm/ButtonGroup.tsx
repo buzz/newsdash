@@ -1,5 +1,5 @@
 import { Button, Group } from '@mantine/core'
-import { IconArrowBack, IconEdit, IconPlus, IconTrash } from '@tabler/icons-react'
+import { IconArrowBack, IconDeviceFloppy, IconPlus, IconTrash } from '@tabler/icons-react'
 
 import type { TabEditMode } from '#types/layout'
 
@@ -16,7 +16,7 @@ function ButtonGroup({ mode, onCancel, onDelete }: ButtonGroupProps) {
       flex="1"
       fullWidth={mode === 'edit'}
       type="submit"
-      leftSection={mode === 'create' ? <IconPlus /> : <IconEdit />}
+      leftSection={mode === 'create' ? <IconPlus /> : <IconDeviceFloppy />}
     >
       {mode === 'create' ? 'Create' : 'Save'}
     </Button>

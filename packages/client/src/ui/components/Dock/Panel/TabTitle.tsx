@@ -46,7 +46,7 @@ function TabIcon({ tab }: TabProps) {
 }
 
 function TabTitle({ tab }: TabProps) {
-  const title = tab.customTitle ?? tab.title ?? 'NO TITLE'
+  const title = tab.customTitle ?? tab.title ?? 'New feed'
 
   return (
     <span className={classes.title}>
