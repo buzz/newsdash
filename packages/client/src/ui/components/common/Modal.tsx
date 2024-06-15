@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from '#ui/hooks/store'
 import type { RootState } from '#store/types'
 import type { ModalName } from '#types/types'
 
+import classes from './common.module.css'
+
 function Modal({ children, icon, name, title }: ModalProps) {
   const dispatch = useDispatch()
   const selectIsOpen = (state: RootState) => selectIsModalOpen(state, name)
@@ -18,10 +20,9 @@ function Modal({ children, icon, name, title }: ModalProps) {
       keepMounted={false}
       onClose={() => dispatch(closeModal(name))}
       opened={opened}
-      size="md"
     >
       <MantineModal.Overlay blur={2} />
-      <MantineModal.Content>
+      <MantineModal.Content className={classes.modalContent} radius="md" shadow="xl">
         <MantineModal.Header>
           {icon}
           {title ? (

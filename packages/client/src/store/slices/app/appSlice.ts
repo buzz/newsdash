@@ -13,19 +13,16 @@ const appSlice = createSlice({
   initialState: initialState,
 
   reducers: {
-    /** Change header visible state */
     changeHeaderVisibile(state, { payload }: PayloadAction<boolean>) {
       state.headerVisible = payload
     },
 
-    /** Open modal */
     openModal(state, { payload }: PayloadAction<ModalName>) {
       if (state.modalOpened === null) {
         state.modalOpened = payload
       }
     },
 
-    /** Close modal */
     closeModal(state, { payload }: PayloadAction<ModalName>) {
       if (state.modalOpened === payload) {
         state.modalOpened = null

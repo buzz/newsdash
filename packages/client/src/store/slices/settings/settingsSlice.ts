@@ -1,3 +1,5 @@
+import type { PayloadAction } from '@reduxjs/toolkit'
+
 import type { Settings } from '@newsdash/schema'
 
 import createSlice from '#store/createSlice'
@@ -13,7 +15,12 @@ const settingsSlice = createSlice({
   name: 'settings',
   initialState: initialState,
 
-  reducers: {},
+  reducers: {
+    updateSettings: (state, { payload }: PayloadAction<Partial<Settings>>) => ({
+      ...state,
+      ...payload,
+    }),
+  },
 })
 
 export const { reducer } = settingsSlice

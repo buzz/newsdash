@@ -4,7 +4,7 @@ import tabsSelectors from '#store/slices/layout/entities/tabs/selectors'
 import selectSettings from '#store/slices/settings/selectors'
 import type { AppStartListening } from '#store/middlewares/types'
 
-const CHECK_INTERVAL = 10_000
+const CHECK_INTERVAL = 8000
 
 /** Periodically fetch feed. */
 function periodicFetchEffect(startListening: AppStartListening) {
