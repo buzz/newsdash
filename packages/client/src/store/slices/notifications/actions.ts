@@ -3,7 +3,7 @@ import type { NotificationData } from '@mantine/notifications'
 
 import notificationsSlice from './notificationsSlice'
 
-const AUTO_CLOSE_DEFAULT = 5000
+const AUTO_CLOSE_DEFAULT = 10_000
 
 /** Request creation of new notification */
 const showNotification = notificationsSlice.createAction(

@@ -4,6 +4,7 @@ import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import feedApi from '#store/slices/api/feedApi'
 import { addFetchedFeedItems } from '#store/slices/feedItems/actions'
 import { editTab } from '#store/slices/layout/entities/tabs/actions'
+import { showNotification } from '#store/slices/notifications/actions'
 import { isArbitraryObject } from '#types/typeGuards'
 import type { AppListenerEffectAPI } from '#store/middlewares/types'
 import type { CustomTab } from '#types/layout'
@@ -25,15 +26,21 @@ async function fetchFeed(listenerApi: AppListenerEffectAPI, tab: CustomTab) {
   listenerApi.dispatch(editTab({ id: tab.id, changes: { status: 'loading' } }))
 
   const fetchAction = feedApi.endpoints.fetchFeed.initiate(tab.url)
-  const { data, error } = await listenerApi.dispatch(fetchAction)
-  if (error) {
-    // TODO: show notification
-    console.log(error)
+  const { data, error, isError } = await listenerApi.dispatch(fetchAction)
+  if (isError) {
+    const errorMessage = extractQueryError(error)
+    listenerApi.dispatch(
+      showNotification({
+        title: `Failed to fetch feed: ${tab.url}`,
+        message: `Error: ${errorMessage}`,
+        color: 'red',
+      })
+    )
     listenerApi.dispatch(
       editTab({
         id: tab.id,
         changes: {
-          error: extractQueryError(error),
+          error: errorMessage,
           lastFetched: Date.now(),
           status: 'error',
         },
