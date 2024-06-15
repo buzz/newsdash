@@ -70,7 +70,7 @@ class LayoutNormalizer {
       throw new Error('Expected panelData ID')
     }
 
-    const panel = layout.panelSchema.parse({ ...panelData, order, parentId })
+    const panel = layout.panelSchema.parse({ group: 'news', ...panelData, order, parentId })
     this.entities.panels.push(panel)
     LayoutNormalizer.removeFromArray(panelData.id, this.panelIds)
 

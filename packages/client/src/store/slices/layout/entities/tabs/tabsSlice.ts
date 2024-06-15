@@ -23,6 +23,7 @@ const tabsSlice = createSlice({
       tabsEntityAdapter.updateOne(state, {
         id,
         changes: {
+          group: 'news',
           ...changes,
           ...(Object.keys(changes).includes('customTitle')
             ? { customTitle: changes.customTitle === '' ? undefined : changes.customTitle }
