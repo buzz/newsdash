@@ -1,8 +1,7 @@
-import { settingsSchema } from '@newsdash/schema'
-
 import { LOCALSTORAGE_SETTINGS_KEY } from '#constants'
 import { init } from '#store/slices/app/actions'
 import { restoreSettings } from '#store/slices/settings/actions'
+import { settingsSchema } from '#types/types'
 import type { AppStartListening } from '#store/middlewares/types'
 
 /** Restore settings from localStorage */

@@ -1,8 +1,7 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 
-import type { Settings } from '@newsdash/schema'
-
 import createSlice from '#store/createSlice'
+import type { Settings } from '#types/types'
 
 const initialState: Settings = {
   saturation: 50,

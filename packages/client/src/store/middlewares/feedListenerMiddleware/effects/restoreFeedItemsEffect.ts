@@ -6,7 +6,7 @@ import { addFeedItems } from '#store/slices/feedItems/actions'
 import { feedItemSchema } from '#types/feed'
 import type { AppStartListening } from '#store/middlewares/types'
 
-/** Restore settings from server */
+/** Restore feed items from localStorage */
 function restoreFeedItemsEffect(startListening: AppStartListening) {
   startListening({
     actionCreator: init,

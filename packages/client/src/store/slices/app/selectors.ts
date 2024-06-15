@@ -1,5 +1,4 @@
 import type { RootState } from '#store/types'
-import type { ModalName } from '#types/types'
 
 /** Select app slice */
 const selectAppSlice = (state: RootState) => state.app

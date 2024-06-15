@@ -1,4 +1,6 @@
-import type { Result, Settings } from '@newsdash/schema'
+import type { Result } from '@newsdash/schema'
+
+import type { Settings } from '#types/types'
 
 import apiSlice from './apiSlice'
 

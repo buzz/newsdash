@@ -36,15 +36,6 @@ const persistLayoutSchema = z.object({
 
 const resultSchema = z.object({ result: z.string() })
 
-const colorParamSchema = z.number().int().min(0).max(100)
-
-const settingsSchema = z.object({
-  lightness: colorParamSchema,
-  saturation: colorParamSchema,
-  fetchInterval: z.number().int().min(5).max(60),
-  itemsToKeep: z.number().int().min(10).max(200),
-})
-
 const versionInfoSchema = z.object({
   name: z.string(),
   version: z.string(),
@@ -55,16 +46,14 @@ type FeedItem = z.infer<typeof feedItemSchema>
 type Feed = z.infer<typeof feedSchema>
 type PersistLayout = z.infer<typeof persistLayoutSchema>
 type Result = z.infer<typeof resultSchema>
-type Settings = z.infer<typeof settingsSchema>
 type VersionInfo = z.infer<typeof versionInfoSchema>
 
-export type { Feed, FeedInfo, FeedItem, PersistLayout, Result, Settings, VersionInfo }
+export type { Feed, FeedInfo, FeedItem, PersistLayout, Result, VersionInfo }
 export {
   feedInfoSchema,
   feedItemSchema,
   feedSchema,
   persistLayoutSchema,
   resultSchema,
-  settingsSchema,
   versionInfoSchema,
 }

@@ -31,21 +31,6 @@ function scan(redis: FastifyRedis, pattern: string): Promise<string[]> {
   })
 }
 
-async function getHash<T extends z.SomeZodObject>(
-  redis: FastifyRedis,
-  key: string,
-  schema: T
-): Promise<z.infer<T> | undefined> {
-  const exists = await redis.exists(key)
-  if (exists === 1) {
-    const hmFields = getSchemaFields(schema)
-    const data = await redis.hmget(key, ...hmFields)
-    assertRedisHashResult(data)
-    return parseRedisHash(data, schema)
-  }
-  return undefined
-}
-
 async function getAllHashes<T extends z.SomeZodObject>(
   redis: FastifyRedis,
   pattern: string,
@@ -77,17 +62,6 @@ async function getAllHashes<T extends z.SomeZodObject>(
   }
 
   return hashes
-}
-
-function setHash(
-  redis: FastifyRedis,
-  key: string,
-  obj: Record<string, string | number>,
-  schema: z.SomeZodObject
-) {
-  const hmFields = getSchemaFields(schema)
-  const hmData = objToHmData(obj, hmFields)
-  return redis.hmset(key, hmData)
 }
 
 async function updateHashesDeleteOthers(
@@ -126,4 +100,4 @@ async function updateHashesDeleteOthers(
 type RedisHashResult = (string | null)[]
 
 export type { RedisHashResult }
-export { getAllHashes, getHash, setHash, updateHashesDeleteOthers }
+export { getAllHashes, updateHashesDeleteOthers }
