@@ -12,59 +12,54 @@
 
 .wrapper {
   height: 100%;
-  width: 100%;
-  padding-top: 0;
-  padding-right: rem(2);
-  padding-bottom: 0;
-  padding-left: 0;
-
-  mask-image: linear-gradient(transparent, rgb(0 0 0 / 100%) var(--scroll-fade-height-top));
-  transition-duration: var(--transition-duration);
-  transition-property: --scroll-fade-height-top;
-  transition-timing-function: var(--transition-timing-function);
-
-  &.atTop {
-    --scroll-fade-height-top: 0;
-  }
-
-  &.atBottom .scroller {
-    --scroll-fade-height-bottom: 0;
-  }
 
   .scroller {
-    overflow: hidden auto !important;
-
-    mask-image: linear-gradient(
-      to top,
-      transparent,
-      rgb(0 0 0 / 100%) var(--scroll-fade-height-bottom)
-    );
+    mask-image: linear-gradient(transparent, rgb(0 0 0 / 100%) var(--scroll-fade-height-top));
     transition-duration: var(--transition-duration);
-    transition-property: --scroll-fade-height-bottom;
+    transition-property: --scroll-fade-height-top;
     transition-timing-function: var(--transition-timing-function);
 
-    &::-webkit-scrollbar-track {
-      background-color: transparent;
+    &.atTop {
+      --scroll-fade-height-top: 0;
     }
 
-    &::-webkit-scrollbar {
-      background-color: transparent;
-      width: 7px;
+    &.atBottom .list {
+      --scroll-fade-height-bottom: 0;
     }
 
-    &::-webkit-scrollbar-thumb {
-      background-color: transparent;
-      border-radius: 4px;
-      transition-duration: var(--transition-duration-short);
-      transition-property: background-color;
+    .list {
+      /* Avoid flickering of native scrollbars */
+      scrollbar-width: none !important;
+
+      mask-image: linear-gradient(
+        to top,
+        transparent,
+        rgb(0 0 0 / 100%) var(--scroll-fade-height-bottom)
+      );
+      transition-duration: var(--transition-duration);
+      transition-property: --scroll-fade-height-bottom;
       transition-timing-function: var(--transition-timing-function);
     }
+  }
 
-    &:hover::-webkit-scrollbar-thumb {
-      background-color: light-dark(
-        alpha(var(--mantine-color-black), 0.15),
-        alpha(var(--mantine-color-white), 0.15)
-      );
-    }
+  .osTheme {
+    --os-handle-bg: light-dark(
+      alpha(var(--mantine-color-black), 0.25),
+      alpha(var(--mantine-color-white), 0.25)
+    );
+    --os-handle-bg-hover: light-dark(
+      alpha(var(--mantine-color-black), 0.3),
+      alpha(var(--mantine-color-white), 0.3)
+    );
+    --os-handle-bg-active: light-dark(
+      alpha(var(--mantine-color-black), 0.3),
+      alpha(var(--mantine-color-white), 0.3)
+    );
+    --os-size: rem(12);
+    --os-padding-perpendicular: rem(2);
+    --os-padding-axis: rem(2);
+    --os-handle-interactive-area-offset: rem(4);
+    --os-handle-border-radius: var(--mantine-radius-sm);
+    --os-handle-min-size: rem(33);
   }
 }

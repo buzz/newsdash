@@ -1,4 +1,8 @@
 .feedItemWrapper {
+  &:last-of-type .feedItem {
+    border-bottom: none;
+  }
+
   .feedItem {
     align-items: center;
     border-bottom: 1px solid var(--mantine-color-default-border);
@@ -6,7 +10,7 @@
     display: flex;
     gap: var(--mantine-spacing-xs);
     height: 100%;
-    padding: rem(5) rem(2) rem(5) rem(6);
+    padding: calc(var(--mantine-spacing-xs) * 0.4) calc(var(--mantine-spacing-xs) * 0.5);
     overflow: hidden;
     text-decoration: none;
 
@@ -121,9 +125,5 @@
         text-overflow: ellipsis;
       }
     }
-  }
-
-  &:last-of-type .feedItem {
-    border-bottom: none;
   }
 }
