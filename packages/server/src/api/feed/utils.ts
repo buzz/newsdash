@@ -83,9 +83,10 @@ function parseUrl(urlString: unknown): URL {
   }
 }
 
-function fetchText(url: URL) {
+async function fetchText(url: URL) {
   try {
-    return got(url, DEFAULT_FETCH_OPTIONS).text()
+    const result = await got(url, DEFAULT_FETCH_OPTIONS).text()
+    return result
   } catch (error) {
     if (isError(error)) {
       throw new BadGateway(error.message)
