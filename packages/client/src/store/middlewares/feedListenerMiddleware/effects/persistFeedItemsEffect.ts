@@ -13,7 +13,10 @@ function persistFeedItemsEffect(startListening: AppStartListening) {
     effect: async (action, listenerApi) => {
       await debounce(listenerApi, PERSIST_DELAY)
       const state = listenerApi.getState()
-      const feedItems = feedItemsSelectors.selectAll(state)
+      const feedItems = feedItemsSelectors.selectAll(state).map((feedItem) => ({
+        ...feedItem,
+        new: false,
+      }))
       const serializedFeedItems = JSON.stringify(feedItems)
       localStorage.setItem(LOCALSTORAGE_FEEDITEMS_KEY, serializedFeedItems)
     },

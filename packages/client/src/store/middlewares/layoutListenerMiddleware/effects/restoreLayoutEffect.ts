@@ -1,6 +1,6 @@
 import layoutApi from '#store/slices/api/layoutApi'
 import { init } from '#store/slices/app/actions'
-import { restoreLayout } from '#store/slices/layout/actions'
+import { layoutRestored, restoreLayout } from '#store/slices/layout/actions'
 import type { AppStartListening } from '#store/middlewares/types'
 
 /** Restore layout from server */
@@ -30,6 +30,7 @@ function restoreLayoutEffect(startListening: AppStartListening) {
             })
           )
         }
+        listenerApi.dispatch(layoutRestored())
       } finally {
         listenerApi.unsubscribe()
       }

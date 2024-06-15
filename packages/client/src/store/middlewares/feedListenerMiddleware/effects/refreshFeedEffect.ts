@@ -1,4 +1,4 @@
-import fetchTab from '#store/middlewares/feedListenerMiddleware/utils'
+import fetchFeed from '#store/middlewares/feedListenerMiddleware/utils'
 import { refreshTab } from '#store/slices/layout/entities/tabs/actions'
 import tabsSelectors from '#store/slices/layout/entities/tabs/selectors'
 import type { AppStartListening } from '#store/middlewares/types'
@@ -9,7 +9,7 @@ function refreshFeedEffect(startListening: AppStartListening) {
     actionCreator: refreshTab,
     effect: async ({ payload: tabId }, listenerApi) => {
       const tab = tabsSelectors.selectById(listenerApi.getState(), tabId)
-      await fetchTab(listenerApi, tab)
+      await fetchFeed(listenerApi, tab)
     },
   })
 }

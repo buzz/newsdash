@@ -13,7 +13,10 @@ const updateLayout = layoutSlice.createAction<NormalizedLayoutState>('updateLayo
 /** Restore layout */
 const restoreLayout = layoutSlice.createAction<NormalizedEntities>('restoreLayout')
 
+/** Signal that layout was restored */
+const layoutRestored = layoutSlice.createAction('layoutRestored')
+
 /** Request new tab */
 const requestNewTab = layoutSlice.createAction<string | undefined>('requestNewTab')
 
-export { rcLayoutChange, requestNewTab, restoreLayout, updateLayout }
+export { layoutRestored, rcLayoutChange, requestNewTab, restoreLayout, updateLayout }
