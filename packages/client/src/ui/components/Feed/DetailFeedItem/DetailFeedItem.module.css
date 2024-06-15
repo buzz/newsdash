@@ -53,6 +53,27 @@
       .title {
         display: flex;
 
+        &.noContent {
+          display: block;
+
+          .titleText {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 4;
+            font-size: var(--mantine-font-size-md);
+            height: 4lh;
+            line-height: 1.3;
+            padding-right: 0;
+            text-overflow: ellipsis;
+            white-space: normal;
+          }
+
+          .badge {
+            float: right;
+            margin-left: calc(var(--mantine-spacing-xs) * 0.5);
+          }
+        }
+
         .titleText {
           color: light-dark(var(--mantine-color-text), var(--text-color-bright));
           flex-grow: 1;

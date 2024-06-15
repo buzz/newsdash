@@ -17,6 +17,27 @@ function makeFeedItemImageUrl(feedItem: FeedItem) {
 function DetailFeedItem({ data, index, style }: DetailFeedItemProps) {
   const feedItem = data[index]
   const imageUrl = makeFeedItemImageUrl(feedItem)
+  const hasContent = Boolean(feedItem.content)
+
+  const content = hasContent ? <div className={classes.teaserText}>{feedItem.content}</div> : null
+
+  const title = hasContent ? (
+    <>
+      <div className={classes.titleText}>{feedItem.title}</div>
+      <Badge className={cx(classes.badge, { [classes.new]: feedItem.new })} radius="sm" size="sm">
+        <TimeAgo date={feedItem.date} />
+      </Badge>
+    </>
+  ) : (
+    <>
+      <div className={classes.titleText}>
+        <Badge className={cx(classes.badge, { [classes.new]: feedItem.new })} radius="sm" size="sm">
+          <TimeAgo date={feedItem.date} />
+        </Badge>
+        {feedItem.title}
+      </div>
+    </>
+  )
 
   return (
     <div className={classes.feedItemWrapper} style={style}>
@@ -24,17 +45,8 @@ function DetailFeedItem({ data, index, style }: DetailFeedItemProps) {
         <a className={classes.feedItem} href={feedItem.link} target="_blank" rel="noreferrer">
           {imageUrl ? <Image className={classes.image} src={imageUrl} /> : null}
           <div className={classes.teaserText}>
-            <div className={classes.title}>
-              <div className={classes.titleText}>{feedItem.title}</div>
-              <Badge
-                className={cx(classes.badge, { [classes.new]: feedItem.new })}
-                radius="sm"
-                size="sm"
-              >
-                <TimeAgo date={feedItem.date} />
-              </Badge>
-            </div>
-            <div className={classes.teaserText}>{feedItem.content}</div>
+            <div className={cx(classes.title, { [classes.noContent]: !hasContent })}>{title}</div>
+            {content}
           </div>
         </a>
       </Popover>

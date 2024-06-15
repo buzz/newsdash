@@ -1,8 +1,8 @@
 .actionButton {
-  --ai-color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-text)) !important;
+  --ai-color: var(--dock-nav-button-color) !important;
 
   &:not([disabled]):hover {
-    color: light-dark(var(--mantine-color-text), lighten(var(--ai-color), 0.5));
+    color: var(--dock-nav-button-color-hover);
   }
 }
 

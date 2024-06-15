@@ -8,7 +8,7 @@ const groups: Record<string, TabGroup> = {
     floatable: false,
     maximizable: false,
     panelExtra: (panel) => <PanelExtra panel={panel} />,
-    moreIcon: <IconDots size="sm" />,
+    moreIcon: <IconDots />,
   },
 }
 
