@@ -38,7 +38,7 @@ function EditFeedForm({ tab, mode }: EditFeedFormProps) {
     },
   })
 
-  const handleCancel = () => {
+  const onCancel = () => {
     if (tab.id) {
       dispatch(
         mode === 'create'
@@ -48,9 +48,14 @@ function EditFeedForm({ tab, mode }: EditFeedFormProps) {
     }
   }
 
-  const handleSubmit = form.onSubmit((values) => {
+  const onDelete = () => {
     if (tab.id) {
-      console.log(values)
+      dispatch(removeTab(tab.id))
+    }
+  }
+
+  const onSubmit = form.onSubmit((values) => {
+    if (tab.id) {
       dispatch(editTab({ id: tab.id, changes: { ...values, editMode: undefined } }))
     }
   })
@@ -62,9 +67,14 @@ function EditFeedForm({ tab, mode }: EditFeedFormProps) {
           <IconRss />
           {mode === 'create' ? 'New feed' : 'Edit feed'}
         </Title>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={onSubmit}>
           <TextInput label="URL" required {...form.getInputProps('url')} />
-          <TextInput label="Custom title" mt="sm" {...form.getInputProps('customTitle')} />
+          <TextInput
+            label="Custom title"
+            mt="sm"
+            placeholder={tab.title}
+            {...form.getInputProps('customTitle')}
+          />
           <ColorInput
             format="hex"
             label="Color"
@@ -84,7 +94,7 @@ function EditFeedForm({ tab, mode }: EditFeedFormProps) {
             }
             {...form.getInputProps('color')}
           />
-          <ButtonGroup mode={mode} onCancel={handleCancel} />
+          <ButtonGroup mode={mode} onCancel={onCancel} onDelete={onDelete} />
         </form>
       </Box>
     </Box>

@@ -35,13 +35,13 @@ interface LabelProps {
 function ColorSchemeModeChooser() {
   const { setColorScheme, colorScheme } = useMantineColorScheme()
 
-  const handleChange = (value: string) => {
+  const onChange = (value: string) => {
     if (isColorScheme(value)) {
       setColorScheme(value)
     }
   }
 
-  return <SegmentedControl data={data} fullWidth onChange={handleChange} value={colorScheme} />
+  return <SegmentedControl data={data} fullWidth onChange={onChange} value={colorScheme} />
 }
 
 export default ColorSchemeModeChooser
