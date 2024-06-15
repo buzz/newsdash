@@ -11,14 +11,12 @@
 }
 
 .wrapper {
-  --feed-item-padding: rem(4);
-
   height: 100%;
   width: 100%;
-  padding-top: calc(var(--mantine-spacing-xs) - var(--feed-item-padding));
+  padding-top: 0;
   padding-right: rem(2);
-  padding-bottom: var(--mantine-spacing-xs);
-  padding-left: calc(var(--mantine-spacing-xs) - var(--feed-item-padding));
+  padding-bottom: 0;
+  padding-left: 0;
 
   mask-image: linear-gradient(transparent, rgb(0 0 0 / 100%) var(--scroll-fade-height-top));
   transition-duration: var(--transition-duration);

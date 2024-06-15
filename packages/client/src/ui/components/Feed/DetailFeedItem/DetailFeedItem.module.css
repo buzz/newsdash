@@ -6,7 +6,7 @@
     display: flex;
     gap: var(--mantine-spacing-xs);
     height: 100%;
-    padding: var(--feed-item-padding) rem(2) var(--feed-item-padding) var(--feed-item-padding);
+    padding: rem(5) rem(2) rem(5) rem(6);
     overflow: hidden;
     text-decoration: none;
 
