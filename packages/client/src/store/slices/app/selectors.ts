@@ -7,8 +7,7 @@ const selectAppSlice = (state: RootState) => state.app
 /** Select header visible state */
 const selectHeaderVisibile = (state: RootState) => selectAppSlice(state).headerVisible
 
-/** Select if modal is opened */
-const selectIsModalOpen = (state: RootState, name: ModalName) =>
-  selectAppSlice(state).modalOpened === name
+/** Select modal */
+const selectModal = (state: RootState) => selectAppSlice(state).modal
 
-export { selectHeaderVisibile, selectIsModalOpen }
+export { selectHeaderVisibile, selectModal }

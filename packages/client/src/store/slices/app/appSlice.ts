@@ -5,7 +5,7 @@ import type { AppState, ModalName } from '#types/types'
 
 const initialState: AppState = {
   headerVisible: false,
-  modalOpened: null,
+  modal: null,
 }
 
 const appSlice = createSlice({
@@ -18,15 +18,13 @@ const appSlice = createSlice({
     },
 
     openModal(state, { payload }: PayloadAction<ModalName>) {
-      if (state.modalOpened === null) {
-        state.modalOpened = payload
+      if (state.modal === null) {
+        state.modal = payload
       }
     },
 
-    closeModal(state, { payload }: PayloadAction<ModalName>) {
-      if (state.modalOpened === payload) {
-        state.modalOpened = null
-      }
+    closeModal(state) {
+      state.modal = null
     },
   },
 })

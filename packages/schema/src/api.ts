@@ -42,7 +42,7 @@ const settingsSchema = z.object({
   lightness: colorParamSchema,
   saturation: colorParamSchema,
   fetchInterval: z.number().int().min(5).max(60),
-  itemsToKeep: z.number().int().min(20).max(200),
+  itemsToKeep: z.number().int().min(10).max(200),
 })
 
 const versionInfoSchema = z.object({

@@ -1,3 +1,3 @@
 import settingsSlice from './settingsSlice'
 
-export const { updateSettings } = settingsSlice.actions
+export const { updateSettings, restoreSettings } = settingsSlice.actions

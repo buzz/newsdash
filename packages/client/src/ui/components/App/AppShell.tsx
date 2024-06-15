@@ -2,12 +2,11 @@ import { AppShell as MantineAppShell } from '@mantine/core'
 import type { ReactNode } from 'react'
 
 import { selectHeaderVisibile } from '#store/slices/app/selectors'
-import AboutModal from '#ui/components/modals/AboutModal/AboutModal'
-import SettingsModal from '#ui/components/modals/SettingsModal/SettingsModal'
 import { useSelector } from '#ui/hooks/store'
 import useInit from '#ui/hooks/useInit'
 
 import Header from './Header/Header'
+import Modal from './Modal/Modal'
 
 import classes from './AppShell.module.css'
 
@@ -27,8 +26,7 @@ function AppShell({ children }: AppShellProps) {
           {children}
         </MantineAppShell.Main>
       </MantineAppShell>
-      <AboutModal />
-      <SettingsModal />
+      <Modal />
     </>
   )
 }

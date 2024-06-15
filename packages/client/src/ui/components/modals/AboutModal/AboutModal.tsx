@@ -3,7 +3,7 @@ import { IconBrandGithub, IconScale } from '@tabler/icons-react'
 
 import { useGetVersionQuery } from '#store/slices/api/version'
 import Logo from '#ui/components/common/Logo'
-import Modal from '#ui/components/common/Modal'
+import ModalInner from '#ui/components/common/ModalInner'
 
 import IconButton from './IconButton'
 
@@ -13,7 +13,7 @@ function AboutModal() {
   const { data, isSuccess } = useGetVersionQuery()
 
   return (
-    <Modal name="about">
+    <ModalInner>
       <Logo className={classes.logo} />
       <Text className={classes.text} fz="lg" ta="center">
         A News Dashboard
@@ -38,7 +38,7 @@ function AboutModal() {
           <IconScale />
         </IconButton>
       </Group>
-    </Modal>
+    </ModalInner>
   )
 }
 

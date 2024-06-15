@@ -1,10 +1,10 @@
-import { Fieldset, Paper, Slider, Stack, Text } from '@mantine/core'
+import { Fieldset, Slider, Stack, Text } from '@mantine/core'
 import { IconSettings } from '@tabler/icons-react'
 import { useState } from 'react'
 
 import { updateSettings } from '#store/slices/settings/actions'
 import selectSettings from '#store/slices/settings/selectors'
-import Modal from '#ui/components/common/Modal'
+import ModalInner from '#ui/components/common/ModalInner'
 import { useDispatch, useSelector } from '#ui/hooks/store'
 
 import ColorSchemeModeChooser from './ColorSchemeModeChooser'
@@ -20,7 +20,6 @@ const formatPercent = (value: number) => `${value} %`
 function SettingsModal() {
   const dispatch = useDispatch()
   const settings = useSelector(selectSettings)
-  console.log(settings)
 
   const [saturation, setSaturation] = useState(settings.saturation)
   const [lightness, setLightness] = useState(settings.lightness)
@@ -28,7 +27,7 @@ function SettingsModal() {
   const [itemsToKeep, setItemsToKeep] = useState(settings.itemsToKeep)
 
   return (
-    <Modal icon={<IconSettings />} name="settings" title="Settings">
+    <ModalInner icon={<IconSettings />} title="Settings">
       <Fieldset mb="md" legend="Appearance" variant="filled">
         <Stack>
           <div>
@@ -109,7 +108,7 @@ function SettingsModal() {
           </div>
         </Stack>
       </Fieldset>
-    </Modal>
+    </ModalInner>
   )
 }
 

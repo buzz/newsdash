@@ -20,6 +20,7 @@ const settingsSlice = createSlice({
       ...state,
       ...payload,
     }),
+    restoreSettings: (state, { payload }: PayloadAction<Settings>) => payload,
   },
 })
 

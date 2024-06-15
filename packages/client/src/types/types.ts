@@ -10,7 +10,7 @@ interface AppState {
   headerVisible: boolean
 
   /** Name of currently opened modal */
-  modalOpened: ModalName | null
+  modal: ModalName | null
 }
 
 interface Notification {
