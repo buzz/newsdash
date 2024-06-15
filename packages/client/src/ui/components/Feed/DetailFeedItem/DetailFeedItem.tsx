@@ -1,4 +1,5 @@
 import { Badge, Image } from '@mantine/core'
+import cx from 'clsx'
 import type { CSSProperties } from 'react'
 
 import Popover from '#ui/components/Feed/Popover/Popover'
@@ -25,7 +26,11 @@ function DetailFeedItem({ data, index, style }: DetailFeedItemProps) {
           <div className={classes.teaserText}>
             <div className={classes.title}>
               <div className={classes.titleText}>{feedItem.title}</div>
-              <Badge className={classes.badge} radius="sm" size="sm">
+              <Badge
+                className={cx(classes.badge, { [classes.new]: feedItem.new })}
+                radius="sm"
+                size="sm"
+              >
                 <TimeAgo date={feedItem.date} />
               </Badge>
             </div>

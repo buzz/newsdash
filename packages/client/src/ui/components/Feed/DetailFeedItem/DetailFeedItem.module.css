@@ -6,7 +6,7 @@
     display: flex;
     gap: var(--mantine-spacing-xs);
     height: 100%;
-    padding: var(--feed-item-padding);
+    padding: var(--feed-item-padding) rem(2) var(--feed-item-padding) var(--feed-item-padding);
     overflow: hidden;
     text-decoration: none;
 
@@ -25,6 +25,10 @@
         .title {
           .badge {
             background-color: light-dark(var(--mantine-color-dark-1), var(--mantine-color-dark-5));
+
+            &.new {
+              background-color: var(--mantine-primary-color-filled);
+            }
           }
         }
       }
@@ -63,6 +67,7 @@
         .badge {
           --badge-padding-x-sm: calc(var(--mantine-spacing-xs) * 0.5);
           background-color: light-dark(var(--mantine-color-dark-0), var(--mantine-color-dark-5));
+          box-shadow: var(--mantine-shadow-sm);
           color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
           font-style: italic;
           margin-top: rem(0);
@@ -71,6 +76,15 @@
           transition-duration: var(--transition-duration);
           transition-property: background-color;
           transition-timing-function: var(--transition-timing-function);
+
+          &.new {
+            background-color: var(--mantine-primary-color-filled);
+
+            > span {
+              color: var(--mantine-color-white);
+              text-shadow: 0 1px 0 rgba(0 0 0 / 28%);
+            }
+          }
         }
       }
 
