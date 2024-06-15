@@ -1,0 +1,3 @@
+.loader:global {
+  animation: spin-animation 3s infinite linear;
+}

@@ -8,6 +8,7 @@ import type { RootState } from '#store/types'
 import type { CustomTabData } from '#types/layout'
 
 import DetailFeedItem from './DetailFeedItem/DetailFeedItem'
+import EmptyList from './EmptyList/EmptyList'
 import WindowedScroller from './WindowedScroller'
 
 import classes from './Feed.module.css'
@@ -17,6 +18,10 @@ const ITEM_HEIGHT = 92
 function Feed({ tab }: FeedProps) {
   const selector = (state: RootState) => selectByTabId(state, tab.id ?? '')
   const feedItems = useSelector(selector)
+
+  if (feedItems.length === 0) {
+    return <EmptyList tab={tab} />
+  }
 
   return (
     <div className={classes.wrapper}>

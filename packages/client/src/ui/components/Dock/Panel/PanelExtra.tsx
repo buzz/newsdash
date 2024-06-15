@@ -34,9 +34,9 @@ function PanelExtra({ panel }: PanelExtraProps) {
           <IconReload />
         </ActionIcon>
       </Tooltip>
-      <Tooltip disabled={editDisabled} label="Edit tab">
+      <Tooltip disabled={editDisabled} label="Tab settings">
         <ActionIcon
-          aria-label="Edit tab"
+          aria-label="Tab settings"
           className={classes.actionButton}
           disabled={editDisabled}
           onClick={() => {
