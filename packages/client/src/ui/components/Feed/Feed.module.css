@@ -13,32 +13,27 @@
 .wrapper {
   height: 100%;
 
-  .scroller {
-    mask-image: linear-gradient(transparent, rgb(0 0 0 / 100%) var(--scroll-fade-height-top));
+  .list {
+    /* Avoid flickering of native scrollbars */
+    scrollbar-width: none !important;
+
+    mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgb(0 0 0 / 100%) var(--scroll-fade-height-top),
+      rgb(0 0 0 / 100%) calc(100% - var(--scroll-fade-height-bottom)),
+      transparent 100%
+    );
     transition-duration: var(--transition-duration);
-    transition-property: --scroll-fade-height-top;
+    transition-property: --scroll-fade-height-top, --scroll-fade-height-bottom;
     transition-timing-function: var(--transition-timing-function);
 
     &.atTop {
       --scroll-fade-height-top: 0;
     }
 
-    &.atBottom .list {
+    &.atBottom {
       --scroll-fade-height-bottom: 0;
-    }
-
-    .list {
-      /* Avoid flickering of native scrollbars */
-      scrollbar-width: none !important;
-
-      mask-image: linear-gradient(
-        to top,
-        transparent,
-        rgb(0 0 0 / 100%) var(--scroll-fade-height-bottom)
-      );
-      transition-duration: var(--transition-duration);
-      transition-property: --scroll-fade-height-bottom;
-      transition-timing-function: var(--transition-timing-function);
     }
   }
 

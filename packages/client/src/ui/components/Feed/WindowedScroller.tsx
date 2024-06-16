@@ -42,15 +42,12 @@ function WindowedScroller<T>({ children, height, itemHeight, items }: WindowedSc
   }, [initialize, osInstance])
 
   return (
-    <div
-      className={cx(classes.scroller, {
-        [classes.atTop]: isAt === 'top',
-        [classes.atBottom]: isAt === 'bottom',
-      })}
-      ref={rootRef}
-    >
+    <div ref={rootRef}>
       <FixedSizeList
-        className={classes.list}
+        className={cx(classes.list, {
+          [classes.atTop]: isAt === 'top',
+          [classes.atBottom]: isAt === 'bottom',
+        })}
         height={height}
         width="100%"
         itemCount={items.length}
