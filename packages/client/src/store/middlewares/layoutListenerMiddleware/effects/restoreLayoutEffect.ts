@@ -23,23 +23,24 @@ function restoreLayoutEffect(startListening: AppStartListening) {
               type: 'error',
             })
           )
-        } else if (
-          isSuccess &&
-          layout.boxes.length > 0 &&
-          layout.panels.length > 0 &&
-          layout.tabs.length > 0
-        ) {
-          listenerApi.dispatch(
-            restoreLayout({
-              boxes: layout.boxes,
-              panels: layout.panels,
-              tabs: layout.tabs.map((tab) => ({
-                ...tab,
-                lastFetched: 0,
-                status: 'loaded',
-              })),
-            })
-          )
+        } else if (isSuccess) {
+          const { boxes, panels, tabs } = data
+          if (boxes.length > 0 && panels.length > 0 && tabs.length > 0) {
+            listenerApi.dispatch(
+              restoreLayout({
+                boxes,
+                panels: panels.map((panel) => ({
+                  ...panel,
+                  activeId: tabs.find((tab) => tab.parentId === panel.id && tab.order === 0)?.id,
+                })),
+                tabs: tabs.map((tab) => ({
+                  ...tab,
+                  lastFetched: 0,
+                  status: 'loaded',
+                })),
+              })
+            )
+          }
         }
       } finally {
         listenerApi.dispatch(layoutRestored())
