@@ -1,5 +1,3 @@
-import { type LayoutBase, placeHolderStyle as placeholderGroup } from 'rc-dock'
-
 const FETCH_TIMEOUT = 5000
 
 const TAB_MIN_WIDTH = 300
@@ -10,11 +8,28 @@ const DOCKBOX_ID = '__dockbox__'
 const LOCALSTORAGE_FEEDITEMS_KEY = 'newsdash_feeditems'
 const LOCALSTORAGE_SETTINGS_KEY = 'newsdash_settings'
 
+const LIGHTNESS_MIN = -20
+const LIGHTNESS_MAX = 20
+const SATURATION_MIN = 0
+const SATURATION_MAX = 100
+const FETCH_INTERVAL_MIN = 5
+const FETCH_INTERVAL_MAX = 60
+const ITEMS_TO_KEEP_MIN = 10
+const ITEMS_TO_KEEP_MAX = 200
+
 export {
   DOCKBOX_ID,
+  FETCH_INTERVAL_MAX,
+  FETCH_INTERVAL_MIN,
   FETCH_TIMEOUT,
+  ITEMS_TO_KEEP_MAX,
+  ITEMS_TO_KEEP_MIN,
+  LIGHTNESS_MAX,
+  LIGHTNESS_MIN,
   LOCALSTORAGE_FEEDITEMS_KEY,
   LOCALSTORAGE_SETTINGS_KEY,
+  SATURATION_MAX,
+  SATURATION_MIN,
   TAB_MIN_HEIGHT,
   TAB_MIN_WIDTH,
 }

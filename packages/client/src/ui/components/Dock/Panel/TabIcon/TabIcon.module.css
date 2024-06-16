@@ -1,0 +1,30 @@
+.stackedIcon {
+  display: inline-flex;
+  position: relative;
+  height: rem(16);
+  width: rem(16);
+
+  &.loading {
+    .favicon {
+      transform: scale(0.55);
+    }
+  }
+
+  .favicon {
+    transition-duration: var(--transition-duration);
+    transition-property: transform;
+    transition-timing-function: var(--transition-timing-function);
+  }
+
+  .loader:global {
+    animation: spin-animation 2s infinite linear;
+  }
+
+  .error {
+    color: var(--mantine-color-error);
+  }
+
+  > * {
+    position: absolute;
+  }
+}

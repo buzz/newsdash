@@ -1,38 +1,58 @@
+:root {
+  --dock-tab-height: rem(24);
+  --dock-border-radius: var(--mantine-radius-default);
+}
+
 :root[data-mantine-color-scheme='dark'] {
-  --dock-panel-color-border: var(--mantine-color-dark-4);
-  --dock-tabs-color-fill: var(--mantine-color-gray-9);
+  --dock-tabs-color-fill: rgba(255 255 255 / 10%);
   --popover-border-color: var(--mantine-color-dark-4);
   --popover-fill-color: var(--mantine-color-dark-6);
   --menu-item-hover: var(--mantine-color-dark-4);
-  --dock-nav-button-color: var(--mantine-color-text);
-  --dock-nav-button-color-hover: lighten(var(--mantine-color-text), 0.5);
+  --dock-nav-button-color: rgba(255 255 255 / 70%);
+  --dock-nav-button-color-hover: lighten(var(--dock-nav-button-color), 0.5);
 }
 
 :root[data-mantine-color-scheme='light'] {
-  --dock-panel-color-border: var(--mantine-color-dark-0);
-  --dock-tabs-color-fill: var(--mantine-color-gray-1);
+  --dock-tabs-color-fill: rgba(0 0 0 / 10%);
   --popover-border-color: var(--mantine-color-gray-2);
   --popover-fill-color: var(--mantine-color-white);
   --menu-item-hover: var(--mantine-color-gray-1);
-  --dock-nav-button-color: var(--mantine-color-gray-7);
-  --dock-nav-button-color-hover: var(--mantine-color-text);
+  --dock-nav-button-color: rgba(0 0 0 / 70%);
+  --dock-nav-button-color-hover: darken(var(--dock-nav-button-color), 1);
 }
 
 .dock-layout {
-  --dock-tab-height: rem(24);
-
   flex-grow: 1;
+  text-shadow: var(--text-shadow);
 
   /**************** panel.less ****************/
 
   /* Panel styles */
   .dock-panel {
+    --mantine-color-default-border: light-dark(rgba(0 0 0 / 10%), rgba(255 255 255 / 10%));
+    --mantine-color-text: light-dark(rgba(0 0 0 / 85%), rgba(255 255 255 / 80%));
+
     background-color: var(--mantine-color-body);
-    border-color: var(--dock-panel-color-border);
-    border-radius: var(--mantine-radius-sm);
+    border-radius: var(--dock-border-radius);
+    border-width: 0;
     box-shadow: var(--mantine-shadow-sm);
-    color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-text));
+    color: var(--mantine-color-text);
     overflow: hidden;
+    transition-duration: var(--transition-duration-short);
+    transition-property: background-color;
+    transition-timing-function: ease-in-out;
+
+    .dock-content-holder {
+      border-top-color: light-dark(
+        darken(var(--mantine-color-default-border), 0.05),
+        lighten(var(--mantine-color-default-border), 0.05)
+      );
+      border-right-color: var(--mantine-color-default-border);
+      border-bottom-color: var(--mantine-color-default-border);
+      border-left-color: var(--mantine-color-default-border);
+      border-style: solid;
+      border-width: rem(1);
+    }
   }
 
   /* Divider styles */
@@ -138,7 +158,12 @@ body > .dragging-layer {
   /* Top bar styles */
   .dock-top .dock-bar {
     background: var(--dock-tabs-color-fill);
-    border-bottom-color: var(--dock-panel-color-border);
+    border-top: rem(1) solid var(--mantine-color-default-border);
+    border-right: rem(1) solid var(--mantine-color-default-border);
+    border-bottom: none;
+    border-left: rem(1) solid var(--mantine-color-default-border);
+    border-top-left-radius: var(--dock-border-radius);
+    border-top-right-radius: var(--dock-border-radius);
     font-size: var(--mantine-font-size-sm);
     line-height: var(--dock-tab-height);
   }
@@ -152,7 +177,7 @@ body > .dragging-layer {
   }
 
   .dock-nav-operations {
-    border-left: 1px solid var(--dock-panel-color-border);
+    border-left: 1px solid var(--mantine-color-default-border);
 
     &.dock-nav-operations-hidden {
       display: none;

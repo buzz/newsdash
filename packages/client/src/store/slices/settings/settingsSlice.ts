@@ -4,6 +4,7 @@ import createSlice from '#store/createSlice'
 import type { Settings } from '#types/types'
 
 const initialState: Settings = {
+  tabColors: true,
   saturation: 50,
   lightness: 50,
   fetchInterval: 10,

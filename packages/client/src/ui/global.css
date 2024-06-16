@@ -1,18 +1,18 @@
+:root[data-mantine-color-scheme='dark'] {
+  --text-shadow: 0 rem(1) 0 rgba(0 0 0 / 28%);
+}
+
+:root[data-mantine-color-scheme='light'] {
+  --text-shadow: 0 rem(1) 0 rgba(255 255 255 / 28%);
+}
+
 body,
 html {
   overflow: hidden;
 }
 
-* {
-  text-shadow: light-dark(0 1px 0 rgba(255 255 255 / 80%), 0 1px 0 rgba(0 0 0 / 28%));
-}
-
 .mantine-Button-label {
-  text-shadow: 0 1px 0 rgba(0 0 0 / 28%);
-}
-
-.mantine-Tooltip-tooltip {
-  text-shadow: none;
+  text-shadow: 0 rem(1) 0 rgba(0 0 0 / 28%);
 }
 
 @keyframes spin-animation {

@@ -1,0 +1,5 @@
+.favicon {
+  height: rem(16);
+  width: rem(16);
+  object-fit: contain;
+}

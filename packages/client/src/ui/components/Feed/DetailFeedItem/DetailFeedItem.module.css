@@ -28,7 +28,7 @@
       .teaserText {
         .title {
           .badge {
-            background-color: light-dark(var(--mantine-color-dark-1), var(--mantine-color-dark-5));
+            background-color: light-dark(rgba(0 0 0 / 30%), rgba(255 255 255 / 30%));
 
             &.new {
               background-color: var(--mantine-primary-color-filled);
@@ -40,7 +40,12 @@
 
     .image {
       border-radius: var(--mantine-radius-xs);
-      border: 1px solid var(--mantine-color-default-border);
+      border-color: light-dark(
+        darken(var(--mantine-color-default-border), 0.1),
+        lighten(var(--mantine-color-default-border), 0.1)
+      );
+      border-style: solid;
+      border-width: 1px;
       flex-grow: 0;
       max-height: 100%;
       object-fit: cover;
@@ -91,8 +96,8 @@
 
         .badge {
           --badge-padding-x-sm: calc(var(--mantine-spacing-xs) * 0.5);
-          background-color: light-dark(var(--mantine-color-dark-0), var(--mantine-color-dark-5));
-          box-shadow: var(--mantine-shadow-sm);
+          background-color: light-dark(rgba(0 0 0 / 25%), rgba(255 255 255 / 25%));
+          box-shadow: var(--mantine-shadow-xs);
           color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
           font-style: italic;
           margin-top: rem(0);

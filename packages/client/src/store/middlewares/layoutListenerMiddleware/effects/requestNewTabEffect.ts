@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid'
 
 import { requestNewTab } from '#store/slices/layout/actions'
-import { setActiveTab } from '#store/slices/layout/entities/panels/actions'
+import { updatePanel } from '#store/slices/layout/entities/panels/actions'
 import { selectPanelForTab } from '#store/slices/layout/entities/panels/selectors'
 import { addTab } from '#store/slices/layout/entities/tabs/actions'
 import { selectMaxTabOrder } from '#store/slices/layout/entities/tabs/selectors'
@@ -37,7 +37,7 @@ function requestNewTabEffect(startListening: AppStartListening) {
           url: '',
         })
       )
-      listenerApi.dispatch(setActiveTab({ panelId, tabId }))
+      listenerApi.dispatch(updatePanel({ id: panelId, changes: { activeId: tabId } }))
     },
   })
 }

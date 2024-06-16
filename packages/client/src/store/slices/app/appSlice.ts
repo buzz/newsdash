@@ -4,6 +4,7 @@ import createSlice from '#store/createSlice'
 import type { AppState, ModalName } from '#types/types'
 
 const initialState: AppState = {
+  colorScheme: 'dark',
   headerVisible: false,
   modal: null,
 }
@@ -13,6 +14,10 @@ const appSlice = createSlice({
   initialState: initialState,
 
   reducers: {
+    changeColorScheme(state, { payload }: PayloadAction<AppState['colorScheme']>) {
+      state.colorScheme = payload
+    },
+
     changeHeaderVisibile(state, { payload }: PayloadAction<boolean>) {
       state.headerVisible = payload
     },

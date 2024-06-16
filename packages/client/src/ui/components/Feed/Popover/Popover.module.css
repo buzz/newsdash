@@ -5,6 +5,7 @@
 .popover {
   padding: var(--mantine-spacing-sm);
   pointer-events: none;
+  text-shadow: var(--text-shadow);
 
   .flexWrap {
     align-items: flex-start;

@@ -1,21 +1,74 @@
-import { Fieldset, Slider, Stack, Text } from '@mantine/core'
-import { IconSettings } from '@tabler/icons-react'
-import { useState } from 'react'
+import { Fieldset, Group, Slider, Stack, Switch, Text } from '@mantine/core'
+import { IconHelpCircle, IconSettings } from '@tabler/icons-react'
+import { throttle } from 'lodash-es'
+import { useEffect, useState } from 'react'
+import type { MantineSpacing, StyleProp } from '@mantine/core'
+import type { ReactNode } from 'react'
 
-import { updateSettings } from '#store/slices/settings/actions'
+import {
+  FETCH_INTERVAL_MAX,
+  FETCH_INTERVAL_MIN,
+  ITEMS_TO_KEEP_MAX,
+  ITEMS_TO_KEEP_MIN,
+  LIGHTNESS_MAX,
+  LIGHTNESS_MIN,
+  SATURATION_MAX,
+  SATURATION_MIN,
+} from '#constants'
+import { updateSettings as updateSettingsAction } from '#store/slices/settings/actions'
 import selectSettings from '#store/slices/settings/selectors'
 import ModalInner from '#ui/components/common/ModalInner'
+import Tooltip from '#ui/components/common/Tooltip'
 import { useDispatch, useSelector } from '#ui/hooks/store'
+import type { Settings } from '#types/types'
 
 import ColorSchemeModeChooser from './ColorSchemeModeChooser'
 
-const marksPercent = [
-  { value: 0, label: '0%' },
-  { value: 50, label: '50%' },
-  { value: 100, label: '100%' },
-]
+import classes from './SettingsModal.module.css'
 
 const formatPercent = (value: number) => `${value} %`
+
+function Label({ children, help, mb = 'xs', rightSection }: LabelProps) {
+  const helpButton = help ? (
+    <Tooltip label={help}>
+      <IconHelpCircle className={classes.icon} />
+    </Tooltip>
+  ) : null
+
+  const rightContent = rightSection ? (
+    <>
+      <span style={{ flexGrow: 1 }} />
+      {rightSection}
+    </>
+  ) : null
+
+  return (
+    <Text className={classes.label} fw={500} mb={mb}>
+      {children}
+      {helpButton}
+      {rightContent}
+    </Text>
+  )
+}
+
+interface LabelProps {
+  children: string
+  help?: string
+  mb?: StyleProp<MantineSpacing>
+  rightSection?: ReactNode
+}
+
+function Value({ children }: ValueProps) {
+  return (
+    <Text component="span" fw={500} size="sm">
+      {children}
+    </Text>
+  )
+}
+
+interface ValueProps {
+  children: string
+}
 
 function SettingsModal() {
   const dispatch = useDispatch()
@@ -26,38 +79,83 @@ function SettingsModal() {
   const [fetchInterval, setFetchInterval] = useState(settings.fetchInterval)
   const [itemsToKeep, setItemsToKeep] = useState(settings.itemsToKeep)
 
+  const updateSettings = throttle(
+    (update: Partial<Settings>) => dispatch(updateSettingsAction(update)),
+    500
+  )
+
+  useEffect(() => {
+    setLightness(settings.lightness)
+  }, [settings.lightness])
+
   return (
     <ModalInner icon={<IconSettings />} title="Settings">
       <Fieldset mb="md" legend="Appearance" variant="filled">
-        <Stack>
+        <Stack gap="lg">
           <div>
-            <Text fw={500}>Color scheme</Text>
+            <Label>Color scheme</Label>
             <ColorSchemeModeChooser />
           </div>
+          <Group justify="space-between">
+            <Label help="Specify a custom color for each tab." mb={0}>
+              Enable Tab Colors
+            </Label>
+            <Switch
+              checked={settings.tabColors}
+              onLabel="ON"
+              offLabel="OFF"
+              onChange={(event) =>
+                dispatch(updateSettings({ tabColors: event.currentTarget.checked }))
+              }
+              size="lg"
+            />
+          </Group>
           <div>
-            <Text fw={500}>Saturation</Text>
+            <Label
+              help="Set the global saturation for all tab colors."
+              rightSection={<Value>{formatPercent(saturation)}</Value>}
+            >
+              Saturation
+            </Label>
             <Slider
-              marks={marksPercent}
+              disabled={!settings.tabColors}
+              marks={[
+                { value: SATURATION_MIN, label: `${SATURATION_MIN} %` },
+                { value: 50, label: '50 %' },
+                { value: SATURATION_MAX, label: `${SATURATION_MAX} %` },
+              ]}
               mb="lg"
-              label={formatPercent}
-              onChange={setSaturation}
-              onChangeEnd={(value) => {
+              min={SATURATION_MIN}
+              max={SATURATION_MAX}
+              label={null}
+              onChange={(value) => {
                 setSaturation(value)
-                dispatch(updateSettings({ saturation: value }))
+                updateSettings({ saturation: value })
               }}
               value={saturation}
             />
           </div>
           <div>
-            <Text fw={500}>Lightness</Text>
+            <Label
+              help="Set the global lightness for all tab colors."
+              rightSection={<Value>{formatPercent(lightness)}</Value>}
+            >
+              Lightness
+            </Label>
             <Slider
-              marks={marksPercent}
+              disabled={!settings.tabColors}
+              marks={[
+                { value: LIGHTNESS_MIN, label: `${LIGHTNESS_MIN} %` },
+                { value: 0, label: '0 %' },
+                { value: LIGHTNESS_MAX, label: `${LIGHTNESS_MAX} %` },
+              ]}
               mb="lg"
-              label={formatPercent}
-              onChange={setLightness}
-              onChangeEnd={(value) => {
+              min={LIGHTNESS_MIN}
+              max={LIGHTNESS_MAX}
+              label={null}
+              onChange={(value) => {
                 setLightness(value)
-                dispatch(updateSettings({ lightness: value }))
+                updateSettings({ lightness: value })
               }}
               value={lightness}
             />
@@ -65,9 +163,14 @@ function SettingsModal() {
         </Stack>
       </Fieldset>
       <Fieldset legend="Feeds" variant="filled">
-        <Stack>
+        <Stack gap="lg">
           <div>
-            <Text fw={500}>Fetch interval</Text>
+            <Label
+              help="Interval at which feeds are checked."
+              rightSection={<Value>{`${fetchInterval} min`}</Value>}
+            >
+              Fetch Interval
+            </Label>
             <Slider
               marks={[
                 { value: 5, label: '5 min' },
@@ -75,19 +178,24 @@ function SettingsModal() {
                 { value: 60, label: '1 h' },
               ]}
               mb="lg"
-              min={5}
-              max={60}
+              min={FETCH_INTERVAL_MIN}
+              max={FETCH_INTERVAL_MAX}
               step={5}
-              onChange={setFetchInterval}
-              onChangeEnd={(value) => {
+              label={null}
+              onChange={(value) => {
                 setFetchInterval(value)
-                dispatch(updateSettings({ fetchInterval: value }))
+                updateSettings({ fetchInterval: value })
               }}
               value={fetchInterval}
             />
           </div>
           <div>
-            <Text fw={500}>Items to keep per feed</Text>
+            <Label
+              help="Maximum number of items to keep per feed."
+              rightSection={<Value>{String(itemsToKeep)}</Value>}
+            >
+              Items to Keep per Feed
+            </Label>
             <Slider
               marks={[
                 { value: 10, label: '10' },
@@ -95,13 +203,13 @@ function SettingsModal() {
                 { value: 200, label: '200' },
               ]}
               mb="lg"
-              min={10}
-              max={200}
+              min={ITEMS_TO_KEEP_MIN}
+              max={ITEMS_TO_KEEP_MAX}
               step={10}
-              onChange={setItemsToKeep}
-              onChangeEnd={(value) => {
+              label={null}
+              onChange={(value) => {
                 setItemsToKeep(value)
-                dispatch(updateSettings({ itemsToKeep: value }))
+                updateSettings({ itemsToKeep: value })
               }}
               value={itemsToKeep}
             />

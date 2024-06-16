@@ -2,23 +2,25 @@ import { createListenerMiddleware } from '@reduxjs/toolkit'
 
 import type { AppStartListening } from '#store/middlewares/types'
 
+import customPanelColorEffect from './effects/customPanelColorEffect'
 import persistLayoutEffect from './effects/persistLayoutEffect'
 import rcLayoutChangeEffect from './effects/rcLayoutChangeEffect'
-import removeTabsOnCascadeEffect from './effects/removePanelEffect'
+import removePanelEffect from './effects/removePanelEffect'
+import removeTabEffect from './effects/removeTabEffect'
 import requestNewTabEffect from './effects/requestNewTabEffect'
 import restoreLayoutEffect from './effects/restoreLayoutEffect'
-import setActiveTabEffect from './effects/setActiveTabEffect'
 
 const layoutListenerMiddleware = createListenerMiddleware()
 const startListening = layoutListenerMiddleware.startListening as AppStartListening
 
 const effects = [
+  customPanelColorEffect,
   persistLayoutEffect,
   rcLayoutChangeEffect,
-  removeTabsOnCascadeEffect,
+  removePanelEffect,
+  removeTabEffect,
   requestNewTabEffect,
   restoreLayoutEffect,
-  setActiveTabEffect,
 ]
 
 for (const effect of effects) {

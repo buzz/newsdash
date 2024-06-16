@@ -17,9 +17,9 @@ const selectPersistTabs = createSelector([tabsSelectors.selectAll], (tabs) =>
     .filter((tab) => tab.editMode !== 'create')
     .map((tab) => ({
       id: tab.id,
-      color: tab.color,
       description: tab.description,
       group: tab.group,
+      hue: tab.hue,
       link: tab.link,
       order: tab.order,
       parentId: tab.parentId,

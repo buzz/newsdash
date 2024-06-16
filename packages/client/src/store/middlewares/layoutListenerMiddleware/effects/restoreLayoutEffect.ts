@@ -12,7 +12,7 @@ function restoreLayoutEffect(startListening: AppStartListening) {
     effect: async (action, listenerApi) => {
       try {
         const getLayout = layoutApi.endpoints.getLayout.initiate()
-        const { isError, error, isSuccess, data: layout } = await listenerApi.dispatch(getLayout)
+        const { isError, error, isSuccess, data } = await listenerApi.dispatch(getLayout)
 
         if (isError) {
           console.error(error)

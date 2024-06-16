@@ -34,13 +34,13 @@ const panelSchema = z.object({
 })
 
 const customTabFields = z.object({
-  color: z.string(),
   customTitle: z.optional(z.string()),
   error: z.optional(z.string()),
-  title: z.optional(z.string()),
+  hue: z.number().min(0).max(360),
   lastFetched: z.number().default(0),
   link: z.optional(z.string().url()),
   status: feedStatusSchema,
+  title: z.optional(z.string()),
   url: z.string().url(),
 })
 

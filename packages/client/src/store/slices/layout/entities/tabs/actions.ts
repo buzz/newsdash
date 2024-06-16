@@ -1,16 +1,16 @@
 import type { Update } from '@reduxjs/toolkit'
 
-import { randomColor } from '#utils'
+import { getRandomHue } from '#utils'
 import type { CustomTab } from '#types/layout'
 
 import tabsSlice from './tabsSlice'
 
 /** Add new tab */
-const addTab = tabsSlice.createAction('addTab', (tab: Omit<CustomTab, 'color'>) => ({
+const addTab = tabsSlice.createAction('addTab', (tab: Omit<CustomTab, 'hue'>) => ({
   payload: {
-    color: randomColor(),
     editMode: 'create' as const,
     group: 'news',
+    hue: getRandomHue(),
     ...tab,
   },
 }))

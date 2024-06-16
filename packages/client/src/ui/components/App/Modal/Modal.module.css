@@ -1,3 +1,4 @@
 .modalContent {
   overflow: hidden;
+  text-shadow: var(--text-shadow);
 }

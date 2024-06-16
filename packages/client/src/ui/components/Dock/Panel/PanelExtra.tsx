@@ -20,7 +20,7 @@ function PanelExtra({ panel }: PanelExtraProps) {
   return (
     <>
       <PanelButton
-        label="Add tab"
+        label="Add Feed"
         onClick={() => {
           dispatch(requestNewTab(panel.id))
         }}
@@ -29,7 +29,7 @@ function PanelExtra({ panel }: PanelExtraProps) {
       </PanelButton>
       <PanelButton
         disabled={refreshDisabled}
-        label="Refresh tab"
+        label="Refresh Feed"
         onClick={() => {
           dispatch(refreshTab(tab.id))
         }}
@@ -38,7 +38,7 @@ function PanelExtra({ panel }: PanelExtraProps) {
       </PanelButton>
       <PanelButton
         disabled={editDisabled}
-        label="Tab settings"
+        label="Feed Settings"
         onClick={() => {
           dispatch(editTab({ id: tab.id, changes: { editMode: 'edit' } }))
         }}
