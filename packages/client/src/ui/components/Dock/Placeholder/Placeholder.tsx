@@ -10,7 +10,7 @@ function Placeholder() {
   const dispatch = useDispatch()
 
   return (
-    <Center maw="50%" mx="auto" style={{ height: '100%' }}>
+    <Center maw="50%" mx="auto">
       <Alert
         className={classes.placeholder}
         title={

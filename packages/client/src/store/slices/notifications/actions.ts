@@ -1,21 +1,17 @@
 import { nanoid } from 'nanoid'
-import type { NotificationData } from '@mantine/notifications'
+
+import type { NotificationShow } from '#types/types'
 
 import notificationsSlice from './notificationsSlice'
 
-const AUTO_CLOSE_DEFAULT = 10_000
-
 /** Request creation of new notification */
 const showNotification = notificationsSlice.createAction(
-  'showNotification',
-  (data: NotificationData) => ({
+  'showErrorNotification',
+  (data: NotificationShow['data']) => ({
     payload: {
       id: nanoid(),
       command: 'show' as const,
-      data: {
-        autoClose: AUTO_CLOSE_DEFAULT,
-        ...data,
-      },
+      data,
     },
   })
 )

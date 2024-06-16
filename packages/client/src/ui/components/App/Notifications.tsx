@@ -2,25 +2,34 @@ import {
   Notifications as MantineNotifications,
   notifications as mantineNotifications,
 } from '@mantine/notifications'
-import { IconCloudDataConnection, IconWorldBolt } from '@tabler/icons-react'
+import { IconExclamationMark, IconInfoCircle } from '@tabler/icons-react'
 import { useEffect } from 'react'
-import type { NotificationData } from '@mantine/notifications'
+import type { NotificationData as MantineNotificationData } from '@mantine/notifications'
 
 import { notificationProcessed } from '#store/slices/notifications/actions'
 import notificationsSelectors from '#store/slices/notifications/selectors'
+import { isNotificationShow } from '#types/typeGuards'
 import { useDispatch, useSelector } from '#ui/hooks/store'
+import type { NotificationShow } from '#types/types'
 
-const icons: Record<string, JSX.Element> = {
-  'connection-error': <IconWorldBolt />,
-  reconnect: <IconCloudDataConnection />,
-}
+const AUTO_CLOSE = 10_000
 
-function addIcon(data: NotificationData): NotificationData {
-  const dataWithIcon = { ...data }
-  if (typeof data.icon === 'string') {
-    dataWithIcon.icon = icons[data.icon]
+function toMantineNotification(data: NotificationShow['data']): MantineNotificationData {
+  if (data.type === 'error') {
+    return {
+      title: data.title,
+      message: `Error: ${data.message}`,
+      autoClose: AUTO_CLOSE,
+      color: 'red',
+      icon: <IconExclamationMark />,
+    }
   }
-  return dataWithIcon
+  return {
+    title: data.title,
+    message: data.message,
+    icon: <IconInfoCircle />,
+    autoClose: AUTO_CLOSE,
+  }
 }
 
 function Notifications() {
@@ -31,9 +40,9 @@ function Notifications() {
   useEffect(() => {
     for (const notification of storeNotifications) {
       try {
-        if (notification.command === 'show' && notification.data) {
-          mantineNotifications.show(addIcon(notification.data))
-        } else if (notification.command === 'hide') {
+        if (isNotificationShow(notification)) {
+          mantineNotifications.show(toMantineNotification(notification.data))
+        } else {
           mantineNotifications.hide(notification.id)
         }
       } finally {

@@ -25,7 +25,7 @@ const statePlugin: FastifyPluginAsync = async (app) => {
     const result = persistLayoutSchema.safeParse({
       boxes: await getAllHashes(app.redis, BOXES_KEY, layout.boxSchema),
       panels: await getAllHashes(app.redis, PANELS_KEY, layout.panelSchema),
-      tabs: await getAllHashes(app.redis, TABS_KEY, layout.tabSchema),
+      tabs: await getAllHashes(app.redis, TABS_KEY, layout.storeTabSchema),
     })
 
     if (result.success) {
@@ -46,7 +46,7 @@ const statePlugin: FastifyPluginAsync = async (app) => {
     const { boxes, panels, tabs } = parsed.data
     await updateHashesDeleteOthers(app.redis, BOXES_KEY, boxes, layout.boxSchema)
     await updateHashesDeleteOthers(app.redis, PANELS_KEY, panels, layout.panelSchema)
-    await updateHashesDeleteOthers(app.redis, TABS_KEY, tabs, layout.tabSchema)
+    await updateHashesDeleteOthers(app.redis, TABS_KEY, tabs, layout.storeTabSchema)
     await reply.send({ result: 'ok ' })
   })
 }

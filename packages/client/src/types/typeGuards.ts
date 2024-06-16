@@ -1,7 +1,7 @@
 import type { MantineColorScheme } from '@mantine/core'
 import type { BoxData, PanelData } from 'rc-dock'
 
-import type { ArbitraryObject } from './types'
+import type { ArbitraryObject, Notification, NotificationShow } from './types'
 
 function isArbitraryObject(obj: unknown): obj is ArbitraryObject {
   return typeof obj === 'object' && obj !== null
@@ -19,4 +19,8 @@ function isPanelData(obj: unknown): obj is PanelData {
   return isArbitraryObject(obj) && Array.isArray(obj.tabs)
 }
 
-export { isArbitraryObject, isBoxData, isColorScheme, isPanelData }
+function isNotificationShow(notif: Notification): notif is NotificationShow {
+  return notif.command === 'show'
+}
+
+export { isArbitraryObject, isBoxData, isColorScheme, isNotificationShow, isPanelData }

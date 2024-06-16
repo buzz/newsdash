@@ -1,5 +1,4 @@
 import { z } from 'zod'
-import type { NotificationData } from '@mantine/notifications'
 
 type ModalName = 'about' | 'settings'
 
@@ -14,11 +13,22 @@ interface AppState {
   modal: ModalName | null
 }
 
-interface Notification {
+interface NotificationShow {
   id: string
-  command: 'show' | 'hide'
-  data?: NotificationData
+  command: 'show'
+  data: {
+    message: string
+    title: string
+    type: 'error' | 'notice'
+  }
 }
+
+interface NotificationHide {
+  id: string
+  command: 'hide'
+}
+
+type Notification = NotificationHide | NotificationShow
 
 const colorParamSchema = z.number().int().min(0).max(100)
 
@@ -31,5 +41,13 @@ const settingsSchema = z.object({
 
 type Settings = z.infer<typeof settingsSchema>
 
-export type { AppState, ArbitraryObject, ModalName, Notification, Settings }
+export type {
+  AppState,
+  ArbitraryObject,
+  ModalName,
+  Notification,
+  NotificationHide,
+  NotificationShow,
+  Settings,
+}
 export { settingsSchema }

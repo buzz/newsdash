@@ -1,4 +1,3 @@
-import { PLACEHOLDER_TAB_ID } from '#constants'
 import tabsSelectors from '#store/slices/layout/entities/tabs/selectors'
 import EditFeedForm from '#ui/components/Feed/EditFeedForm/EditFeedForm'
 import Feed from '#ui/components/Feed/Feed'
@@ -6,25 +5,11 @@ import type { RootState } from '#store/types'
 import type { CustomTabData } from '#types/layout'
 
 import TabTitle from './Panel/TabTitle'
-import Placeholder from './Placeholder/Placeholder'
 
 /** Get tab component */
 function loadTab(store: RootState, tabData: CustomTabData) {
-  if (!tabData.id) {
-    throw new Error('Expected tab ID')
-  }
-
-  // Placeholder
-  if (tabData.id === PLACEHOLDER_TAB_ID) {
-    return {
-      ...tabData,
-      content: <Placeholder />,
-      title: 'Welcome to newsdash',
-    }
-  }
-
-  // News feed
-  else {
+  if (tabData.id) {
+    // News feed
     const tab = tabsSelectors.selectById(store, tabData.id)
 
     switch (tabData.editMode) {
@@ -51,6 +36,8 @@ function loadTab(store: RootState, tabData: CustomTabData) {
       }
     }
   }
+
+  throw new Error('Expected tab ID')
 }
 
 export default loadTab
