@@ -48,11 +48,19 @@ function TabIcon({ tab }: TabProps) {
 function TabTitle({ tab }: TabProps) {
   const title = tab.customTitle ?? tab.title ?? 'New feed'
 
-  return (
+  const titleSpan = (
     <span className={classes.title}>
       <TabIcon tab={tab} />
       {title}
     </span>
+  )
+
+  return tab.description ? (
+    <Tooltip label={tab.description} multiline maw={400}>
+      {titleSpan}
+    </Tooltip>
+  ) : (
+    titleSpan
   )
 }
 
