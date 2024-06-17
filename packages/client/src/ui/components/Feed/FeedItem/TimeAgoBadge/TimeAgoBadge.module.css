@@ -1,0 +1,22 @@
+.badge {
+  --badge-padding-x-sm: calc(var(--mantine-spacing-xs) * 0.5);
+  background-color: light-dark(rgba(0 0 0 / 35%), rgba(255 255 255 / 25%));
+  box-shadow: var(--mantine-shadow-xs);
+  color: var(--mantine-color-white);
+  font-weight: 400;
+  overflow: visible;
+  text-shadow: none;
+  text-transform: lowercase;
+  transition-duration: var(--transition-duration);
+  transition-property: background-color;
+  transition-timing-function: var(--transition-timing-function);
+
+  &.new {
+    background-color: var(--mantine-primary-color-filled);
+
+    > span {
+      color: var(--mantine-color-white);
+      text-shadow: 0 1px 0 rgba(0 0 0 / 28%);
+    }
+  }
+}

@@ -27,3 +27,17 @@
     }
   }
 }
+
+.option {
+  display: flex;
+  align-items: center;
+
+  .label {
+    flex-grow: 1;
+  }
+
+  .icon {
+    margin-right: var(--mantine-spacing-xs);
+    height: var(--mantine-font-size-xl);
+  }
+}

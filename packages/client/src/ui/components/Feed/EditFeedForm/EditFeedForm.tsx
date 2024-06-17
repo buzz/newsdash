@@ -5,6 +5,7 @@ import {
   Group,
   HueSlider,
   InputLabel,
+  InputWrapper,
   Stack,
   TextInput,
   Title,
@@ -15,7 +16,7 @@ import { IconPalette, IconX } from '@tabler/icons-react'
 import { useEffect, useState } from 'react'
 import tinycolor from 'tinycolor2'
 
-import type { Tab } from '@newsdash/schema'
+import type { Display, Tab } from '@newsdash/schema'
 
 import { editTab, removeTab } from '#store/slices/layout/entities/tabs/actions'
 import selectSettings from '#store/slices/settings/selectors'
@@ -26,6 +27,7 @@ import { getRandomHue, isValidUrl } from '#utils'
 import type { TabEditMode } from '#types/layout'
 
 import ButtonGroup from './ButtonGroup'
+import DisplayCombobox from './DisplayCombobox'
 
 import classes from './EditFeedForm.module.css'
 
@@ -57,23 +59,25 @@ function EditFeedForm({ tab, mode }: EditFeedFormProps) {
     }
   }, [mode, origHue, tab.hue])
 
-  const initialValues =
+  const initialValues: EditFeedFormValues =
     mode === 'create'
       ? {
           customTitle: '',
+          display: 'detailed',
           hue: tab.hue,
           url: '',
         }
       : {
           customTitle: tab.customTitle ?? '',
+          display: tab.display,
           hue: tab.hue,
           url: tab.url,
         }
 
-  const form = useForm({
+  const form = useForm<EditFeedFormValues>({
     initialValues,
-
     validate: {
+      // TODO: use zod
       url: isValidUrl,
     },
   })
@@ -160,6 +164,15 @@ function EditFeedForm({ tab, mode }: EditFeedFormProps) {
             }
             {...form.getInputProps('customTitle')}
           />
+          <InputWrapper mt="sm">
+            <InputLabel>Display</InputLabel>
+            <DisplayCombobox
+              onChange={(value) => {
+                form.setFieldValue('display', value)
+              }}
+              value={form.getValues().display}
+            />
+          </InputWrapper>
           <Stack gap={0} mt="sm">
             <InputLabel>Color</InputLabel>
             <Group gap="xs">
@@ -194,6 +207,13 @@ function EditFeedForm({ tab, mode }: EditFeedFormProps) {
 interface EditFeedFormProps {
   tab: Tab
   mode: TabEditMode
+}
+
+interface EditFeedFormValues {
+  customTitle?: string
+  display: Display
+  hue: number
+  url: string
 }
 
 export default EditFeedForm

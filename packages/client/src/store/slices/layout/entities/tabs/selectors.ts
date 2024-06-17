@@ -18,6 +18,7 @@ const selectPersistTabs = createSelector([tabsSelectors.selectAll], (tabs) =>
     .map((tab) => ({
       id: tab.id,
       description: tab.description,
+      display: tab.display,
       group: tab.group,
       hue: tab.hue,
       link: tab.link,

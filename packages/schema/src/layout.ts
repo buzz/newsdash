@@ -12,6 +12,10 @@ const feedStatusSchema = z
   .union([z.literal('loaded'), z.literal('loading'), z.literal('error')])
   .default('loaded')
 
+const displaySchema = z
+  .union([z.literal('condensedList'), z.literal('list'), z.literal('detailed'), z.literal('tiles')])
+  .default('detailed')
+
 const sizeSchema = z.optional(z.number().int().min(0))
 const orderSchema = z.number().int().min(0)
 const parentIdSchema = z.nullable(z.string())
@@ -35,6 +39,7 @@ const panelSchema = z.object({
 
 const customTabFields = z.object({
   customTitle: z.optional(z.string()),
+  display: displaySchema,
   error: z.optional(z.string()),
   hue: z.number().min(0).max(360),
   lastFetched: z.number().default(0),
@@ -63,4 +68,5 @@ export type Box = z.infer<typeof boxSchema>
 export type Panel = z.infer<typeof panelSchema>
 export type CustomTabFields = z.infer<typeof customTabFields>
 export type Tab = z.infer<typeof tabSchema>
-export { boxSchema, panelSchema, storeTabSchema, tabSchema }
+export type Display = z.infer<typeof displaySchema>
+export { boxSchema, displaySchema, panelSchema, storeTabSchema, tabSchema }
