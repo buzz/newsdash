@@ -23,7 +23,13 @@ const overlayScrollbarsParams: UseOverlayScrollbarsParams = {
   },
 }
 
-function WindowedScroller<T>({ children, height, itemHeight, items }: WindowedScrollerProps<T>) {
+function WindowedScroller<T>({
+  children,
+  height,
+  itemHeight,
+  items,
+  overscanCount = 1,
+}: WindowedScrollerProps<T>) {
   const [isAt, setIsAt] = useState<'top' | 'bottom' | undefined>('top')
   const rootRef = useRef<HTMLDivElement>(null)
   const outerRef = useRef<HTMLDivElement>(null)
@@ -63,7 +69,7 @@ function WindowedScroller<T>({ children, height, itemHeight, items }: WindowedSc
             setIsAt(undefined)
           }
         }}
-        overscanCount={1}
+        overscanCount={overscanCount}
       >
         {children}
       </FixedSizeList>
@@ -76,6 +82,7 @@ interface WindowedScrollerProps<T> {
   height: number
   itemHeight: number
   items: T[]
+  overscanCount?: number
 }
 
 export default WindowedScroller

@@ -20,11 +20,28 @@ import WindowedScroller from './WindowedScroller'
 
 import classes from './Feed.module.css'
 
-const COMPONENT_MAP: Record<Display, { component: FeedItemComponentType; height: number }> = {
-  condensedList: { component: CondensedListFeedItem, height: 24 },
-  list: { component: ListFeedItem, height: 36 },
-  detailed: { component: DetailFeedItem, height: 92 },
-  tiles: { component: () => null, height: 92 },
+const COMPONENT_MAP: Record<
+  Display,
+  { component: FeedItemComponentType; height: number; overscanCount?: number }
+> = {
+  condensedList: {
+    component: CondensedListFeedItem,
+    height: 24,
+    overscanCount: 8,
+  },
+  list: {
+    component: ListFeedItem,
+    height: 36,
+    overscanCount: 5,
+  },
+  detailed: {
+    component: DetailFeedItem,
+    height: 92,
+  },
+  tiles: {
+    component: () => null,
+    height: 92,
+  },
 }
 
 function Feed({ tab }: FeedProps) {
@@ -35,13 +52,22 @@ function Feed({ tab }: FeedProps) {
     return <EmptyList tab={tab} />
   }
 
-  const { component: FeedItemComponent, height: itemHeight } = COMPONENT_MAP[tab.display]
+  const {
+    component: FeedItemComponent,
+    height: itemHeight,
+    overscanCount,
+  } = COMPONENT_MAP[tab.display]
 
   return (
     <div className={classes.wrapper}>
       <AutoSizer disableWidth>
         {({ height }) => (
-          <WindowedScroller height={height} itemHeight={itemHeight} items={feedItems}>
+          <WindowedScroller
+            height={height}
+            itemHeight={itemHeight}
+            items={feedItems}
+            overscanCount={overscanCount ?? 1}
+          >
             {FeedItemComponent}
           </WindowedScroller>
         )}
