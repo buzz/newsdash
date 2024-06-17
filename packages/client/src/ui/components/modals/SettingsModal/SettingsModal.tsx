@@ -200,7 +200,10 @@ function SettingsModal() {
               marks={[
                 { value: 10, label: '10' },
                 { value: 100, label: '100' },
-                { value: 200, label: '200' },
+                { value: 250, label: '250' },
+                { value: 500, label: '500' },
+                { value: 750, label: '750' },
+                { value: 1000, label: '1000' },
               ]}
               mb="lg"
               min={ITEMS_TO_KEEP_MIN}
