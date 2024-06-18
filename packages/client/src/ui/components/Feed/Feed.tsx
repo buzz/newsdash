@@ -1,46 +1,38 @@
-import 'overlayscrollbars/styles/overlayscrollbars.css'
-
+import { Overlay } from '@mantine/core'
 import AutoSizer from 'react-virtualized-auto-sizer'
-import type { ComponentType, CSSProperties } from 'react'
-import type { ListChildComponentProps } from 'react-window'
 
 import type { Display } from '@newsdash/schema'
 
 import { selectByTabId } from '#store/slices/feedItems/selectors'
 import { useSelector } from '#ui/hooks/store'
 import type { RootState } from '#store/types'
-import type { FeedItem } from '#types/feed'
+import type { FeedItem as FeedItem } from '#types/feed'
 import type { CustomTabData } from '#types/layout'
 
+import EditFeedForm from './EditFeedForm/EditFeedForm'
 import EmptyList from './EmptyList/EmptyList'
-import DetailFeedItem from './FeedItem/DetailFeedItem/DetailFeedItem'
-import CondensedListFeedItem from './FeedItem/ListFeedItem/CondensedListFeedItem'
-import ListFeedItem from './FeedItem/ListFeedItem/ListFeedItem'
 import WindowedScroller from './WindowedScroller'
 
 import classes from './Feed.module.css'
 
-const COMPONENT_MAP: Record<
-  Display,
-  { component: FeedItemComponentType; height: number; overscanCount?: number }
-> = {
+const DEFAULT_MIN_WIDTH = 800
+
+const DISPLAY_VALUES: Record<Display, DisplayValues> = {
   condensedList: {
-    component: CondensedListFeedItem,
     height: 24,
     overscanCount: 8,
   },
   list: {
-    component: ListFeedItem,
     height: 36,
     overscanCount: 5,
   },
   detailed: {
-    component: DetailFeedItem,
     height: 92,
+    minWidth: 500,
   },
   tiles: {
-    component: () => null,
-    height: 92,
+    height: 201,
+    minWidth: 200,
   },
 }
 
@@ -48,45 +40,58 @@ function Feed({ tab }: FeedProps) {
   const selector = (state: RootState) => selectByTabId(state, tab.id ?? '')
   const feedItems = useSelector(selector)
 
+  const overlay = tab.editMode ? (
+    <Overlay blur={2}>
+      <EditFeedForm tab={tab} mode={tab.editMode} />
+    </Overlay>
+  ) : null
+
   if (feedItems.length === 0) {
-    return <EmptyList tab={tab} />
+    return (
+      <>
+        <EmptyList tab={tab} />
+        {overlay}
+      </>
+    )
   }
 
-  const {
-    component: FeedItemComponent,
-    height: itemHeight,
-    overscanCount,
-  } = COMPONENT_MAP[tab.display]
+  const { height: itemHeight, minWidth, overscanCount } = DISPLAY_VALUES[tab.display]
 
   return (
-    <div className={classes.wrapper}>
-      <AutoSizer disableWidth>
-        {({ height }) => (
+    <AutoSizer className={classes.wrapper}>
+      {({ height, width }) => (
+        <>
           <WindowedScroller
+            display={tab.display}
             height={height}
-            itemHeight={itemHeight}
+            width={width}
+            minWidth={minWidth ?? DEFAULT_MIN_WIDTH}
+            rowHeight={itemHeight}
             items={feedItems}
             overscanCount={overscanCount ?? 1}
-          >
-            {FeedItemComponent}
-          </WindowedScroller>
-        )}
-      </AutoSizer>
-    </div>
+          />
+          {overlay}
+        </>
+      )}
+    </AutoSizer>
   )
+}
+
+interface DisplayValues {
+  height: number
+  minWidth?: number
+  overscanCount?: number
 }
 
 interface FeedProps {
   tab: CustomTabData
 }
 
-interface FeedItemProps {
-  data: FeedItem[]
-  index: number
-  style: CSSProperties
+interface GridData {
+  items: FeedItem[]
+  display: Display
+  columnCount: number
 }
 
-type FeedItemComponentType = ComponentType<ListChildComponentProps<FeedItem[]>>
-
-export type { FeedItemProps }
+export type { GridData }
 export default Feed

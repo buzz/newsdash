@@ -1,19 +1,29 @@
-.wrapper {
+.formWrapper {
   align-items: center;
   display: flex;
   height: 100%;
   justify-content: center;
+  padding: var(--mantine-spacing-sm);
 
   .content {
+    --mantine-color-body: alpha(
+      light-dark(var(--mantine-color-body), var(--mantine-color-dark-7)),
+      0.85
+    );
     max-width: rem(500);
     width: 100%;
-    padding: var(--mantine-spacing-xs);
+    padding: var(--mantine-spacing-md);
 
     .title {
       display: flex;
       align-items: center;
       gap: var(--mantine-spacing-xs);
       margin-bottom: var(--mantine-spacing-sm);
+
+      .feedIcon {
+        height: rem(32);
+        width: rem(32);
+      }
     }
 
     :global(.mantine-ColorPicker-slider) {

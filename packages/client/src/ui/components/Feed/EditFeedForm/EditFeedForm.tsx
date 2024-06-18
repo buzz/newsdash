@@ -6,6 +6,7 @@ import {
   HueSlider,
   InputLabel,
   InputWrapper,
+  Paper,
   Stack,
   TextInput,
   Title,
@@ -136,16 +137,16 @@ function EditFeedForm({ tab, mode }: EditFeedFormProps) {
   })
 
   return (
-    <Box className={classes.wrapper}>
-      <Box className={classes.content}>
+    <Box className={classes.formWrapper}>
+      <Paper className={classes.content}>
         <Title className={classes.title} order={2}>
-          <FeedIcon tab={tab} />
+          <FeedIcon className={classes.feedIcon} tab={tab} />
           {mode === 'create' ? 'Add Feed' : 'Feed Settings'}
         </Title>
         <form onSubmit={onSubmit}>
           <TextInput label="URL" required {...form.getInputProps('url')} />
           <TextInput
-            label="Custom title"
+            label="Title"
             mt="sm"
             placeholder={tab.title}
             rightSection={
@@ -199,7 +200,7 @@ function EditFeedForm({ tab, mode }: EditFeedFormProps) {
           </Stack>
           <ButtonGroup mode={mode} onCancel={onCancel} onDelete={onDelete} />
         </form>
-      </Box>
+      </Paper>
     </Box>
   )
 }

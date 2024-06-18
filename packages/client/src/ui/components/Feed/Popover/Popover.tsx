@@ -1,6 +1,7 @@
 import { AspectRatio, Group, Image, Popover as MantinePopover, Text } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
-import { type ReactNode, useState } from 'react'
+import { useState } from 'react'
+import type { MouseEventHandler } from 'react'
 
 import classes from './Popover.module.css'
 
@@ -38,15 +39,7 @@ function Popover({ children, content, imageUrl, title }: PopoverProps) {
       width={600}
       withArrow
     >
-      <MantinePopover.Target>
-        <div
-          className={classes.targetWrapper}
-          onMouseEnter={onMouseEnter}
-          onMouseLeave={onMouseLeave}
-        >
-          {children}
-        </div>
-      </MantinePopover.Target>
+      <MantinePopover.Target>{children({ onMouseEnter, onMouseLeave })}</MantinePopover.Target>
       <MantinePopover.Dropdown className={classes.popover}>
         <Group className={classes.flexWrap} wrap="nowrap">
           {image}
@@ -63,7 +56,13 @@ function Popover({ children, content, imageUrl, title }: PopoverProps) {
 }
 
 interface PopoverProps {
-  children: ReactNode
+  children: ({
+    onMouseEnter,
+    onMouseLeave,
+  }: {
+    onMouseEnter: MouseEventHandler<HTMLAnchorElement>
+    onMouseLeave: MouseEventHandler<HTMLAnchorElement>
+  }) => JSX.Element
   content?: string
   imageUrl?: string
   title: string

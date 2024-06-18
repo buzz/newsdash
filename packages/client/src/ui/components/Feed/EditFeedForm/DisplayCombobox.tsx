@@ -2,7 +2,7 @@ import { CheckIcon, Combobox, Group, InputBase, useCombobox } from '@mantine/cor
 import {
   IconBaselineDensityMedium,
   IconBaselineDensitySmall,
-  IconLayoutDashboard,
+  IconLayoutGrid,
   IconListDetails,
 } from '@tabler/icons-react'
 import type { ReactNode } from 'react'
@@ -41,7 +41,7 @@ const displayOptions: Record<Display, { icon: ReactNode; label: string }> = {
     label: 'Detailed',
   },
   tiles: {
-    icon: <IconLayoutDashboard />,
+    icon: <IconLayoutGrid />,
     label: 'Tiles',
   },
 }

@@ -1,0 +1,7 @@
+.title {
+  flex-grow: 1;
+  font-size: var(--mantine-font-size-md);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

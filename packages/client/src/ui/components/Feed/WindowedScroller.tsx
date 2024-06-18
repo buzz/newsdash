@@ -1,9 +1,15 @@
+import 'overlayscrollbars/styles/overlayscrollbars.css'
+
 import cx from 'clsx'
 import { useOverlayScrollbars, type UseOverlayScrollbarsParams } from 'overlayscrollbars-react'
 import { useEffect, useRef, useState } from 'react'
 import { FixedSizeList } from 'react-window'
-import type { ComponentType } from 'react'
-import type { ListChildComponentProps } from 'react-window'
+
+import type { Display } from '@newsdash/schema'
+
+import type { FeedItem } from '#types/feed'
+
+import FeedItemRow from './FeedItemRow/FeedItemRow'
 
 import classes from './Feed.module.css'
 
@@ -23,13 +29,15 @@ const overlayScrollbarsParams: UseOverlayScrollbarsParams = {
   },
 }
 
-function WindowedScroller<T>({
-  children,
+function WindowedScroller({
+  display,
   height,
-  itemHeight,
+  width,
+  minWidth,
+  rowHeight,
   items,
   overscanCount = 1,
-}: WindowedScrollerProps<T>) {
+}: WindowedScrollerProps) {
   const [isAt, setIsAt] = useState<'top' | 'bottom' | undefined>('top')
   const rootRef = useRef<HTMLDivElement>(null)
   const outerRef = useRef<HTMLDivElement>(null)
@@ -44,8 +52,10 @@ function WindowedScroller<T>({
         },
       })
     }
-    return () => osInstance()?.destroy()
   }, [initialize, osInstance])
+
+  const columnCount = Math.max(1, Math.floor(width / minWidth))
+  const rowCount = Math.ceil(items.length / columnCount)
 
   return (
     <div ref={rootRef}>
@@ -55,15 +65,15 @@ function WindowedScroller<T>({
           [classes.atBottom]: isAt === 'bottom',
         })}
         height={height}
-        width="100%"
-        itemCount={items.length}
-        itemData={items}
-        itemSize={itemHeight}
+        width={width}
+        itemCount={rowCount}
+        itemSize={rowHeight}
+        itemData={{ items, display, columnCount }}
         outerRef={outerRef}
         onScroll={({ scrollOffset }) => {
           if (scrollOffset < 2) {
             setIsAt('top')
-          } else if (scrollOffset + height > itemHeight * items.length - 2) {
+          } else if (scrollOffset + height > rowHeight * rowCount - 2) {
             setIsAt('bottom')
           } else {
             setIsAt(undefined)
@@ -71,17 +81,19 @@ function WindowedScroller<T>({
         }}
         overscanCount={overscanCount}
       >
-        {children}
+        {FeedItemRow}
       </FixedSizeList>
     </div>
   )
 }
 
-interface WindowedScrollerProps<T> {
-  children: ComponentType<ListChildComponentProps<T[]>>
+interface WindowedScrollerProps {
+  display: Display
   height: number
-  itemHeight: number
-  items: T[]
+  width: number
+  minWidth: number
+  rowHeight: number
+  items: FeedItem[]
   overscanCount?: number
 }
 

@@ -1,17 +1,17 @@
 @property --scroll-fade-height-top {
   syntax: '<length>';
   inherits: false;
-  initial-value: 30px;
+  initial-value: 20px;
 }
 
 @property --scroll-fade-height-bottom {
   syntax: '<length>';
   inherits: false;
-  initial-value: 30px;
+  initial-value: 20px;
 }
 
 .wrapper {
-  height: 100%;
+  width: 100% !important;
 
   .list {
     /* Avoid flickering of native scrollbars */
@@ -24,7 +24,7 @@
       rgb(0 0 0 / 100%) calc(100% - var(--scroll-fade-height-bottom)),
       transparent 100%
     );
-    transition-duration: var(--transition-duration);
+    transition-duration: var(--transition-duration-extra-short);
     transition-property: --scroll-fade-height-top, --scroll-fade-height-bottom;
     transition-timing-function: var(--transition-timing-function);
 
