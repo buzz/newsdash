@@ -9,6 +9,7 @@ import {
   parseFeed,
   parseUrl,
   scrapeUrlImage,
+  scrapeUrlLogo,
 } from './utils.js'
 import type { UrlRequest } from './types.js'
 
@@ -28,6 +29,15 @@ const feedPlugin: FastifyPluginAsync = (app) => {
     const body = await fetchText(url)
     const imageUrl = parseUrl(await scrapeUrlImage(body, url))
     return reply.send(downloadImageAndResizeStream(imageUrl))
+  })
+
+  app.get('/logo', async (request: UrlRequest, reply) => {
+    void reply.type('image/png')
+    void reply.header('Cache-Control', `public, max-age=${IMG_MAX_AGE}`)
+    const url = parseUrl(request.query.url)
+    const body = await fetchText(url)
+    const logoUrl = parseUrl(await scrapeUrlLogo(body, url))
+    return reply.send(downloadImageAndResizeStream(logoUrl, 32, 32, 'png'))
   })
 
   return Promise.resolve()

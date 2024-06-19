@@ -32,6 +32,8 @@
     "got": "^14.4.1",
     "metascraper": "^5.45.10",
     "metascraper-image": "^5.45.10",
+    "metascraper-logo": "^5.45.10",
+    "metascraper-logo-favicon": "^5.45.12",
     "rss-parser": "^3.13.0",
     "sharp": "^0.33.4",
     "string-strip-html": "^13.4.8",

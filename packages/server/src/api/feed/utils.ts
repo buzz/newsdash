@@ -3,6 +3,8 @@ import { createHash } from 'node:crypto'
 import got, { type OptionsOfUnknownResponseBodyWrapped } from 'got'
 import metascraper from 'metascraper'
 import metascraperImage from 'metascraper-image'
+import metascraperLogo from 'metascraper-logo'
+import metascraperLogoFavicon from 'metascraper-logo-favicon'
 import RssParser from 'rss-parser'
 import sharp from 'sharp'
 import { stripHtml } from 'string-strip-html'
@@ -132,9 +134,25 @@ async function scrapeUrlImage(html: string, url: URL) {
   throw new NotFound()
 }
 
-function downloadImageAndResizeStream(url: URL) {
+async function scrapeUrlLogo(html: string, url: URL) {
+  const imageScraper = metascraper([metascraperLogo(), metascraperLogoFavicon()])
+  const { logo } = await imageScraper({ html, url: String(url) })
+  if (logo) {
+    return logo
+  }
+
+  throw new NotFound()
+}
+
+function downloadImageAndResizeStream(
+  url: URL,
+  width: number = IMG_WIDTH,
+  height: number = IMG_HEIGHT,
+  format: 'jpeg' | 'png' = 'jpeg'
+) {
   try {
-    const resizer = sharp().resize(IMG_WIDTH, IMG_HEIGHT).jpeg({ quality: IMG_QUALITY })
+    let resizer = sharp().resize(width, height)
+    resizer = format === 'jpeg' ? resizer.jpeg({ quality: IMG_QUALITY }) : resizer.png()
     return fetchStream(url).pipe(resizer)
   } catch (error: unknown) {
     if (isError(error)) {
@@ -152,4 +170,5 @@ export {
   parseFeed,
   parseUrl,
   scrapeUrlImage,
+  scrapeUrlLogo,
 }
