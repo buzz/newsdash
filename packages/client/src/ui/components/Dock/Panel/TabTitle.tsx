@@ -20,19 +20,19 @@ function getTitle({ customTitle, status, title }: Tab) {
 }
 
 function TabTitle({ tab }: TabProps) {
-  const titleSpan = (
-    <span className={classes.title}>
-      <TabIcon tab={tab} />
-      <span>{getTitle(tab)}</span>
-    </span>
-  )
-
-  return tab.description ? (
+  const title = tab.description ? (
     <Tooltip label={tab.description} multiline maw={400}>
-      {titleSpan}
+      <span>{getTitle(tab)}</span>
     </Tooltip>
   ) : (
-    titleSpan
+    <span>{getTitle(tab)}</span>
+  )
+
+  return (
+    <span className={classes.title}>
+      <TabIcon tab={tab} />
+      {title}
+    </span>
   )
 }
 
