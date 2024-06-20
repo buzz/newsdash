@@ -7,6 +7,10 @@ interface UrlQueryString {
 
 type UrlRequest = FastifyRequest<{ Querystring: UrlQueryString }>
 
-type RssParserResult = Awaited<ReturnType<RssParser['parseString']>>
+interface CustomFeedFields {
+  language?: string
+}
 
-export type { RssParserResult, UrlRequest }
+type RssParserResult = Awaited<ReturnType<RssParser<CustomFeedFields>['parseString']>>
+
+export type { CustomFeedFields, RssParserResult, UrlRequest }

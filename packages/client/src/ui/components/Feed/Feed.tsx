@@ -96,6 +96,7 @@ function Feed({ tab: { id: tabId } }: FeedProps) {
         <>
           <WindowedScroller
             display={tab.display}
+            language={tab.language}
             height={height}
             width={width}
             minWidth={minWidth ?? DEFAULT_MIN_WIDTH}
@@ -123,6 +124,7 @@ interface FeedProps {
 interface GridData {
   items: FeedItem[]
   display: Display
+  language: string
   columnCount: number
 }
 

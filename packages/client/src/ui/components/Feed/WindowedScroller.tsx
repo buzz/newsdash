@@ -31,6 +31,7 @@ const overlayScrollbarsParams: UseOverlayScrollbarsParams = {
 
 function WindowedScroller({
   display,
+  language = 'en',
   height,
   width,
   minWidth,
@@ -68,7 +69,7 @@ function WindowedScroller({
         width={width}
         itemCount={rowCount}
         itemSize={rowHeight}
-        itemData={{ items, display, columnCount }}
+        itemData={{ items, display, language, columnCount }}
         outerRef={outerRef}
         onScroll={({ scrollOffset }) => {
           if (scrollOffset < 2) {
@@ -89,6 +90,7 @@ function WindowedScroller({
 
 interface WindowedScrollerProps {
   display: Display
+  language?: string
   height: number
   width: number
   minWidth: number

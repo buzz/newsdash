@@ -6,6 +6,7 @@ import { boxSchema, panelSchema, storeTabSchema } from './layout.js'
 const feedInfoSchema = z.object({
   title: z.string(),
   description: z.optional(z.string()),
+  language: z.optional(z.string()),
   link: z.optional(webUrlSchema),
 })
 

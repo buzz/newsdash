@@ -20,5 +20,11 @@
       font-weight: 700;
       line-height: 1.3;
     }
+
+    .content {
+      hyphens: auto;
+      hyphenate-limit-chars: 6 3 3;
+      word-break: break-word;
+    }
   }
 }

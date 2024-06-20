@@ -18,6 +18,9 @@
   flex-grow: 1;
   overflow: hidden;
   padding-top: rem(1);
+  hyphens: auto;
+  hyphenate-limit-chars: 6 3 3;
+  word-break: break-word;
 
   .title {
     display: flex;

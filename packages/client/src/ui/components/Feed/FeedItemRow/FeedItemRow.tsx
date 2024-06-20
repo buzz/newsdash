@@ -39,7 +39,7 @@ const DISPLAY_COMPONENT: Record<
 }
 
 function FeedItemRow({
-  data: { display, items, columnCount },
+  data: { display, language, items, columnCount },
   index,
   style,
 }: ListChildComponentProps<GridData>) {
@@ -57,6 +57,7 @@ function FeedItemRow({
         content={feedItem.content}
         date={feedItem.date}
         imageUrl={imageUrl}
+        language={language}
         title={feedItem.title}
         key={feedItem.id}
       >
@@ -70,7 +71,7 @@ function FeedItemRow({
             style={itemStyle}
             target="_blank"
           >
-            <FeedItemComponent feedItem={feedItem} imageUrl={imageUrl} />
+            <FeedItemComponent feedItem={feedItem} imageUrl={imageUrl} language={language} />
           </a>
         )}
       </Popover>

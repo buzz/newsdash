@@ -21,7 +21,7 @@ import {
   USER_AGENT,
 } from '#constants'
 
-import type { RssParserResult } from './types.js'
+import type { CustomFeedFields, RssParserResult } from './types.js'
 
 const NO_TITLE = 'NO_TITLE'
 const DEFAULT_FETCH_OPTIONS = {
@@ -50,8 +50,6 @@ function constructFeedResponse(result: RssParserResult) {
           : content
     }
 
-    // TODO: image
-
     return {
       id,
       content,
@@ -64,6 +62,7 @@ function constructFeedResponse(result: RssParserResult) {
   return feedSchema.parse({
     title: feed.title ?? NO_TITLE,
     description: feed.description,
+    language: feed.language,
     link: feed.link,
     items,
   })
@@ -110,7 +109,7 @@ function fetchStream(url: URL) {
 
 function parseFeed(body: string) {
   try {
-    return new RssParser().parseString(body)
+    return new RssParser<CustomFeedFields>().parseString(body)
   } catch (error) {
     if (isError(error)) {
       throw new ParseError(error.message)

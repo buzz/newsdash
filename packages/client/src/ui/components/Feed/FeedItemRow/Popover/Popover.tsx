@@ -18,7 +18,7 @@ function formatDateTime(isoDate: string, locale?: string, hour12 = false) {
   }).format(Date.parse(isoDate))
 }
 
-function Popover({ children, content, date, imageUrl, title }: PopoverProps) {
+function Popover({ children, content, date, imageUrl, language, title }: PopoverProps) {
   const { dateLocale, dateHour12 } = useSelector(selectSettings)
   const [opened, { close, open }] = useDisclosure(false)
   const [openTimeout, setOpenTimeout] = useState<number | undefined>()
@@ -58,7 +58,11 @@ function Popover({ children, content, date, imageUrl, title }: PopoverProps) {
             <Text fs="italic" size="sm">
               {formatDateTime(date, dateLocale, dateHour12)}
             </Text>
-            {content ? <Text size="sm">{content}</Text> : null}
+            {content ? (
+              <Text className={classes.content} lang={language} size="sm">
+                {content}
+              </Text>
+            ) : null}
           </Stack>
         </Group>
       </MantinePopover.Dropdown>
@@ -77,6 +81,7 @@ interface PopoverProps {
   content?: string
   date: string
   imageUrl?: string
+  language: string
   title: string
 }
 

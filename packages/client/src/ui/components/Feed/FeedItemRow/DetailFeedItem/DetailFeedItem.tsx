@@ -6,9 +6,13 @@ import type { FeedItemComponentProps } from '#ui/components/Feed/FeedItemRow/typ
 
 import classes from './DetailFeedItem.module.css'
 
-function DetailFeedItem({ feedItem, imageUrl }: FeedItemComponentProps) {
+function DetailFeedItem({ feedItem, imageUrl, language }: FeedItemComponentProps) {
   const hasContent = Boolean(feedItem.content)
-  const content = hasContent ? <div className={classes.teaserText}>{feedItem.content}</div> : null
+  const content = hasContent ? (
+    <div className={classes.teaserText} lang={language}>
+      {feedItem.content}
+    </div>
+  ) : null
 
   const timeAgoBadge = <TimeAgoBadge className={classes.badge} feedItem={feedItem} />
 

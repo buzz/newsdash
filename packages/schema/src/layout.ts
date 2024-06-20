@@ -59,6 +59,7 @@ const storeTabSchema = customTabFields.extend({
   id: z.string(),
   description: z.optional(z.string()),
   group: z.optional(z.string()),
+  language: z.optional(z.string()),
   order: orderSchema,
   parentId: parentIdSchema,
 })
