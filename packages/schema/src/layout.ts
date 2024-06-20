@@ -34,7 +34,7 @@ const panelSchema = z.object({
 })
 
 const customTabFields = z.object({
-  customTitle: z.optional(z.string()),
+  customTitle: z.string(),
   display: displaySchema,
   error: z.optional(z.string()),
   hue: z.number().min(0).max(360),

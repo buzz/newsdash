@@ -50,16 +50,16 @@ const COLOR_NAMES = [
 
 function EditFeedForm({ tab, mode }: EditFeedFormProps) {
   const dispatch = useDispatch()
-  const [origHue, setOrigHue] = useState<number | undefined>()
+  const [tabBackup, setTabBackup] = useState<Tab | undefined>()
   const { tabColors } = useSelector(selectSettings)
   const theme = useMantineTheme()
 
-  // Remember original hue value for edit mode in case of cancel
+  // Remember original values for edit mode in case of cancel
   useEffect(() => {
-    if (mode === 'edit' && origHue === undefined) {
-      setOrigHue(tab.hue)
+    if (mode === 'edit' && tabBackup === undefined) {
+      setTabBackup({ ...tab })
     }
-  }, [mode, origHue, tab.hue])
+  }, [mode, tab, tabBackup])
 
   const initialValues: EditFeedFormValues =
     mode === 'new'
@@ -70,7 +70,7 @@ function EditFeedForm({ tab, mode }: EditFeedFormProps) {
           url: '',
         }
       : {
-          customTitle: tab.customTitle ?? '',
+          customTitle: tab.customTitle,
           display: tab.display,
           hue: tab.hue,
           url: tab.url,
@@ -81,6 +81,18 @@ function EditFeedForm({ tab, mode }: EditFeedFormProps) {
     validate: {
       url: isValidUrl,
     },
+    onValuesChange: (values) => {
+      dispatch(
+        editTab({
+          id: tab.id,
+          changes: {
+            customTitle: values.customTitle,
+            display: values.display,
+            hue: values.hue,
+          },
+        })
+      )
+    },
   })
 
   const onCancel = () => {
@@ -88,7 +100,7 @@ function EditFeedForm({ tab, mode }: EditFeedFormProps) {
       dispatch(
         mode === 'new'
           ? removeTab(tab.id)
-          : editTab({ id: tab.id, changes: { status: 'loaded', hue: origHue } })
+          : editTab({ id: tab.id, changes: { ...tabBackup, status: 'loaded' } })
       )
     }
   }
@@ -105,13 +117,6 @@ function EditFeedForm({ tab, mode }: EditFeedFormProps) {
     }
   })
 
-  const onHueChange = (value: number) => {
-    form.setFieldValue('hue', value)
-    if (tab.id) {
-      dispatch(editTab({ id: tab.id, changes: { hue: value } }))
-    }
-  }
-
   const customTitleClearDisabled = form.getValues().customTitle === ''
 
   const swatches = COLOR_NAMES.map((colorName) => {
@@ -127,7 +132,7 @@ function EditFeedForm({ tab, mode }: EditFeedFormProps) {
           color={color}
           onClick={(event) => {
             event.preventDefault()
-            onHueChange(tinycolor(color).toHsl().h)
+            form.setFieldValue('hue', tinycolor(color).toHsl().h)
           }}
           size="xs"
         />
@@ -181,13 +186,15 @@ function EditFeedForm({ tab, mode }: EditFeedFormProps) {
                 size="xl"
                 value={tab.hue}
                 {...form.getInputProps('hue')}
-                onChange={onHueChange}
+                onChange={(value) => {
+                  form.setFieldValue('hue', value)
+                }}
               />
               <Tooltip disabled={!tabColors} label="Random color">
                 <ActionIcon
                   disabled={!tabColors}
                   onClick={() => {
-                    onHueChange(getRandomHue())
+                    form.setFieldValue('hue', getRandomHue())
                   }}
                   variant="subtle"
                 >
@@ -211,7 +218,7 @@ interface EditFeedFormProps {
 }
 
 interface EditFeedFormValues {
-  customTitle?: string
+  customTitle: string
   display: Display
   hue: number
   url: string

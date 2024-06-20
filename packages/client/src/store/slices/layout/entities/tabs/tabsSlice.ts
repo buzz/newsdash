@@ -20,15 +20,11 @@ const tabsSlice = createSlice({
 
     // Edit tab
     builder.addCase(editTab, (state, { payload: { id, changes } }) => {
-      // TODO: reset last updated if url changed
       tabsEntityAdapter.updateOne(state, {
         id,
         changes: {
           group: 'news',
           ...changes,
-          ...(Object.keys(changes).includes('customTitle')
-            ? { customTitle: changes.customTitle === '' ? undefined : changes.customTitle }
-            : {}),
         },
       })
     })

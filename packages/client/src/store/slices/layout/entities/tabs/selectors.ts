@@ -17,6 +17,7 @@ const selectPersistTabs = createSelector([tabsSelectors.selectAll], (tabs) =>
     .filter((tab) => tab.status !== 'new')
     .map((tab) => ({
       id: tab.id,
+      customTitle: tab.customTitle,
       description: tab.description,
       display: tab.display,
       group: tab.group,

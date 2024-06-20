@@ -6,13 +6,24 @@ import TabIcon from './TabIcon/TabIcon'
 
 import classes from './Panel.module.css'
 
-function TabTitle({ tab }: TabProps) {
-  const title = tab.customTitle ?? tab.title ?? 'Add Feed'
+function getTitle({ customTitle, status, title }: Tab) {
+  if (status === 'new') {
+    return 'Add Feed'
+  }
+  if (customTitle.length > 0) {
+    return customTitle
+  }
+  if (title !== undefined && title.length > 0) {
+    return title
+  }
+  return 'NO TITLE'
+}
 
+function TabTitle({ tab }: TabProps) {
   const titleSpan = (
     <span className={classes.title}>
       <TabIcon tab={tab} />
-      {title}
+      <span>{getTitle(tab)}</span>
     </span>
   )
 
