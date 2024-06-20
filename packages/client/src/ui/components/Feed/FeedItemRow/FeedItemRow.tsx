@@ -4,7 +4,7 @@ import type { ListChildComponentProps } from 'react-window'
 
 import type { Display } from '@newsdash/schema'
 
-import Popover from '#ui/components/Feed/Popover/Popover'
+import Popover from '#ui/components/Feed/FeedItemRow/Popover/Popover'
 import { makeFeedItemImageUrl } from '#ui/components/Feed/utils'
 import type { FeedItem as FeedItemRow } from '#types/feed'
 import type { GridData } from '#ui/components/Feed/Feed'
@@ -55,6 +55,7 @@ function FeedItemRow({
     return (
       <Popover
         content={feedItem.content}
+        date={feedItem.date}
         imageUrl={imageUrl}
         title={feedItem.title}
         key={feedItem.id}

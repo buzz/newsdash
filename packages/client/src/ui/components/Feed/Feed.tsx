@@ -3,6 +3,7 @@ import AutoSizer from 'react-virtualized-auto-sizer'
 
 import type { Display, Tab } from '@newsdash/schema'
 
+import { DEFAULT_BLUR } from '#constants'
 import { selectByTabId } from '#store/slices/feedItems/selectors'
 import tabsSelectors from '#store/slices/layout/entities/tabs/selectors'
 import { isTabEditMode } from '#types/typeGuards'
@@ -53,7 +54,7 @@ function FeedSettingsOverlay({ tab }: FeedSettingsOverlayProps) {
       timingFunction={transition.timingFunction}
     >
       {(styles) => (
-        <Overlay blur={2} style={styles}>
+        <Overlay blur={DEFAULT_BLUR} style={styles}>
           <EditFeedForm tab={tab} mode={status === 'new' ? 'new' : 'edit'} />
         </Overlay>
       )}
@@ -86,6 +87,8 @@ function Feed({ tab: { id: tabId } }: FeedProps) {
   }
 
   const { height: itemHeight, minWidth, overscanCount } = DISPLAY_VALUES[tab.display]
+
+  // TODO: useElementSize instead of AutoSizer?
 
   return (
     <AutoSizer className={classes.wrapper}>

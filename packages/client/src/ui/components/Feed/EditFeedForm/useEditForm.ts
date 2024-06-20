@@ -1,14 +1,35 @@
 import { useForm } from '@mantine/form'
 import { useEffect, useState } from 'react'
 
-import type { Tab } from '@newsdash/schema'
+import { type Tab, webUrlSchema } from '@newsdash/schema'
 
 import { editTab, removeTab } from '#store/slices/layout/entities/tabs/actions'
 import { useDispatch } from '#ui/hooks/store'
+import { zodErrorToString } from '#utils'
 import type { TabEditMode } from '#types/layout'
 
-import { getInitialFormValues, isValidUrl } from './utils'
 import type { EditFeedFormValues } from './types'
+
+function getInitialFormValues(mode: TabEditMode, tab: Tab): EditFeedFormValues {
+  return mode === 'new'
+    ? {
+        customTitle: '',
+        display: 'detailed',
+        hue: tab.hue,
+        url: '',
+      }
+    : {
+        customTitle: tab.customTitle,
+        display: tab.display,
+        hue: tab.hue,
+        url: tab.url,
+      }
+}
+
+function validateUrl(urlString: string) {
+  const result = webUrlSchema.safeParse(urlString)
+  return result.success ? null : zodErrorToString(result.error)
+}
 
 function useEditForm(mode: TabEditMode, tab: Tab) {
   const dispatch = useDispatch()
@@ -23,9 +44,7 @@ function useEditForm(mode: TabEditMode, tab: Tab) {
 
   const form = useForm<EditFeedFormValues>({
     initialValues: getInitialFormValues(mode, tab),
-    validate: {
-      url: isValidUrl,
-    },
+    validate: { url: validateUrl },
     // Live update tab
     onValuesChange: (values) => {
       dispatch(

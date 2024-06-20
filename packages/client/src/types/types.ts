@@ -1,3 +1,4 @@
+import isLocale from 'validator/lib/isLocale'
 import { z } from 'zod'
 
 import {
@@ -44,12 +45,16 @@ interface NotificationHide {
 
 type Notification = NotificationHide | NotificationShow
 
+const localeSchema = z.string().refine(isLocale, { message: 'Not a valid locale' })
+
 const settingsSchema = z.object({
   tabColors: z.boolean(),
   lightness: z.number().int().min(LIGHTNESS_MIN).max(LIGHTNESS_MAX),
   saturation: z.number().int().min(SATURATION_MIN).max(SATURATION_MAX),
   fetchInterval: z.number().int().min(FETCH_INTERVAL_MIN).max(FETCH_INTERVAL_MAX),
   itemsToKeep: z.number().int().min(ITEMS_TO_KEEP_MIN).max(ITEMS_TO_KEEP_MAX),
+  dateLocale: z.optional(localeSchema),
+  dateHour12: z.optional(z.boolean()),
 })
 
 type Settings = z.infer<typeof settingsSchema>
@@ -63,4 +68,4 @@ export type {
   NotificationShow,
   Settings,
 }
-export { settingsSchema }
+export { localeSchema, settingsSchema }

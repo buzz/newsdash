@@ -1,15 +1,8 @@
-import {
-  ActionIcon,
-  Button,
-  Group,
-  HueSlider,
-  InputLabel,
-  InputWrapper,
-  useMantineTheme,
-} from '@mantine/core'
+import { ActionIcon, Button, Group, HueSlider, useMantineTheme } from '@mantine/core'
 import { IconPalette } from '@tabler/icons-react'
 import tinycolor from 'tinycolor2'
 
+import InputWrapper from '#ui/components/common/InputWrapper/InputWrapper'
 import Tooltip from '#ui/components/common/Tooltip'
 import { getRandomHue } from '#utils'
 import type { InputProps } from '#ui/components/Feed/EditFeedForm/types'
@@ -58,8 +51,7 @@ function ColorSwatches({ form }: InputProps) {
 
 function ColorInput({ disabled, form }: ColorInputProps) {
   return (
-    <InputWrapper mt="sm">
-      <InputLabel>Color</InputLabel>
+    <InputWrapper label="Color">
       <Group gap="xs">
         <HueSlider
           className="foobar"

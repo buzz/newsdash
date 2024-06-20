@@ -3,6 +3,10 @@
   align-items: center;
   gap: var(--mantine-spacing-xs);
 
+  .spacer {
+    flex-grow: 1;
+  }
+
   .icon {
     color: var(--mantine-color-blue-3);
     cursor: help;

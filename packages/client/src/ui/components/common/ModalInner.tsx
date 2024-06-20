@@ -4,7 +4,7 @@ import type { ReactNode } from 'react'
 function ModalInner({ children, icon = null, title }: ModalInnerProps) {
   return (
     <>
-      <Modal.Header>
+      <Modal.Header pt="lg" pr="md" pb="lg" pl="lg">
         {icon}
         {title ? (
           <Modal.Title fz="xl" pl="xs">
@@ -13,7 +13,9 @@ function ModalInner({ children, icon = null, title }: ModalInnerProps) {
         ) : undefined}
         <Modal.CloseButton />
       </Modal.Header>
-      <Modal.Body>{children}</Modal.Body>
+      <Modal.Body pr="lg" pb="lg" pl="lg">
+        {children}
+      </Modal.Body>
     </>
   )
 }

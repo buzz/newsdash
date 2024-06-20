@@ -24,7 +24,7 @@ function ButtonGroup({ mode, onCancel, onDelete }: ButtonGroupProps) {
   )
 
   return (
-    <>
+    <div>
       <Group justify="center" wrap="nowrap">
         <Button flex="1" leftSection={<IconArrowBack />} onClick={onCancel}>
           Cancel
@@ -33,7 +33,7 @@ function ButtonGroup({ mode, onCancel, onDelete }: ButtonGroupProps) {
         {mode === 'new' ? confirmButton : null}
       </Group>
       {mode === 'edit' ? confirmButton : null}
-    </>
+    </div>
   )
 }
 

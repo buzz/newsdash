@@ -1,6 +1,7 @@
 import { Modal as MantineModal } from '@mantine/core'
 import type { ComponentType } from 'react'
 
+import { DEFAULT_BLUR } from '#constants'
 import { closeModal } from '#store/slices/app/actions'
 import { selectModal } from '#store/slices/app/selectors'
 import AboutModal from '#ui/components/modals/AboutModal/AboutModal'
@@ -27,7 +28,7 @@ function Modal() {
 
   return (
     <MantineModal.Root centered onClose={() => dispatch(closeModal())} opened>
-      <MantineModal.Overlay blur={2} />
+      <MantineModal.Overlay blur={DEFAULT_BLUR} />
       <MantineModal.Content className={classes.modalContent} radius="md" shadow="xl">
         <ModalComponent />
       </MantineModal.Content>

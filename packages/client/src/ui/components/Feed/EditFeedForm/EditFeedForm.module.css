@@ -10,9 +10,16 @@
       light-dark(var(--mantine-color-body), var(--mantine-color-dark-7)),
       0.85
     );
+
     max-width: rem(500);
     width: 100%;
     padding: var(--mantine-spacing-md);
+
+    .form {
+      display: flex;
+      flex-direction: column;
+      gap: var(--mantine-spacing-md);
+    }
 
     .title {
       display: flex;

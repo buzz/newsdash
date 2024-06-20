@@ -1,18 +1,19 @@
 import { z } from 'zod'
 
+import { webUrlSchema } from './common.js'
 import { boxSchema, panelSchema, storeTabSchema } from './layout.js'
 
 const feedInfoSchema = z.object({
   title: z.string(),
   description: z.optional(z.string()),
-  link: z.optional(z.string().url()),
+  link: z.optional(webUrlSchema),
 })
 
 const feedItemSchema = z.object({
   id: z.string(),
   content: z.optional(z.string()),
   date: z.string().datetime(),
-  link: z.optional(z.string().url()),
+  link: z.optional(webUrlSchema),
   title: z.string(),
 })
 

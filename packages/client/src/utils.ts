@@ -1,3 +1,11 @@
-const getRandomHue = () => Math.floor(Math.random() * 360)
+import type { z } from 'zod'
 
-export { getRandomHue }
+function getRandomHue() {
+  return Math.floor(Math.random() * 360)
+}
+
+function zodErrorToString<T>(error: z.ZodError<T>) {
+  return error.issues.at(0)?.message ?? 'Unknown error'
+}
+
+export { getRandomHue, zodErrorToString }

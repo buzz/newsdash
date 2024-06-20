@@ -1,5 +1,7 @@
 import { z } from 'zod'
 
+import { webUrlSchema } from './common.js'
+
 const dockModeSchema = z.union([
   z.literal('horizontal'),
   z.literal('vertical'),
@@ -39,7 +41,7 @@ const customTabFields = z.object({
   error: z.optional(z.string()),
   hue: z.number().min(0).max(360),
   lastFetched: z.number().default(0),
-  link: z.optional(z.string().url()),
+  link: z.optional(webUrlSchema),
   status: z
     .union([
       z.literal('edit'),
@@ -50,7 +52,7 @@ const customTabFields = z.object({
     ])
     .default('loaded'),
   title: z.optional(z.string()),
-  url: z.string().url(),
+  url: webUrlSchema,
 })
 
 const storeTabSchema = customTabFields.extend({

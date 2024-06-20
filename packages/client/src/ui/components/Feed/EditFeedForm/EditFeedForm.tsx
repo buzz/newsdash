@@ -25,7 +25,7 @@ function EditFeedForm({ mode, tab }: EditFeedFormProps) {
           <FeedIcon className={classes.feedIcon} tab={tab} />
           {mode === 'new' ? 'Add Feed' : 'Feed Settings'}
         </Title>
-        <form onSubmit={onSubmit}>
+        <form className={classes.form} onSubmit={onSubmit}>
           <UrlInput form={form} />
           <TitleInput
             disabled={form.getValues().customTitle === ''}
@@ -34,7 +34,7 @@ function EditFeedForm({ mode, tab }: EditFeedFormProps) {
           />
           <DisplayInput form={form} />
           <ColorInput disabled={!tabColors} form={form} />
-          <Divider my="md" />
+          <Divider />
           <ButtonGroup mode={mode} onCancel={onCancel} onDelete={onDelete} />
         </form>
       </Paper>

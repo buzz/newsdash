@@ -1,12 +1,4 @@
-import {
-  CheckIcon,
-  Combobox,
-  Group,
-  InputBase,
-  InputLabel,
-  InputWrapper,
-  useCombobox,
-} from '@mantine/core'
+import { CheckIcon, Combobox, Group, InputBase, useCombobox } from '@mantine/core'
 import {
   IconBaselineDensityMedium,
   IconBaselineDensitySmall,
@@ -17,6 +9,7 @@ import type { ReactNode } from 'react'
 
 import { type Display, layout } from '@newsdash/schema'
 
+import InputWrapper from '#ui/components/common/InputWrapper/InputWrapper'
 import type { InputProps } from '#ui/components/Feed/EditFeedForm/types'
 
 import classes from '#ui/components/Feed/EditFeedForm/EditFeedForm.module.css'
@@ -110,8 +103,7 @@ interface DisplayComboboxProps {
 
 function DisplayInput({ form }: InputProps) {
   return (
-    <InputWrapper mt="sm">
-      <InputLabel>Display</InputLabel>
+    <InputWrapper label="Display">
       <DisplayCombobox
         onChange={(value) => {
           form.setFieldValue('display', value)

@@ -6,7 +6,7 @@ import type { Settings } from '#types/types'
 const initialState: Settings = {
   tabColors: true,
   saturation: 50,
-  lightness: 50,
+  lightness: 0,
   fetchInterval: 10,
   itemsToKeep: 100,
 }
