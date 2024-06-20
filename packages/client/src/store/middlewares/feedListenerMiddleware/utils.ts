@@ -1,3 +1,5 @@
+import type { Tab } from '@newsdash/schema'
+
 import { extractQueryError } from '#store/middlewares/utils'
 import feedApi from '#store/slices/api/feedApi'
 import { addFetchedFeedItems } from '#store/slices/feedItems/actions'
@@ -5,9 +7,8 @@ import { selectByTabId } from '#store/slices/feedItems/selectors'
 import { editTab } from '#store/slices/layout/entities/tabs/actions'
 import { showNotification } from '#store/slices/notifications/actions'
 import type { AppListenerEffectAPI } from '#store/middlewares/types'
-import type { CustomTab } from '#types/layout'
 
-async function fetchFeed(listenerApi: AppListenerEffectAPI, tab: CustomTab) {
+async function fetchFeed(listenerApi: AppListenerEffectAPI, tab: Tab) {
   listenerApi.dispatch(editTab({ id: tab.id, changes: { status: 'loading' } }))
 
   const fetchAction = feedApi.endpoints.fetchFeed.initiate(tab.url, { forceRefetch: true })
@@ -41,7 +42,7 @@ async function fetchFeed(listenerApi: AppListenerEffectAPI, tab: CustomTab) {
   const { items, ...feedInfo } = data
 
   // Update feed
-  const tabUpdate: Partial<CustomTab> = {
+  const tabUpdate: Partial<Tab> = {
     ...feedInfo,
     error: undefined,
     lastFetched: Date.now(),

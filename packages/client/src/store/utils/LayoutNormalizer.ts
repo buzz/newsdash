@@ -1,10 +1,9 @@
 import type { BoxData, LayoutBase, PanelData, TabData } from 'rc-dock'
 
 import { layout } from '@newsdash/schema'
-import type { Box, Panel } from '@newsdash/schema'
+import type { Box, Panel, Tab } from '@newsdash/schema'
 
 import { isBoxData, isPanelData } from '#types/typeGuards'
-import type { CustomTab } from '#types/layout'
 
 /**
  * Transform layout to be saved in store.
@@ -14,10 +13,10 @@ class LayoutNormalizer {
   private boxIds: string[]
   private panelIds: string[]
   private tabIds: string[]
-  private tabs: CustomTab[]
+  private tabs: Tab[]
   private entities: NormalizedEntities = { boxes: [], panels: [], tabs: [] }
 
-  constructor(layout: LayoutBase, boxIds: string[], panelIds: string[], tabs: CustomTab[]) {
+  constructor(layout: LayoutBase, boxIds: string[], panelIds: string[], tabs: Tab[]) {
     this.layout = layout
     this.tabs = tabs
 
@@ -111,7 +110,7 @@ class LayoutNormalizer {
 interface NormalizedEntities {
   boxes: Box[]
   panels: Panel[]
-  tabs: CustomTab[]
+  tabs: Tab[]
 }
 
 interface NormalizedLayoutState {

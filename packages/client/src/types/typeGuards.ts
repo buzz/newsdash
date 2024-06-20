@@ -1,6 +1,7 @@
 import type { MantineColorScheme } from '@mantine/core'
 import type { BoxData, PanelData } from 'rc-dock'
 
+import type { TabEditMode } from './layout'
 import type { ArbitraryObject, Notification, NotificationShow } from './types'
 
 function isArbitraryObject(obj: unknown): obj is ArbitraryObject {
@@ -23,4 +24,15 @@ function isNotificationShow(notif: Notification): notif is NotificationShow {
   return notif.command === 'show'
 }
 
-export { isArbitraryObject, isBoxData, isColorScheme, isNotificationShow, isPanelData }
+function isTabEditMode(mode: string): mode is TabEditMode {
+  return mode === 'edit' || mode === 'new'
+}
+
+export {
+  isArbitraryObject,
+  isBoxData,
+  isColorScheme,
+  isNotificationShow,
+  isPanelData,
+  isTabEditMode,
+}

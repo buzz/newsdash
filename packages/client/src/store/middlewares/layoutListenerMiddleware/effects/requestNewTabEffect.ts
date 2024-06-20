@@ -30,6 +30,7 @@ function requestNewTabEffect(startListening: AppStartListening) {
       listenerApi.dispatch(
         addTab({
           id: tabId,
+          display: 'detailed',
           lastFetched: 0,
           order,
           parentId: panelId,

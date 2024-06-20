@@ -16,9 +16,9 @@ function ButtonGroup({ mode, onCancel, onDelete }: ButtonGroupProps) {
       flex="1"
       fullWidth={mode === 'edit'}
       type="submit"
-      leftSection={mode === 'create' ? <IconPlus /> : <IconDeviceFloppy />}
+      leftSection={mode === 'new' ? <IconPlus /> : <IconDeviceFloppy />}
     >
-      {mode === 'create' ? 'Create' : 'Save'}
+      {mode === 'new' ? 'Create' : 'Save'}
     </Button>
   )
 
@@ -29,7 +29,7 @@ function ButtonGroup({ mode, onCancel, onDelete }: ButtonGroupProps) {
           Cancel
         </Button>
         {deleteButton}
-        {mode === 'create' ? confirmButton : null}
+        {mode === 'new' ? confirmButton : null}
       </Group>
       {mode === 'edit' ? confirmButton : null}
     </>

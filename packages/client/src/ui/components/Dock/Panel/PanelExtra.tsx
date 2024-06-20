@@ -4,6 +4,7 @@ import type { PanelData } from 'rc-dock'
 import { requestNewTab } from '#store/slices/layout/actions'
 import { editTab, refreshTab } from '#store/slices/layout/entities/tabs/actions'
 import tabsSelectors from '#store/slices/layout/entities/tabs/selectors'
+import { isTabEditMode } from '#types/typeGuards'
 import { useDispatch, useSelector } from '#ui/hooks/store'
 import type { RootState } from '#store/types'
 
@@ -15,7 +16,7 @@ function PanelExtra({ panel }: PanelExtraProps) {
   const tab = useSelector(selectTab)
 
   const refreshDisabled = tab.status === 'loading'
-  const editDisabled = tab.editMode !== undefined
+  const editDisabled = isTabEditMode(tab.status)
 
   return (
     <>
@@ -40,7 +41,7 @@ function PanelExtra({ panel }: PanelExtraProps) {
         disabled={editDisabled}
         label="Feed Settings"
         onClick={() => {
-          dispatch(editTab({ id: tab.id, changes: { editMode: 'edit' } }))
+          dispatch(editTab({ id: tab.id, changes: { status: 'edit' } }))
         }}
       >
         <IconSettings />

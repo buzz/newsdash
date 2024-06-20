@@ -1,12 +1,8 @@
 import type { BoxData, PanelData, TabData } from 'rc-dock'
 
-import type { CustomTabFields, Tab } from '@newsdash/schema'
+import type { CustomTabFields } from '@newsdash/schema'
 
-type TabEditMode = 'create' | 'edit' | undefined
-
-interface EditModeMixin {
-  editMode?: TabEditMode
-}
+type TabEditMode = 'edit' | 'new'
 
 interface Orderable {
   order: number
@@ -24,12 +20,7 @@ interface CustomPanelTabs {
 
 type CustomPanelData = Omit<PanelData, 'tabs'> & CustomPanelTabs & Orderable
 
-type CustomTab = Tab & EditModeMixin
-
-type CustomTabData = Omit<TabData, 'title' | 'content'> &
-  CustomTabFields &
-  EditModeMixin &
-  Orderable
+type CustomTabData = Omit<TabData, 'title' | 'content'> & CustomTabFields & Orderable
 
 interface DenormalizedLayout {
   dockbox: CustomBoxData
@@ -38,7 +29,6 @@ interface DenormalizedLayout {
 export type {
   CustomBoxData,
   CustomPanelData,
-  CustomTab,
   CustomTabData,
   DenormalizedLayout,
   Orderable,

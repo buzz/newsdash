@@ -61,7 +61,7 @@ function EditFeedForm({ tab, mode }: EditFeedFormProps) {
   }, [mode, origHue, tab.hue])
 
   const initialValues: EditFeedFormValues =
-    mode === 'create'
+    mode === 'new'
       ? {
           customTitle: '',
           display: 'detailed',
@@ -78,7 +78,6 @@ function EditFeedForm({ tab, mode }: EditFeedFormProps) {
   const form = useForm<EditFeedFormValues>({
     initialValues,
     validate: {
-      // TODO: use zod
       url: isValidUrl,
     },
   })
@@ -86,9 +85,9 @@ function EditFeedForm({ tab, mode }: EditFeedFormProps) {
   const onCancel = () => {
     if (tab.id) {
       dispatch(
-        mode === 'create'
+        mode === 'new'
           ? removeTab(tab.id)
-          : editTab({ id: tab.id, changes: { editMode: undefined, hue: origHue } })
+          : editTab({ id: tab.id, changes: { status: 'loaded', hue: origHue } })
       )
     }
   }
@@ -101,7 +100,7 @@ function EditFeedForm({ tab, mode }: EditFeedFormProps) {
 
   const onSubmit = form.onSubmit((values) => {
     if (tab.id) {
-      dispatch(editTab({ id: tab.id, changes: { ...values, editMode: undefined } }))
+      dispatch(editTab({ id: tab.id, changes: { ...values, status: 'loaded' } }))
     }
   })
 
@@ -141,7 +140,7 @@ function EditFeedForm({ tab, mode }: EditFeedFormProps) {
       <Paper className={classes.content}>
         <Title className={classes.title} order={2}>
           <FeedIcon className={classes.feedIcon} tab={tab} />
-          {mode === 'create' ? 'Add Feed' : 'Feed Settings'}
+          {mode === 'new' ? 'Add Feed' : 'Feed Settings'}
         </Title>
         <form onSubmit={onSubmit}>
           <TextInput label="URL" required {...form.getInputProps('url')} />

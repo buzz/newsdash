@@ -1,9 +1,8 @@
 import type { EntityState } from '@reduxjs/toolkit'
 
-import type { Box, Panel } from '@newsdash/schema'
+import type { Box, Panel, Tab } from '@newsdash/schema'
 
 import createSlice from '#store/createSlice'
-import type { CustomTab } from '#types/layout'
 
 import { restoreLayout, updateLayout } from './actions'
 import { boxesInitialState } from './entities/boxes/boxesEntityAdapter'
@@ -14,7 +13,7 @@ import { restoreLayoutReducer, updateLayoutReducer } from './extraReducers'
 interface LayoutState {
   boxes: EntityState<Box, string>
   panels: EntityState<Panel, string>
-  tabs: EntityState<CustomTab, string>
+  tabs: EntityState<Tab, string>
 }
 
 const initialState: LayoutState = {

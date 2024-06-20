@@ -1,4 +1,4 @@
-import type { Box, Panel } from '@newsdash/schema'
+import type { Box, Panel, Tab } from '@newsdash/schema'
 
 import { TAB_MIN_HEIGHT, TAB_MIN_WIDTH } from '#constants'
 import { selectChildBoxes, selectDockbox } from '#store/slices/layout/entities/boxes/selectors'
@@ -8,7 +8,6 @@ import type { RootState } from '#store/types'
 import type {
   CustomBoxData,
   CustomPanelData,
-  CustomTab,
   CustomTabData,
   DenormalizedLayout,
 } from '#types/layout'
@@ -81,7 +80,7 @@ class LayoutDenormalizer {
   /**
    * Denormalize tab by removing `parentId`, `order`.
    */
-  private denormalizeTab(tab: CustomTab): CustomTabData {
+  private denormalizeTab(tab: Tab): CustomTabData {
     return {
       ...tab,
       minHeight: TAB_MIN_HEIGHT,

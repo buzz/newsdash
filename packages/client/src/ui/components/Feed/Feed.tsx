@@ -4,6 +4,8 @@ import AutoSizer from 'react-virtualized-auto-sizer'
 import type { Display } from '@newsdash/schema'
 
 import { selectByTabId } from '#store/slices/feedItems/selectors'
+import tabsSelectors from '#store/slices/layout/entities/tabs/selectors'
+import { isTabEditMode } from '#types/typeGuards'
 import { useSelector } from '#ui/hooks/store'
 import type { RootState } from '#store/types'
 import type { FeedItem as FeedItem } from '#types/feed'
@@ -36,13 +38,20 @@ const DISPLAY_VALUES: Record<Display, DisplayValues> = {
   },
 }
 
-function Feed({ tab }: FeedProps) {
-  const selector = (state: RootState) => selectByTabId(state, tab.id ?? '')
-  const feedItems = useSelector(selector)
+function Feed({ tab: { id: tabId } }: FeedProps) {
+  if (tabId === undefined) {
+    throw new Error('Expected tabId')
+  }
 
-  const overlay = tab.editMode ? (
+  const tabSelector = (state: RootState) => tabsSelectors.selectById(state, tabId)
+  const tab = useSelector(tabSelector)
+
+  const feedItemsSelector = (state: RootState) => selectByTabId(state, tab.id)
+  const feedItems = useSelector(feedItemsSelector)
+
+  const overlay = isTabEditMode(tab.status) ? (
     <Overlay blur={2}>
-      <EditFeedForm tab={tab} mode={tab.editMode} />
+      <EditFeedForm tab={tab} mode={tab.status} />
     </Overlay>
   ) : null
 

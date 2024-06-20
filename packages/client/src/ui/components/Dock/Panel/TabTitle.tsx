@@ -1,5 +1,6 @@
+import type { Tab } from '@newsdash/schema'
+
 import Tooltip from '#ui/components/common/Tooltip'
-import type { CustomTab } from '#types/layout'
 
 import TabIcon from './TabIcon/TabIcon'
 
@@ -25,7 +26,7 @@ function TabTitle({ tab }: TabProps) {
 }
 
 interface TabProps {
-  tab: CustomTab
+  tab: Tab
 }
 
 export default TabTitle

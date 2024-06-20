@@ -1,14 +1,14 @@
 import type { Update } from '@reduxjs/toolkit'
 
+import type { Tab } from '@newsdash/schema'
+
 import { getRandomHue } from '#utils'
-import type { CustomTab } from '#types/layout'
 
 import tabsSlice from './tabsSlice'
 
 /** Add new tab */
-const addTab = tabsSlice.createAction('addTab', (tab: Omit<CustomTab, 'hue'>) => ({
+const addTab = tabsSlice.createAction('addTab', (tab: Omit<Tab, 'hue'>) => ({
   payload: {
-    editMode: 'create' as const,
     group: 'news',
     hue: getRandomHue(),
     ...tab,
@@ -19,7 +19,7 @@ const addTab = tabsSlice.createAction('addTab', (tab: Omit<CustomTab, 'hue'>) =>
 const removeTab = tabsSlice.createAction<string>('removeTab')
 
 /** Edit tab */
-const editTab = tabsSlice.createAction<Update<CustomTab, string>>('editTab')
+const editTab = tabsSlice.createAction<Update<Tab, string>>('editTab')
 
 /** Refresh tab */
 const refreshTab = tabsSlice.createAction<string>('refreshTab')

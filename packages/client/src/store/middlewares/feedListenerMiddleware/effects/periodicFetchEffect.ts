@@ -2,6 +2,7 @@ import fetchFeed from '#store/middlewares/feedListenerMiddleware/utils'
 import { layoutRestored } from '#store/slices/layout/actions'
 import tabsSelectors from '#store/slices/layout/entities/tabs/selectors'
 import selectSettings from '#store/slices/settings/selectors'
+import { isTabEditMode } from '#types/typeGuards'
 import type { AppStartListening } from '#store/middlewares/types'
 
 const CHECK_INTERVAL = 8000
@@ -21,7 +22,7 @@ function periodicFetchEffect(startListening: AppStartListening) {
         await Promise.all(
           tabsSelectors
             .selectAll(state)
-            .filter((tab) => tab.editMode === undefined && now - tab.lastFetched > intervalMillis)
+            .filter((tab) => !isTabEditMode(tab.status) && now - tab.lastFetched > intervalMillis)
             .map((tab) => fetchFeed(listenerApi, tab))
         )
 
