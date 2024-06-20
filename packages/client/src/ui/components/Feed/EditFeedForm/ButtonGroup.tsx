@@ -15,8 +15,9 @@ function ButtonGroup({ mode, onCancel, onDelete }: ButtonGroupProps) {
       color="green"
       flex="1"
       fullWidth={mode === 'edit'}
-      type="submit"
       leftSection={mode === 'new' ? <IconPlus /> : <IconDeviceFloppy />}
+      mt={mode === 'edit' ? 'md' : undefined}
+      type="submit"
     >
       {mode === 'new' ? 'Create' : 'Save'}
     </Button>
@@ -24,7 +25,7 @@ function ButtonGroup({ mode, onCancel, onDelete }: ButtonGroupProps) {
 
   return (
     <>
-      <Group mt="xl" mb="md" justify="center" wrap="nowrap">
+      <Group justify="center" wrap="nowrap">
         <Button flex="1" leftSection={<IconArrowBack />} onClick={onCancel}>
           Cancel
         </Button>

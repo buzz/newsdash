@@ -2,6 +2,7 @@ import {
   ActionIcon,
   Box,
   Button,
+  Divider,
   Group,
   HueSlider,
   InputLabel,
@@ -129,7 +130,6 @@ function EditFeedForm({ tab, mode }: EditFeedFormProps) {
             onHueChange(tinycolor(color).toHsl().h)
           }}
           size="xs"
-          style={{ backgroundColor: color }}
         />
       </Tooltip>
     )
@@ -137,7 +137,7 @@ function EditFeedForm({ tab, mode }: EditFeedFormProps) {
 
   return (
     <Box className={classes.formWrapper}>
-      <Paper className={classes.content}>
+      <Paper className={classes.content} radius="md">
         <Title className={classes.title} order={2}>
           <FeedIcon className={classes.feedIcon} tab={tab} />
           {mode === 'new' ? 'Add Feed' : 'Feed Settings'}
@@ -197,6 +197,7 @@ function EditFeedForm({ tab, mode }: EditFeedFormProps) {
             </Group>
             <Button.Group mt="xs">{swatches}</Button.Group>
           </Stack>
+          <Divider my="md" />
           <ButtonGroup mode={mode} onCancel={onCancel} onDelete={onDelete} />
         </form>
       </Paper>
