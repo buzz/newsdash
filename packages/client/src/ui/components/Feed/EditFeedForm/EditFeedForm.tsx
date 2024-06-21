@@ -32,7 +32,9 @@ function EditFeedForm({ mode, tab }: EditFeedFormProps) {
             form={form}
             placeholder={tab.title}
           />
+          <Divider label="Display" />
           <DisplayInput form={form} />
+          <Divider label="Color" />
           <ColorInput disabled={!tabColors} form={form} />
           <Divider />
           <ButtonGroup mode={mode} onCancel={onCancel} onDelete={onDelete} />

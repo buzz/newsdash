@@ -21,7 +21,9 @@ interface InputProps {
 interface EditFeedFormValues {
   customTitle: string
   display: Display
+  gridView: boolean
   hue: number
+  minColumnWidth: number
   url: string
 }
 

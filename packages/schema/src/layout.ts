@@ -58,8 +58,10 @@ const customTabFields = z.object({
 const storeTabSchema = customTabFields.extend({
   id: z.string(),
   description: z.optional(z.string()),
+  gridView: z.boolean().default(false),
   group: z.optional(z.string()),
   language: z.optional(z.string()),
+  minColumnWidth: z.number().default(600),
   order: orderSchema,
   parentId: parentIdSchema,
 })

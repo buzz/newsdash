@@ -1,4 +1,4 @@
-import { CheckIcon, Combobox, Group, InputBase, useCombobox } from '@mantine/core'
+import { CheckIcon, Combobox, Group, InputBase, Slider, Switch, useCombobox } from '@mantine/core'
 import {
   IconBaselineDensityMedium,
   IconBaselineDensitySmall,
@@ -9,6 +9,7 @@ import type { ReactNode } from 'react'
 
 import { type Display, layout } from '@newsdash/schema'
 
+import { MIN_COLUMN_WIDTH_MAX, MIN_COLUMN_WIDTH_MIN } from '#constants'
 import InputWrapper from '#ui/components/common/InputWrapper/InputWrapper'
 import type { InputProps } from '#ui/components/Feed/EditFeedForm/types'
 
@@ -101,16 +102,54 @@ interface DisplayComboboxProps {
   value: Display
 }
 
+const minColumnWidthMid = (MIN_COLUMN_WIDTH_MIN + MIN_COLUMN_WIDTH_MAX) / 2
+
 function DisplayInput({ form }: InputProps) {
   return (
-    <InputWrapper label="Display">
-      <DisplayCombobox
-        onChange={(value) => {
-          form.setFieldValue('display', value)
-        }}
-        value={form.getValues().display}
+    <>
+      <InputWrapper label="Display">
+        <DisplayCombobox
+          onChange={(value) => {
+            form.setFieldValue('display', value)
+          }}
+          value={form.getValues().display}
+        />
+      </InputWrapper>
+      <InputWrapper
+        help="Displays feed items in a grid."
+        label="Enable Grid View"
+        rightSection={
+          <Switch
+            checked={form.values.gridView}
+            onLabel="ON"
+            offLabel="OFF"
+            onChange={(event) => {
+              form.setFieldValue('gridView', event.currentTarget.checked)
+            }}
+            size="lg"
+          />
+        }
       />
-    </InputWrapper>
+      <InputWrapper help="." label="Minimum Column Width" rightSection={form.values.minColumnWidth}>
+        <Slider
+          disabled={!form.values.gridView}
+          marks={[
+            { value: MIN_COLUMN_WIDTH_MIN, label: MIN_COLUMN_WIDTH_MIN },
+            { value: minColumnWidthMid, label: minColumnWidthMid },
+            { value: MIN_COLUMN_WIDTH_MAX, label: MIN_COLUMN_WIDTH_MAX },
+          ]}
+          mb="lg"
+          min={MIN_COLUMN_WIDTH_MIN}
+          max={MIN_COLUMN_WIDTH_MAX}
+          step={10}
+          label={null}
+          onChange={(value) => {
+            form.setFieldValue('minColumnWidth', value)
+          }}
+          value={form.values.minColumnWidth}
+        />
+      </InputWrapper>
+    </>
   )
 }
 

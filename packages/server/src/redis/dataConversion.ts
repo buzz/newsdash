@@ -1,8 +1,25 @@
 import { z } from 'zod'
 
-import type { RedisHashResult } from './redis.js'
+import type { RedisHashElementType, RedisHashResult } from './redis.js'
 
 const NULL_SYMBOL = '__NULL__'
+
+/** Check if `thing` is of specific type (unwrapping optional/default) */
+function isZodType(thing: unknown, zodType: 'boolean' | 'number') {
+  if (thing instanceof (zodType == 'boolean' ? z.ZodBoolean : z.ZodNumber)) {
+    return true
+  }
+
+  if (thing instanceof z.ZodOptional && isZodType(thing.unwrap(), zodType)) {
+    return true
+  }
+
+  if (thing instanceof z.ZodDefault && isZodType(thing.removeDefault(), zodType)) {
+    return true
+  }
+
+  return false
+}
 
 /** Get list of schema fields */
 function getSchemaFields(schema: z.SomeZodObject) {
@@ -10,7 +27,7 @@ function getSchemaFields(schema: z.SomeZodObject) {
 }
 
 // { foo: '1', bar: '2' } => ['foo', '1', 'bar', '2']
-function objToHmData(obj: Record<string, string | number | null | undefined>, hmFields: string[]) {
+function objToHmData(obj: Record<string, RedisHashElementType | undefined>, hmFields: string[]) {
   const result = []
   for (const hmField of hmFields) {
     const value = obj[hmField]
@@ -41,15 +58,22 @@ function parseRedisHash(data: RedisHashResult, schema: z.SomeZodObject): Record<
     // Null values are encoded using `NULL_SYMBOL`
     if (value === NULL_SYMBOL) {
       result[fieldName] = null
-      continue
     }
 
-    const isNumberType =
-      zodType instanceof z.ZodNumber ||
-      (zodType instanceof z.ZodOptional && zodType.unwrap() instanceof z.ZodNumber) ||
-      (zodType instanceof z.ZodDefault && zodType.removeDefault() instanceof z.ZodNumber)
+    // Parse boolean
+    else if (isZodType(zodType, 'boolean')) {
+      result[fieldName] = zodType.parse(value === 'true')
+    }
 
-    result[fieldName] = zodType.parse(isNumberType ? Number.parseInt(value, 10) : value)
+    // Parse integer
+    else if (isZodType(zodType, 'number')) {
+      result[fieldName] = zodType.parse(Number.parseInt(value, 10))
+    }
+
+    // Parse string
+    else {
+      result[fieldName] = zodType.parse(value)
+    }
   }
 
   return result

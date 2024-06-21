@@ -1,8 +1,10 @@
 import { useForm } from '@mantine/form'
+import { throttle } from 'lodash-es'
 import { useEffect, useState } from 'react'
 
 import { type Tab, webUrlSchema } from '@newsdash/schema'
 
+import { MIN_COLUMN_WIDTH_DEFAULT } from '#constants'
 import { editTab, removeTab } from '#store/slices/layout/entities/tabs/actions'
 import { useDispatch } from '#ui/hooks/store'
 import { zodErrorToString } from '#utils'
@@ -15,13 +17,17 @@ function getInitialFormValues(mode: TabEditMode, tab: Tab): EditFeedFormValues {
     ? {
         customTitle: '',
         display: 'detailed',
+        gridView: false,
         hue: tab.hue,
+        minColumnWidth: MIN_COLUMN_WIDTH_DEFAULT,
         url: '',
       }
     : {
         customTitle: tab.customTitle,
         display: tab.display,
+        gridView: tab.gridView,
         hue: tab.hue,
+        minColumnWidth: tab.minColumnWidth,
         url: tab.url,
       }
 }
@@ -42,22 +48,28 @@ function useEditForm(mode: TabEditMode, tab: Tab) {
     }
   }, [mode, tab, tabBackup])
 
-  const form = useForm<EditFeedFormValues>({
-    initialValues: getInitialFormValues(mode, tab),
-    validate: { url: validateUrl },
-    // Live update tab
-    onValuesChange: (values) => {
+  const throttledUpdateFeed = throttle(
+    (values: EditFeedFormValues) =>
       dispatch(
         editTab({
           id: tab.id,
           changes: {
             customTitle: values.customTitle,
             display: values.display,
+            gridView: values.gridView,
             hue: values.hue,
+            minColumnWidth: values.minColumnWidth,
           },
         })
-      )
-    },
+      ),
+    250
+  )
+
+  const form = useForm<EditFeedFormValues>({
+    initialValues: getInitialFormValues(mode, tab),
+    validate: { url: validateUrl },
+    // Live update tab
+    onValuesChange: throttledUpdateFeed,
   })
 
   const onCancel = () => {

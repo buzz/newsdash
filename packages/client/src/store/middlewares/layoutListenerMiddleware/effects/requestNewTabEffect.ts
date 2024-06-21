@@ -1,5 +1,6 @@
 import { nanoid } from 'nanoid'
 
+import { MIN_COLUMN_WIDTH_DEFAULT } from '#constants'
 import { requestNewTab } from '#store/slices/layout/actions'
 import { updatePanel } from '#store/slices/layout/entities/panels/actions'
 import { selectPanelForTab } from '#store/slices/layout/entities/panels/selectors'
@@ -32,6 +33,8 @@ function requestNewTabEffect(startListening: AppStartListening) {
           id: tabId,
           customTitle: '',
           display: 'detailed',
+          gridView: false,
+          minColumnWidth: MIN_COLUMN_WIDTH_DEFAULT,
           lastFetched: 0,
           order,
           parentId: panelId,

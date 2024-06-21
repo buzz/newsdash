@@ -18,8 +18,6 @@ import WindowedScroller from './WindowedScroller'
 
 import classes from './Feed.module.css'
 
-const DEFAULT_MIN_WIDTH = 800
-
 const DISPLAY_VALUES: Record<Display, DisplayValues> = {
   condensedList: {
     height: 24,
@@ -31,11 +29,9 @@ const DISPLAY_VALUES: Record<Display, DisplayValues> = {
   },
   detailed: {
     height: 92,
-    minWidth: 500,
   },
   tiles: {
     height: 201,
-    minWidth: 200,
   },
 }
 
@@ -86,7 +82,7 @@ function Feed({ tab: { id: tabId } }: FeedProps) {
     )
   }
 
-  const { height: itemHeight, minWidth, overscanCount } = DISPLAY_VALUES[tab.display]
+  const { height: itemHeight, overscanCount } = DISPLAY_VALUES[tab.display]
 
   // TODO: useElementSize instead of AutoSizer?
 
@@ -99,7 +95,7 @@ function Feed({ tab: { id: tabId } }: FeedProps) {
             language={tab.language}
             height={height}
             width={width}
-            minWidth={minWidth ?? DEFAULT_MIN_WIDTH}
+            minWidth={tab.multiColumn ? tab.minColumnWidth : 99_999}
             rowHeight={itemHeight}
             items={feedItems}
             overscanCount={overscanCount ?? 1}
@@ -113,7 +109,6 @@ function Feed({ tab: { id: tabId } }: FeedProps) {
 
 interface DisplayValues {
   height: number
-  minWidth?: number
   overscanCount?: number
 }
 
