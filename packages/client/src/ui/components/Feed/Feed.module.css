@@ -14,7 +14,7 @@
   width: 100% !important;
 
   .list {
-    /* Avoid flickering of native scrollbars */
+    /* Hide native scrollbars */
     scrollbar-width: none !important;
 
     mask-image: linear-gradient(
@@ -35,26 +35,5 @@
     &.atBottom {
       --scroll-fade-height-bottom: 0;
     }
-  }
-
-  .osTheme {
-    --os-handle-bg: light-dark(
-      alpha(var(--mantine-color-black), 0.25),
-      alpha(var(--mantine-color-white), 0.25)
-    );
-    --os-handle-bg-hover: light-dark(
-      alpha(var(--mantine-color-black), 0.3),
-      alpha(var(--mantine-color-white), 0.3)
-    );
-    --os-handle-bg-active: light-dark(
-      alpha(var(--mantine-color-black), 0.3),
-      alpha(var(--mantine-color-white), 0.3)
-    );
-    --os-size: rem(12);
-    --os-padding-perpendicular: rem(2);
-    --os-padding-axis: rem(2);
-    --os-handle-interactive-area-offset: rem(4);
-    --os-handle-border-radius: var(--mantine-radius-sm);
-    --os-handle-min-size: rem(33);
   }
 }
