@@ -1,3 +1,5 @@
+import 'simplebar-react/dist/simplebar.min.css'
+
 import { MantineProvider } from '@mantine/core'
 import { Provider as ReduxProvider } from 'react-redux'
 

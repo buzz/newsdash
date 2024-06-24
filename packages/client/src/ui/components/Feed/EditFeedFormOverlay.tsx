@@ -7,7 +7,7 @@ import { isTabEditMode } from '#types/typeGuards'
 
 import EditFeedForm from './EditFeedForm/EditFeedForm'
 
-function FeedSettingsOverlay({ tab }: FeedSettingsOverlayProps) {
+function EditFeedFormOverlay({ tab }: EditFeedFormOverlayProps) {
   const {
     other: { transition },
   } = useMantineTheme()
@@ -30,8 +30,8 @@ function FeedSettingsOverlay({ tab }: FeedSettingsOverlayProps) {
   )
 }
 
-interface FeedSettingsOverlayProps {
+interface EditFeedFormOverlayProps {
   tab: Tab
 }
 
-export default FeedSettingsOverlay
+export default EditFeedFormOverlay

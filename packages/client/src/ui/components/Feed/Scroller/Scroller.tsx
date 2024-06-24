@@ -1,6 +1,3 @@
-import 'simplebar-react/dist/simplebar.min.css'
-import './simplebar.css'
-
 import cx from 'clsx'
 import { useState } from 'react'
 import SimpleBarReact from 'simplebar-react'

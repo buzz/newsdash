@@ -23,3 +23,13 @@ html {
     transform: rotate(360deg);
   }
 }
+
+.simplebar-scrollbar {
+  &:before {
+    background-color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
+  }
+
+  &.simplebar-visible:before {
+    opacity: light-dark(0.4, 0.2);
+  }
+}

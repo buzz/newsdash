@@ -7,8 +7,8 @@ import { useSelector } from '#ui/hooks/store'
 import type { RootState } from '#store/types'
 import type { CustomTabData } from '#types/layout'
 
+import EditFeedFormOverlay from './EditFeedFormOverlay'
 import EmptyList from './EmptyList/EmptyList'
-import FeedSettingsOverlay from './FeedSettingsOverlay'
 import Scroller from './Scroller/Scroller'
 
 import classes from './Feed.module.css'
@@ -30,7 +30,7 @@ function Feed({ tab: { id: tabId } }: FeedProps) {
     return (
       <>
         <EmptyList tab={tab} />
-        <FeedSettingsOverlay tab={tab} />
+        <EditFeedFormOverlay tab={tab} />
       </>
     )
   }
@@ -47,7 +47,7 @@ function Feed({ tab: { id: tabId } }: FeedProps) {
         overscanCount={overscanCount ?? 1}
         tab={tab}
       />
-      <FeedSettingsOverlay tab={tab} />
+      <EditFeedFormOverlay tab={tab} />
     </div>
   )
 }
