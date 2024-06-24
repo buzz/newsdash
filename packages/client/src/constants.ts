@@ -1,3 +1,7 @@
+import type { Display } from '@newsdash/schema'
+
+import type { DisplayParams } from '#types/types'
+
 const DEFAULT_BLUR = 2
 
 const FETCH_TIMEOUT = 5000
@@ -22,8 +26,26 @@ const MIN_COLUMN_WIDTH_DEFAULT = 300
 const MIN_COLUMN_WIDTH_MIN = 100
 const MIN_COLUMN_WIDTH_MAX = 1000
 
+const DISPLAY_PARAMS: Record<Display, DisplayParams> = {
+  condensedList: {
+    height: 24,
+    overscanCount: 8,
+  },
+  list: {
+    height: 36,
+    overscanCount: 5,
+  },
+  detailed: {
+    height: 92,
+  },
+  tiles: {
+    height: 201,
+  },
+}
+
 export {
   DEFAULT_BLUR,
+  DISPLAY_PARAMS,
   DOCKBOX_ID,
   FETCH_INTERVAL_MAX,
   FETCH_INTERVAL_MIN,

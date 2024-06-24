@@ -1,4 +1,4 @@
-import type { FeedItemComponentProps } from '#ui/components/Feed/FeedItemRow/types'
+import type { FeedItemComponentProps } from '#ui/components/Feed/FeedItem/types'
 
 import classes from './TileFeedItem.module.css'
 

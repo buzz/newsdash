@@ -25,6 +25,8 @@ function persistLayoutEffect(startListening: AppStartListening) {
       const state = listenerApi.getState()
       const persistLayout = selectPersistLayout(state)
 
+      // TODO: don't persist while feed settings is open
+
       // Only persist if layout actually changed
       if (!isEqual(persistLayout, lastPersistLayout)) {
         await listenerApi.dispatch(layoutApi.endpoints.persistLayout.initiate(persistLayout))

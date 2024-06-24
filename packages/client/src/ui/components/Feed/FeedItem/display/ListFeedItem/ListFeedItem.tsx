@@ -1,5 +1,5 @@
-import TimeAgoBadge from '#ui/components/Feed/FeedItemRow/TimeAgoBadge/TimeAgoBadge'
-import type { FeedItemComponentProps } from '#ui/components/Feed/FeedItemRow/types'
+import TimeAgoBadge from '#ui/components/Feed/FeedItem/TimeAgoBadge/TimeAgoBadge'
+import type { FeedItemComponentProps } from '#ui/components/Feed/FeedItem/types'
 
 import classes from './ListFeedItem.module.css'
 

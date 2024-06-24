@@ -45,6 +45,11 @@ interface NotificationHide {
 
 type Notification = NotificationHide | NotificationShow
 
+interface DisplayParams {
+  height: number
+  overscanCount?: number
+}
+
 const localeSchema = z.string().refine(isLocale, { message: 'Not a valid locale' })
 
 const settingsSchema = z.object({
@@ -62,6 +67,7 @@ type Settings = z.infer<typeof settingsSchema>
 export type {
   AppState,
   ArbitraryObject,
+  DisplayParams,
   ModalName,
   Notification,
   NotificationHide,

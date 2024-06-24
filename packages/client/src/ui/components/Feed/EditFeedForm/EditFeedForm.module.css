@@ -7,7 +7,7 @@
 
   .content {
     --mantine-color-body: alpha(
-      light-dark(var(--mantine-color-body), var(--mantine-color-dark-7)),
+      light-dark(var(--mantine-color-white), var(--mantine-color-dark-7)),
       0.85
     );
 

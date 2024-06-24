@@ -81,7 +81,7 @@ interface PopoverProps {
   content?: string
   date: string
   imageUrl?: string
-  language: string
+  language?: string
   title: string
 }
 

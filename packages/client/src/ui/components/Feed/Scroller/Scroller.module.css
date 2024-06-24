@@ -1,0 +1,56 @@
+@property --scroll-fade-height-top {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 20px;
+}
+
+@property --scroll-fade-height-bottom {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 20px;
+}
+
+.fadeMask {
+  /* Hide native scrollbars */
+  scrollbar-width: none !important;
+
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgb(0 0 0 / 100%) var(--scroll-fade-height-top),
+    rgb(0 0 0 / 100%) calc(100% - var(--scroll-fade-height-bottom)),
+    transparent 100%
+  );
+  transition-duration: var(--transition-duration-extra-short);
+  transition-property: --scroll-fade-height-top, --scroll-fade-height-bottom;
+  transition-timing-function: var(--transition-timing-function);
+
+  &.top {
+    --scroll-fade-height-top: 0;
+  }
+
+  &.bottom {
+    --scroll-fade-height-bottom: 0;
+  }
+}
+
+.cell {
+  border-right: 1px solid var(--mantine-color-default-border);
+  border-bottom: 1px solid var(--mantine-color-default-border);
+
+  &.lastCol {
+    border-right: none;
+  }
+
+  &.lastRow {
+    border-bottom: none;
+  }
+}
+
+.row {
+  border-bottom: 1px solid var(--mantine-color-default-border);
+
+  &.last {
+    border-bottom: none;
+  }
+}
