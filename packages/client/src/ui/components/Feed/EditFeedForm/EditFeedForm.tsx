@@ -1,6 +1,7 @@
-import { Box, Divider, Paper, Title } from '@mantine/core'
+import { Box, Paper, Title } from '@mantine/core'
 
 import selectSettings from '#store/slices/settings/selectors'
+import Divider from '#ui/components/common/Divider/Divider'
 import FeedIcon from '#ui/components/Feed/FeedIcon/FeedIcon'
 import { useSelector } from '#ui/hooks/store'
 

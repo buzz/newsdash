@@ -1,9 +1,10 @@
-import { Divider, Stack } from '@mantine/core'
+import { Stack } from '@mantine/core'
 import { IconSettings } from '@tabler/icons-react'
 import { throttle } from 'lodash-es'
 
 import { updateSettings as updateSettingsAction } from '#store/slices/settings/actions'
 import selectSettings from '#store/slices/settings/selectors'
+import Divider from '#ui/components/common/Divider/Divider'
 import InputWrapper from '#ui/components/common/InputWrapper/InputWrapper'
 import ModalInner from '#ui/components/common/ModalInner'
 import { useDispatch, useSelector } from '#ui/hooks/store'

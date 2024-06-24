@@ -1,0 +1,8 @@
+.divider {
+  --divider-color: var(--mantine-color-default-border);
+
+  :global(.mantine-Divider-label) {
+    color: var(--mantine-color-text);
+    font-size: var(--mantine-font-size-md);
+  }
+}
