@@ -10,7 +10,7 @@ const FETCH_TIMEOUT = 10_000
 const USER_AGENT = `${PKG_NAME}/${PKG_VERSION} (${PKG_HOMEPAGE})`
 
 const MAX_CONTENT_LENGTH = 400
-const IMG_QUALITY = 90
+const IMG_QUALITY = 85
 const IMG_MAX_AGE = 5_184_000 // 60d
 
 export {

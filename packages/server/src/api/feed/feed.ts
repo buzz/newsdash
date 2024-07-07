@@ -23,7 +23,7 @@ const feedPlugin: FastifyPluginAsync = (app) => {
   })
 
   app.get('/image', async (request: UrlRequest, reply) => {
-    void reply.type('image/jpeg')
+    void reply.type('image/webp')
     void reply.header('Cache-Control', `public, max-age=${IMG_MAX_AGE}`)
     const url = parseUrl(request.query.url)
     const body = await fetchText(url)

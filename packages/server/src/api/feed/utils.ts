@@ -141,11 +141,11 @@ function downloadImageAndResizeStream(
   url: URL,
   width: number = IMG_WIDTH,
   height: number = IMG_HEIGHT,
-  format: 'jpeg' | 'png' = 'jpeg'
+  format: 'webp' | 'png' = 'webp'
 ) {
   try {
     let resizer = sharp().resize(width, height)
-    resizer = format === 'jpeg' ? resizer.jpeg({ quality: IMG_QUALITY }) : resizer.png()
+    resizer = format === 'webp' ? resizer.webp({ quality: IMG_QUALITY }) : resizer.png()
     return fetchStream(url).pipe(resizer)
   } catch (error: unknown) {
     if (isError(error)) {
