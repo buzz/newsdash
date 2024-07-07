@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-import { feedItemSchema as apiFeedItemSchema } from '@newsdash/schema'
+import { feedItemSchema as apiFeedItemSchema } from '@newsdash/common/schema'
 
 const feedItemSchema = apiFeedItemSchema.extend({
   tabId: z.string(),

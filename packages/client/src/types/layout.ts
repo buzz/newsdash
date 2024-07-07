@@ -1,6 +1,6 @@
 import type { BoxData, PanelData, TabData } from 'rc-dock'
 
-import type { CustomTabFields } from '@newsdash/schema'
+import type { CustomTabFields } from '@newsdash/common/schema'
 
 type TabEditMode = 'edit' | 'new'
 

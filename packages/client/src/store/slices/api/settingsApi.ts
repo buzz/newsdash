@@ -1,4 +1,4 @@
-import type { Result } from '@newsdash/schema'
+import type { Result } from '@newsdash/common/schema'
 
 import type { Settings } from '#types/types'
 

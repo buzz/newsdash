@@ -1,4 +1,4 @@
-import type { Feed } from '@newsdash/schema'
+import type { Feed } from '@newsdash/common/schema'
 
 import apiSlice from './apiSlice'
 

@@ -1,7 +1,7 @@
 import fastifyRedis from '@fastify/redis'
 import type { FastifyPluginAsync } from 'fastify'
 
-import { layout, persistLayoutSchema } from '@newsdash/schema'
+import { layout, persistLayoutSchema } from '@newsdash/common/schema'
 
 import { DEFAULT_REDIS_URL } from '#constants'
 import { getAllHashes, updateHashesDeleteOthers } from '#redis/redis.js'

@@ -1,6 +1,6 @@
 import { Overlay, Transition, useMantineTheme } from '@mantine/core'
 
-import type { Tab } from '@newsdash/schema'
+import type { Tab } from '@newsdash/common/schema'
 
 import { DEFAULT_BLUR } from '#constants'
 import { isTabEditMode } from '#types/typeGuards'

@@ -1,4 +1,4 @@
-import type { Tab } from '@newsdash/schema'
+import type { Tab } from '@newsdash/common/schema'
 
 import { extractQueryError } from '#store/middlewares/utils'
 import feedApi from '#store/slices/api/feedApi'

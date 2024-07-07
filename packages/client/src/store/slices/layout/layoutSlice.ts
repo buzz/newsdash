@@ -1,6 +1,6 @@
 import type { EntityState } from '@reduxjs/toolkit'
 
-import type { Box, Panel, Tab } from '@newsdash/schema'
+import type { Box, Panel, Tab } from '@newsdash/common/schema'
 
 import createSlice from '#store/createSlice'
 

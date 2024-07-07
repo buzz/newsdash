@@ -1,7 +1,7 @@
 import { createEntityAdapter } from '@reduxjs/toolkit'
 import { nanoid } from 'nanoid'
 
-import type { Panel } from '@newsdash/schema'
+import type { Panel } from '@newsdash/common/schema'
 
 import { DOCKBOX_ID } from '#constants'
 import { orderSortComparer } from '#store/utils/sortComparer'

@@ -1,4 +1,4 @@
-import type { Box, Panel, Tab } from '@newsdash/schema'
+import type { Box, Panel, Tab } from '@newsdash/common/schema'
 
 import { TAB_MIN_HEIGHT, TAB_MIN_WIDTH } from '#constants'
 import { selectChildBoxes, selectDockbox } from '#store/slices/layout/entities/boxes/selectors'

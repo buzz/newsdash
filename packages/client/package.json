@@ -23,7 +23,7 @@
     "@mantine/form": "^7.10.1",
     "@mantine/hooks": "^7.10.2",
     "@mantine/notifications": "^7.10.1",
-    "@newsdash/schema": "link:../schema",
+    "@newsdash/common": "link:../common",
     "@reduxjs/toolkit": "^2.2.5",
     "@tabler/icons-react": "^3.5.0",
     "clsx": "^2.1.1",

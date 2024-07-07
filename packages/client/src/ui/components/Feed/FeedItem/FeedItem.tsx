@@ -1,6 +1,6 @@
 import cx from 'clsx'
 
-import type { Tab } from '@newsdash/schema'
+import type { Tab } from '@newsdash/common/schema'
 
 import { makeFeedItemImageUrl } from '#ui/components/Feed/utils'
 import type { FeedItem as FeedItemType } from '#types/feed'

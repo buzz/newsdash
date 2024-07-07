@@ -1,6 +1,6 @@
 import type { Update } from '@reduxjs/toolkit'
 
-import type { Panel } from '@newsdash/schema'
+import type { Panel } from '@newsdash/common/schema'
 
 import panelsSlice from './panelsSlice'
 

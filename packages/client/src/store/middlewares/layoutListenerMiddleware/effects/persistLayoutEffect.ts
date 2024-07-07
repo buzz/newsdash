@@ -1,7 +1,7 @@
 import { isAnyOf } from '@reduxjs/toolkit'
 import { isEqual } from 'lodash-es'
 
-import type { PersistLayout } from '@newsdash/schema'
+import type { PersistLayout } from '@newsdash/common/schema'
 
 import { debounce } from '#store/middlewares/utils'
 import layoutApi from '#store/slices/api/layoutApi'

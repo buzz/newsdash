@@ -1,4 +1,4 @@
-import { AspectRatio, Group, Image, Popover as MantinePopover, Stack, Text } from '@mantine/core'
+import { Group, Popover as MantinePopover, Stack, Text } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { useState } from 'react'
 import type { MouseEventHandler } from 'react'
@@ -23,11 +23,7 @@ function Popover({ children, content, date, imageUrl, language, title }: Popover
   const [opened, { close, open }] = useDisclosure(false)
   const [openTimeout, setOpenTimeout] = useState<number | undefined>()
 
-  const image = imageUrl ? (
-    <AspectRatio className={classes.image} ratio={20 / 15} w={300}>
-      <Image src={imageUrl} />
-    </AspectRatio>
-  ) : null
+  const image = imageUrl ? <img className={classes.image} alt={title} src={imageUrl} /> : null
 
   const onMouseEnter = () => {
     setOpenTimeout(setTimeout(open, OPEN_DELAY))

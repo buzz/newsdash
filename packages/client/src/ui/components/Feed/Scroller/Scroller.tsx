@@ -2,7 +2,7 @@ import cx from 'clsx'
 import { useState } from 'react'
 import SimpleBarReact from 'simplebar-react'
 
-import type { Tab } from '@newsdash/schema'
+import type { Tab } from '@newsdash/common/schema'
 
 import type { FeedItem } from '#types/feed'
 

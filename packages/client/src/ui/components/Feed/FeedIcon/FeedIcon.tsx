@@ -1,7 +1,7 @@
 import { IconRss } from '@tabler/icons-react'
 import cx from 'clsx'
 
-import type { Tab } from '@newsdash/schema'
+import type { Tab } from '@newsdash/common/schema'
 
 import { makeTabLogoUrl } from '#ui/components/Feed/utils'
 

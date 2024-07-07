@@ -1,7 +1,7 @@
 import { IconExclamationCircle, IconLoader2 } from '@tabler/icons-react'
 import cx from 'clsx'
 
-import type { Tab } from '@newsdash/schema'
+import type { Tab } from '@newsdash/common/schema'
 
 import Tooltip from '#ui/components/common/Tooltip'
 import FeedIcon from '#ui/components/Feed/FeedIcon/FeedIcon'

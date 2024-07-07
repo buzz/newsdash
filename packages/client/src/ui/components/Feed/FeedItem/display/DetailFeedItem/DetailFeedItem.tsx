@@ -1,4 +1,3 @@
-import { Image } from '@mantine/core'
 import cx from 'clsx'
 
 import TimeAgoBadge from '#ui/components/Feed/FeedItem/TimeAgoBadge/TimeAgoBadge'
@@ -32,7 +31,7 @@ function DetailFeedItem({ feedItem, imageUrl, language }: FeedItemComponentProps
 
   return (
     <>
-      {imageUrl ? <Image className={classes.image} src={imageUrl} /> : null}
+      <img alt={feedItem.title} className={classes.image} src={imageUrl} />
       <div className={classes.teaserText}>
         <div className={cx(classes.title, { [classes.noContent]: !hasContent })}>{title}</div>
         {content}

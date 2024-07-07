@@ -1,6 +1,6 @@
 import type { FastifyPluginAsync } from 'fastify'
 
-import { versionInfoSchema } from '@newsdash/schema'
+import { versionInfoSchema } from '@newsdash/common/schema'
 
 import { PKG_NAME, PKG_VERSION } from '#constants'
 

@@ -1,6 +1,6 @@
 import type { Update } from '@reduxjs/toolkit'
 
-import type { Tab } from '@newsdash/schema'
+import type { Tab } from '@newsdash/common/schema'
 
 import { getRandomHue } from '#utils'
 

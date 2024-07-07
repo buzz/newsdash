@@ -1,0 +1,5 @@
+const IMG_WIDTH = 300
+const IMG_HEIGHT = 200
+const IMG_AR = IMG_WIDTH / IMG_HEIGHT
+
+export { IMG_AR, IMG_HEIGHT, IMG_WIDTH }

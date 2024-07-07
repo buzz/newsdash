@@ -1,6 +1,6 @@
 import type { ComponentType } from 'react'
 
-import type { Display } from '@newsdash/schema'
+import type { Display } from '@newsdash/common/schema'
 
 import type { FeedItemComponentProps } from '#ui/components/Feed/FeedItem/types'
 

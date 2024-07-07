@@ -1,6 +1,6 @@
 import { createEntityAdapter } from '@reduxjs/toolkit'
 
-import type { Box } from '@newsdash/schema'
+import type { Box } from '@newsdash/common/schema'
 
 import { DOCKBOX_ID } from '#constants'
 import { orderSortComparer } from '#store/utils/sortComparer'

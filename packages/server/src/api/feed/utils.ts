@@ -9,17 +9,11 @@ import RssParser from 'rss-parser'
 import sharp from 'sharp'
 import { stripHtml } from 'string-strip-html'
 
-import { feedSchema } from '@newsdash/schema'
+import { IMG_HEIGHT, IMG_WIDTH } from '@newsdash/common/constants'
+import { feedSchema } from '@newsdash/common/schema'
 
 import { BadGateway, BadRequest, isError, NotFound, ParseError, ServerError } from '#api/errors.js'
-import {
-  FETCH_TIMEOUT,
-  IMG_HEIGHT,
-  IMG_QUALITY,
-  IMG_WIDTH,
-  MAX_CONTENT_LENGTH,
-  USER_AGENT,
-} from '#constants'
+import { FETCH_TIMEOUT, IMG_QUALITY, MAX_CONTENT_LENGTH, USER_AGENT } from '#constants'
 
 import type { CustomFeedFields, RssParserResult } from './types.js'
 

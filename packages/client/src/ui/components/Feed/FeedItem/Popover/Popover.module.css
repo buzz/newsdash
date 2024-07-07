@@ -11,6 +11,8 @@
     align-items: flex-start;
 
     .image {
+      aspect-ratio: var(--feed-item-image-ar);
+      width: var(--feed-item-image-width);
       border-radius: var(--mantine-radius-sm);
       border: 1px solid var(--mantine-color-default-border);
       flex-shrink: 0;

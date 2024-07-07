@@ -1,4 +1,4 @@
-import type { VersionInfo } from '@newsdash/schema'
+import type { VersionInfo } from '@newsdash/common/schema'
 
 import apiSlice from './apiSlice'
 

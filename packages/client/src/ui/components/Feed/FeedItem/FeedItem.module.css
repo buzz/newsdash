@@ -32,7 +32,9 @@
   }
 
   &.detail {
-    padding: calc(var(--mantine-spacing-xs) * 0.4) calc(var(--mantine-spacing-xs) * 0.5);
+    --feed-item-padding-v: calc(var(--mantine-spacing-xs) * 0.4);
+
+    padding: var(--feed-item-padding-v) calc(var(--mantine-spacing-xs) * 0.5);
   }
 
   &.tile {

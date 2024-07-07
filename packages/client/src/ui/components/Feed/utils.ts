@@ -1,4 +1,4 @@
-import type { Tab } from '@newsdash/schema'
+import type { Tab } from '@newsdash/common/schema'
 
 import type { FeedItem } from '#types/feed'
 

@@ -1,4 +1,4 @@
-import type { Display } from '@newsdash/schema'
+import type { Display } from '@newsdash/common/schema'
 
 import type { DisplayParams } from '#types/types'
 

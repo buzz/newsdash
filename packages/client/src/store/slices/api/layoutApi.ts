@@ -1,4 +1,4 @@
-import type { PersistLayout, Result } from '@newsdash/schema'
+import type { PersistLayout, Result } from '@newsdash/common/schema'
 
 import apiSlice from './apiSlice'
 

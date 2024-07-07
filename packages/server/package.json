@@ -27,7 +27,7 @@
   "dependencies": {
     "@fastify/error": "^3.4.1",
     "@fastify/redis": "^6.2.0",
-    "@newsdash/schema": "link:../schema",
+    "@newsdash/common": "link:../common",
     "fastify": "^4.27.0",
     "got": "^14.4.1",
     "metascraper": "^5.45.10",

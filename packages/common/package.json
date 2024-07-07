@@ -1,6 +1,6 @@
 {
-  "name": "@newsdash/schema",
-  "description": "Schema for newsdash",
+  "name": "@newsdash/common",
+  "description": "Common code for newsdash",
   "version": "0.0.0",
   "license": "AGPL-3.0-or-later",
   "private": true,
@@ -13,13 +13,14 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/buzz/newsdash.git",
-    "directory": "packages/schema"
+    "directory": "packages/common"
   },
   "exports": {
     ".": {
-      "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
-    }
+    },
+    "./constants": "./dist/constants.js",
+    "./schema": "./dist/schema/index.js"
   },
   "scripts": {
     "build": "tsc --declaration --declarationMap --outDir dist --project .",

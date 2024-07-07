@@ -1,6 +1,6 @@
 import type { UseFormReturnType } from '@mantine/form'
 
-import type { Display, Tab } from '@newsdash/schema'
+import type { Display, Tab } from '@newsdash/common/schema'
 
 import type { TabEditMode } from '#types/layout'
 

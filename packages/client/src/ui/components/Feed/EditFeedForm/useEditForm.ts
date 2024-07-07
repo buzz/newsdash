@@ -2,7 +2,7 @@ import { useForm } from '@mantine/form'
 import { throttle } from 'lodash-es'
 import { useEffect, useState } from 'react'
 
-import { type Tab, webUrlSchema } from '@newsdash/schema'
+import { type Tab, webUrlSchema } from '@newsdash/common/schema'
 
 import { MIN_COLUMN_WIDTH_DEFAULT } from '#constants'
 import { editTab, removeTab } from '#store/slices/layout/entities/tabs/actions'

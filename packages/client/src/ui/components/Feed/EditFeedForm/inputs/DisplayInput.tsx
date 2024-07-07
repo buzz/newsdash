@@ -7,7 +7,7 @@ import {
 } from '@tabler/icons-react'
 import type { ReactNode } from 'react'
 
-import { type Display, layout } from '@newsdash/schema'
+import { type Display, layout } from '@newsdash/common/schema'
 
 import { MIN_COLUMN_WIDTH_MAX, MIN_COLUMN_WIDTH_MIN } from '#constants'
 import InputWrapper from '#ui/components/common/InputWrapper/InputWrapper'

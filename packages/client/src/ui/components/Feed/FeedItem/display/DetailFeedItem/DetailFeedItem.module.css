@@ -1,4 +1,8 @@
 .image {
+  aspect-ratio: var(--feed-item-image-ar);
+  height: 100%;
+  object-fit: cover;
+
   border-radius: var(--mantine-radius-xs);
   border-color: light-dark(
     darken(var(--mantine-color-default-border), 0.1),
@@ -6,9 +10,6 @@
   );
   border-style: solid;
   border-width: 1px;
-  flex-grow: 0;
-  max-height: 100%;
-  object-fit: cover;
 }
 
 .teaserText {
