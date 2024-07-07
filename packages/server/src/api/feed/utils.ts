@@ -1,5 +1,6 @@
 import { createHash } from 'node:crypto'
 
+import decodeIco from 'decode-ico'
 import got, { type OptionsOfUnknownResponseBodyWrapped } from 'got'
 import metascraper from 'metascraper'
 import metascraperImage from 'metascraper-image'
@@ -140,13 +141,10 @@ async function scrapeUrlLogo(html: string, url: URL) {
 function downloadImageAndResizeStream(
   url: URL,
   width: number = IMG_WIDTH,
-  height: number = IMG_HEIGHT,
-  format: 'webp' | 'png' = 'webp'
+  height: number = IMG_HEIGHT
 ) {
   try {
-    let resizer = sharp().resize(width, height)
-    resizer = format === 'webp' ? resizer.webp({ quality: IMG_QUALITY }) : resizer.png()
-    return fetchStream(url).pipe(resizer)
+    return fetchStream(url).pipe(sharp().resize(width, height).webp({ quality: IMG_QUALITY }))
   } catch (error: unknown) {
     if (isError(error)) {
       throw new ServerError(error.message)
@@ -155,8 +153,42 @@ function downloadImageAndResizeStream(
   throw new Error('Unknown error')
 }
 
+async function downloadImageAndResizeIco(url: URL) {
+  try {
+    const response = await got(url, { ...DEFAULT_FETCH_OPTIONS, responseType: 'buffer' })
+    const buffer = response.body
+    const images = decodeIco(buffer)
+
+    let foundImg = images.find((image) => image.width === 32 && image.height === 32)
+
+    if (!foundImg) {
+      foundImg = images[0]
+      for (const image of images) {
+        if (image.width * image.height > foundImg.width * foundImg.height) {
+          foundImg = image
+        }
+      }
+    }
+
+    const sharpImg =
+      foundImg.type === 'png'
+        ? sharp(foundImg.data)
+        : sharp(foundImg.data, {
+            raw: { width: foundImg.width, height: foundImg.height, channels: 4 },
+          })
+
+    return sharpImg.resize(32, 32).webp({ quality: IMG_QUALITY }).toBuffer()
+  } catch (error) {
+    if (isError(error)) {
+      throw new BadGateway(error.message)
+    }
+  }
+  throw new Error('Unknown error')
+}
+
 export {
   constructFeedResponse,
+  downloadImageAndResizeIco,
   downloadImageAndResizeStream,
   fetchStream,
   fetchText,

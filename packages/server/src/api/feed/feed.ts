@@ -4,6 +4,7 @@ import { IMG_MAX_AGE } from '#constants'
 
 import {
   constructFeedResponse,
+  downloadImageAndResizeIco,
   downloadImageAndResizeStream,
   fetchText,
   parseFeed,
@@ -32,12 +33,18 @@ const feedPlugin: FastifyPluginAsync = (app) => {
   })
 
   app.get('/logo', async (request: UrlRequest, reply) => {
-    void reply.type('image/png')
+    void reply.type('image/webp')
     void reply.header('Cache-Control', `public, max-age=${IMG_MAX_AGE}`)
+
     const url = parseUrl(request.query.url)
     const body = await fetchText(url)
     const logoUrl = parseUrl(await scrapeUrlLogo(body, url))
-    return reply.send(downloadImageAndResizeStream(logoUrl, 32, 32, 'png'))
+
+    if (String(logoUrl).endsWith('.ico')) {
+      return reply.send(await downloadImageAndResizeIco(logoUrl))
+    }
+
+    return reply.send(downloadImageAndResizeStream(logoUrl, 32, 32))
   })
 
   return Promise.resolve()

@@ -1,7 +1,9 @@
 .stackedIcon {
+  border-radius: var(--mantine-radius-xs);
   display: inline-flex;
-  position: relative;
   height: rem(16);
+  overflow: hidden;
+  position: relative;
   width: rem(16);
 
   &.loading {

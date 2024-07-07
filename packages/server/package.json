@@ -28,6 +28,7 @@
     "@fastify/error": "^3.4.1",
     "@fastify/redis": "^6.2.0",
     "@newsdash/common": "link:../common",
+    "decode-ico": "^0.4.1",
     "fastify": "^4.27.0",
     "got": "^14.4.1",
     "metascraper": "^5.45.10",
