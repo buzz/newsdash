@@ -73,6 +73,8 @@ function parseUrl(urlString: unknown): URL {
     if (!['http:', 'https:'].includes(url.protocol)) {
       throw new BadRequest('Malformed URL')
     }
+    url.hash = ''
+    url.search = ''
     return url
   } catch {
     throw new BadRequest('Malformed URL')
