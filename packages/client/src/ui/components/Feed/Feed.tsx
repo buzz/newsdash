@@ -1,5 +1,3 @@
-import { useElementSize } from '@mantine/hooks'
-
 import { DISPLAY_PARAMS } from '#constants'
 import { selectByTabId } from '#store/slices/feedItems/selectors'
 import tabsSelectors from '#store/slices/layout/entities/tabs/selectors'
@@ -9,13 +7,11 @@ import type { CustomTabData } from '#types/layout'
 
 import EditFeedFormOverlay from './EditFeedFormOverlay'
 import EmptyList from './EmptyList/EmptyList'
-import Scroller from './Scroller/Scroller'
+import Window from './Window/Window'
 
 import classes from './Feed.module.css'
 
 function Feed({ tab: { id: tabId } }: FeedProps) {
-  const { ref, width, height } = useElementSize()
-
   if (tabId === undefined) {
     throw new Error('Expected tabId')
   }
@@ -35,14 +31,12 @@ function Feed({ tab: { id: tabId } }: FeedProps) {
     )
   }
 
-  const { height: itemHeight, overscanCount } = DISPLAY_PARAMS[tab.display]
+  const { height: rowHeight, overscanCount } = DISPLAY_PARAMS[tab.display]
 
   return (
-    <div className={classes.feed} ref={ref}>
-      <Scroller
-        height={height}
-        width={width}
-        rowHeight={itemHeight}
+    <div className={classes.feed}>
+      <Window
+        rowHeight={rowHeight}
         items={feedItems}
         overscanCount={overscanCount ?? 1}
         tab={tab}

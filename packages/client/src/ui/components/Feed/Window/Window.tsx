@@ -1,18 +1,15 @@
-import cx from 'clsx'
-import { forwardRef, useState } from 'react'
+import { forwardRef } from 'react'
 
 import type { Tab } from '@newsdash/common/schema'
 
 import { SCROLLER_PADDING_Y } from '#constants'
-import SimpleBar from '#ui/components/common/SimpleBar'
+import Scroller from '#ui/components/common/Scroller/Scroller'
 import type { FeedItem } from '#types/feed'
 
 import Grid from './Grid'
 import List from './List'
 import { parseHeight } from './utils'
-import type { InnerElementProps, ScrollState } from './types'
-
-import classes from './Scroller.module.css'
+import type { InnerElementProps } from './types'
 
 const InnerElement = forwardRef<HTMLDivElement, InnerElementProps>(({ style, ...rest }, ref) => (
   <div
@@ -22,42 +19,37 @@ const InnerElement = forwardRef<HTMLDivElement, InnerElementProps>(({ style, ...
   />
 ))
 
-function Scroller({ height, width, rowHeight, items, overscanCount = 1, tab }: ScrollerProps) {
-  const [scrollState, setScrollState] = useState<ScrollState>('top')
-
+function Window({ rowHeight, items, overscanCount = 1, tab }: WindowProps) {
   const WindowComponent = tab.gridView ? Grid : List
 
+  // Force scroller to rerender when component changes, otherwise refs would not be updated
+  const key = `component-${tab.gridView ? 'Grid' : 'List'}`
+
   return (
-    <SimpleBar height={height}>
-      {({ contentNodeRef, scrollableNodeRef }) => (
+    <Scroller key={key}>
+      {({ className, width, height, contentNodeRef, scrollableNodeRef }) => (
         <WindowComponent
-          className={cx(classes.fadeMask, {
-            [classes.top]: scrollState === 'top',
-            [classes.bottom]: scrollState === 'bottom',
-          })}
-          height={height}
           width={width}
+          height={height}
+          className={className}
           items={items}
           overscanCount={overscanCount}
           rowHeight={rowHeight}
-          setScrollState={setScrollState}
           tab={tab}
           innerElementType={InnerElement}
           innerRef={contentNodeRef}
           outerRef={scrollableNodeRef}
         />
       )}
-    </SimpleBar>
+    </Scroller>
   )
 }
 
-interface ScrollerProps {
-  height: number
-  width: number
+interface WindowProps {
   rowHeight: number
   items: FeedItem[]
   overscanCount?: number
   tab: Tab
 }
 
-export default Scroller
+export default Window

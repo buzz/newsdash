@@ -1,4 +1,4 @@
-import type { ComponentType, CSSProperties, MutableRefObject } from 'react'
+import type { ComponentType, CSSProperties, Ref } from 'react'
 
 import type { Tab } from '@newsdash/common/schema'
 
@@ -14,9 +14,7 @@ interface GridData extends ListData {
   rowCount: number
 }
 
-type ScrollState = 'top' | 'bottom' | undefined
-
-interface WindowProps {
+interface GridListProps {
   className: string
   height: number
   width: number
@@ -24,16 +22,15 @@ interface WindowProps {
   items: FeedItem[]
   overscanCount: number
   rowHeight: number
-  setScrollState: (value: ScrollState) => void
   tab: Tab
 
   innerElementType: ComponentType<InnerElementProps>
-  innerRef: MutableRefObject<HTMLElement | undefined>
-  outerRef: MutableRefObject<HTMLElement | undefined>
+  innerRef: Ref<HTMLElement | undefined>
+  outerRef: Ref<HTMLElement | undefined>
 }
 
 interface InnerElementProps {
   style: CSSProperties
 }
 
-export type { GridData, InnerElementProps, ListData, ScrollState, WindowProps }
+export type { GridData, GridListProps, InnerElementProps, ListData }

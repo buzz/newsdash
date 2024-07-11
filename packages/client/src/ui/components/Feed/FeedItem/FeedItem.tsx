@@ -21,7 +21,6 @@ function FeedItem({ feedItem, tab: { display, language } }: FeedItemProps) {
       imageUrl={imageUrl}
       language={language}
       title={feedItem.title}
-      key={feedItem.id}
     >
       {({ onMouseEnter, onMouseLeave }) => (
         <a

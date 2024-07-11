@@ -5,39 +5,45 @@
   justify-content: center;
   padding: var(--mantine-spacing-sm);
 
-  .content {
+  .paper {
     --mantine-color-body: alpha(
       light-dark(var(--mantine-color-white), var(--mantine-color-dark-7)),
       0.85
     );
 
     display: flex;
+    border-radius: var(--mantine-radius-md);
     max-width: rem(500);
     width: 100%;
     max-height: 100%;
     padding: var(--mantine-spacing-md);
     overflow: hidden;
 
-    .simplebarWrapper {
+    .scrollWrapper {
       max-height: 100%;
       width: 100%;
 
-      .form {
-        display: flex;
-        flex-direction: column;
-        gap: var(--mantine-spacing-md);
-      }
-    }
+      .content {
+        /* Account for buttons which would otherwise overflow the content area in actived state */
+        padding-bottom: rem(2) !important;
 
-    .title {
-      display: flex;
-      align-items: center;
-      gap: var(--mantine-spacing-xs);
-      margin-bottom: var(--mantine-spacing-sm);
+        .title {
+          display: flex;
+          align-items: center;
+          gap: var(--mantine-spacing-xs);
+          margin-bottom: var(--mantine-spacing-sm);
 
-      .feedIcon {
-        height: rem(32);
-        width: rem(32);
+          .feedIcon {
+            height: rem(32);
+            width: rem(32);
+          }
+        }
+
+        .form {
+          display: flex;
+          flex-direction: column;
+          gap: var(--mantine-spacing-md);
+        }
       }
     }
 

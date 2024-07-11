@@ -1,0 +1,7 @@
+.row {
+  border-bottom: 1px solid var(--mantine-color-default-border);
+
+  &.last {
+    border-bottom: none;
+  }
+}

@@ -5,10 +5,10 @@ import { FixedSizeGrid, type GridChildComponentProps } from 'react-window'
 import { SCROLLER_PADDING_Y } from '#constants'
 import FeedItem from '#ui/components/Feed/FeedItem/FeedItem'
 
-import { gridItemKey, makeOnScroll, parseHeight } from './utils'
-import type { GridData, WindowProps } from './types'
+import { gridItemKey, parseHeight } from './utils'
+import type { GridData, GridListProps } from './types'
 
-import classes from './Scroller.module.css'
+import classes from './Grid.module.css'
 
 const GridCell = memo(function GridCell({
   data: { columnCount, rowCount, items, tab },
@@ -39,9 +39,8 @@ function Grid({
   rowHeight,
   tab,
   innerElementType,
-  setScrollState,
   ...otherProps
-}: WindowProps) {
+}: GridListProps) {
   const itemCount = items.length
   const columnCount = Math.max(1, Math.floor(width / tab.minColumnWidth))
   const rowCount = Math.ceil(itemCount / columnCount)
@@ -62,7 +61,6 @@ function Grid({
       itemData={itemData}
       itemKey={gridItemKey}
       overscanRowCount={overscanCount}
-      onScroll={makeOnScroll('grid', height, rowHeight, rowCount, setScrollState)}
       {...otherProps}
     >
       {GridCell}

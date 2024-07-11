@@ -1,0 +1,12 @@
+.cell {
+  border-right: 1px solid var(--mantine-color-default-border);
+  border-bottom: 1px solid var(--mantine-color-default-border);
+
+  &.lastCol {
+    border-right: none;
+  }
+
+  &.lastRow {
+    border-bottom: none;
+  }
+}

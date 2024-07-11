@@ -5,10 +5,10 @@ import { FixedSizeList, type ListChildComponentProps } from 'react-window'
 import { SCROLLER_PADDING_Y } from '#constants'
 import FeedItem from '#ui/components/Feed/FeedItem/FeedItem'
 
-import { listItemKey, makeOnScroll, parseHeight } from './utils'
-import type { ListData, WindowProps } from './types'
+import { listItemKey, parseHeight } from './utils'
+import type { GridListProps, ListData } from './types'
 
-import classes from './Scroller.module.css'
+import classes from './List.module.css'
 
 const ListRow = memo(function ListRow({
   data: { items, tab },
@@ -25,28 +25,20 @@ const ListRow = memo(function ListRow({
   )
 })
 
-function List({
-  height,
-  items,
-  rowHeight,
-  setScrollState,
-  tab,
-  innerElementType,
-  ...otherProps
-}: WindowProps) {
+function List({ height, items, rowHeight, tab, innerElementType, ...otherProps }: GridListProps) {
   const itemCount = items.length
   const itemData = useMemo(() => ({ items, tab }), [items, tab])
 
   return (
     <FixedSizeList
+      {...otherProps}
+      width="100%"
       height={height}
       innerElementType={innerElementType}
       itemCount={itemCount}
       itemData={itemData}
       itemKey={listItemKey}
       itemSize={rowHeight}
-      onScroll={makeOnScroll('list', height, rowHeight, itemCount, setScrollState)}
-      {...otherProps}
     >
       {ListRow}
     </FixedSizeList>
