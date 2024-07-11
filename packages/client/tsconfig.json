@@ -5,6 +5,7 @@
     "declaration": false,
     "target": "ES2022",
     "module": "ESNext",
+    "types": ["vite/client"],
     "strict": true,
 
     /* Bundler mode */

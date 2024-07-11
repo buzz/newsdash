@@ -14,6 +14,8 @@ const DOCKBOX_ID = '__dockbox__'
 const LOCALSTORAGE_FEEDITEMS_KEY = 'newsdash_feeditems'
 const LOCALSTORAGE_SETTINGS_KEY = 'newsdash_settings'
 
+const API_BASE = '/api/'
+
 const LIGHTNESS_MIN = -20
 const LIGHTNESS_MAX = 20
 const SATURATION_MIN = 0
@@ -44,6 +46,7 @@ const DISPLAY_PARAMS: Record<Display, DisplayParams> = {
 }
 
 export {
+  API_BASE,
   DEFAULT_BLUR,
   DISPLAY_PARAMS,
   DOCKBOX_ID,
