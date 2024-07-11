@@ -1,0 +1,5 @@
+.logo path[fill='#504a47'] {
+  @mixin dark {
+    fill: #a1948e !important;
+  }
+}

@@ -11,7 +11,7 @@ import {
 import { changeHeaderVisibile, openModal } from '#store/slices/app/actions'
 import { selectHeaderVisibile } from '#store/slices/app/selectors'
 import { requestNewTab } from '#store/slices/layout/actions'
-import Logo from '#ui/components/common/Logo'
+import Logo from '#ui/components/common/Logo/Logo'
 import { useDispatch, useSelector } from '#ui/hooks/store'
 
 import HeaderButton from './HeaderButton'

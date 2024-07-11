@@ -1,11 +1,6 @@
 .logo {
-  padding: 0 var(--mantine-spacing-xl) var(--mantine-spacing-xl);
-}
-
-.text {
-  padding-top: var(--mantine-spacing-xs);
-}
-
-.links {
-  padding-top: var(--mantine-spacing-xl);
+  display: block;
+  max-width: rem(334);
+  max-height: rem(128);
+  margin: 0 auto var(--mantine-spacing-xl);
 }

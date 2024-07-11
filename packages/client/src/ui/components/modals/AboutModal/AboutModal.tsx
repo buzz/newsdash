@@ -2,7 +2,7 @@ import { Group, Text } from '@mantine/core'
 import { IconBrandGithub, IconScale } from '@tabler/icons-react'
 
 import { useGetVersionQuery } from '#store/slices/api/version'
-import Logo from '#ui/components/common/Logo'
+import Logo from '#ui/components/common/Logo/Logo'
 import ModalInner from '#ui/components/common/ModalInner'
 
 import IconButton from './IconButton'
@@ -15,16 +15,17 @@ function AboutModal() {
   return (
     <ModalInner>
       <Logo className={classes.logo} />
-      <Text className={classes.text} fz="lg" ta="center">
+      <Text fz="lg" my="xs" ta="center">
         A News Dashboard
       </Text>
-      <Text fz="md" ta="center">
-        A Modern Tribute to iGoogle and Netvibes
+      <Text fz="md" my="xs" ta="center">
+        Free and open-source alternative
+        <br /> to iGoogle and Netvibes
       </Text>
-      <Text className={classes.text} fz="sm" ta="center">
+      <Text fz="sm" my="xs" ta="center">
         Version {isSuccess ? data.version : ''}
       </Text>
-      <Group className={classes.links} justify="center">
+      <Group justify="center" mt="lg">
         <IconButton
           href="https://github.com/buzz/newsdash"
           tooltip="https://github.com/buzz/newsdash"
