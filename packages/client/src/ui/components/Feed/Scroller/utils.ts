@@ -1,6 +1,9 @@
+import type { CSSProperties } from 'react'
 import type { GridOnScrollProps, ListOnScrollProps } from 'react-window'
 
 import type { GridData, ListData, ScrollState } from './types'
+
+const SCROLL_STATE_TOLERANCE = 2
 
 function gridItemKey({ columnIndex, data: { columnCount, items }, rowIndex }: GridItemKeyArg) {
   try {
@@ -14,7 +17,9 @@ function listItemKey(index: number, { items }: ListData) {
   return items[index].id
 }
 
-const SCROLL_STATE_TOLERANCE = 2
+function parseHeight(height: CSSProperties['height']): number {
+  return (typeof height === 'string' ? Number.parseFloat(height) : height) ?? 0
+}
 
 function makeOnScroll<T extends 'grid' | 'list'>(
   windowType: T,
@@ -48,4 +53,4 @@ interface GridItemKeyArg {
   rowIndex: number
 }
 
-export { gridItemKey, listItemKey, makeOnScroll }
+export { gridItemKey, listItemKey, makeOnScroll, parseHeight }

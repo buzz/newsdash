@@ -16,6 +16,8 @@ const LOCALSTORAGE_SETTINGS_KEY = 'newsdash_settings'
 
 const API_BASE = '/api/'
 
+const SCROLLER_PADDING_Y = 6
+
 const LIGHTNESS_MIN = -20
 const LIGHTNESS_MAX = 20
 const SATURATION_MIN = 0
@@ -64,6 +66,7 @@ export {
   MIN_COLUMN_WIDTH_MIN,
   SATURATION_MAX,
   SATURATION_MIN,
+  SCROLLER_PADDING_Y,
   TAB_MIN_HEIGHT,
   TAB_MIN_WIDTH,
 }

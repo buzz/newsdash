@@ -1,16 +1,26 @@
 import cx from 'clsx'
-import { useState } from 'react'
+import { forwardRef, useState } from 'react'
 import SimpleBarReact from 'simplebar-react'
 
 import type { Tab } from '@newsdash/common/schema'
 
+import { SCROLLER_PADDING_Y } from '#constants'
 import type { FeedItem } from '#types/feed'
 
 import Grid from './Grid'
 import List from './List'
-import type { ScrollState } from './types'
+import { parseHeight } from './utils'
+import type { InnerElementProps, ScrollState } from './types'
 
 import classes from './Scroller.module.css'
+
+const InnerElement = forwardRef<HTMLDivElement, InnerElementProps>(({ style, ...rest }, ref) => (
+  <div
+    ref={ref}
+    style={{ ...style, height: `${parseHeight(style.height) + 2 * SCROLLER_PADDING_Y}px` }}
+    {...rest}
+  />
+))
 
 function Scroller({ height, width, rowHeight, items, overscanCount = 1, tab }: ScrollerProps) {
   const [scrollState, setScrollState] = useState<ScrollState>('top')
@@ -32,6 +42,7 @@ function Scroller({ height, width, rowHeight, items, overscanCount = 1, tab }: S
           rowHeight={rowHeight}
           setScrollState={setScrollState}
           tab={tab}
+          innerElementType={InnerElement}
           innerRef={contentNodeRef}
           outerRef={scrollableNodeRef}
         />

@@ -1,4 +1,4 @@
-import type { MutableRefObject } from 'react'
+import type { ComponentType, CSSProperties, MutableRefObject } from 'react'
 
 import type { Tab } from '@newsdash/common/schema'
 
@@ -27,8 +27,13 @@ interface WindowProps {
   setScrollState: (value: ScrollState) => void
   tab: Tab
 
+  innerElementType: ComponentType<InnerElementProps>
   innerRef: MutableRefObject<HTMLElement | undefined>
   outerRef: MutableRefObject<HTMLElement | undefined>
 }
 
-export type { GridData, ListData, ScrollState, WindowProps }
+interface InnerElementProps {
+  style: CSSProperties
+}
+
+export type { GridData, InnerElementProps, ListData, ScrollState, WindowProps }
