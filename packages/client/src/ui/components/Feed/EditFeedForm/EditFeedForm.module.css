@@ -1,4 +1,4 @@
-.formWrapper {
+.center {
   align-items: center;
   display: flex;
   height: 100%;
@@ -11,14 +11,22 @@
       0.85
     );
 
+    display: flex;
     max-width: rem(500);
     width: 100%;
+    max-height: 100%;
     padding: var(--mantine-spacing-md);
+    overflow: hidden;
 
-    .form {
-      display: flex;
-      flex-direction: column;
-      gap: var(--mantine-spacing-md);
+    .simplebarWrapper {
+      max-height: 100%;
+      width: 100%;
+
+      .form {
+        display: flex;
+        flex-direction: column;
+        gap: var(--mantine-spacing-md);
+      }
     }
 
     .title {

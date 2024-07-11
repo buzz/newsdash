@@ -2,6 +2,7 @@ import { Box, Paper, Title } from '@mantine/core'
 
 import selectSettings from '#store/slices/settings/selectors'
 import Divider from '#ui/components/common/Divider/Divider'
+import SimpleBar from '#ui/components/common/SimpleBar'
 import FeedIcon from '#ui/components/Feed/FeedIcon/FeedIcon'
 import { useSelector } from '#ui/hooks/store'
 
@@ -20,26 +21,30 @@ function EditFeedForm({ mode, tab }: EditFeedFormProps) {
   const { tabColors } = useSelector(selectSettings)
 
   return (
-    <Box className={classes.formWrapper}>
+    <Box className={classes.center}>
       <Paper className={classes.content} radius="md">
-        <Title className={classes.title} order={2}>
-          <FeedIcon className={classes.feedIcon} tab={tab} />
-          {mode === 'new' ? 'Add Feed' : 'Feed Settings'}
-        </Title>
-        <form className={classes.form} onSubmit={onSubmit}>
-          <UrlInput form={form} />
-          <TitleInput
-            disabled={form.getValues().customTitle === ''}
-            form={form}
-            placeholder={tab.title}
-          />
-          <Divider label="Display" />
-          <DisplayInput form={form} />
-          <Divider label="Color" />
-          <ColorInput disabled={!tabColors} form={form} />
-          <Divider />
-          <ButtonGroup mode={mode} onCancel={onCancel} onDelete={onDelete} />
-        </form>
+        <div className={classes.simplebarWrapper}>
+          <SimpleBar height="100%">
+            <Title className={classes.title} order={2}>
+              <FeedIcon className={classes.feedIcon} tab={tab} />
+              {mode === 'new' ? 'Add Feed' : 'Feed Settings'}
+            </Title>
+            <form className={classes.form} onSubmit={onSubmit}>
+              <UrlInput form={form} />
+              <TitleInput
+                disabled={form.getValues().customTitle === ''}
+                form={form}
+                placeholder={tab.title}
+              />
+              <Divider label="Display" />
+              <DisplayInput form={form} />
+              <Divider label="Color" />
+              <ColorInput disabled={!tabColors} form={form} />
+              <Divider />
+              <ButtonGroup mode={mode} onCancel={onCancel} onDelete={onDelete} />
+            </form>
+          </SimpleBar>
+        </div>
       </Paper>
     </Box>
   )

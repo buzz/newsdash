@@ -23,7 +23,7 @@ function EditFeedFormOverlay({ tab }: EditFeedFormOverlayProps) {
     >
       {(styles) => (
         <Overlay blur={DEFAULT_BLUR} style={styles}>
-          <EditFeedForm tab={tab} mode={status === 'new' ? 'new' : 'edit'} />
+          <EditFeedForm mode={status === 'new' ? 'new' : 'edit'} tab={tab} />
         </Overlay>
       )}
     </Transition>

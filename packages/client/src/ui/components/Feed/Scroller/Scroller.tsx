@@ -1,10 +1,10 @@
 import cx from 'clsx'
 import { forwardRef, useState } from 'react'
-import SimpleBarReact from 'simplebar-react'
 
 import type { Tab } from '@newsdash/common/schema'
 
 import { SCROLLER_PADDING_Y } from '#constants'
+import SimpleBar from '#ui/components/common/SimpleBar'
 import type { FeedItem } from '#types/feed'
 
 import Grid from './Grid'
@@ -28,7 +28,7 @@ function Scroller({ height, width, rowHeight, items, overscanCount = 1, tab }: S
   const WindowComponent = tab.gridView ? Grid : List
 
   return (
-    <SimpleBarReact clickOnTrack={false} style={{ height: `${height}px` }}>
+    <SimpleBar height={height}>
       {({ contentNodeRef, scrollableNodeRef }) => (
         <WindowComponent
           className={cx(classes.fadeMask, {
@@ -47,7 +47,7 @@ function Scroller({ height, width, rowHeight, items, overscanCount = 1, tab }: S
           outerRef={scrollableNodeRef}
         />
       )}
-    </SimpleBarReact>
+    </SimpleBar>
   )
 }
 
