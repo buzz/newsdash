@@ -130,7 +130,10 @@ function DisplayInput({ form }: InputProps) {
           />
         }
       />
-      <InputWrapper help="." label="Minimum Column Width" rightSection={form.values.minColumnWidth}>
+      <InputWrapper
+        label="Minimum Column Width"
+        rightSection={`${form.values.minColumnWidth} Pixel`}
+      >
         <Slider
           disabled={!form.values.gridView}
           marks={[

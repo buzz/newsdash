@@ -37,6 +37,12 @@
             height: rem(32);
             width: rem(32);
           }
+
+          .text {
+            text-overflow: ellipsis;
+            text-wrap: nowrap;
+            overflow: hidden;
+          }
         }
 
         .form {

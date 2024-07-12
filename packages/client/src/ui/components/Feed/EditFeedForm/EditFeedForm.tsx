@@ -5,6 +5,7 @@ import Divider from '#ui/components/common/Divider/Divider'
 import Scroller from '#ui/components/common/Scroller/Scroller'
 import FeedIcon from '#ui/components/Feed/FeedIcon/FeedIcon'
 import { useSelector } from '#ui/hooks/store'
+import { getTitle } from '#utils'
 
 import ButtonGroup from './ButtonGroup'
 import ColorInput from './inputs/ColorInput'
@@ -28,9 +29,11 @@ function EditFeedForm({ mode, tab }: EditFeedFormProps) {
             {({ className, contentNodeRef, scrollableNodeRef }) => (
               <div className={className} ref={scrollableNodeRef}>
                 <div className={classes.content} ref={contentNodeRef}>
-                  <Title className={classes.title} order={2}>
+                  <Title className={classes.title} order={3}>
                     <FeedIcon className={classes.feedIcon} tab={tab} />
-                    {mode === 'new' ? 'Add Feed' : 'Feed Settings'}
+                    <span className={classes.text}>
+                      {mode === 'new' ? 'Add Feed' : getTitle(tab)}
+                    </span>
                   </Title>
                   <form className={classes.form} onSubmit={onSubmit}>
                     <UrlInput form={form} />

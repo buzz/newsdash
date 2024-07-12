@@ -22,7 +22,7 @@ const InnerElement = forwardRef<HTMLDivElement, InnerElementProps>(({ style, ...
 function Window({ rowHeight, items, overscanCount = 1, tab }: WindowProps) {
   const WindowComponent = tab.gridView ? Grid : List
 
-  // Force scroller to rerender when component changes, otherwise refs would not be updated
+  // Force scroller to rerender when component changes, otherwise refs don't update properly
   const key = `component-${tab.gridView ? 'Grid' : 'List'}`
 
   return (

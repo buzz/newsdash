@@ -1,4 +1,5 @@
-import { createTheme, type CSSVariablesResolver } from '@mantine/core'
+import { createTheme, rem } from '@mantine/core'
+import type { CSSVariablesResolver } from '@mantine/core'
 
 import { IMG_AR, IMG_WIDTH } from '@newsdash/common/constants'
 
@@ -25,7 +26,7 @@ const resolver: CSSVariablesResolver = (theme) => ({
     '--transition-duration-extra-short': `${theme.other.transition.duration.extraShort}ms`,
     '--transition-timing-function': theme.other.transition.timingFunction,
     '--feed-item-detail-height': `${DISPLAY_PARAMS.detailed.height}px`,
-    '--feed-item-image-width': `${IMG_WIDTH}px`,
+    '--feed-item-image-width': rem(IMG_WIDTH),
     '--feed-item-image-ar': String(IMG_AR),
   },
   dark: {},

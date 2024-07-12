@@ -1,23 +1,11 @@
 import type { Tab } from '@newsdash/common/schema'
 
 import Tooltip from '#ui/components/common/Tooltip'
+import { getTitle } from '#utils'
 
 import TabIcon from './TabIcon/TabIcon'
 
 import classes from './Panel.module.css'
-
-function getTitle({ customTitle, status, title }: Tab) {
-  if (status === 'new') {
-    return 'Add Feed'
-  }
-  if (customTitle.length > 0) {
-    return customTitle
-  }
-  if (title !== undefined && title.length > 0) {
-    return title
-  }
-  return 'NO TITLE'
-}
 
 function TabTitle({ tab }: TabProps) {
   const title = tab.description ? (
