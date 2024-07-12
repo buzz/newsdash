@@ -1,4 +1,5 @@
 import { Box, Paper, Title } from '@mantine/core'
+import { useFocusTrap } from '@mantine/hooks'
 
 import selectSettings from '#store/slices/settings/selectors'
 import Divider from '#ui/components/common/Divider/Divider'
@@ -20,6 +21,7 @@ import classes from './EditFeedForm.module.css'
 function EditFeedForm({ mode, tab }: EditFeedFormProps) {
   const { form, onCancel, onDelete, onSubmit } = useEditForm(mode, tab)
   const { tabColors } = useSelector(selectSettings)
+  const focusTrapRef = useFocusTrap()
 
   return (
     <Box className={classes.center}>
@@ -35,7 +37,7 @@ function EditFeedForm({ mode, tab }: EditFeedFormProps) {
                       {mode === 'new' ? 'Add Feed' : getTitle(tab)}
                     </span>
                   </Title>
-                  <form className={classes.form} onSubmit={onSubmit}>
+                  <form className={classes.form} onSubmit={onSubmit} ref={focusTrapRef}>
                     <UrlInput form={form} />
                     <TitleInput
                       disabled={form.getValues().customTitle === ''}

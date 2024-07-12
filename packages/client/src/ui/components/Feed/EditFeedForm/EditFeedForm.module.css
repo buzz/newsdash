@@ -6,6 +6,9 @@
   padding: var(--mantine-spacing-sm);
 
   .paper {
+    /* Account for content that would overflow, like buttons, etc. */
+    --padding-buffer: rem(2);
+
     --mantine-color-body: alpha(
       light-dark(var(--mantine-color-white), var(--mantine-color-dark-7)),
       0.85
@@ -16,7 +19,8 @@
     max-width: rem(500);
     width: 100%;
     max-height: 100%;
-    padding: var(--mantine-spacing-md);
+    padding: var(--mantine-spacing-md) calc(var(--mantine-spacing-md) - var(--padding-buffer))
+      calc(var(--mantine-spacing-md) - var(--padding-buffer));
     overflow: hidden;
 
     .scrollWrapper {
@@ -24,8 +28,7 @@
       width: 100%;
 
       .content {
-        /* Account for buttons which would otherwise overflow the content area in actived state */
-        padding-bottom: rem(2) !important;
+        padding: 0 rem(2) rem(2) !important;
 
         .title {
           display: flex;
