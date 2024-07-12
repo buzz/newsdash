@@ -7,6 +7,8 @@
 
   &[disabled] {
     background-color: transparent;
+    color: var(--dock-nav-button-color);
+    opacity: 0.5;
   }
 }
 
