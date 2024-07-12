@@ -116,7 +116,23 @@ function DisplayInput({ form }: InputProps) {
         />
       </InputWrapper>
       <InputWrapper
-        help="Displays feed items in a grid."
+        help="Display Popover on hover."
+        label="Enable Popover"
+        show={form.values.display !== 'tiles'}
+        rightSection={
+          <Switch
+            checked={form.values.enablePopover}
+            onLabel="ON"
+            offLabel="OFF"
+            onChange={(event) => {
+              form.setFieldValue('enablePopover', event.currentTarget.checked)
+            }}
+            size="lg"
+          />
+        }
+      />
+      <InputWrapper
+        help="Display feed items in a grid."
         label="Enable Grid View"
         show={form.values.display !== 'tiles'}
         rightSection={
@@ -132,6 +148,7 @@ function DisplayInput({ form }: InputProps) {
         }
       />
       <InputWrapper
+        help="Maximum width before a column wraps to the next row."
         label="Maximum Column Width"
         rightSection={`${form.values.maxColumnWidth} Pixel`}
         show={form.values.display !== 'tiles'}

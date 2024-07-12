@@ -20,6 +20,7 @@ const selectPersistTabs = createSelector([tabsSelectors.selectAll], (tabs) =>
       customTitle: tab.customTitle,
       description: tab.description,
       display: tab.display,
+      enablePopover: tab.enablePopover,
       gridView: tab.gridView,
       group: tab.group,
       hue: tab.hue,

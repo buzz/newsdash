@@ -17,6 +17,7 @@ function getInitialFormValues(mode: TabEditMode, tab: Tab): EditFeedFormValues {
     ? {
         customTitle: '',
         display: 'detailed',
+        enablePopover: true,
         gridView: false,
         hue: tab.hue,
         maxColumnWidth: MAX_COLUMN_WIDTH_DEFAULT,
@@ -25,6 +26,7 @@ function getInitialFormValues(mode: TabEditMode, tab: Tab): EditFeedFormValues {
     : {
         customTitle: tab.customTitle,
         display: tab.display,
+        enablePopover: tab.enablePopover,
         gridView: tab.gridView,
         hue: tab.hue,
         maxColumnWidth: tab.maxColumnWidth,

@@ -33,6 +33,7 @@ function requestNewTabEffect(startListening: AppStartListening) {
           id: tabId,
           customTitle: '',
           display: 'detailed',
+          enablePopover: true,
           gridView: false,
           maxColumnWidth: MAX_COLUMN_WIDTH_DEFAULT,
           lastFetched: 0,
