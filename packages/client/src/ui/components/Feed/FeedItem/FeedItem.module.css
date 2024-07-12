@@ -38,14 +38,14 @@
   }
 
   &.tile {
-    > img {
+    img {
       filter: brightness(100%);
       transition-duration: var(--transition-duration);
       transition-property: filter;
       transition-timing-function: var(--transition-timing-function);
     }
 
-    &:hover > img {
+    &:hover img {
       filter: brightness(86%);
     }
   }

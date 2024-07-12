@@ -24,7 +24,7 @@ const selectPersistTabs = createSelector([tabsSelectors.selectAll], (tabs) =>
       group: tab.group,
       hue: tab.hue,
       link: tab.link,
-      minColumnWidth: tab.minColumnWidth,
+      maxColumnWidth: tab.maxColumnWidth,
       order: tab.order,
       parentId: tab.parentId,
       title: tab.title,

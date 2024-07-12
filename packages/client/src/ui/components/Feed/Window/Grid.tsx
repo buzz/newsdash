@@ -2,6 +2,8 @@ import cx from 'clsx'
 import { memo, useMemo } from 'react'
 import { FixedSizeGrid, type GridChildComponentProps } from 'react-window'
 
+import { IMG_WIDTH } from '@newsdash/common/constants'
+
 import { SCROLLER_PADDING_Y } from '#constants'
 import FeedItem from '#ui/components/Feed/FeedItem/FeedItem'
 
@@ -41,8 +43,9 @@ function Grid({
   innerElementType,
   ...otherProps
 }: GridListProps) {
+  const maxColumnWidth = tab.display === 'tiles' ? IMG_WIDTH : tab.maxColumnWidth
+  const columnCount = Math.max(1, Math.floor(width / maxColumnWidth) + 1)
   const itemCount = items.length
-  const columnCount = Math.max(1, Math.floor(width / tab.minColumnWidth))
   const rowCount = Math.ceil(itemCount / columnCount)
   const itemData = useMemo(
     () => ({ columnCount, rowCount, items, tab }),

@@ -23,7 +23,7 @@ interface EditFeedFormValues {
   display: Display
   gridView: boolean
   hue: number
-  minColumnWidth: number
+  maxColumnWidth: number
   url: string
 }
 

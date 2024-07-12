@@ -9,7 +9,7 @@ import type { ReactNode } from 'react'
 
 import { type Display, layout } from '@newsdash/common/schema'
 
-import { MIN_COLUMN_WIDTH_MAX, MIN_COLUMN_WIDTH_MIN } from '#constants'
+import { MAX_COLUMN_WIDTH_MAX, MAX_COLUMN_WIDTH_MIN } from '#constants'
 import InputWrapper from '#ui/components/common/InputWrapper/InputWrapper'
 import type { InputProps } from '#ui/components/Feed/EditFeedForm/types'
 
@@ -102,7 +102,7 @@ interface DisplayComboboxProps {
   value: Display
 }
 
-const minColumnWidthMid = (MIN_COLUMN_WIDTH_MIN + MIN_COLUMN_WIDTH_MAX) / 2
+const maxColumnWidthMid = (MAX_COLUMN_WIDTH_MIN + MAX_COLUMN_WIDTH_MAX) / 2
 
 function DisplayInput({ form }: InputProps) {
   return (
@@ -118,6 +118,7 @@ function DisplayInput({ form }: InputProps) {
       <InputWrapper
         help="Displays feed items in a grid."
         label="Enable Grid View"
+        show={form.values.display !== 'tiles'}
         rightSection={
           <Switch
             checked={form.values.gridView}
@@ -131,25 +132,27 @@ function DisplayInput({ form }: InputProps) {
         }
       />
       <InputWrapper
-        label="Minimum Column Width"
-        rightSection={`${form.values.minColumnWidth} Pixel`}
+        label="Maximum Column Width"
+        rightSection={`${form.values.maxColumnWidth} Pixel`}
+        show={form.values.display !== 'tiles'}
       >
         <Slider
-          disabled={!form.values.gridView}
+          disabled={!form.values.gridView || form.values.display === 'tiles'}
           marks={[
-            { value: MIN_COLUMN_WIDTH_MIN, label: MIN_COLUMN_WIDTH_MIN },
-            { value: minColumnWidthMid, label: minColumnWidthMid },
-            { value: MIN_COLUMN_WIDTH_MAX, label: MIN_COLUMN_WIDTH_MAX },
+            { value: MAX_COLUMN_WIDTH_MIN, label: MAX_COLUMN_WIDTH_MIN },
+            { value: maxColumnWidthMid, label: maxColumnWidthMid },
+            { value: MAX_COLUMN_WIDTH_MAX, label: MAX_COLUMN_WIDTH_MAX },
           ]}
           mb="lg"
-          min={MIN_COLUMN_WIDTH_MIN}
-          max={MIN_COLUMN_WIDTH_MAX}
+          min={MAX_COLUMN_WIDTH_MIN}
+          max={MAX_COLUMN_WIDTH_MAX}
           step={10}
+          px={18}
           label={null}
           onChange={(value) => {
-            form.setFieldValue('minColumnWidth', value)
+            form.setFieldValue('maxColumnWidth', value)
           }}
-          value={form.values.minColumnWidth}
+          value={form.values.maxColumnWidth}
         />
       </InputWrapper>
     </>

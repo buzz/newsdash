@@ -1,6 +1,6 @@
 import type { z } from 'zod'
 
-import type { Tab } from '@newsdash/common'
+import type { Tab } from '@newsdash/common/schema'
 
 function getRandomHue() {
   return Math.floor(Math.random() * 360)

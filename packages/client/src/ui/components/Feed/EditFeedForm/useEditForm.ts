@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 
 import { type Tab, webUrlSchema } from '@newsdash/common/schema'
 
-import { MIN_COLUMN_WIDTH_DEFAULT } from '#constants'
+import { MAX_COLUMN_WIDTH_DEFAULT } from '#constants'
 import { editTab, removeTab } from '#store/slices/layout/entities/tabs/actions'
 import { useDispatch } from '#ui/hooks/store'
 import { zodErrorToString } from '#utils'
@@ -19,7 +19,7 @@ function getInitialFormValues(mode: TabEditMode, tab: Tab): EditFeedFormValues {
         display: 'detailed',
         gridView: false,
         hue: tab.hue,
-        minColumnWidth: MIN_COLUMN_WIDTH_DEFAULT,
+        maxColumnWidth: MAX_COLUMN_WIDTH_DEFAULT,
         url: '',
       }
     : {
@@ -27,7 +27,7 @@ function getInitialFormValues(mode: TabEditMode, tab: Tab): EditFeedFormValues {
         display: tab.display,
         gridView: tab.gridView,
         hue: tab.hue,
-        minColumnWidth: tab.minColumnWidth,
+        maxColumnWidth: tab.maxColumnWidth,
         url: tab.url,
       }
 }
@@ -58,7 +58,7 @@ function useEditForm(mode: TabEditMode, tab: Tab) {
             display: values.display,
             gridView: values.gridView,
             hue: values.hue,
-            minColumnWidth: values.minColumnWidth,
+            maxColumnWidth: values.maxColumnWidth,
           },
         })
       ),

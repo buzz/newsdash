@@ -61,7 +61,7 @@ const storeTabSchema = customTabFields.extend({
   gridView: z.boolean().default(false),
   group: z.optional(z.string()),
   language: z.optional(z.string()),
-  minColumnWidth: z.number().default(600),
+  maxColumnWidth: z.number().default(600),
   order: orderSchema,
   parentId: parentIdSchema,
 })

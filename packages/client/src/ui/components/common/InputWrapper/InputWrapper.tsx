@@ -12,6 +12,7 @@ function InputWrapper({
   label,
   required = false,
   rightSection,
+  show = true,
 }: InputWrapperProps) {
   const helpButton = help ? (
     <Tooltip label={help}>
@@ -39,7 +40,7 @@ function InputWrapper({
   }
 
   return (
-    <MantineInputWrapper>
+    <MantineInputWrapper display={show ? undefined : 'none'}>
       <InputLabel className={classes.label} mb={children ? 'xs' : undefined} required={required}>
         {label}
         {helpButton}
@@ -56,6 +57,7 @@ interface InputWrapperProps {
   label: string
   required?: boolean
   rightSection?: ReactNode
+  show?: boolean
 }
 
 export default InputWrapper
