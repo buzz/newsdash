@@ -21,8 +21,10 @@
     "typecheck": "tsc --noEmit --project ."
   },
   "imports": {
-    "#constants": "./src/constants.ts",
-    "#redis/*": "./src/redis/*"
+    "#api/*": "./dist/api/*",
+    "#constants": "./dist/constants.js",
+    "#redis": "./dist/redis/redis.js",
+    "#schema": "./dist/schema.js"
   },
   "dependencies": {
     "@fastify/error": "^4.0.0",

@@ -4,7 +4,7 @@ import type { FastifyPluginAsync } from 'fastify'
 import { layout, persistLayoutSchema } from '@newsdash/common/schema'
 
 import { DEFAULT_REDIS_URL } from '#constants'
-import { getAllHashes, updateHashesDeleteOthers } from '#redis/redis.js'
+import { getAllHashes, updateHashesDeleteOthers } from '#redis'
 
 import { BadRequest, NotFound } from './errors.js'
 
