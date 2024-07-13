@@ -74,17 +74,15 @@ function parseUrl(urlString: unknown): URL {
       throw new BadRequest('Malformed URL')
     }
     url.hash = ''
-    url.search = ''
     return url
   } catch {
     throw new BadRequest('Malformed URL')
   }
 }
 
-async function fetchText(url: URL) {
+function fetchText(url: URL) {
   try {
-    const result = await got(url, DEFAULT_FETCH_OPTIONS).text()
-    return result
+    return got(url, DEFAULT_FETCH_OPTIONS).text()
   } catch (error) {
     if (isError(error)) {
       throw new BadGateway(error.message)
