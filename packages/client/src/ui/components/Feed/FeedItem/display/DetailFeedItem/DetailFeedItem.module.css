@@ -57,6 +57,18 @@
       padding-right: calc(var(--mantine-spacing-xs) * 0.5);
       text-overflow: ellipsis;
       white-space: nowrap;
+
+      transition-duration: var(--transition-duration);
+      transition-property: color;
+      transition-timing-function: var(--transition-timing-function);
+
+      a:visited & {
+        color: var(--mantine-color-dimmed);
+      }
+
+      a:hover & {
+        color: light-dark(var(--mantine-color-text), var(--text-color-bright));
+      }
     }
   }
 

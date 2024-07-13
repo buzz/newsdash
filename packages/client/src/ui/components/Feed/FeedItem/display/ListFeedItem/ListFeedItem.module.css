@@ -1,7 +1,20 @@
 .title {
+  color: light-dark(var(--mantine-color-text), var(--text-color-bright));
   flex-grow: 1;
   font-size: var(--mantine-font-size-md);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+
+  transition-duration: var(--transition-duration);
+  transition-property: color;
+  transition-timing-function: var(--transition-timing-function);
+
+  a:visited & {
+    color: var(--mantine-color-dimmed);
+  }
+
+  a:hover & {
+    color: light-dark(var(--mantine-color-text), var(--text-color-bright));
+  }
 }

@@ -1,4 +1,6 @@
 .feedItem {
+  --mantine-color-dimmed: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-0));
+
   display: flex;
   align-items: center;
   color: light-dark(var(--mantine-color-gray-8), var(--mantine-color-text));
@@ -10,6 +12,10 @@
   transition-duration: var(--transition-duration);
   transition-property: background-color, color;
   transition-timing-function: var(--transition-timing-function);
+
+  &:visited {
+    color: var(--mantine-color-dimmed);
+  }
 
   &:hover {
     background-color: light-dark(
