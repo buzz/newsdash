@@ -21,16 +21,33 @@ const InnerElement = forwardRef<HTMLDivElement, InnerElementProps>(({ style, ...
 ))
 
 function Window({ rowHeight, items, overscanCount = 1, tab }: WindowProps) {
-  const WindowComponent = tab.gridView || tab.display === 'tiles' ? Grid : List
+  // Make sure Scroller is properly re-rendered, otherwise simplebar will not initialize correctly
+  // when switching display.
 
-  // Force scroller to rerender when component changes, otherwise refs don't update properly
-  const key = `component-${tab.gridView ? 'Grid' : 'List'}`
+  if (tab.gridView || tab.display === 'tiles') {
+    return (
+      <Scroller key="component-grid">
+        {({ width, height, contentNodeRef, scrollableNodeRef }) => (
+          <Grid
+            width={width}
+            height={height}
+            items={items}
+            overscanCount={overscanCount}
+            rowHeight={rowHeight}
+            tab={tab}
+            innerElementType={InnerElement}
+            innerRef={contentNodeRef}
+            outerRef={scrollableNodeRef}
+          />
+        )}
+      </Scroller>
+    )
+  }
 
   return (
-    <Scroller key={key}>
-      {({ width, height, contentNodeRef, scrollableNodeRef }) => (
-        <WindowComponent
-          width={width}
+    <Scroller key="component-list">
+      {({ height, contentNodeRef, scrollableNodeRef }) => (
+        <List
           height={height}
           items={items}
           overscanCount={overscanCount}

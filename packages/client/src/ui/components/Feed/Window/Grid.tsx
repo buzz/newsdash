@@ -8,7 +8,7 @@ import { SCROLLER_PADDING_Y } from '#constants'
 import FeedItem from '#ui/components/Feed/FeedItem/FeedItem'
 
 import { gridItemKey, parseHeight } from './utils'
-import type { GridData, GridListProps } from './types'
+import type { GridData, ListProps } from './types'
 
 import classes from './Grid.module.css'
 
@@ -33,7 +33,7 @@ const GridCell = memo(function GridCell({
   )
 })
 
-function Grid({ width, items, overscanCount, tab, ...otherProps }: GridListProps) {
+function Grid({ width, items, overscanCount, tab, ...otherProps }: GridProps) {
   const maxColumnWidth = tab.display === 'tiles' ? IMG_WIDTH : tab.maxColumnWidth
   const columnCount = Math.max(1, Math.floor(width / maxColumnWidth) + 1)
   const itemCount = items.length
@@ -57,6 +57,10 @@ function Grid({ width, items, overscanCount, tab, ...otherProps }: GridListProps
       {GridCell}
     </FixedSizeGrid>
   )
+}
+
+interface GridProps extends ListProps {
+  width: number
 }
 
 export default Grid

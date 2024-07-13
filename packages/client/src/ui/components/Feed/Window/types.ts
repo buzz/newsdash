@@ -15,10 +15,8 @@ interface GridData extends ListData {
   rowCount: number
 }
 
-interface GridListProps
-  extends Pick<ReactWindowProps, 'innerElementType' | 'innerRef' | 'outerRef'> {
+interface ListProps extends Pick<ReactWindowProps, 'innerElementType' | 'innerRef' | 'outerRef'> {
   height: number
-  width: number
 
   items: FeedItem[]
   overscanCount: number
@@ -30,4 +28,4 @@ interface InnerElementProps {
   style: CSSProperties
 }
 
-export type { GridData, GridListProps, InnerElementProps, ListData }
+export type { GridData, InnerElementProps, ListData, ListProps }

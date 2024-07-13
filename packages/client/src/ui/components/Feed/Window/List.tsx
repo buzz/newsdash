@@ -6,7 +6,7 @@ import { SCROLLER_PADDING_Y } from '#constants'
 import FeedItem from '#ui/components/Feed/FeedItem/FeedItem'
 
 import { listItemKey, parseHeight } from './utils'
-import type { GridListProps, ListData } from './types'
+import type { ListData, ListProps } from './types'
 
 import classes from './List.module.css'
 
@@ -25,7 +25,7 @@ const ListRow = memo(function ListRow({
   )
 })
 
-function List({ items, rowHeight, tab, innerElementType, ...otherProps }: GridListProps) {
+function List({ items, rowHeight, tab, innerElementType, ...otherProps }: ListProps) {
   const itemCount = items.length
   const itemData = useMemo(() => ({ items, tab }), [items, tab])
 
@@ -36,8 +36,8 @@ function List({ items, rowHeight, tab, innerElementType, ...otherProps }: GridLi
       itemData={itemData}
       itemKey={listItemKey}
       itemSize={rowHeight}
-      {...otherProps}
       width="100%"
+      {...otherProps}
     >
       {ListRow}
     </FixedSizeList>
