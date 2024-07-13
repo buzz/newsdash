@@ -10,27 +10,6 @@
   initial-value: 20px;
 }
 
-.fadeMask {
-  mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgb(0 0 0 / 100%) var(--scroll-fade-height-top),
-    rgb(0 0 0 / 100%) calc(100% - var(--scroll-fade-height-bottom)),
-    transparent 100%
-  );
-  transition-duration: var(--transition-duration-extra-short);
-  transition-property: --scroll-fade-height-top, --scroll-fade-height-bottom;
-  transition-timing-function: var(--transition-timing-function);
-
-  &.top {
-    --scroll-fade-height-top: 0;
-  }
-
-  &.bottom {
-    --scroll-fade-height-bottom: 0;
-  }
-}
-
 .wrapper {
   width: 100%;
   height: 100%;
@@ -41,9 +20,33 @@
     height: 100%;
     overflow-x: hidden;
 
-    /* Hide native scrollbars */
+    /* `.simplebar-content-wrapper` doesn't have a className when using render function. */
     :has(> :global(.simplebar-content)) {
+      /* Hide native scrollbars */
       scrollbar-width: none;
+    }
+
+    &.fadeMask {
+      :has(> :global(.simplebar-content)) {
+        mask-image: linear-gradient(
+          to bottom,
+          transparent 0%,
+          rgb(0 0 0 / 100%) var(--scroll-fade-height-top),
+          rgb(0 0 0 / 100%) calc(100% - var(--scroll-fade-height-bottom)),
+          transparent 100%
+        );
+        transition-duration: var(--transition-duration-extra-short);
+        transition-property: --scroll-fade-height-top, --scroll-fade-height-bottom;
+        transition-timing-function: var(--transition-timing-function);
+      }
+
+      &.top :has(> :global(.simplebar-content)) {
+        --scroll-fade-height-top: 0;
+      }
+
+      &.bottom :has(> :global(.simplebar-content)) {
+        --scroll-fade-height-bottom: 0;
+      }
     }
   }
 }
