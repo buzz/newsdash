@@ -1,4 +1,6 @@
 .modalContent {
+  --mantine-color-body: var(--paper-color-body);
+
   overflow: hidden;
   text-shadow: var(--text-shadow);
 }

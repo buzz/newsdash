@@ -9,10 +9,7 @@
     /* Account for content that would overflow, like buttons, etc. */
     --padding-buffer: rem(2);
 
-    --mantine-color-body: alpha(
-      light-dark(var(--mantine-color-white), var(--mantine-color-dark-7)),
-      0.85
-    );
+    --mantine-color-body: var(--paper-color-body);
 
     display: flex;
     border-radius: var(--mantine-radius-md);
