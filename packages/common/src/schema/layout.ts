@@ -14,7 +14,7 @@ const displaySchema = z
   .union([z.literal('condensedList'), z.literal('list'), z.literal('detailed'), z.literal('tiles')])
   .default('detailed')
 
-const sizeSchema = z.optional(z.number().int().min(0))
+const sizeSchema = z.optional(z.number().min(0))
 const orderSchema = z.number().int().min(0)
 const parentIdSchema = z.nullable(z.string())
 
