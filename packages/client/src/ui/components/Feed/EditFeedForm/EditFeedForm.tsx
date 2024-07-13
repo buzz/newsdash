@@ -34,6 +34,7 @@ function EditFeedForm({ mode, tab }: EditFeedFormProps) {
                 <span className={classes.text}>{mode === 'new' ? 'Add Feed' : getTitle(tab)}</span>
               </Title>
               <form className={classes.form} onSubmit={onSubmit} ref={focusTrapRef}>
+                <Divider label="General" />
                 <UrlInput form={form} />
                 <TitleInput
                   disabled={form.getValues().customTitle === ''}

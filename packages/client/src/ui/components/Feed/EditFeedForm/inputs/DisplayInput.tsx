@@ -1,4 +1,13 @@
-import { CheckIcon, Combobox, Group, InputBase, Slider, Switch, useCombobox } from '@mantine/core'
+import {
+  CheckIcon,
+  Collapse,
+  Combobox,
+  Group,
+  InputBase,
+  Slider,
+  Switch,
+  useCombobox,
+} from '@mantine/core'
 import {
   IconBaselineDensityMedium,
   IconBaselineDensitySmall,
@@ -107,7 +116,7 @@ const maxColumnWidthMid = (MAX_COLUMN_WIDTH_MIN + MAX_COLUMN_WIDTH_MAX) / 2
 function DisplayInput({ form }: InputProps) {
   return (
     <>
-      <InputWrapper label="Display">
+      <InputWrapper label="Display Type">
         <DisplayCombobox
           onChange={(value) => {
             form.setFieldValue('display', value)
@@ -115,63 +124,66 @@ function DisplayInput({ form }: InputProps) {
           value={form.getValues().display}
         />
       </InputWrapper>
-      <InputWrapper
-        help="Display Popover on hover."
-        label="Enable Popover"
-        show={form.values.display !== 'tiles'}
-        rightSection={
-          <Switch
-            checked={form.values.enablePopover}
-            onLabel="ON"
-            offLabel="OFF"
-            onChange={(event) => {
-              form.setFieldValue('enablePopover', event.currentTarget.checked)
-            }}
-            size="lg"
-          />
-        }
-      />
-      <InputWrapper
-        help="Display feed items in a grid."
-        label="Enable Grid View"
-        show={form.values.display !== 'tiles'}
-        rightSection={
-          <Switch
-            checked={form.values.gridView}
-            onLabel="ON"
-            offLabel="OFF"
-            onChange={(event) => {
-              form.setFieldValue('gridView', event.currentTarget.checked)
-            }}
-            size="lg"
-          />
-        }
-      />
-      <InputWrapper
-        help="Maximum width before a column wraps to the next row."
-        label="Maximum Column Width"
-        rightSection={`${form.values.maxColumnWidth} Pixel`}
-        show={form.values.display !== 'tiles'}
-      >
-        <Slider
-          disabled={!form.values.gridView || form.values.display === 'tiles'}
-          marks={[
-            { value: MAX_COLUMN_WIDTH_MIN, label: MAX_COLUMN_WIDTH_MIN },
-            { value: maxColumnWidthMid, label: maxColumnWidthMid },
-            { value: MAX_COLUMN_WIDTH_MAX, label: MAX_COLUMN_WIDTH_MAX },
-          ]}
-          mb="lg"
-          min={MAX_COLUMN_WIDTH_MIN}
-          max={MAX_COLUMN_WIDTH_MAX}
-          step={10}
-          px={18}
-          label={null}
-          onChange={(value) => {
-            form.setFieldValue('maxColumnWidth', value)
-          }}
-          value={form.values.maxColumnWidth}
+      <Collapse in={form.values.display !== 'tiles'}>
+        <InputWrapper
+          help="Display Popover on hover."
+          label="Enable Popover"
+          mb="md"
+          rightSection={
+            <Switch
+              checked={form.values.enablePopover}
+              onLabel="ON"
+              offLabel="OFF"
+              onChange={(event) => {
+                form.setFieldValue('enablePopover', event.currentTarget.checked)
+              }}
+              size="lg"
+            />
+          }
         />
-      </InputWrapper>
+        <InputWrapper
+          help="Display feed items in a grid."
+          label="Enable Grid View"
+          rightSection={
+            <Switch
+              checked={form.values.gridView}
+              onLabel="ON"
+              offLabel="OFF"
+              onChange={(event) => {
+                form.setFieldValue('gridView', event.currentTarget.checked)
+              }}
+              size="lg"
+            />
+          }
+        />
+        <Collapse in={form.values.gridView}>
+          <InputWrapper
+            help="Maximum width before a column wraps to the next row."
+            label="Maximum Column Width"
+            mt="md"
+            rightSection={`${form.values.maxColumnWidth} Pixel`}
+          >
+            <Slider
+              disabled={!form.values.gridView || form.values.display === 'tiles'}
+              marks={[
+                { value: MAX_COLUMN_WIDTH_MIN, label: MAX_COLUMN_WIDTH_MIN },
+                { value: maxColumnWidthMid, label: maxColumnWidthMid },
+                { value: MAX_COLUMN_WIDTH_MAX, label: MAX_COLUMN_WIDTH_MAX },
+              ]}
+              mb="lg"
+              min={MAX_COLUMN_WIDTH_MIN}
+              max={MAX_COLUMN_WIDTH_MAX}
+              step={10}
+              px={18}
+              label={null}
+              onChange={(value) => {
+                form.setFieldValue('maxColumnWidth', value)
+              }}
+              value={form.values.maxColumnWidth}
+            />
+          </InputWrapper>
+        </Collapse>
+      </Collapse>
     </>
   )
 }

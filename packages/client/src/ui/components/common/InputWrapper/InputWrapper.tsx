@@ -1,5 +1,6 @@
 import { InputLabel, InputWrapper as MantineInputWrapper, Text } from '@mantine/core'
 import { IconHelpCircle } from '@tabler/icons-react'
+import type { MantineSpacing, StyleProp } from '@mantine/core'
 import type { ReactNode } from 'react'
 
 import Tooltip from '#ui/components/common/Tooltip'
@@ -10,9 +11,10 @@ function InputWrapper({
   children,
   help,
   label,
+  mb,
+  mt,
   required = false,
   rightSection,
-  show = true,
 }: InputWrapperProps) {
   const helpButton = help ? (
     <Tooltip label={help}>
@@ -40,7 +42,7 @@ function InputWrapper({
   }
 
   return (
-    <MantineInputWrapper display={show ? undefined : 'none'}>
+    <MantineInputWrapper mb={mb} mt={mt}>
       <InputLabel className={classes.label} mb={children ? 'xs' : undefined} required={required}>
         {label}
         {helpButton}
@@ -55,9 +57,10 @@ interface InputWrapperProps {
   children?: ReactNode
   help?: string
   label: string
+  mb?: StyleProp<MantineSpacing>
+  mt?: StyleProp<MantineSpacing>
   required?: boolean
   rightSection?: ReactNode
-  show?: boolean
 }
 
 export default InputWrapper
