@@ -26,7 +26,7 @@ function Window({ rowHeight, items, overscanCount = 1, tab }: WindowProps) {
 
   if (tab.gridView || tab.display === 'tiles') {
     return (
-      <Scroller key="component-grid">
+      <Scroller showScrollToTop key="component-grid">
         {({ width, height, contentNodeRef, scrollableNodeRef }) => (
           <Grid
             width={width}
@@ -45,7 +45,7 @@ function Window({ rowHeight, items, overscanCount = 1, tab }: WindowProps) {
   }
 
   return (
-    <Scroller key="component-list">
+    <Scroller showScrollToTop key="component-list">
       {({ height, contentNodeRef, scrollableNodeRef }) => (
         <List
           height={height}
