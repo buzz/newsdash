@@ -25,20 +25,19 @@ const ListRow = memo(function ListRow({
   )
 })
 
-function List({ height, items, rowHeight, tab, innerElementType, ...otherProps }: GridListProps) {
+function List({ items, rowHeight, tab, innerElementType, ...otherProps }: GridListProps) {
   const itemCount = items.length
   const itemData = useMemo(() => ({ items, tab }), [items, tab])
 
   return (
     <FixedSizeList
-      {...otherProps}
-      width="100%"
-      height={height}
       innerElementType={innerElementType}
       itemCount={itemCount}
       itemData={itemData}
       itemKey={listItemKey}
       itemSize={rowHeight}
+      {...otherProps}
+      width="100%"
     >
       {ListRow}
     </FixedSizeList>

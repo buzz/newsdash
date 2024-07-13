@@ -1,4 +1,5 @@
-import type { ComponentType, CSSProperties, Ref } from 'react'
+import type { CSSProperties } from 'react'
+import type { CommonProps as ReactWindowProps } from 'react-window'
 
 import type { Tab } from '@newsdash/common/schema'
 
@@ -14,8 +15,8 @@ interface GridData extends ListData {
   rowCount: number
 }
 
-interface GridListProps {
-  className: string
+interface GridListProps
+  extends Pick<ReactWindowProps, 'innerElementType' | 'innerRef' | 'outerRef'> {
   height: number
   width: number
 
@@ -23,10 +24,6 @@ interface GridListProps {
   overscanCount: number
   rowHeight: number
   tab: Tab
-
-  innerElementType: ComponentType<InnerElementProps>
-  innerRef: Ref<HTMLElement | undefined>
-  outerRef: Ref<HTMLElement | undefined>
 }
 
 interface InnerElementProps {

@@ -35,6 +35,7 @@
     "react-redux": "^9.1.2",
     "react-window": "^1.8.10",
     "reduce-reducers": "^1.0.4",
+    "simplebar-core": "^1.2.6",
     "simplebar-react": "^3.2.6",
     "timeago.js": "^4.0.2",
     "tinycolor2": "^1.6.0",

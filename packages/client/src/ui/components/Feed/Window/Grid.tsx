@@ -33,16 +33,7 @@ const GridCell = memo(function GridCell({
   )
 })
 
-function Grid({
-  width,
-  height,
-  items,
-  overscanCount,
-  rowHeight,
-  tab,
-  innerElementType,
-  ...otherProps
-}: GridListProps) {
+function Grid({ width, items, overscanCount, tab, ...otherProps }: GridListProps) {
   const maxColumnWidth = tab.display === 'tiles' ? IMG_WIDTH : tab.maxColumnWidth
   const columnCount = Math.max(1, Math.floor(width / maxColumnWidth) + 1)
   const itemCount = items.length
@@ -57,10 +48,7 @@ function Grid({
       columnCount={columnCount}
       columnWidth={width / columnCount}
       rowCount={rowCount}
-      rowHeight={rowHeight}
       width={width}
-      height={height}
-      innerElementType={innerElementType}
       itemData={itemData}
       itemKey={gridItemKey}
       overscanRowCount={overscanCount}

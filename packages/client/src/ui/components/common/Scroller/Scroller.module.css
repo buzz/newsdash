@@ -40,9 +40,10 @@
     width: 100%;
     height: 100%;
     overflow-x: hidden;
-  }
-}
 
-.hideNativeScrollbars {
-  scrollbar-width: none !important;
+    /* Hide native scrollbars */
+    :has(> :global(.simplebar-content)) {
+      scrollbar-width: none;
+    }
+  }
 }

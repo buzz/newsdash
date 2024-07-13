@@ -28,32 +28,26 @@ function EditFeedForm({ mode, tab }: EditFeedFormProps) {
       <Paper className={classes.paper}>
         <div className={classes.scrollWrapper}>
           <Scroller>
-            {({ className, contentNodeRef, scrollableNodeRef }) => (
-              <div className={className} ref={scrollableNodeRef}>
-                <div className={classes.content} ref={contentNodeRef}>
-                  <Title className={classes.title} order={3}>
-                    <FeedIcon className={classes.feedIcon} tab={tab} />
-                    <span className={classes.text}>
-                      {mode === 'new' ? 'Add Feed' : getTitle(tab)}
-                    </span>
-                  </Title>
-                  <form className={classes.form} onSubmit={onSubmit} ref={focusTrapRef}>
-                    <UrlInput form={form} />
-                    <TitleInput
-                      disabled={form.getValues().customTitle === ''}
-                      form={form}
-                      placeholder={tab.title}
-                    />
-                    <Divider label="Display" />
-                    <DisplayInput form={form} />
-                    <Divider label="Color" />
-                    <ColorInput disabled={!tabColors} form={form} />
-                    <Divider />
-                    <ButtonGroup mode={mode} onCancel={onCancel} onDelete={onDelete} />
-                  </form>
-                </div>
-              </div>
-            )}
+            <div className={classes.content}>
+              <Title className={classes.title} order={3}>
+                <FeedIcon className={classes.feedIcon} tab={tab} />
+                <span className={classes.text}>{mode === 'new' ? 'Add Feed' : getTitle(tab)}</span>
+              </Title>
+              <form className={classes.form} onSubmit={onSubmit} ref={focusTrapRef}>
+                <UrlInput form={form} />
+                <TitleInput
+                  disabled={form.getValues().customTitle === ''}
+                  form={form}
+                  placeholder={tab.title}
+                />
+                <Divider label="Display" />
+                <DisplayInput form={form} />
+                <Divider label="Color" />
+                <ColorInput disabled={!tabColors} form={form} />
+                <Divider />
+                <ButtonGroup mode={mode} onCancel={onCancel} onDelete={onDelete} />
+              </form>
+            </div>
           </Scroller>
         </div>
       </Paper>

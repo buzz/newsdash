@@ -13,6 +13,7 @@ import type { InnerElementProps } from './types'
 
 const InnerElement = forwardRef<HTMLDivElement, InnerElementProps>(({ style, ...rest }, ref) => (
   <div
+    className="simplebar-content"
     ref={ref}
     style={{ ...style, height: `${parseHeight(style.height) + 2 * SCROLLER_PADDING_Y}px` }}
     {...rest}
@@ -27,11 +28,10 @@ function Window({ rowHeight, items, overscanCount = 1, tab }: WindowProps) {
 
   return (
     <Scroller key={key}>
-      {({ className, width, height, contentNodeRef, scrollableNodeRef }) => (
+      {({ width, height, contentNodeRef, scrollableNodeRef }) => (
         <WindowComponent
           width={width}
           height={height}
-          className={className}
           items={items}
           overscanCount={overscanCount}
           rowHeight={rowHeight}
