@@ -42,6 +42,11 @@
       line-clamp: 1;
       overflow: hidden;
       text-overflow: ellipsis;
+
+      .badge {
+        float: right;
+        margin-left: calc(0.5 * var(--mantine-spacing-xs));
+      }
     }
 
     .content {
