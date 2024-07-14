@@ -2,7 +2,7 @@ import {
   Notifications as MantineNotifications,
   notifications as mantineNotifications,
 } from '@mantine/notifications'
-import { IconExclamationMark, IconInfoCircle } from '@tabler/icons-react'
+import { IconCheck, IconExclamationMark, IconInfoCircle } from '@tabler/icons-react'
 import { useEffect } from 'react'
 import type { NotificationData as MantineNotificationData } from '@mantine/notifications'
 
@@ -15,20 +15,33 @@ import type { NotificationShow } from '#types/types'
 const AUTO_CLOSE = 10_000
 
 function toMantineNotification(data: NotificationShow['data']): MantineNotificationData {
-  if (data.type === 'error') {
-    return {
-      title: data.title,
-      message: `Error: ${data.message}`,
-      autoClose: AUTO_CLOSE,
-      color: 'red',
-      icon: <IconExclamationMark />,
+  switch (data.type) {
+    case 'error': {
+      return {
+        autoClose: AUTO_CLOSE,
+        color: 'red',
+        icon: <IconExclamationMark />,
+        message: `Error: ${data.message}`,
+        title: data.title,
+      }
     }
-  }
-  return {
-    title: data.title,
-    message: data.message,
-    icon: <IconInfoCircle />,
-    autoClose: AUTO_CLOSE,
+    case 'success': {
+      return {
+        autoClose: AUTO_CLOSE,
+        color: 'green',
+        icon: <IconCheck />,
+        message: data.message,
+        title: data.title,
+      }
+    }
+    default: {
+      return {
+        autoClose: AUTO_CLOSE,
+        icon: <IconInfoCircle />,
+        message: data.message,
+        title: data.title,
+      }
+    }
   }
 }
 

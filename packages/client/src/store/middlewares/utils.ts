@@ -1,7 +1,10 @@
 import type { SerializedError } from '@reduxjs/toolkit'
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 
+import type { PersistLayout } from '@newsdash/common/schema'
+
 import { isArbitraryObject } from '#types/typeGuards'
+import type { NormalizedEntities } from '#types/types'
 
 import type { AppListenerEffectAPI } from './types'
 
@@ -23,4 +26,23 @@ function extractQueryError(error: FetchBaseQueryError | SerializedError): string
   return 'Unknown error'
 }
 
-export { debounce, extractQueryError }
+function fromPersistLayout({ boxes, panels, tabs }: PersistLayout): NormalizedEntities {
+  if (boxes.length === 0 || panels.length === 0 || tabs.length === 0) {
+    throw new Error('Invalid persisted layout')
+  }
+
+  return {
+    boxes,
+    panels: panels.map((panel) => ({
+      ...panel,
+      activeId: tabs.find((tab) => tab.parentId === panel.id && tab.order === 0)?.id,
+    })),
+    tabs: tabs.map((tab) => ({
+      ...tab,
+      lastFetched: 0,
+      status: 'loaded',
+    })),
+  }
+}
+
+export { debounce, extractQueryError, fromPersistLayout }

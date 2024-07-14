@@ -1,6 +1,7 @@
 import type { CaseReducer, PayloadAction } from '@reduxjs/toolkit'
 
-import type { NormalizedEntities, NormalizedLayoutState } from '#store/utils/LayoutNormalizer'
+import type { NormalizedLayoutState } from '#store/utils/LayoutNormalizer'
+import type { NormalizedEntities } from '#types/types'
 
 import boxesEntityAdapter from './entities/boxes/boxesEntityAdapter'
 import panelsEntityAdapter from './entities/panels/panelsEntityAdapter'

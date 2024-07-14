@@ -1,4 +1,6 @@
-import { extractQueryError } from '#store/middlewares/utils'
+import { isError } from 'lodash-es'
+
+import { extractQueryError, fromPersistLayout } from '#store/middlewares/utils'
 import layoutApi from '#store/slices/api/layoutApi'
 import { init } from '#store/slices/app/actions'
 import { layoutRestored, restoreLayout } from '#store/slices/layout/actions'
@@ -12,36 +14,30 @@ function restoreLayoutEffect(startListening: AppStartListening) {
     effect: async (action, listenerApi) => {
       try {
         const getLayout = layoutApi.endpoints.getLayout.initiate()
-        const { isError, error, isSuccess, data } = await listenerApi.dispatch(getLayout)
+        const {
+          isError: isQueryError,
+          error,
+          isSuccess,
+          data,
+        } = await listenerApi.dispatch(getLayout)
 
-        if (isError) {
-          console.error(error)
-          listenerApi.dispatch(
-            showNotification({
-              title: 'Failed to load layout',
-              message: extractQueryError(error),
-              type: 'error',
-            })
-          )
+        if (isQueryError) {
+          throw new Error(extractQueryError(error))
         } else if (isSuccess) {
-          const { boxes, panels, tabs } = data
-          if (boxes.length > 0 && panels.length > 0 && tabs.length > 0) {
-            listenerApi.dispatch(
-              restoreLayout({
-                boxes,
-                panels: panels.map((panel) => ({
-                  ...panel,
-                  activeId: tabs.find((tab) => tab.parentId === panel.id && tab.order === 0)?.id,
-                })),
-                tabs: tabs.map((tab) => ({
-                  ...tab,
-                  lastFetched: 0,
-                  status: 'loaded',
-                })),
-              })
-            )
-          }
+          listenerApi.dispatch(restoreLayout(fromPersistLayout(data)))
         }
+      } catch (error) {
+        let message: string | undefined
+        if (isError(error)) {
+          message = error.message
+        }
+        listenerApi.dispatch(
+          showNotification({
+            title: 'Failed to load layout',
+            message: message ?? 'Unknown error',
+            type: 'error',
+          })
+        )
       } finally {
         listenerApi.dispatch(layoutRestored())
         listenerApi.unsubscribe()

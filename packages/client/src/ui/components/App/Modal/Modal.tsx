@@ -5,6 +5,7 @@ import { DEFAULT_BLUR } from '#constants'
 import { closeModal } from '#store/slices/app/actions'
 import { selectModal } from '#store/slices/app/selectors'
 import AboutModal from '#ui/components/modals/AboutModal/AboutModal'
+import ImportExportModal from '#ui/components/modals/ImportExportModal/ImportExportModal'
 import SettingsModal from '#ui/components/modals/SettingsModal/SettingsModal'
 import { useDispatch, useSelector } from '#ui/hooks/store'
 import type { ModalName } from '#types/types'
@@ -13,6 +14,7 @@ import classes from './Modal.module.css'
 
 const MODAL_MAPPING: Record<ModalName, ComponentType> = {
   about: AboutModal,
+  'import-export': ImportExportModal,
   settings: SettingsModal,
 }
 
@@ -23,9 +25,8 @@ function getModalComponent(name: ModalName | null) {
 function Modal() {
   const dispatch = useDispatch()
   const modalName = useSelector(selectModal)
-  const {
-    other: { transition },
-  } = useMantineTheme()
+  const { other } = useMantineTheme()
+  const { transition } = other
 
   const ModalComponent = getModalComponent(modalName)
 

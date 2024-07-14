@@ -1,9 +1,10 @@
 import type { BoxData, LayoutBase, PanelData, TabData } from 'rc-dock'
 
 import { layout } from '@newsdash/common/schema'
-import type { Box, Panel, Tab } from '@newsdash/common/schema'
+import type { Tab } from '@newsdash/common/schema'
 
 import { isBoxData, isPanelData } from '#types/typeGuards'
+import type { NormalizedEntities } from '#types/types'
 
 /**
  * Transform layout to be saved in store.
@@ -107,12 +108,6 @@ class LayoutNormalizer {
   }
 }
 
-interface NormalizedEntities {
-  boxes: Box[]
-  panels: Panel[]
-  tabs: Tab[]
-}
-
 interface NormalizedLayoutState {
   entities: NormalizedEntities
   removeIds: {
@@ -122,5 +117,5 @@ interface NormalizedLayoutState {
   }
 }
 
-export type { NormalizedEntities, NormalizedLayoutState }
+export type { NormalizedLayoutState }
 export default LayoutNormalizer

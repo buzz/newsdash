@@ -1,18 +1,8 @@
-import isLocale from 'validator/lib/isLocale'
-import { z } from 'zod'
+import type { z } from 'zod'
 
-import {
-  FETCH_INTERVAL_MAX,
-  FETCH_INTERVAL_MIN,
-  ITEMS_TO_KEEP_MAX,
-  ITEMS_TO_KEEP_MIN,
-  LIGHTNESS_MAX,
-  LIGHTNESS_MIN,
-  SATURATION_MAX,
-  SATURATION_MIN,
-} from '#constants'
+import type { normalizedEntitiesSchema, settingsSchema } from './schema'
 
-type ModalName = 'about' | 'settings'
+type ModalName = 'about' | 'import-export' | 'settings'
 
 /** Arbitrary object */
 type ArbitraryObject = Record<string, unknown>
@@ -34,7 +24,7 @@ interface NotificationShow {
   data: {
     message: string
     title: string
-    type: 'error' | 'notice'
+    type: 'error' | 'notice' | 'success'
   }
 }
 
@@ -50,28 +40,18 @@ interface DisplayParams {
   overscanCount?: number
 }
 
-const localeSchema = z.string().refine(isLocale, { message: 'Not a valid locale' })
-
-const settingsSchema = z.object({
-  tabColors: z.boolean(),
-  lightness: z.number().int().min(LIGHTNESS_MIN).max(LIGHTNESS_MAX),
-  saturation: z.number().int().min(SATURATION_MIN).max(SATURATION_MAX),
-  fetchInterval: z.number().int().min(FETCH_INTERVAL_MIN).max(FETCH_INTERVAL_MAX),
-  itemsToKeep: z.number().int().min(ITEMS_TO_KEEP_MIN).max(ITEMS_TO_KEEP_MAX),
-  dateLocale: z.optional(localeSchema),
-  dateHour12: z.optional(z.boolean()),
-})
-
 type Settings = z.infer<typeof settingsSchema>
+
+type NormalizedEntities = z.infer<typeof normalizedEntitiesSchema>
 
 export type {
   AppState,
   ArbitraryObject,
   DisplayParams,
   ModalName,
+  NormalizedEntities,
   Notification,
   NotificationHide,
   NotificationShow,
   Settings,
 }
-export { localeSchema, settingsSchema }

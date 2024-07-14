@@ -1,5 +1,6 @@
 import { AppShell, Group, Transition, useMantineColorScheme, useMantineTheme } from '@mantine/core'
 import {
+  IconArrowsUpDown,
   IconInfoSquare,
   IconMoonStars,
   IconPlus,
@@ -51,7 +52,7 @@ function Header() {
                   onClick={() => {
                     toggleColorScheme()
                   }}
-                  tooltip="Toggle color scheme"
+                  tooltip="Toggle Color Scheme"
                 >
                   {colorScheme === 'dark' ? (
                     <IconSun size="1.3rem" />
@@ -61,9 +62,15 @@ function Header() {
                 </HeaderButton>
                 <HeaderButton
                   onClick={() => dispatch(openModal('settings'))}
-                  tooltip="Open settings"
+                  tooltip="Open Settings"
                 >
                   <IconSettings />
+                </HeaderButton>
+                <HeaderButton
+                  onClick={() => dispatch(openModal('import-export'))}
+                  tooltip="Import/Export Settings"
+                >
+                  <IconArrowsUpDown />
                 </HeaderButton>
                 <HeaderButton onClick={() => dispatch(openModal('about'))} tooltip="About newsdash">
                   <IconInfoSquare />
@@ -71,7 +78,7 @@ function Header() {
                 <HeaderButton
                   color="red"
                   onClick={() => dispatch(changeHeaderVisibile(false))}
-                  tooltip="Close navigation bar"
+                  tooltip="Close Navigation Bar"
                 >
                   <IconX />
                 </HeaderButton>

@@ -1,6 +1,7 @@
 import type { LayoutBase } from 'rc-dock'
 
-import type { NormalizedEntities, NormalizedLayoutState } from '#store/utils/LayoutNormalizer'
+import type { NormalizedLayoutState } from '#store/utils/LayoutNormalizer'
+import type { NormalizedEntities } from '#types/types'
 
 import layoutSlice from './layoutSlice'
 
