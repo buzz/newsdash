@@ -1,14 +1,20 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 
+import {
+  FETCH_INTERVAL_DEFAULT,
+  ITEMS_TO_KEEP_DEFAULT,
+  LIGHTNESS_DEFAULT,
+  SATURATION_DEFAULT,
+} from '#constants'
 import createSlice from '#store/createSlice'
 import type { Settings } from '#types/types'
 
 const initialState: Settings = {
   tabColors: true,
-  saturation: 50,
-  lightness: 0,
-  fetchInterval: 10,
-  itemsToKeep: 100,
+  saturation: SATURATION_DEFAULT,
+  lightness: LIGHTNESS_DEFAULT,
+  fetchInterval: FETCH_INTERVAL_DEFAULT,
+  itemsToKeep: ITEMS_TO_KEEP_DEFAULT,
 }
 
 const settingsSlice = createSlice({
