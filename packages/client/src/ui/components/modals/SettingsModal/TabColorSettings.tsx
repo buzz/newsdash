@@ -1,17 +1,14 @@
-import { Slider, Switch } from '@mantine/core'
+import { Collapse, Slider, Switch } from '@mantine/core'
 import { useEffect, useState } from 'react'
 
 import { LIGHTNESS_MAX, LIGHTNESS_MIN, SATURATION_MAX, SATURATION_MIN } from '#constants'
-import { updateSettings } from '#store/slices/settings/actions'
 import InputWrapper from '#ui/components/common/InputWrapper/InputWrapper'
-import { useDispatch } from '#ui/hooks/store'
-import type { Settings } from '#types/types'
+
+import type { SettingsProps } from './types'
 
 const formatPercent = (value: number) => `${value} %`
 
-function TabColorSettings({ settings, throttledUpdateSettings }: TabColorSettingsProps) {
-  const dispatch = useDispatch()
-
+function TabColorSettings({ settings, throttledUpdateSettings }: SettingsProps) {
   const [saturation, setSaturation] = useState(settings.saturation)
   const [lightness, setLightness] = useState(settings.lightness)
 
@@ -30,66 +27,63 @@ function TabColorSettings({ settings, throttledUpdateSettings }: TabColorSetting
             checked={settings.tabColors}
             onLabel="ON"
             offLabel="OFF"
-            onChange={(event) =>
-              dispatch(updateSettings({ tabColors: event.currentTarget.checked }))
-            }
+            onChange={(event) => {
+              throttledUpdateSettings({ tabColors: event.currentTarget.checked })
+            }}
             size="lg"
           />
         }
       />
-      <InputWrapper
-        help="Set the global saturation for all tab colors."
-        label="Saturation"
-        rightSection={formatPercent(saturation)}
-      >
-        <Slider
-          disabled={!settings.tabColors}
-          marks={[
-            { value: SATURATION_MIN, label: `${SATURATION_MIN} %` },
-            { value: 50, label: '50 %' },
-            { value: SATURATION_MAX, label: `${SATURATION_MAX} %` },
-          ]}
-          mb="lg"
-          min={SATURATION_MIN}
-          max={SATURATION_MAX}
-          label={null}
-          onChange={(value) => {
-            setSaturation(value)
-            throttledUpdateSettings({ saturation: value })
-          }}
-          value={saturation}
-        />
-      </InputWrapper>
-      <InputWrapper
-        help="Set the global lightness for all tab colors."
-        label="Lightness"
-        rightSection={formatPercent(lightness)}
-      >
-        <Slider
-          disabled={!settings.tabColors}
-          marks={[
-            { value: LIGHTNESS_MIN, label: `${LIGHTNESS_MIN} %` },
-            { value: 0, label: '0 %' },
-            { value: LIGHTNESS_MAX, label: `${LIGHTNESS_MAX} %` },
-          ]}
-          mb="lg"
-          min={LIGHTNESS_MIN}
-          max={LIGHTNESS_MAX}
-          label={null}
-          onChange={(value) => {
-            setLightness(value)
-            throttledUpdateSettings({ lightness: value })
-          }}
-          value={lightness}
-        />
-      </InputWrapper>
+      <Collapse in={settings.tabColors}>
+        <InputWrapper
+          help="Set the global saturation for all tab colors."
+          label="Saturation"
+          rightSection={formatPercent(saturation)}
+        >
+          <Slider
+            disabled={!settings.tabColors}
+            marks={[
+              { value: SATURATION_MIN, label: `${SATURATION_MIN} %` },
+              { value: 50, label: '50 %' },
+              { value: SATURATION_MAX, label: `${SATURATION_MAX} %` },
+            ]}
+            mb="xl"
+            min={SATURATION_MIN}
+            max={SATURATION_MAX}
+            label={null}
+            onChange={(value) => {
+              setSaturation(value)
+              throttledUpdateSettings({ saturation: value })
+            }}
+            value={saturation}
+          />
+        </InputWrapper>
+        <InputWrapper
+          help="Set the global lightness for all tab colors."
+          label="Lightness"
+          rightSection={formatPercent(lightness)}
+        >
+          <Slider
+            disabled={!settings.tabColors}
+            marks={[
+              { value: LIGHTNESS_MIN, label: `${LIGHTNESS_MIN} %` },
+              { value: 0, label: '0 %' },
+              { value: LIGHTNESS_MAX, label: `${LIGHTNESS_MAX} %` },
+            ]}
+            mb="lg"
+            min={LIGHTNESS_MIN}
+            max={LIGHTNESS_MAX}
+            label={null}
+            onChange={(value) => {
+              setLightness(value)
+              throttledUpdateSettings({ lightness: value })
+            }}
+            value={lightness}
+          />
+        </InputWrapper>
+      </Collapse>
     </>
   )
-}
-
-interface TabColorSettingsProps {
-  settings: Settings
-  throttledUpdateSettings: (settings: Partial<Settings>) => void
 }
 
 export default TabColorSettings

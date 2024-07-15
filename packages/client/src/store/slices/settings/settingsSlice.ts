@@ -15,6 +15,8 @@ const initialState: Settings = {
   lightness: LIGHTNESS_DEFAULT,
   fetchInterval: FETCH_INTERVAL_DEFAULT,
   itemsToKeep: ITEMS_TO_KEEP_DEFAULT,
+  dateHour12: undefined,
+  dateLocale: undefined,
 }
 
 const settingsSlice = createSlice({

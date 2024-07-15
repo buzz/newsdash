@@ -10,7 +10,7 @@ import classes from './Popover.module.css'
 
 const OPEN_DELAY = 500
 
-function formatDateTime(isoDate: string, locale?: string, hour12 = false) {
+function formatDateTime(isoDate: string, locale?: string, hour12?: boolean) {
   return new Intl.DateTimeFormat(locale, {
     dateStyle: 'long',
     timeStyle: 'short',

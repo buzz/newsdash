@@ -1,7 +1,9 @@
-import { Box, Center, SegmentedControl, useMantineColorScheme } from '@mantine/core'
-import { type Icon, IconDeviceDesktop, IconMoonStars, IconSun } from '@tabler/icons-react'
+import { SegmentedControl, useMantineColorScheme } from '@mantine/core'
+import { IconDeviceDesktop, IconMoonStars, IconSun } from '@tabler/icons-react'
 
 import { isColorScheme } from '#types/typeGuards'
+
+import Label from './Label'
 
 const data = [
   {
@@ -17,20 +19,6 @@ const data = [
     value: 'dark',
   },
 ]
-
-function Label({ icon: Icon, text }: LabelProps) {
-  return (
-    <Center>
-      <Icon size="1rem" />
-      <Box ml={10}>{text}</Box>
-    </Center>
-  )
-}
-
-interface LabelProps {
-  icon: Icon
-  text: string
-}
 
 function ColorSchemeModeChooser() {
   const { setColorScheme, colorScheme } = useMantineColorScheme()

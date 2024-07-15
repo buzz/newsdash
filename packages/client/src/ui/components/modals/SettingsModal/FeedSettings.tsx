@@ -8,9 +8,10 @@ import {
   ITEMS_TO_KEEP_MIN,
 } from '#constants'
 import InputWrapper from '#ui/components/common/InputWrapper/InputWrapper'
-import type { Settings } from '#types/types'
 
-function FeedSettings({ settings, throttledUpdateSettings }: FeedSettingsProps) {
+import type { SettingsProps } from './types'
+
+function FeedSettings({ settings, throttledUpdateSettings }: SettingsProps) {
   const [fetchInterval, setFetchInterval] = useState(settings.fetchInterval)
   const [itemsToKeep, setItemsToKeep] = useState(settings.itemsToKeep)
 
@@ -67,11 +68,6 @@ function FeedSettings({ settings, throttledUpdateSettings }: FeedSettingsProps) 
       </InputWrapper>
     </>
   )
-}
-
-interface FeedSettingsProps {
-  settings: Settings
-  throttledUpdateSettings: (settings: Partial<Settings>) => void
 }
 
 export default FeedSettings

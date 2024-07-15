@@ -12,6 +12,7 @@ import type { Settings } from '#types/types'
 
 import ColorSchemeModeChooser from './ColorSchemeModeChooser'
 import FeedSettings from './FeedSettings'
+import LocaleSettings from './LocaleSettings'
 import TabColorSettings from './TabColorSettings'
 
 function SettingsModal() {
@@ -33,6 +34,8 @@ function SettingsModal() {
         <TabColorSettings settings={settings} throttledUpdateSettings={throttledUpdateSettings} />
         <Divider label="Feeds" />
         <FeedSettings settings={settings} throttledUpdateSettings={throttledUpdateSettings} />
+        <Divider label="Locale Settings" />
+        <LocaleSettings settings={settings} throttledUpdateSettings={throttledUpdateSettings} />
       </Stack>
     </ModalInner>
   )
