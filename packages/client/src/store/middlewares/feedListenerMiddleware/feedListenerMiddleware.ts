@@ -1,6 +1,6 @@
 import { createListenerMiddleware } from '@reduxjs/toolkit'
 
-import type { AppStartListening } from '#store/middlewares/types'
+import { listenToEffects } from '#store/middlewares/utils'
 
 import editFeedEffect from './effects/editFeedEffect'
 import periodicFetchEffect from './effects/periodicFetchEffect'
@@ -11,9 +11,8 @@ import removeTabEffect from './effects/removeTabEffect'
 import restoreFeedItemsEffect from './effects/restoreFeedItemsEffect'
 
 const feedListenerMiddleware = createListenerMiddleware()
-const startListening = feedListenerMiddleware.startListening as AppStartListening
 
-const effects = [
+listenToEffects(feedListenerMiddleware, [
   editFeedEffect,
   periodicFetchEffect,
   persistFeedItemsEffect,
@@ -21,10 +20,6 @@ const effects = [
   removeOldFeedItemsEffect,
   removeTabEffect,
   restoreFeedItemsEffect,
-]
-
-for (const effect of effects) {
-  effect(startListening)
-}
+])
 
 export default feedListenerMiddleware

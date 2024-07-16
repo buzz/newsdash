@@ -1,18 +1,17 @@
 import { createListenerMiddleware } from '@reduxjs/toolkit'
 
-import type { AppStartListening } from '#store/middlewares/types'
+import { listenToEffects } from '#store/middlewares/utils'
 
 import importSettingsEffect from './effects/importSettingsEffect'
 import persistSettingsEffect from './effects/persistSettingsEffect'
 import restoreSettingsEffect from './effects/restoreSettingsEffect'
 
 const appListenerMiddleware = createListenerMiddleware()
-const startListening = appListenerMiddleware.startListening as AppStartListening
 
-const effects = [importSettingsEffect, persistSettingsEffect, restoreSettingsEffect]
-
-for (const effect of effects) {
-  effect(startListening)
-}
+listenToEffects(appListenerMiddleware, [
+  importSettingsEffect,
+  persistSettingsEffect,
+  restoreSettingsEffect,
+])
 
 export default appListenerMiddleware

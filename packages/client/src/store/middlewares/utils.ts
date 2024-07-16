@@ -1,4 +1,4 @@
-import type { SerializedError } from '@reduxjs/toolkit'
+import type { ListenerMiddlewareInstance, SerializedError } from '@reduxjs/toolkit'
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 
 import type { PersistLayout } from '@newsdash/common/schema'
@@ -6,7 +6,7 @@ import type { PersistLayout } from '@newsdash/common/schema'
 import { isArbitraryObject } from '#types/typeGuards'
 import type { NormalizedEntities } from '#types/types'
 
-import type { AppListenerEffectAPI } from './types'
+import type { AppListenerEffectAPI, AppStartListening } from './types'
 
 async function debounce(listenerApi: AppListenerEffectAPI, delay: number) {
   listenerApi.cancelActiveListeners()
@@ -45,4 +45,13 @@ function fromPersistLayout({ boxes, panels, tabs }: PersistLayout): NormalizedEn
   }
 }
 
-export { debounce, extractQueryError, fromPersistLayout }
+function listenToEffects(
+  middleware: ListenerMiddlewareInstance,
+  effects: ((startListening: AppStartListening) => void)[]
+) {
+  for (const effect of effects) {
+    effect(middleware.startListening as AppStartListening)
+  }
+}
+
+export { debounce, extractQueryError, fromPersistLayout, listenToEffects }
