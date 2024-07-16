@@ -1,4 +1,4 @@
-import { Box, Paper, Title } from '@mantine/core'
+import { Box, Paper, Text, Title } from '@mantine/core'
 import { useFocusTrap } from '@mantine/hooks'
 
 import selectSettings from '#store/slices/settings/selectors'
@@ -31,7 +31,9 @@ function EditFeedForm({ mode, tab }: EditFeedFormProps) {
             <div className={classes.content}>
               <Title className={classes.title} order={3}>
                 <FeedIcon className={classes.feedIcon} tab={tab} />
-                <span className={classes.text}>{mode === 'new' ? 'Add Feed' : getTitle(tab)}</span>
+                <Text component="span" fz="xl" truncate>
+                  {mode === 'new' ? 'Add Feed' : getTitle(tab)}
+                </Text>
               </Title>
               <form className={classes.form} onSubmit={onSubmit} ref={focusTrapRef}>
                 <Divider label="General" />
