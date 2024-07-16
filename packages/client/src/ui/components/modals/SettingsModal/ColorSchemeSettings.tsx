@@ -2,6 +2,7 @@ import { SegmentedControl, useMantineColorScheme } from '@mantine/core'
 import { IconDeviceDesktop, IconMoonStars, IconSun } from '@tabler/icons-react'
 
 import { isColorScheme } from '#types/typeGuards'
+import InputWrapper from '#ui/components/common/InputWrapper/InputWrapper'
 
 import Label from './Label'
 
@@ -20,7 +21,7 @@ const data = [
   },
 ]
 
-function ColorSchemeModeChooser() {
+function ColorSchemeSettings() {
   const { setColorScheme, colorScheme } = useMantineColorScheme()
 
   const onChange = (value: string) => {
@@ -29,7 +30,11 @@ function ColorSchemeModeChooser() {
     }
   }
 
-  return <SegmentedControl data={data} fullWidth onChange={onChange} value={colorScheme} />
+  return (
+    <InputWrapper label="Color Scheme">
+      <SegmentedControl data={data} fullWidth onChange={onChange} value={colorScheme} />
+    </InputWrapper>
+  )
 }
 
-export default ColorSchemeModeChooser
+export default ColorSchemeSettings

@@ -1,27 +1,12 @@
 import type { PayloadAction } from '@reduxjs/toolkit'
 
-import {
-  FETCH_INTERVAL_DEFAULT,
-  ITEMS_TO_KEEP_DEFAULT,
-  LIGHTNESS_DEFAULT,
-  SATURATION_DEFAULT,
-} from '#constants'
 import createSlice from '#store/createSlice'
+import { settingsSchema } from '#types/schema'
 import type { Settings } from '#types/types'
-
-const initialState: Settings = {
-  tabColors: true,
-  saturation: SATURATION_DEFAULT,
-  lightness: LIGHTNESS_DEFAULT,
-  fetchInterval: FETCH_INTERVAL_DEFAULT,
-  itemsToKeep: ITEMS_TO_KEEP_DEFAULT,
-  dateHour12: undefined,
-  dateLocale: undefined,
-}
 
 const settingsSlice = createSlice({
   name: 'settings',
-  initialState: initialState,
+  initialState: settingsSchema.parse({}),
 
   reducers: {
     updateSettings: (state, { payload }: PayloadAction<Partial<Settings>>) => ({

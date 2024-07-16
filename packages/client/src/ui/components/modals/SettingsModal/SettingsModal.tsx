@@ -6,13 +6,13 @@ import { updateSettings as updateSettingsAction } from '#store/slices/settings/a
 import selectSettings from '#store/slices/settings/selectors'
 import ModalInner from '#ui/components/App/Modal/ModalInner'
 import Divider from '#ui/components/common/Divider/Divider'
-import InputWrapper from '#ui/components/common/InputWrapper/InputWrapper'
 import { useDispatch, useSelector } from '#ui/hooks/store'
 import type { Settings } from '#types/types'
 
-import ColorSchemeModeChooser from './ColorSchemeModeChooser'
+import ColorSchemeSettings from './ColorSchemeSettings'
 import FeedSettings from './FeedSettings'
 import LocaleSettings from './LocaleSettings'
+import SlideAnimationSettings from './SlideAnimationSettings'
 import TabColorSettings from './TabColorSettings'
 
 function SettingsModal() {
@@ -24,18 +24,19 @@ function SettingsModal() {
     100
   )
 
+  const props = { settings, throttledUpdateSettings }
+
   return (
     <ModalInner icon={<IconSettings />} title="Settings">
       <Stack gap="md">
         <Divider label="Appearance" />
-        <InputWrapper label="Color Scheme">
-          <ColorSchemeModeChooser />
-        </InputWrapper>
-        <TabColorSettings settings={settings} throttledUpdateSettings={throttledUpdateSettings} />
+        <ColorSchemeSettings />
+        <TabColorSettings {...props} />
+        <SlideAnimationSettings {...props} />
         <Divider label="Feeds" />
-        <FeedSettings settings={settings} throttledUpdateSettings={throttledUpdateSettings} />
+        <FeedSettings {...props} />
         <Divider label="Locale Settings" />
-        <LocaleSettings settings={settings} throttledUpdateSettings={throttledUpdateSettings} />
+        <LocaleSettings {...props} />
       </Stack>
     </ModalInner>
   )
