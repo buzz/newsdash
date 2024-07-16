@@ -73,6 +73,7 @@ function LocaleSettings({ settings, throttledUpdateSettings }: SettingsProps) {
       }
     } else {
       setDateLocale(undefined)
+      setDateLocaleError(undefined)
     }
 
     throttledUpdateSettings({ dateLocale: undefined })

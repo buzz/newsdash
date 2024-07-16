@@ -156,7 +156,7 @@ function DisplayInput({ form }: InputProps) {
             />
           }
         />
-        <Collapse in={form.values.gridView}>
+        <Collapse in={form.values.gridView} pl="sm">
           <InputWrapper
             help="Maximum width before a column wraps to the next row."
             label="Maximum Column Width"

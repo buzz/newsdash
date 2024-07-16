@@ -37,6 +37,7 @@ function FeedSettings({ settings, throttledUpdateSettings }: SettingsProps) {
             setFetchInterval(value)
             throttledUpdateSettings({ fetchInterval: value })
           }}
+          px={18}
           value={fetchInterval}
         />
       </InputWrapper>
@@ -49,10 +50,7 @@ function FeedSettings({ settings, throttledUpdateSettings }: SettingsProps) {
           marks={[
             { value: 10, label: '10' },
             { value: 100, label: '100' },
-            { value: 250, label: '250' },
-            { value: 500, label: '500' },
-            { value: 750, label: '750' },
-            { value: 1000, label: '1k' },
+            { value: 200, label: '200' },
           ]}
           mb="lg"
           min={ITEMS_TO_KEEP_MIN}
@@ -63,6 +61,7 @@ function FeedSettings({ settings, throttledUpdateSettings }: SettingsProps) {
             setItemsToKeep(value)
             throttledUpdateSettings({ itemsToKeep: value })
           }}
+          px={18}
           value={itemsToKeep}
         />
       </InputWrapper>

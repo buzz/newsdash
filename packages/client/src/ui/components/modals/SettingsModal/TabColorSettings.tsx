@@ -34,7 +34,7 @@ function TabColorSettings({ settings, throttledUpdateSettings }: SettingsProps) 
           />
         }
       />
-      <Collapse in={settings.tabColors}>
+      <Collapse in={settings.tabColors} pl="sm">
         <InputWrapper
           help="Set the global saturation for all tab colors."
           label="Saturation"
@@ -55,6 +55,7 @@ function TabColorSettings({ settings, throttledUpdateSettings }: SettingsProps) 
               setSaturation(value)
               throttledUpdateSettings({ saturation: value })
             }}
+            px={18}
             value={saturation}
           />
         </InputWrapper>
@@ -78,6 +79,7 @@ function TabColorSettings({ settings, throttledUpdateSettings }: SettingsProps) 
               setLightness(value)
               throttledUpdateSettings({ lightness: value })
             }}
+            px={18}
             value={lightness}
           />
         </InputWrapper>

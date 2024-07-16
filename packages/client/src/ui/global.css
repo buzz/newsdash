@@ -1,11 +1,11 @@
 :root[data-mantine-color-scheme='dark'] {
   --text-shadow: 0 rem(1) 0 rgba(0 0 0 / 28%);
-  --paper-color-body: alpha(var(--mantine-color-dark-7), 0.85);
+  --color-input-bg: alpha(var(--mantine-color-white), 0.03);
 }
 
 :root[data-mantine-color-scheme='light'] {
   --text-shadow: 0 rem(1) 0 rgba(255 255 255 / 28%);
-  --paper-color-body: alpha(var(--mantine-color-white), 0.85);
+  --color-input-bg: alpha(var(--mantine-color-white), 0.5);
 }
 
 body,
@@ -15,6 +15,26 @@ html {
 
 .mantine-Button-label {
   text-shadow: 0 rem(1) 0 rgba(0 0 0 / 28%);
+}
+
+.mantine-Combobox-dropdown {
+  background-color: light-dark(
+    alpha(var(--mantine-color-white), 0.95),
+    alpha(var(--mantine-color-dark-6), 0.95)
+  );
+}
+
+.mantine-TextInput-wrapper,
+.mantine-InputBase-wrapper {
+  --input-bg: var(--color-input-bg) !important;
+}
+
+.mantine-SegmentedControl-root {
+  background-color: var(--color-input-bg) !important;
+}
+
+.mantine-Slider-track {
+  --slider-track-bg: var(--color-input-bg) !important;
 }
 
 @keyframes spin-animation {

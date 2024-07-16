@@ -1,5 +1,8 @@
 .inner {
-  --mantine-color-body: var(--paper-color-body);
+  --mantine-color-body: light-dark(
+    alpha(var(--mantine-color-white), 0.9),
+    alpha(var(--mantine-color-dark-7), 0.95)
+  );
 
   display: flex;
   border-radius: var(--mantine-radius-md);

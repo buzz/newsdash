@@ -27,10 +27,10 @@ function SettingsModal() {
   return (
     <ModalInner icon={<IconSettings />} title="Settings">
       <Stack gap="md">
+        <Divider label="Appearance" />
         <InputWrapper label="Color Scheme">
           <ColorSchemeModeChooser />
         </InputWrapper>
-        <Divider label="Tab Colors" />
         <TabColorSettings settings={settings} throttledUpdateSettings={throttledUpdateSettings} />
         <Divider label="Feeds" />
         <FeedSettings settings={settings} throttledUpdateSettings={throttledUpdateSettings} />
