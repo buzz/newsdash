@@ -11,8 +11,8 @@ import { useRef, useState } from 'react'
 
 import { importSettings } from '#store/slices/app/actions'
 import { selectSettingsExport } from '#store/slices/settings/selectors'
+import ModalInner from '#ui/components/App/Modal/ModalInner'
 import InputWrapper from '#ui/components/common/InputWrapper/InputWrapper'
-import ModalInner from '#ui/components/common/ModalInner'
 import Tooltip from '#ui/components/common/Tooltip'
 import { useDispatch, useSelector } from '#ui/hooks/store'
 

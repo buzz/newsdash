@@ -1,6 +1,31 @@
-.modalContent {
+.inner {
   --mantine-color-body: var(--paper-color-body);
 
+  display: flex;
+  border-radius: var(--mantine-radius-md);
+  width: 100%;
+  max-height: 100%;
+  padding: var(--mantine-spacing-md);
   overflow: hidden;
   text-shadow: var(--text-shadow);
+
+  .scrollWrapper {
+    max-height: 100%;
+    width: 100%;
+
+    .content {
+      .header {
+        background-color: transparent;
+        flex-grow: 0;
+        margin-bottom: var(--mantine-spacing-sm);
+        min-height: rem(32);
+        padding: 0;
+        position: static;
+      }
+
+      .body {
+        padding: 0;
+      }
+    }
+  }
 }

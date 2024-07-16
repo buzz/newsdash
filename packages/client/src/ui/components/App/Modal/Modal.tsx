@@ -42,7 +42,7 @@ function Modal() {
       }}
     >
       <MantineModal.Overlay blur={DEFAULT_BLUR} />
-      <MantineModal.Content className={classes.modalContent} miw={280} radius="md" shadow="xl">
+      <MantineModal.Content className={classes.inner} radius="md" shadow="xl">
         <ModalComponent />
       </MantineModal.Content>
     </MantineModal.Root>

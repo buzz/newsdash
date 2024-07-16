@@ -4,9 +4,9 @@ import { throttle } from 'lodash-es'
 
 import { updateSettings as updateSettingsAction } from '#store/slices/settings/actions'
 import selectSettings from '#store/slices/settings/selectors'
+import ModalInner from '#ui/components/App/Modal/ModalInner'
 import Divider from '#ui/components/common/Divider/Divider'
 import InputWrapper from '#ui/components/common/InputWrapper/InputWrapper'
-import ModalInner from '#ui/components/common/ModalInner'
 import { useDispatch, useSelector } from '#ui/hooks/store'
 import type { Settings } from '#types/types'
 

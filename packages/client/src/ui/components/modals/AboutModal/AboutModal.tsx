@@ -2,8 +2,8 @@ import { Group, Text } from '@mantine/core'
 import { IconBrandGithub, IconScale } from '@tabler/icons-react'
 
 import { useGetVersionQuery } from '#store/slices/api/version'
+import ModalInner from '#ui/components/App/Modal/ModalInner'
 import Logo from '#ui/components/common/Logo/Logo'
-import ModalInner from '#ui/components/common/ModalInner'
 
 import IconButton from './IconButton'
 
