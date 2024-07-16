@@ -12,6 +12,8 @@ function restoreLayoutEffect(startListening: AppStartListening) {
   startListening({
     actionCreator: init,
     effect: async (action, listenerApi) => {
+      listenerApi.unsubscribe()
+
       try {
         const getLayout = layoutApi.endpoints.getLayout.initiate()
         const {
@@ -40,7 +42,6 @@ function restoreLayoutEffect(startListening: AppStartListening) {
         )
       } finally {
         listenerApi.dispatch(layoutRestored())
-        listenerApi.unsubscribe()
       }
     },
   })

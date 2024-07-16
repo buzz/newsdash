@@ -11,15 +11,13 @@ function restoreFeedItemsEffect(startListening: AppStartListening) {
   startListening({
     actionCreator: init,
     effect: (action, listenerApi) => {
-      try {
-        const serializedFeedItems = localStorage.getItem(LOCALSTORAGE_FEEDITEMS_KEY)
-        if (serializedFeedItems) {
-          const parsedFeedItems: unknown = JSON.parse(serializedFeedItems)
-          const feedItems = z.array(feedItemSchema).parse(parsedFeedItems)
-          listenerApi.dispatch(addFeedItems(feedItems))
-        }
-      } finally {
-        listenerApi.unsubscribe()
+      listenerApi.unsubscribe()
+
+      const serializedFeedItems = localStorage.getItem(LOCALSTORAGE_FEEDITEMS_KEY)
+      if (serializedFeedItems) {
+        const parsedFeedItems: unknown = JSON.parse(serializedFeedItems)
+        const feedItems = z.array(feedItemSchema).parse(parsedFeedItems)
+        listenerApi.dispatch(addFeedItems(feedItems))
       }
     },
   })

@@ -11,26 +11,24 @@ function restoreSettingsEffect(startListening: AppStartListening) {
   startListening({
     actionCreator: init,
     effect: (action, listenerApi) => {
-      try {
-        const serializedSettings = localStorage.getItem(LOCALSTORAGE_SETTINGS_KEY)
-        if (serializedSettings) {
-          const parsedSettings: unknown = JSON.parse(serializedSettings)
-          const result = settingsSchema.safeParse(parsedSettings)
-          if (result.success) {
-            listenerApi.dispatch(restoreSettings(result.data))
-          } else {
-            console.error(result.error.format())
-            listenerApi.dispatch(
-              showNotification({
-                type: 'error',
-                title: 'Failed to restore settings',
-                message: `Could not parse settings: ${zodErrorToString(result.error)}`,
-              })
-            )
-          }
+      listenerApi.unsubscribe()
+
+      const serializedSettings = localStorage.getItem(LOCALSTORAGE_SETTINGS_KEY)
+      if (serializedSettings) {
+        const parsedSettings: unknown = JSON.parse(serializedSettings)
+        const result = settingsSchema.safeParse(parsedSettings)
+        if (result.success) {
+          listenerApi.dispatch(restoreSettings(result.data))
+        } else {
+          console.error(result.error.format())
+          listenerApi.dispatch(
+            showNotification({
+              type: 'error',
+              title: 'Failed to restore settings',
+              message: `Could not parse settings: ${zodErrorToString(result.error)}`,
+            })
+          )
         }
-      } finally {
-        listenerApi.unsubscribe()
       }
     },
   })
