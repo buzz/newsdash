@@ -7,6 +7,11 @@ import tabsEntityAdapter from './tabsEntityAdapter'
 /** Adapter selectors */
 const tabsSelectors = tabsEntityAdapter.getSelectors((state: RootState) => state.layout.tabs)
 
+/** Select new/edit tabs. */
+const selectEditTabs = createSelector([tabsSelectors.selectAll], (tabs) =>
+  tabs.filter((tab) => ['edit', 'new'].includes(tab.status))
+)
+
 /**
  * Select tabs for persisting.
  *
@@ -41,5 +46,5 @@ const selectChildTabs = (state: RootState, panelId: string) =>
 const selectMaxTabOrder = (state: RootState, panelId: string) =>
   Math.max(...selectChildTabs(state, panelId).map((p) => p.order))
 
-export { selectChildTabs, selectMaxTabOrder, selectPersistTabs }
+export { selectChildTabs, selectEditTabs, selectMaxTabOrder, selectPersistTabs }
 export default tabsSelectors

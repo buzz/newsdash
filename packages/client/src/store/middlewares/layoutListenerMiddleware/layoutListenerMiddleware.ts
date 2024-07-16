@@ -2,6 +2,7 @@ import { createListenerMiddleware } from '@reduxjs/toolkit'
 
 import type { AppStartListening } from '#store/middlewares/types'
 
+import closeOtherFeedSettingsEffect from './effects/closeOtherFeedSettingsEffect'
 import customPanelColorEffect from './effects/customPanelColorEffect'
 import persistLayoutEffect from './effects/persistLayoutEffect'
 import rcLayoutChangeEffect from './effects/rcLayoutChangeEffect'
@@ -14,6 +15,7 @@ const layoutListenerMiddleware = createListenerMiddleware()
 const startListening = layoutListenerMiddleware.startListening as AppStartListening
 
 const effects = [
+  closeOtherFeedSettingsEffect,
   customPanelColorEffect,
   persistLayoutEffect,
   rcLayoutChangeEffect,

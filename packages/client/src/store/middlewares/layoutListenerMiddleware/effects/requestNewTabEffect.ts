@@ -15,7 +15,6 @@ function requestNewTabEffect(startListening: AppStartListening) {
     actionCreator: requestNewTab,
     effect: ({ payload: requestedPanelId }, listenerApi) => {
       // Find parent panel
-      // const panelId = requestedPanelId ?? findPanelId(listenerApi)
       const panelId = requestedPanelId ?? selectPanelForTab(listenerApi.getState())?.id
       if (!panelId) {
         throw new Error('Expected panel to exist')

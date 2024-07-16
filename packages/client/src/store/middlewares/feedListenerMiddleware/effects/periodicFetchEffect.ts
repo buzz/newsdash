@@ -1,4 +1,4 @@
-import fetchFeed from '#store/middlewares/feedListenerMiddleware/utils'
+import fetchFeed from '#store/middlewares/feedListenerMiddleware/fetchFeed'
 import { layoutRestored } from '#store/slices/layout/actions'
 import tabsSelectors from '#store/slices/layout/entities/tabs/selectors'
 import selectSettings from '#store/slices/settings/selectors'

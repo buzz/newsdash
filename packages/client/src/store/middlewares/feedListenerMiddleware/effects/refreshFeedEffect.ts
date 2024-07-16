@@ -1,4 +1,4 @@
-import fetchFeed from '#store/middlewares/feedListenerMiddleware/utils'
+import fetchFeed from '#store/middlewares/feedListenerMiddleware/fetchFeed'
 import { refreshTab } from '#store/slices/layout/entities/tabs/actions'
 import tabsSelectors from '#store/slices/layout/entities/tabs/selectors'
 import type { AppStartListening } from '#store/middlewares/types'
