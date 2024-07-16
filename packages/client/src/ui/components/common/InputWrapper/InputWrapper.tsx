@@ -16,12 +16,6 @@ function InputWrapper({
   required = false,
   rightSection,
 }: InputWrapperProps) {
-  const helpButton = help ? (
-    <Tooltip label={help}>
-      <IconHelpCircle className={classes.icon} />
-    </Tooltip>
-  ) : null
-
   let rightSectionNode: ReactNode = null
   if (rightSection !== undefined) {
     const node =
@@ -45,7 +39,11 @@ function InputWrapper({
     <MantineInputWrapper mb={mb} mt={mt}>
       <InputLabel className={classes.label} mb={children ? 'xs' : undefined} required={required}>
         {label}
-        {helpButton}
+        {help && (
+          <Tooltip label={help}>
+            <IconHelpCircle className={classes.icon} />
+          </Tooltip>
+        )}
         {rightSectionNode}
       </InputLabel>
       {children}

@@ -30,9 +30,9 @@ function ButtonGroup({ mode, onCancel, onDelete }: ButtonGroupProps) {
           Cancel
         </Button>
         {deleteButton}
-        {mode === 'new' ? confirmButton : null}
+        {mode === 'new' && confirmButton}
       </Group>
-      {mode === 'edit' ? confirmButton : null}
+      {mode === 'edit' && confirmButton}
     </div>
   )
 }

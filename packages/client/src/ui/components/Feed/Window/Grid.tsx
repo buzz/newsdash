@@ -19,7 +19,6 @@ const GridCell = memo(function GridCell({
   style,
 }: GridChildComponentProps<GridData>) {
   const itemIndex = rowIndex * columnCount + columnIndex
-  const item = itemIndex < items.length ? <FeedItem feedItem={items[itemIndex]} tab={tab} /> : null
   return (
     <div
       className={cx(classes.cell, {
@@ -28,7 +27,7 @@ const GridCell = memo(function GridCell({
       })}
       style={{ ...style, top: `${parseHeight(style.top) + SCROLLER_PADDING_Y}px` }}
     >
-      {item}
+      {itemIndex < items.length && <FeedItem feedItem={items[itemIndex]} tab={tab} />}
     </div>
   )
 })

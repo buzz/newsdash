@@ -7,11 +7,6 @@ import classes from './DetailFeedItem.module.css'
 
 function DetailFeedItem({ feedItem, imageUrl, language }: FeedItemComponentProps) {
   const hasContent = Boolean(feedItem.content)
-  const content = hasContent ? (
-    <div className={classes.teaserText} lang={language}>
-      {feedItem.content}
-    </div>
-  ) : null
 
   const timeAgoBadge = <TimeAgoBadge className={classes.badge} feedItem={feedItem} />
 
@@ -34,7 +29,11 @@ function DetailFeedItem({ feedItem, imageUrl, language }: FeedItemComponentProps
       <img alt={feedItem.title} className={classes.image} src={imageUrl} />
       <div className={classes.teaserText}>
         <div className={cx(classes.title, { [classes.noContent]: !hasContent })}>{title}</div>
-        {content}
+        {hasContent && (
+          <div className={classes.teaserText} lang={language}>
+            {feedItem.content}
+          </div>
+        )}
       </div>
     </>
   )

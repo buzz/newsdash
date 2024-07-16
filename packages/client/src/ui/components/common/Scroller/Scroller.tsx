@@ -100,7 +100,7 @@ function Scroller({ children, showScrollToTop }: ScrollerProps) {
 
   return (
     <div className={classes.wrapper} ref={wrapperRef}>
-      {showScrollToTop ? (
+      {showScrollToTop && (
         <IconButton
           className={cx(classes.scrollToTop, { [classes.show]: scrollToTopVisible })}
           onClick={onClickScrollToTop}
@@ -109,7 +109,7 @@ function Scroller({ children, showScrollToTop }: ScrollerProps) {
         >
           <IconSquareRoundedChevronUpFilled />
         </IconButton>
-      ) : null}
+      )}
       <SimpleBarReact
         className={cx(classes.simplebar, className)}
         clickOnTrack={false}

@@ -23,8 +23,6 @@ function Popover({ children, content, date, imageUrl, language, title }: Popover
   const [opened, { close, open }] = useDisclosure(false)
   const [openTimeout, setOpenTimeout] = useState<number | undefined>()
 
-  const image = imageUrl ? <img className={classes.image} alt={title} src={imageUrl} /> : null
-
   const onMouseEnter = () => {
     setOpenTimeout(setTimeout(open, OPEN_DELAY))
   }
@@ -48,17 +46,17 @@ function Popover({ children, content, date, imageUrl, language, title }: Popover
       <MantinePopover.Target>{children({ onMouseEnter, onMouseLeave })}</MantinePopover.Target>
       <MantinePopover.Dropdown className={classes.popover}>
         <Group className={classes.flexWrap} wrap="nowrap">
-          {image}
+          {imageUrl && <img className={classes.image} alt={title} src={imageUrl} />}
           <Stack gap="xs">
-            {title.length > 0 ? <Text className={classes.title}>{title}</Text> : null}
+            {title.length > 0 && <Text className={classes.title}>{title}</Text>}
             <Text fs="italic" size="sm">
               {formatDateTime(date, dateLocale, dateHour12)}
             </Text>
-            {content ? (
+            {content && (
               <Text className={classes.content} lang={language} size="sm">
                 {content}
               </Text>
-            ) : null}
+            )}
           </Stack>
         </Group>
       </MantinePopover.Dropdown>
