@@ -71,8 +71,8 @@ export default tsEslint.config(
             },
             {
               name: '@reduxjs/toolkit',
-              importNames: ['createSlice'],
-              message: 'Use extended `createSlice` from app instead.',
+              importNames: ['addListener', 'createSlice'],
+              message: 'Use extended `addListener` and `createSlice` from app instead.',
             },
           ],
         },

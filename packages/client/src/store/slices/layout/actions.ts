@@ -13,9 +13,6 @@ const updateLayout = layoutSlice.createAction<UpdateLayoutPayload>('updateLayout
 /** Restore layout */
 const restoreLayout = layoutSlice.createAction<NormalizedEntities>('restoreLayout')
 
-/** Signal that layout was restored */
-const layoutRestored = layoutSlice.createAction('layoutRestored')
-
 /** Request new tab */
 const requestNewTab = layoutSlice.createAction<string | undefined>('requestNewTab')
 
@@ -29,4 +26,4 @@ interface UpdateLayoutPayload {
 }
 
 export type { UpdateLayoutPayload }
-export { layoutRestored, rcLayoutChange, requestNewTab, restoreLayout, updateLayout }
+export { rcLayoutChange, requestNewTab, restoreLayout, updateLayout }

@@ -1,13 +1,6 @@
-// force import order to avoid circular import
-// https://redux-toolkit.js.org/usage/usage-guide#exporting-and-using-slices
-import './slices/notifications/actions'
-
 import { configureStore } from '@reduxjs/toolkit'
 
-import appListenerMiddleware from './middlewares/appListenerMiddleware/appListenerMiddleware'
-import feedItemListenerMiddleware from './middlewares/feedItemListenerMiddleware/feedItemListenerMiddleware'
-import feedListenerMiddleware from './middlewares/feedListenerMiddleware/feedListenerMiddleware'
-import layoutListenerMiddleware from './middlewares/layoutListenerMiddleware/layoutListenerMiddleware'
+import listenerMiddleware from './middleware/listenerMiddleware'
 import reducer from './reducer'
 import apiSlice from './slices/api/apiSlice'
 
@@ -17,14 +10,10 @@ function makeStore() {
     devTools: import.meta.env.DEV,
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware()
+        // Add before serializability check middleware
+        .prepend(listenerMiddleware.middleware)
         // eslint-disable-next-line unicorn/prefer-spread
-        .concat(
-          apiSlice.middleware,
-          appListenerMiddleware.middleware,
-          feedItemListenerMiddleware.middleware,
-          feedListenerMiddleware.middleware,
-          layoutListenerMiddleware.middleware
-        ),
+        .concat(apiSlice.middleware),
     reducer,
   })
 }
