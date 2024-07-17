@@ -18,4 +18,9 @@
       ) !important;
     }
   }
+
+  .happyReading {
+    color: light-dark(var(--mantine-primary-color-8), var(--mantine-primary-color-3));
+    font-size: var(--mantine-font-size-lg);
+  }
 }
