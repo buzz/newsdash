@@ -4,6 +4,7 @@ import {
   IconInfoSquare,
   IconMoonStars,
   IconPlus,
+  IconRefresh,
   IconSettings,
   IconSun,
   IconX,
@@ -11,7 +12,8 @@ import {
 
 import { changeHeaderVisibile, openModal } from '#store/slices/app/actions'
 import { selectHeaderVisibile } from '#store/slices/app/selectors'
-import { requestNewTab } from '#store/slices/layout/actions'
+import { refreashAllTabs, requestNewTab } from '#store/slices/layout/actions'
+import { selectNonEditTabs } from '#store/slices/layout/entities/tabs/selectors'
 import Logo from '#ui/components/common/Logo/Logo'
 import { useDispatch, useSelector } from '#ui/hooks/store'
 
@@ -23,6 +25,7 @@ import classes from './Header.module.css'
 function Header() {
   const dispatch = useDispatch()
   const headerVisible = useSelector(selectHeaderVisibile)
+  const tabCount = useSelector(selectNonEditTabs).length
   const { colorScheme, toggleColorScheme } = useMantineColorScheme()
   const theme = useMantineTheme()
 
@@ -47,6 +50,13 @@ function Header() {
                   variant="gradient"
                 >
                   <IconPlus />
+                </HeaderButton>
+                <HeaderButton
+                  disabled={tabCount === 0}
+                  onClick={() => dispatch(refreashAllTabs())}
+                  tooltip="Refresh Feeds"
+                >
+                  <IconRefresh />
                 </HeaderButton>
                 <HeaderButton
                   onClick={() => {

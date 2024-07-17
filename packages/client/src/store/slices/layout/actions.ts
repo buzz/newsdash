@@ -16,6 +16,9 @@ const restoreLayout = layoutSlice.createAction<NormalizedEntities>('restoreLayou
 /** Request new tab */
 const requestNewTab = layoutSlice.createAction<string | undefined>('requestNewTab')
 
+/** Refresh all tabs */
+const refreashAllTabs = layoutSlice.createAction('refreshAllTabs')
+
 interface UpdateLayoutPayload {
   entities: NormalizedEntities
   removeIds: {
@@ -26,4 +29,4 @@ interface UpdateLayoutPayload {
 }
 
 export type { UpdateLayoutPayload }
-export { rcLayoutChange, requestNewTab, restoreLayout, updateLayout }
+export { rcLayoutChange, refreashAllTabs, requestNewTab, restoreLayout, updateLayout }

@@ -12,6 +12,11 @@ const selectEditTabs = createSelector([tabsSelectors.selectAll], (tabs) =>
   tabs.filter((tab) => ['edit', 'new'].includes(tab.status))
 )
 
+/** Select non-edit tabs. */
+const selectNonEditTabs = createSelector([tabsSelectors.selectAll], (tabs) =>
+  tabs.filter((tab) => !['edit', 'new'].includes(tab.status))
+)
+
 /**
  * Select tabs for persisting.
  *
@@ -46,5 +51,5 @@ const selectChildTabs = (state: RootState, panelId: string) =>
 const selectMaxTabOrder = (state: RootState, panelId: string) =>
   Math.max(...selectChildTabs(state, panelId).map((p) => p.order))
 
-export { selectChildTabs, selectEditTabs, selectMaxTabOrder, selectPersistTabs }
+export { selectChildTabs, selectEditTabs, selectMaxTabOrder, selectNonEditTabs, selectPersistTabs }
 export default tabsSelectors
