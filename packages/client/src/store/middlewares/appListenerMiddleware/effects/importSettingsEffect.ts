@@ -1,5 +1,6 @@
 import { isError } from 'lodash-es'
 
+import { UNKNOWN_ERROR_MESSAGE } from '@newsdash/common/constants'
 import { persistLayoutSchema } from '@newsdash/common/schema'
 
 import { fromPersistLayout } from '#store/middlewares/utils'
@@ -50,17 +51,11 @@ function importSettingsEffect(startListening: AppStartListening) {
           })
         )
       } catch (error) {
-        let message: string | undefined
-
-        if (isError(error)) {
-          message = error.message
-        }
-
         listenerApi.dispatch(
           showNotification({
             type: 'error',
             title: 'Failed to restore settings',
-            message: `Could not parse: ${message ?? 'Unknown error'}`,
+            message: `Could not parse: ${isError(error) ? error.message : UNKNOWN_ERROR_MESSAGE}`,
           })
         )
       }

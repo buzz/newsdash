@@ -1,5 +1,6 @@
 import type { z } from 'zod'
 
+import { UNKNOWN_ERROR_MESSAGE } from '@newsdash/common/constants'
 import type { Tab } from '@newsdash/common/schema'
 
 function getRandomHue() {
@@ -20,7 +21,7 @@ function getTitle({ customTitle, status, title }: Tab) {
 }
 
 function zodErrorToString<T>(error: z.ZodError<T>) {
-  return error.issues.at(0)?.message ?? 'Unknown error'
+  return error.issues.at(0)?.message ?? UNKNOWN_ERROR_MESSAGE
 }
 
 export { getRandomHue, getTitle, zodErrorToString }

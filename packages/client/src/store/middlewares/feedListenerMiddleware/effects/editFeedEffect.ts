@@ -8,17 +8,19 @@ function editFeedEffect(startListening: AppStartListening) {
   startListening({
     actionCreator: editTab,
     effect: async ({ payload: { id: tabId, changes } }, listenerApi) => {
-      if (changes.status === 'loaded') {
-        // Refetch only if URL changed
-        if (!Object.keys(changes).includes('url')) {
-          return
+      if (['edit', 'new', 'loading'].includes(changes.status ?? '')) {
+        return
+      }
+
+      if (changes.url) {
+        const { url: urlOrig } = tabsSelectors.selectById(listenerApi.getOriginalState(), tabId)
+
+        // Check if URL actually changed
+        if (changes.url !== urlOrig) {
+          // Fetch feed
+          const tab = tabsSelectors.selectById(listenerApi.getState(), tabId)
+          await fetchFeed(listenerApi, tab)
         }
-
-        // TODO: check if url is different from before: then always fetch
-
-        // Fetch feed
-        const tab = tabsSelectors.selectById(listenerApi.getState(), tabId)
-        await fetchFeed(listenerApi, tab)
       }
     },
   })

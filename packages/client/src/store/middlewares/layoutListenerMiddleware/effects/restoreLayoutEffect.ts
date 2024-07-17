@@ -1,5 +1,7 @@
 import { isError } from 'lodash-es'
 
+import { UNKNOWN_ERROR_MESSAGE } from '@newsdash/common/constants'
+
 import { extractQueryError, fromPersistLayout } from '#store/middlewares/utils'
 import layoutApi from '#store/slices/api/layoutApi'
 import { init } from '#store/slices/app/actions'
@@ -29,14 +31,10 @@ function restoreLayoutEffect(startListening: AppStartListening) {
           listenerApi.dispatch(restoreLayout(fromPersistLayout(data)))
         }
       } catch (error) {
-        let message: string | undefined
-        if (isError(error)) {
-          message = error.message
-        }
         listenerApi.dispatch(
           showNotification({
             title: 'Failed to load layout',
-            message: message ?? 'Unknown error',
+            message: isError(error) ? error.message : UNKNOWN_ERROR_MESSAGE,
             type: 'error',
           })
         )

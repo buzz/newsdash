@@ -10,7 +10,7 @@ import RssParser from 'rss-parser'
 import sharp from 'sharp'
 import { stripHtml } from 'string-strip-html'
 
-import { IMG_HEIGHT, IMG_WIDTH } from '@newsdash/common/constants'
+import { IMG_HEIGHT, IMG_WIDTH, UNKNOWN_ERROR_MESSAGE } from '@newsdash/common/constants'
 import { feedSchema } from '@newsdash/common/schema'
 
 import { BadGateway, BadRequest, isError, NotFound, ParseError, ServerError } from '#api/errors.js'
@@ -88,7 +88,7 @@ function fetchText(url: URL) {
       throw new BadGateway(error.message)
     }
   }
-  throw new Error('Unknown error')
+  throw new Error(UNKNOWN_ERROR_MESSAGE)
 }
 
 function fetchStream(url: URL) {
@@ -99,7 +99,7 @@ function fetchStream(url: URL) {
       throw new BadGateway(error.message)
     }
   }
-  throw new Error('Unknown error')
+  throw new Error(UNKNOWN_ERROR_MESSAGE)
 }
 
 function parseFeed(body: string) {
@@ -110,7 +110,7 @@ function parseFeed(body: string) {
       throw new ParseError(error.message)
     }
   }
-  throw new Error('Unknown error')
+  throw new Error(UNKNOWN_ERROR_MESSAGE)
 }
 
 async function scrapeUrlImage(html: string, url: URL) {
@@ -150,7 +150,7 @@ function downloadImageAndResizeStream(
       throw new ServerError(error.message)
     }
   }
-  throw new Error('Unknown error')
+  throw new Error(UNKNOWN_ERROR_MESSAGE)
 }
 
 async function downloadImageAndResizeIco(url: URL) {
@@ -183,7 +183,7 @@ async function downloadImageAndResizeIco(url: URL) {
       throw new BadGateway(error.message)
     }
   }
-  throw new Error('Unknown error')
+  throw new Error(UNKNOWN_ERROR_MESSAGE)
 }
 
 export {

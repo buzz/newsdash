@@ -1,6 +1,7 @@
 import type { ListenerMiddlewareInstance, SerializedError } from '@reduxjs/toolkit'
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 
+import { UNKNOWN_ERROR_MESSAGE } from '@newsdash/common/constants'
 import type { PersistLayout } from '@newsdash/common/schema'
 
 import { isArbitraryObject } from '#types/typeGuards'
@@ -23,7 +24,7 @@ function extractQueryError(error: FetchBaseQueryError | SerializedError): string
   if ('message' in error && typeof error.message === 'string') {
     return error.message
   }
-  return 'Unknown error'
+  return UNKNOWN_ERROR_MESSAGE
 }
 
 function fromPersistLayout({ boxes, panels, tabs }: PersistLayout): NormalizedEntities {

@@ -132,6 +132,7 @@ export default tsEslint.config(
       ],
       // Produces false positives
       '@typescript-eslint/unbound-method': 'off',
+      '@typescript-eslint/no-unused-vars': ['error', { ignoreRestSiblings: true }],
 
       'unicorn/filename-case': 'off',
       'unicorn/no-null': 'off',
