@@ -27,10 +27,6 @@ function extractQueryError(error: FetchBaseQueryError | SerializedError): string
 }
 
 function fromPersistLayout({ boxes, panels, tabs }: PersistLayout): NormalizedEntities {
-  if (boxes.length === 0 || panels.length === 0 || tabs.length === 0) {
-    throw new Error('Invalid persisted layout')
-  }
-
   return {
     boxes,
     panels: panels.map((panel) => ({
