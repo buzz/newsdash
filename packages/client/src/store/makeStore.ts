@@ -5,6 +5,7 @@ import './slices/notifications/actions'
 import { configureStore } from '@reduxjs/toolkit'
 
 import appListenerMiddleware from './middlewares/appListenerMiddleware/appListenerMiddleware'
+import feedItemListenerMiddleware from './middlewares/feedItemListenerMiddleware/feedItemListenerMiddleware'
 import feedListenerMiddleware from './middlewares/feedListenerMiddleware/feedListenerMiddleware'
 import layoutListenerMiddleware from './middlewares/layoutListenerMiddleware/layoutListenerMiddleware'
 import reducer from './reducer'
@@ -20,6 +21,7 @@ function makeStore() {
         .concat(
           apiSlice.middleware,
           appListenerMiddleware.middleware,
+          feedItemListenerMiddleware.middleware,
           feedListenerMiddleware.middleware,
           layoutListenerMiddleware.middleware
         ),
