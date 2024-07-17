@@ -1,4 +1,4 @@
-import { IconReload, IconSettings, IconSquarePlus } from '@tabler/icons-react'
+import { IconRefresh, IconSettings, IconSquarePlus } from '@tabler/icons-react'
 import type { PanelData } from 'rc-dock'
 
 import { requestNewTab } from '#store/slices/layout/actions'
@@ -35,7 +35,7 @@ function PanelExtra({ panel }: PanelExtraProps) {
           dispatch(refreshTab(tab.id))
         }}
       >
-        <IconReload />
+        <IconRefresh />
       </PanelButton>
       <PanelButton
         disabled={editDisabled}
