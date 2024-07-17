@@ -7,10 +7,11 @@ import RcDockLayout from 'rc-dock'
 import { useMemo } from 'react'
 import type { TabGroup } from 'rc-dock'
 
+import { TAB_GROUP } from '#constants'
 import layoutApi from '#store/slices/api/layoutApi'
 import { rcLayoutChange } from '#store/slices/layout/actions'
 import tabsSelectors from '#store/slices/layout/entities/tabs/selectors'
-import { selectDenormalizedLayout } from '#store/slices/layout/selectors'
+import selectDenormalizedLayout from '#store/slices/layout/selectors/selectDenormalizedLayout'
 import selectSettings from '#store/slices/settings/selectors'
 import { useDispatch, useSelector, useStore } from '#ui/hooks/store'
 import type { CustomTabData } from '#types/layout'
@@ -20,7 +21,7 @@ import PanelExtra from './Panel/PanelExtra'
 import Placeholder from './Placeholder/Placeholder'
 
 const makeGroups = (animated: boolean): Record<string, TabGroup> => ({
-  news: {
+  [TAB_GROUP]: {
     animated,
     floatable: false,
     maximizable: false,

@@ -1,6 +1,6 @@
 import { createEntityAdapter } from '@reduxjs/toolkit'
 
-import { dateSortComparer } from '#store/utils/sortComparer'
+import { dateSortComparer } from '#store/sortComparer'
 import type { FeedItem } from '#types/feed'
 
 const feedItemsEntityAdapter = createEntityAdapter<FeedItem>({

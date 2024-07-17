@@ -10,6 +10,7 @@ const TAB_MIN_WIDTH = 300
 const TAB_MIN_HEIGHT = 300
 
 const DOCKBOX_ID = '__dockbox__'
+const TAB_GROUP = 'news'
 
 const LOCALSTORAGE_FEEDITEMS_KEY = 'newsdash_feeditems'
 const LOCALSTORAGE_SETTINGS_KEY = 'newsdash_settings'
@@ -75,6 +76,7 @@ export {
   SATURATION_MAX,
   SATURATION_MIN,
   SCROLLER_PADDING_Y,
+  TAB_GROUP,
   TAB_MIN_HEIGHT,
   TAB_MIN_WIDTH,
 }

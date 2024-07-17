@@ -2,7 +2,7 @@ import { createEntityAdapter } from '@reduxjs/toolkit'
 
 import type { Tab } from '@newsdash/common/schema'
 
-import { orderSortComparer } from '#store/utils/sortComparer'
+import { orderSortComparer } from '#store/sortComparer'
 
 const tabsEntityAdapter = createEntityAdapter<Tab>({ sortComparer: orderSortComparer })
 

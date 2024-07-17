@@ -1,15 +1,15 @@
 import type { CaseReducer, PayloadAction } from '@reduxjs/toolkit'
 
-import type { NormalizedLayoutState } from '#store/utils/LayoutNormalizer'
 import type { NormalizedEntities } from '#types/types'
 
 import boxesEntityAdapter from './entities/boxes/boxesEntityAdapter'
 import panelsEntityAdapter from './entities/panels/panelsEntityAdapter'
 import tabsEntityAdapter from './entities/tabs/tabsEntityAdapter'
+import type { UpdateLayoutPayload } from './actions'
 import type { LayoutState } from './layoutSlice'
 
 /** Handle update of normalized layout, also remove remaining entities */
-const updateLayoutReducer: CaseReducer<LayoutState, PayloadAction<NormalizedLayoutState>> = (
+const updateLayoutReducer: CaseReducer<LayoutState, PayloadAction<UpdateLayoutPayload>> = (
   state,
   { payload: { entities, removeIds } }
 ) => {

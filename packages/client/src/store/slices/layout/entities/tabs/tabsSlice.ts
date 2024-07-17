@@ -1,3 +1,4 @@
+import { TAB_GROUP } from '#constants'
 import createSlice from '#store/createSlice'
 
 import { addTab, editTab, removeTab } from './actions'
@@ -23,7 +24,7 @@ const tabsSlice = createSlice({
       tabsEntityAdapter.updateOne(state, {
         id,
         changes: {
-          group: 'news',
+          group: TAB_GROUP,
           ...changes,
         },
       })

@@ -3,8 +3,8 @@ import { nanoid } from 'nanoid'
 
 import type { Panel } from '@newsdash/common/schema'
 
-import { DOCKBOX_ID } from '#constants'
-import { orderSortComparer } from '#store/utils/sortComparer'
+import { DOCKBOX_ID, TAB_GROUP } from '#constants'
+import { orderSortComparer } from '#store/sortComparer'
 
 const panelsEntityAdapter = createEntityAdapter<Panel>({
   sortComparer: orderSortComparer,
@@ -13,7 +13,7 @@ const panelsEntityAdapter = createEntityAdapter<Panel>({
 const panelsInitialState = panelsEntityAdapter.getInitialState(undefined, [
   {
     id: nanoid(),
-    group: 'news',
+    group: TAB_GROUP,
     order: 0,
     parentId: DOCKBOX_ID,
   },

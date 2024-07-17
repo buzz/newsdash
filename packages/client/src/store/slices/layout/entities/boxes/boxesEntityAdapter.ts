@@ -3,7 +3,7 @@ import { createEntityAdapter } from '@reduxjs/toolkit'
 import type { Box } from '@newsdash/common/schema'
 
 import { DOCKBOX_ID } from '#constants'
-import { orderSortComparer } from '#store/utils/sortComparer'
+import { orderSortComparer } from '#store/sortComparer'
 
 const boxesEntityAdapter = createEntityAdapter<Box>({ sortComparer: orderSortComparer })
 
