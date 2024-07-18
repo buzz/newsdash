@@ -1,11 +1,13 @@
 :root[data-mantine-color-scheme='dark'] {
   --text-shadow: 0 rem(1) 0 rgba(0 0 0 / 28%);
   --color-input-bg: alpha(var(--mantine-color-white), 0.03);
+  --overlay-bg: alpha(var(--mantine-color-black), 0.6);
 }
 
 :root[data-mantine-color-scheme='light'] {
   --text-shadow: 0 rem(1) 0 rgba(255 255 255 / 28%);
   --color-input-bg: alpha(var(--mantine-color-white), 0.5);
+  --overlay-bg: alpha(var(--mantine-color-white), 0.6);
 }
 
 body,
