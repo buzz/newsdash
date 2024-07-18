@@ -1,3 +1,5 @@
+import { createSelector } from '@reduxjs/toolkit'
+
 import type { RootState } from '#store/types'
 
 import boxesEntityAdapter from './boxesEntityAdapter'
@@ -6,11 +8,16 @@ import boxesEntityAdapter from './boxesEntityAdapter'
 const boxesSelectors = boxesEntityAdapter.getSelectors((state: RootState) => state.layout.boxes)
 
 /** Select child boxes */
-const selectChildBoxes = (state: RootState, parentId: string | null) =>
-  boxesSelectors.selectAll(state).filter((box) => box.parentId === parentId)
+const selectChildBoxes = createSelector(
+  [boxesSelectors.selectAll, (_: RootState, parentId: string | null) => parentId],
+  (boxes, parentId) => boxes.filter((box) => box.parentId === parentId)
+)
 
 /** Select root box */
-const selectDockbox = (state: RootState) => selectChildBoxes(state, null).at(0)
+const selectDockbox = createSelector(
+  [(state: RootState) => selectChildBoxes(state, null)],
+  (boxes) => boxes.at(0)
+)
 
 export { selectChildBoxes, selectDockbox }
 export default boxesSelectors

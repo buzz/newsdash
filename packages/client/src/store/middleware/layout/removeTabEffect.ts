@@ -1,6 +1,6 @@
 import { addAppListener } from '#store/middleware/utils'
 import { updatePanel } from '#store/slices/layout/entities/panels/actions'
-import panelsSelectors from '#store/slices/layout/entities/panels/selectors'
+import { selectPanelByActiveTabId } from '#store/slices/layout/entities/panels/selectors'
 import { removeTab } from '#store/slices/layout/entities/tabs/actions'
 import { selectChildTabs } from '#store/slices/layout/entities/tabs/selectors'
 import type { AppListenerEffectAPI } from '#store/middleware/types'
@@ -12,9 +12,7 @@ function removeTabEffect(listenerApi: AppListenerEffectAPI) {
       actionCreator: removeTab,
       effect: ({ payload: tabId }, listenerApi) => {
         const state = listenerApi.getState()
-
-        const panel = panelsSelectors.selectAll(state).find((panel) => panel.activeId === tabId)
-
+        const panel = selectPanelByActiveTabId(state, tabId)
         if (panel) {
           const tabs = selectChildTabs(state, panel.id)
           if (tabs.length > 0) {

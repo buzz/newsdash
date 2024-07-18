@@ -18,5 +18,8 @@ const selectPlaceholderPanel = (state: RootState) =>
 /** Select panel for tab insertion */
 const selectPanelForTab = (state: RootState) => panelsSelectors.selectAll(state).at(0)
 
-export { selectChildPanels, selectPanelForTab, selectPlaceholderPanel }
+const selectPanelByActiveTabId = (state: RootState, tabId: string) =>
+  panelsSelectors.selectAll(state).find((panel) => panel.activeId === tabId)
+
+export { selectChildPanels, selectPanelByActiveTabId, selectPanelForTab, selectPlaceholderPanel }
 export default panelsSelectors
