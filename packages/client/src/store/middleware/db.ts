@@ -102,7 +102,10 @@ async function saveFeedItems(feedItems: FeedItem[]) {
 
     // Save items
     for (const item of feedItems) {
-      store.put(item)
+      if (!storedIds.has(item.id)) {
+        const { new: _new, ...dbItem } = item
+        store.put(dbItem)
+      }
     }
 
     transaction.addEventListener('complete', () => {
@@ -122,7 +125,8 @@ async function restoreFeedItems() {
     const request = store.getAll()
 
     request.addEventListener('success', (event) => {
-      resolve((event.target as IDBRequest<FeedItem[]>).result)
+      const results = (event.target as IDBRequest<DbFeedItem[]>).result
+      resolve(results.map((item) => ({ ...item, new: false })))
     })
 
     request.addEventListener('error', errorHandler(reject))
@@ -132,5 +136,7 @@ async function restoreFeedItems() {
 interface DbSettings extends Settings {
   id: typeof DB_SETTINGS_ID
 }
+
+type DbFeedItem = Omit<FeedItem, 'new'>
 
 export { restoreFeedItems, restoreSettings, saveFeedItems, saveSettings }

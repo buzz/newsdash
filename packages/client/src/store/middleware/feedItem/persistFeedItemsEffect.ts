@@ -16,10 +16,7 @@ function persistFeedItemsEffect(listenerApi: AppListenerEffectAPI) {
       effect: async (action, listenerApi) => {
         await debounce(listenerApi, PERSIST_DELAY)
 
-        const feedItems = feedItemsSelectors.selectAll(listenerApi.getState()).map((feedItem) => ({
-          ...feedItem,
-          new: false,
-        }))
+        const feedItems = feedItemsSelectors.selectAll(listenerApi.getState())
         await saveFeedItems(feedItems)
       },
     })
