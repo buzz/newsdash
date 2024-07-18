@@ -1,12 +1,10 @@
-import { Group, Popover as MantinePopover, Stack, Text } from '@mantine/core'
-import { useDisclosure } from '@mantine/hooks'
-import { useState } from 'react'
-import type { MouseEventHandler } from 'react'
+import { Group, HoverCard, Stack, Text } from '@mantine/core'
+import type { ReactNode } from 'react'
 
 import selectSettings from '#store/slices/settings/selectors'
 import { useSelector } from '#ui/hooks/store'
 
-import classes from './Popover.module.css'
+import classes from './FeedHoverCard.module.css'
 
 const OPEN_DELAY = 500
 
@@ -18,33 +16,20 @@ function formatDateTime(isoDate: string, locale?: string, hour12?: boolean) {
   }).format(Date.parse(isoDate))
 }
 
-function Popover({ children, content, date, imageUrl, language, title }: PopoverProps) {
+function FeedHoverCard({ children, content, date, imageUrl, language, title }: FeedHoverCardProps) {
   const { dateLocale, dateHour12 } = useSelector(selectSettings)
-  const [opened, { close, open }] = useDisclosure(false)
-  const [openTimeout, setOpenTimeout] = useState<number | undefined>()
-
-  const onMouseEnter = () => {
-    setOpenTimeout(setTimeout(open, OPEN_DELAY))
-  }
-
-  const onMouseLeave = () => {
-    if (openTimeout) {
-      clearTimeout(openTimeout)
-    }
-    close()
-  }
 
   return (
-    <MantinePopover
+    <HoverCard
       arrowSize={10}
       keepMounted={false}
-      opened={opened}
+      openDelay={OPEN_DELAY}
       shadow="md"
       width={600}
       withArrow
     >
-      <MantinePopover.Target>{children({ onMouseEnter, onMouseLeave })}</MantinePopover.Target>
-      <MantinePopover.Dropdown className={classes.popover}>
+      <HoverCard.Target>{children}</HoverCard.Target>
+      <HoverCard.Dropdown className={classes.hoverCard}>
         <Group className={classes.flexWrap} wrap="nowrap">
           {imageUrl && <img className={classes.image} alt={title} src={imageUrl} />}
           <Stack gap="xs">
@@ -59,19 +44,13 @@ function Popover({ children, content, date, imageUrl, language, title }: Popover
             )}
           </Stack>
         </Group>
-      </MantinePopover.Dropdown>
-    </MantinePopover>
+      </HoverCard.Dropdown>
+    </HoverCard>
   )
 }
 
-interface PopoverProps {
-  children: ({
-    onMouseEnter,
-    onMouseLeave,
-  }: {
-    onMouseEnter: MouseEventHandler<HTMLAnchorElement>
-    onMouseLeave: MouseEventHandler<HTMLAnchorElement>
-  }) => JSX.Element
+interface FeedHoverCardProps {
+  children: ReactNode
   content?: string
   date: string
   imageUrl?: string
@@ -79,4 +58,4 @@ interface PopoverProps {
   title: string
 }
 
-export default Popover
+export default FeedHoverCard

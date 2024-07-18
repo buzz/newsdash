@@ -2,7 +2,7 @@
   height: 100%;
 }
 
-.popover {
+.hoverCard {
   padding: var(--mantine-spacing-sm);
   pointer-events: none;
   text-shadow: var(--text-shadow);

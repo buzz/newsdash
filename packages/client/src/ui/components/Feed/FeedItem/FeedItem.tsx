@@ -6,7 +6,7 @@ import { makeFeedItemImageUrl } from '#ui/components/Feed/utils'
 import type { FeedItem as FeedItemType } from '#types/feed'
 
 import DISPLAY_COMPONENTS from './display/components'
-import Popover from './Popover/Popover'
+import FeedHoverCard from './FeedHoverCard/FeedHoverCard'
 
 import classes from './FeedItem.module.css'
 
@@ -27,19 +27,15 @@ function FeedItem({ feedItem, tab: { display, enablePopover, language } }: FeedI
 
   if (enablePopover && display !== 'tiles') {
     return (
-      <Popover
+      <FeedHoverCard
         content={feedItem.content}
         date={feedItem.date}
         imageUrl={imageUrl}
         language={language}
         title={feedItem.title}
       >
-        {({ onMouseEnter, onMouseLeave }) => (
-          <a onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} {...props}>
-            {feedItemDisplay}
-          </a>
-        )}
-      </Popover>
+        <a {...props}>{feedItemDisplay}</a>
+      </FeedHoverCard>
     )
   }
 
