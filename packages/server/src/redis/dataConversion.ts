@@ -1,25 +1,8 @@
 import { z } from 'zod'
 
-import type { RedisHashElementType, RedisHashResult } from './redis.js'
+import type { RedisHashResult, RedisObject } from './redis.js'
 
 const NULL_SYMBOL = '__NULL__'
-
-/** Check if `thing` is of specific type (unwrapping optional/default) */
-function isZodType(thing: unknown, zodType: 'boolean' | 'number') {
-  if (thing instanceof (zodType == 'boolean' ? z.ZodBoolean : z.ZodNumber)) {
-    return true
-  }
-
-  if (thing instanceof z.ZodOptional && isZodType(thing.unwrap(), zodType)) {
-    return true
-  }
-
-  if (thing instanceof z.ZodDefault && isZodType(thing.removeDefault(), zodType)) {
-    return true
-  }
-
-  return false
-}
 
 /** Get list of schema fields */
 function getSchemaFields(schema: z.SomeZodObject) {
@@ -27,14 +10,22 @@ function getSchemaFields(schema: z.SomeZodObject) {
 }
 
 // { foo: '1', bar: '2' } => ['foo', '1', 'bar', '2']
-function objToHmData(obj: Record<string, RedisHashElementType | undefined>, hmFields: Set<string>) {
+function objToHmData(obj: RedisObject, hmFields: Set<string>) {
   const result = []
   for (const hmField of hmFields) {
     const value = obj[hmField]
     if (value === undefined) {
       continue
     }
-    result.push(hmField, value === null ? NULL_SYMBOL : value.toString())
+    let stringValue: string
+    if (value === null) {
+      stringValue = NULL_SYMBOL
+    } else if (Array.isArray(value)) {
+      stringValue = JSON.stringify(value)
+    } else {
+      stringValue = value.toString()
+    }
+    result.push(hmField, stringValue)
   }
   return result
 }
@@ -60,6 +51,11 @@ function parseRedisHash(data: RedisHashResult, schema: z.SomeZodObject): Record<
       result[fieldName] = null
     }
 
+    // Parse array value
+    else if (isZodType(zodType, 'array')) {
+      result[fieldName] = JSON.parse(value)
+    }
+
     // Parse boolean
     else if (isZodType(zodType, 'boolean')) {
       result[fieldName] = zodType.parse(value === 'true')
@@ -77,6 +73,18 @@ function parseRedisHash(data: RedisHashResult, schema: z.SomeZodObject): Record<
   }
 
   return result
+}
+
+/** Check if `thing` is of specific type (supports optional/default) */
+function isZodType(thing: unknown, zodType: 'array' | 'boolean' | 'number'): boolean {
+  return (
+    (zodType === 'array' && thing instanceof z.ZodArray) ||
+    (zodType === 'boolean' && thing instanceof z.ZodBoolean) ||
+    (zodType === 'number' && thing instanceof z.ZodNumber) ||
+    // unwrap nested zod types
+    (thing instanceof z.ZodOptional && isZodType(thing.unwrap(), zodType)) ||
+    (thing instanceof z.ZodDefault && isZodType(thing.removeDefault(), zodType))
+  )
 }
 
 export { getSchemaFields, objToHmData, parseRedisHash }

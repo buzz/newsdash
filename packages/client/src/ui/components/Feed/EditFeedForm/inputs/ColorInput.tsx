@@ -49,7 +49,7 @@ function ColorSwatches({ form }: InputProps) {
   })
 }
 
-function ColorInput({ disabled, form }: ColorInputProps) {
+function ColorInput({ form }: InputProps) {
   return (
     <InputWrapper label="Color">
       <Group gap="xs">
@@ -62,9 +62,8 @@ function ColorInput({ disabled, form }: ColorInputProps) {
             form.setFieldValue('hue', value)
           }}
         />
-        <Tooltip disabled={disabled} label="Random color">
+        <Tooltip label="Random color">
           <ActionIcon
-            disabled={disabled}
             onClick={() => {
               form.setFieldValue('hue', getRandomHue())
             }}
@@ -79,10 +78,6 @@ function ColorInput({ disabled, form }: ColorInputProps) {
       </Button.Group>
     </InputWrapper>
   )
-}
-
-interface ColorInputProps extends InputProps {
-  disabled: boolean
 }
 
 export default ColorInput

@@ -9,6 +9,7 @@ import classes from './InputWrapper.module.css'
 
 function InputWrapper({
   children,
+  error,
   help,
   label,
   mb,
@@ -36,7 +37,7 @@ function InputWrapper({
   }
 
   return (
-    <MantineInputWrapper mb={mb} mt={mt}>
+    <MantineInputWrapper error={error} mb={mb} mt={mt}>
       <InputLabel className={classes.label} mb={children ? 'xs' : undefined} required={required}>
         {label}
         {help && (
@@ -53,7 +54,8 @@ function InputWrapper({
 
 interface InputWrapperProps {
   children?: ReactNode
-  help?: string
+  error?: ReactNode
+  help?: ReactNode
   label: string
   mb?: StyleProp<MantineSpacing>
   mt?: StyleProp<MantineSpacing>

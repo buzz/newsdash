@@ -1,0 +1,9 @@
+.filterInput {
+  flex-grow: 1;
+}
+
+.trashIcon {
+  color: light-dark(var(--mantine-color-red-8), var(--mantine-color-red-6));
+  height: var(--mantine-spacing-lg);
+  width: var(--mantine-spacing-lg);
+}

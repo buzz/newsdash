@@ -31,6 +31,7 @@ const selectPersistTabs = createSelector([tabsSelectors.selectAll], (tabs) =>
       description: tab.description,
       display: tab.display,
       enablePopover: tab.enablePopover,
+      filters: tab.filters,
       gridView: tab.gridView,
       group: tab.group,
       hue: tab.hue,

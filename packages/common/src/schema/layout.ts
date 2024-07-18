@@ -59,6 +59,7 @@ const storeTabSchema = customTabFields.extend({
   id: z.string(),
   description: z.optional(z.string()),
   enablePopover: z.boolean().default(true),
+  filters: z.array(z.string().min(1, 'Filter must not be empty')).default([]),
   gridView: z.boolean().default(false),
   group: z.optional(z.string()),
   language: z.optional(z.string()),

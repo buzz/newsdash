@@ -67,7 +67,7 @@ async function getAllHashes<T extends z.SomeZodObject>(
 async function updateHashesDeleteOthers(
   redis: FastifyRedis,
   pattern: string,
-  objs: Record<string, RedisHashElementType>[],
+  objs: RedisObject[],
   schema: z.SomeZodObject
 ) {
   const hmFields = getSchemaFields(schema)
@@ -94,8 +94,11 @@ async function updateHashesDeleteOthers(
   return pipeline.exec()
 }
 
-type RedisHashElementType = boolean | string | number | null
 type RedisHashResult = (string | null)[]
+interface RedisObject {
+  id: string
+  [key: string]: boolean | string | number | string[] | null | undefined
+}
 
-export type { RedisHashElementType, RedisHashResult }
+export type { RedisHashResult, RedisObject }
 export { getAllHashes, updateHashesDeleteOthers }

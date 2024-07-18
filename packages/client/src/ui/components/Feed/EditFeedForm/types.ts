@@ -1,8 +1,11 @@
 import type { UseFormReturnType } from '@mantine/form'
+import type { z } from 'zod'
 
-import type { Display, Tab } from '@newsdash/common/schema'
+import type { Tab } from '@newsdash/common/schema'
 
 import type { TabEditMode } from '#types/layout'
+
+import type { formSchema } from './useEditForm'
 
 type EditForm = UseFormReturnType<
   EditFeedFormValues,
@@ -18,14 +21,6 @@ interface InputProps {
   form: EditForm
 }
 
-interface EditFeedFormValues {
-  customTitle: string
-  display: Display
-  enablePopover: boolean
-  gridView: boolean
-  hue: number
-  maxColumnWidth: number
-  url: string
-}
+type EditFeedFormValues = z.infer<typeof formSchema>
 
 export type { EditFeedFormProps, EditFeedFormValues, EditForm, InputProps }

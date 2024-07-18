@@ -2,15 +2,26 @@ import { useForm } from '@mantine/form'
 import { throttle } from 'lodash-es'
 import { useEffect, useState } from 'react'
 
-import { type Tab, webUrlSchema } from '@newsdash/common/schema'
+import { layout } from '@newsdash/common/schema'
+import type { Tab } from '@newsdash/common/schema'
 
 import { MAX_COLUMN_WIDTH_DEFAULT } from '#constants'
 import { editTab, removeTab } from '#store/slices/layout/entities/tabs/actions'
 import { useDispatch } from '#ui/hooks/store'
-import { zodErrorToString } from '#utils'
 import type { TabEditMode } from '#types/layout'
 
 import type { EditFeedFormValues } from './types'
+
+const formSchema = layout.storeTabSchema.pick({
+  customTitle: true,
+  display: true,
+  enablePopover: true,
+  filters: true,
+  gridView: true,
+  hue: true,
+  maxColumnWidth: true,
+  url: true,
+})
 
 function getInitialFormValues(mode: TabEditMode, tab: Tab): EditFeedFormValues {
   return mode === 'new'
@@ -18,6 +29,7 @@ function getInitialFormValues(mode: TabEditMode, tab: Tab): EditFeedFormValues {
         customTitle: '',
         display: 'detailed',
         enablePopover: true,
+        filters: [],
         gridView: false,
         hue: tab.hue,
         maxColumnWidth: MAX_COLUMN_WIDTH_DEFAULT,
@@ -27,16 +39,12 @@ function getInitialFormValues(mode: TabEditMode, tab: Tab): EditFeedFormValues {
         customTitle: tab.customTitle,
         display: tab.display,
         enablePopover: tab.enablePopover,
+        filters: tab.filters,
         gridView: tab.gridView,
         hue: tab.hue,
         maxColumnWidth: tab.maxColumnWidth,
         url: tab.url,
       }
-}
-
-function validateUrl(urlString: string) {
-  const result = webUrlSchema.safeParse(urlString)
-  return result.success ? null : zodErrorToString(result.error)
 }
 
 function useEditForm(mode: TabEditMode, tab: Tab) {
@@ -69,7 +77,17 @@ function useEditForm(mode: TabEditMode, tab: Tab) {
 
   const form = useForm<EditFeedFormValues>({
     initialValues: getInitialFormValues(mode, tab),
-    validate: { url: validateUrl },
+    validate: (values) => {
+      const result = formSchema.safeParse(values)
+      return result.success
+        ? {}
+        : Object.fromEntries(
+            Object.entries(result.error.formErrors.fieldErrors).map(([field, errors]) => [
+              field,
+              Array.isArray(errors) ? errors[0] : undefined,
+            ])
+          )
+    },
     // Live update tab
     onValuesChange: throttledUpdateFeed,
   })
@@ -99,4 +117,5 @@ function useEditForm(mode: TabEditMode, tab: Tab) {
   return { form, onCancel, onDelete, onSubmit }
 }
 
+export type { formSchema }
 export default useEditForm

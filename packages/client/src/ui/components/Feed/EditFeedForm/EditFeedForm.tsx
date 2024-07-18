@@ -11,6 +11,7 @@ import { getTitle } from '#utils'
 import ButtonGroup from './ButtonGroup'
 import ColorInput from './inputs/ColorInput'
 import DisplayInput from './inputs/DisplayInput'
+import FiltersInput from './inputs/FiltersInput'
 import TitleInput from './inputs/TitleInput'
 import UrlInput from './inputs/UrlInput'
 import useEditForm from './useEditForm'
@@ -48,7 +49,11 @@ function EditFeedForm({ mode, tab }: EditFeedFormProps) {
                 {tabColors && (
                   <>
                     <Divider label="Color" />
-                <ColorInput disabled={!tabColors} form={form} />
+                    <ColorInput form={form} />
+                  </>
+                )}
+                <Divider label="Filters" />
+                <FiltersInput form={form} />
                 <Divider />
                 <ButtonGroup mode={mode} onCancel={onCancel} onDelete={onDelete} />
               </form>
