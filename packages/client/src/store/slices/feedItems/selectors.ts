@@ -12,10 +12,8 @@ const feedItemsSelectors = feedItemsEntityAdapter.getSelectors(
 )
 
 /** Select feed items by tab ID. */
-const selectByTabId = createSelector(
-  [feedItemsSelectors.selectAll, (_, tabId: string) => tabId],
-  (feedItems, tabId) => feedItems.filter((feedItem) => feedItem.tabId === tabId)
-)
+const selectByTabId = (state: RootState, tabId: string) =>
+  feedItemsSelectors.selectAll(state).filter((item) => item.tabId === tabId)
 
 /** Select feed item IDs by tab ID. */
 const selectIdsByTabId = createSelector(

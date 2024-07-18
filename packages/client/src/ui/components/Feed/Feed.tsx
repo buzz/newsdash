@@ -1,3 +1,6 @@
+import { createSelector } from '@reduxjs/toolkit'
+import { useMemo } from 'react'
+
 import { DISPLAY_PARAMS } from '#constants'
 import { selectByTabId } from '#store/slices/feedItems/selectors'
 import tabsSelectors from '#store/slices/layout/entities/tabs/selectors'
@@ -16,10 +19,22 @@ function Feed({ tab: { id: tabId } }: FeedProps) {
     throw new Error('Expected tabId')
   }
 
-  const tabSelector = (state: RootState) => tabsSelectors.selectById(state, tabId)
+  const tabSelector = useMemo(
+    () =>
+      createSelector([(state: RootState) => state, () => tabId], (state, tabId) =>
+        tabsSelectors.selectById(state, tabId)
+      ),
+    [tabId]
+  )
   const tab = useSelector(tabSelector)
 
-  const feedItemsSelector = (state: RootState) => selectByTabId(state, tab.id)
+  const feedItemsSelector = useMemo(
+    () =>
+      createSelector([(state: RootState) => state, () => tabId], (state, tabId) =>
+        selectByTabId(state, tabId)
+      ),
+    [tabId]
+  )
   const feedItems = useSelector(feedItemsSelector)
 
   if (feedItems.length === 0) {
