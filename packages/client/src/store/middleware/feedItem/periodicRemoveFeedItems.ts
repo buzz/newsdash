@@ -10,8 +10,8 @@ async function periodicRemoveFeedItems(listenerApi: AppListenerEffectAPI) {
     await listenerApi.delay(CHECK_INTERVAL)
 
     const feedIds = selectOldFeedItemIds(listenerApi.getState())
-    if (feedIds.length > 0) {
-      listenerApi.dispatch(removeFeedItems(feedIds))
+    if (feedIds.size > 0) {
+      listenerApi.dispatch(removeFeedItems([...feedIds]))
     }
   }
 }

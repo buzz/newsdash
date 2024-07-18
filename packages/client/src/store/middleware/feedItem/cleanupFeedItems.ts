@@ -4,9 +4,9 @@ import type { AppListenerEffectAPI } from '#store/middleware/types'
 
 function cleanupFeedItems(listenerApi: AppListenerEffectAPI) {
   const state = listenerApi.getState()
-  const feedIds = [...selectOldFeedItemIds(state), ...selectOrphanedFeedItemIds(state)]
-  if (feedIds.length > 0) {
-    listenerApi.dispatch(removeFeedItems(feedIds))
+  const feedIds = new Set([...selectOldFeedItemIds(state), ...selectOrphanedFeedItemIds(state)])
+  if (feedIds.size > 0) {
+    listenerApi.dispatch(removeFeedItems([...feedIds]))
   }
 }
 

@@ -3,7 +3,7 @@ import type { Tab } from '@newsdash/common/schema'
 import { extractQueryError } from '#store/middleware/utils'
 import feedApi from '#store/slices/api/feedApi'
 import { addFetchedFeedItems } from '#store/slices/feedItems/actions'
-import { selectByTabId } from '#store/slices/feedItems/selectors'
+import { selectIdsByTabId } from '#store/slices/feedItems/selectors'
 import { editTab } from '#store/slices/layout/entities/tabs/actions'
 import { showNotification } from '#store/slices/notifications/actions'
 import type { AppListenerEffectAPI } from '#store/middleware/types'
@@ -51,11 +51,11 @@ async function fetchFeed(listenerApi: AppListenerEffectAPI, tab: Tab) {
   listenerApi.dispatch(editTab({ id: tab.id, changes: tabUpdate }))
 
   // Add feed items
-  const oldItemIds = selectByTabId(listenerApi.getState(), tab.id).map((item) => item.id)
+  const oldItemIds = selectIdsByTabId(listenerApi.getState(), tab.id)
   listenerApi.dispatch(
     addFetchedFeedItems({
       items,
-      oldItemIds,
+      oldItemIds: [...oldItemIds],
       tabId: tab.id,
     })
   )

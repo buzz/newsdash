@@ -13,7 +13,7 @@ import type { RootState } from '#store/types'
 
 function normalizeBoxData(
   state: RootState,
-  update: UpdateLayoutPayload,
+  update: UpdateLayoutPayloadSets,
   { children, ...boxData }: BoxData,
   order: number,
   parentId: string | null
@@ -24,7 +24,7 @@ function normalizeBoxData(
 
   const box = layout.boxSchema.parse({ ...boxData, order, parentId })
   update.entities.boxes.push(box)
-  removeFromArray(boxData.id, update.removeIds.boxIds)
+  update.removeIds.boxIds.delete(boxData.id)
 
   for (const [i, child] of children.entries()) {
     if (isBoxData(child)) {
@@ -37,7 +37,7 @@ function normalizeBoxData(
 
 function normalizePanelData(
   state: RootState,
-  update: UpdateLayoutPayload,
+  update: UpdateLayoutPayloadSets,
   { tabs: panelTabs, ...panelData }: PanelData,
   order: number,
   parentId: string
@@ -48,7 +48,7 @@ function normalizePanelData(
 
   const panel = layout.panelSchema.parse({ group: TAB_GROUP, ...panelData, order, parentId })
   update.entities.panels.push(panel)
-  removeFromArray(panelData.id, update.removeIds.panelIds)
+  update.removeIds.boxIds.delete(panelData.id)
 
   for (const [order, tabData] of panelTabs.entries()) {
     normalizeTabData(state, update, tabData, order, panelData.id)
@@ -57,7 +57,7 @@ function normalizePanelData(
 
 function normalizeTabData(
   state: RootState,
-  update: UpdateLayoutPayload,
+  update: UpdateLayoutPayloadSets,
   tabData: TabData,
   order: number,
   parentId: string
@@ -76,14 +76,7 @@ function normalizeTabData(
     parentId,
   })
   update.entities.tabs.push(tab)
-  removeFromArray(tabData.id, update.removeIds.tabIds)
-}
-
-function removeFromArray(id: string, arr: string[]) {
-  const idx = arr.indexOf(id)
-  if (idx >= 0) {
-    arr.splice(idx, 1)
-  }
+  update.removeIds.boxIds.delete(tabData.id)
 }
 
 /**
@@ -107,20 +100,36 @@ const selectLayoutUpdate = createSelector(
       throw new Error('Expected `layout.dockbox` to be `BoxData`')
     }
 
-    const update: UpdateLayoutPayload = {
+    const update: UpdateLayoutPayloadSets = {
       entities: { boxes: [], panels: [], tabs: [] },
       // Keep track of encountered IDs, the remaining ones are slated for removal
       removeIds: {
-        boxIds: [...boxIds],
-        panelIds: [...panelIds],
-        tabIds: [...tabIds],
+        boxIds: new Set(boxIds),
+        panelIds: new Set(panelIds),
+        tabIds: new Set(tabIds),
       },
     }
 
     normalizeBoxData(state, update, dockbox, 0, null)
 
-    return update
+    return {
+      entities: update.entities,
+      removeIds: {
+        boxIds: [...update.removeIds.boxIds],
+        panelIds: [...update.removeIds.panelIds],
+        tabIds: [...update.removeIds.tabIds],
+      },
+    } satisfies UpdateLayoutPayload
   }
 )
+
+interface UpdateLayoutPayloadSets {
+  entities: UpdateLayoutPayload['entities']
+  removeIds: {
+    boxIds: Set<string>
+    panelIds: Set<string>
+    tabIds: Set<string>
+  }
+}
 
 export default selectLayoutUpdate

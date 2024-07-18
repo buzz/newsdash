@@ -17,18 +17,24 @@ const selectByTabId = createSelector(
   (feedItems, tabId) => feedItems.filter((feedItem) => feedItem.tabId === tabId)
 )
 
+/** Select feed item IDs by tab ID. */
+const selectIdsByTabId = createSelector(
+  [(state: RootState, tabId: string) => selectByTabId(state, tabId)],
+  (feedItems) => new Set(feedItems.map((item) => item.id))
+)
+
 /** Select old feed item IDs. */
 const selectOldFeedItemIds = createSelector(
   [selectSettings, tabsSelectors.selectAll, feedItemsSelectors.selectAll],
   ({ itemsToKeep }, tabs, feedItems) => {
-    const feedIds: string[] = []
+    const feedIds = new Set<string>()
 
     for (const tab of tabs) {
       const tabItems = feedItems.filter((item) => item.tabId === tab.id)
 
       for (const [i, { id: feedId }] of tabItems.entries()) {
         if (i >= itemsToKeep) {
-          feedIds.push(feedId)
+          feedIds.add(feedId)
         }
       }
     }
@@ -41,8 +47,8 @@ const selectOldFeedItemIds = createSelector(
 const selectOrphanedFeedItemIds = createSelector(
   [tabsSelectors.selectIds, feedItemsSelectors.selectAll],
   (tabIds, feedItems) =>
-    feedItems.filter((item) => !tabIds.includes(item.tabId)).map((item) => item.id)
+    new Set(feedItems.filter((item) => !tabIds.includes(item.tabId)).map((item) => item.id))
 )
 
-export { selectByTabId, selectOldFeedItemIds, selectOrphanedFeedItemIds }
+export { selectByTabId, selectIdsByTabId, selectOldFeedItemIds, selectOrphanedFeedItemIds }
 export default feedItemsSelectors

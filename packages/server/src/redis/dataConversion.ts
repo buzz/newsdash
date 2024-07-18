@@ -23,11 +23,11 @@ function isZodType(thing: unknown, zodType: 'boolean' | 'number') {
 
 /** Get list of schema fields */
 function getSchemaFields(schema: z.SomeZodObject) {
-  return Object.keys(schema.shape)
+  return new Set(Object.keys(schema.shape))
 }
 
 // { foo: '1', bar: '2' } => ['foo', '1', 'bar', '2']
-function objToHmData(obj: Record<string, RedisHashElementType | undefined>, hmFields: string[]) {
+function objToHmData(obj: Record<string, RedisHashElementType | undefined>, hmFields: Set<string>) {
   const result = []
   for (const hmField of hmFields) {
     const value = obj[hmField]

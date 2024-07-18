@@ -18,5 +18,4 @@ interface AddFetchedFeedItemsPayload {
   tabId: string
 }
 
-export type { AddFetchedFeedItemsPayload }
 export { addFeedItems, addFetchedFeedItems, removeFeedItems }

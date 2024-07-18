@@ -1,37 +1,37 @@
-import type { CaseReducer, EntityState, PayloadAction, Update } from '@reduxjs/toolkit'
+import type { CaseReducer, EntityState, Update } from '@reduxjs/toolkit'
 
 import type { FeedItem } from '#types/feed'
 
 import feedItemsEntityAdapter from './feedItemsEntityAdapter'
-import type { AddFetchedFeedItemsPayload } from './actions'
+import type { addFeedItems, addFetchedFeedItems, removeFeedItems } from './actions'
 
 /** Add feed items */
-const addFeedItemsReducer: CaseReducer<EntityState<FeedItem, string>, PayloadAction<FeedItem[]>> = (
-  state,
-  { payload: items }
-) => {
+const addFeedItemsReducer: CaseReducer<
+  EntityState<FeedItem, string>,
+  ReturnType<typeof addFeedItems>
+> = (state, { payload: items }) => {
   feedItemsEntityAdapter.upsertMany(state, items)
 }
 
 /** Add feed items from feed fetch (settings new=false on old items) */
 const addFetchedFeedItemsReducer: CaseReducer<
   EntityState<FeedItem, string>,
-  PayloadAction<AddFetchedFeedItemsPayload>
-> = (state, { payload: { items, oldItemIds, tabId } }) => {
-  const oldIds = new Set(oldItemIds)
+  ReturnType<typeof addFetchedFeedItems>
+> = (state, { payload: { items, oldItemIds: oldItemIdsArray, tabId } }) => {
+  const oldItemIds = new Set(oldItemIdsArray)
   const updates: Update<FeedItem, string>[] = []
   const additions: FeedItem[] = []
 
   // Process new items
   for (const item of items) {
     // Update existing item
-    if (oldIds.has(item.id)) {
+    if (oldItemIds.has(item.id)) {
       const { id, ...changes } = item
       updates.push({
         id,
         changes: { ...changes, new: false },
       })
-      oldIds.delete(item.id)
+      oldItemIds.delete(item.id)
     }
     // Add new item
     else {
@@ -40,7 +40,7 @@ const addFetchedFeedItemsReducer: CaseReducer<
   }
 
   // Set new=false on remaining old items
-  for (const id of oldIds) {
+  for (const id of oldItemIds) {
     updates.push({ id, changes: { new: false } })
   }
 
@@ -51,9 +51,9 @@ const addFetchedFeedItemsReducer: CaseReducer<
 /** Remove feed items */
 const removeFeedItemsReducer: CaseReducer<
   EntityState<FeedItem, string>,
-  PayloadAction<string[]>
+  ReturnType<typeof removeFeedItems>
 > = (state, { payload: ids }) => {
-  feedItemsEntityAdapter.removeMany(state, ids)
+  feedItemsEntityAdapter.removeMany(state, [...ids])
 }
 
 export { addFeedItemsReducer, addFetchedFeedItemsReducer, removeFeedItemsReducer }

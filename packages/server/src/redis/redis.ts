@@ -12,15 +12,15 @@ function assertRedisHashResult(thing: unknown): asserts thing is RedisHashResult
   }
 }
 
-function scan(redis: FastifyRedis, pattern: string): Promise<string[]> {
+function scan(redis: FastifyRedis, pattern: string): Promise<Set<string>> {
   return new Promise((resolve) => {
     const stream = redis.scanStream({ match: pattern })
-    const keys: string[] = []
+    const keys = new Set<string>()
     stream.on('data', (foundKeys) => {
       if (Array.isArray(foundKeys)) {
         for (const key of foundKeys) {
           if (typeof key === 'string') {
-            keys.push(key)
+            keys.add(key)
           }
         }
       }
@@ -80,10 +80,7 @@ async function updateHashesDeleteOthers(
     const key = `${keyBase}${obj.id}`
 
     // remove from delete set
-    const idx = deleteSet.indexOf(key)
-    if (idx > -1) {
-      deleteSet.splice(idx, 1)
-    }
+    deleteSet.delete(key)
 
     // update hash
     pipeline.hmset(key, objToHmData(obj, hmFields))

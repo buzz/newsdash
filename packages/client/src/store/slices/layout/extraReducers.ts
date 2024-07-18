@@ -1,21 +1,19 @@
-import type { CaseReducer, PayloadAction } from '@reduxjs/toolkit'
-
-import type { NormalizedEntities } from '#types/types'
+import type { CaseReducer } from '@reduxjs/toolkit'
 
 import boxesEntityAdapter from './entities/boxes/boxesEntityAdapter'
 import panelsEntityAdapter from './entities/panels/panelsEntityAdapter'
 import tabsEntityAdapter from './entities/tabs/tabsEntityAdapter'
-import type { UpdateLayoutPayload } from './actions'
+import type { restoreLayout, updateLayout } from './actions'
 import type { LayoutState } from './layoutSlice'
 
 /** Handle update of normalized layout, also remove remaining entities */
-const updateLayoutReducer: CaseReducer<LayoutState, PayloadAction<UpdateLayoutPayload>> = (
+const updateLayoutReducer: CaseReducer<LayoutState, ReturnType<typeof updateLayout>> = (
   state,
   { payload: { entities, removeIds } }
 ) => {
-  boxesEntityAdapter.removeMany(state.boxes, removeIds.boxIds)
-  panelsEntityAdapter.removeMany(state.panels, removeIds.panelIds)
-  tabsEntityAdapter.removeMany(state.tabs, removeIds.tabIds)
+  boxesEntityAdapter.removeMany(state.boxes, [...removeIds.boxIds])
+  panelsEntityAdapter.removeMany(state.panels, [...removeIds.panelIds])
+  tabsEntityAdapter.removeMany(state.tabs, [...removeIds.tabIds])
 
   boxesEntityAdapter.upsertMany(state.boxes, entities.boxes)
   panelsEntityAdapter.upsertMany(state.panels, entities.panels)
@@ -23,7 +21,7 @@ const updateLayoutReducer: CaseReducer<LayoutState, PayloadAction<UpdateLayoutPa
 }
 
 /** Handle restore of normalized layout, wiping layout before insertion */
-const restoreLayoutReducer: CaseReducer<LayoutState, PayloadAction<NormalizedEntities>> = (
+const restoreLayoutReducer: CaseReducer<LayoutState, ReturnType<typeof restoreLayout>> = (
   state,
   { payload: entities }
 ) => {
