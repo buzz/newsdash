@@ -15,12 +15,14 @@ function PanelExtra({ panel }: PanelExtraProps) {
   const selectTab = (state: RootState) => tabsSelectors.selectById(state, panel.activeId ?? '')
   const tab = useSelector(selectTab)
 
-  const refreshDisabled = tab.status === 'loading'
+  const addDisabled = tab.status === 'new'
   const editDisabled = isTabEditMode(tab.status)
+  const refreshDisabled = tab.status === 'loading' || editDisabled
 
   return (
     <>
       <PanelButton
+        disabled={addDisabled}
         label="Add Feed"
         onClick={() => {
           dispatch(requestNewTab(panel.id))
