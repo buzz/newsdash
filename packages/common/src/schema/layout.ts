@@ -63,7 +63,7 @@ const storeTabSchema = customTabFields.extend({
   gridView: z.boolean().default(false),
   group: z.optional(z.string()),
   language: z.optional(z.string()),
-  maxColumnWidth: z.number().default(600),
+  maxColumnWidth: z.number(),
   order: orderSchema,
   parentId: parentIdSchema,
 })
@@ -80,4 +80,4 @@ export type CustomTabFields = z.infer<typeof customTabFields>
 export type Display = z.infer<typeof displaySchema>
 export type Panel = z.infer<typeof panelSchema>
 export type Tab = z.infer<typeof tabSchema>
-export { boxSchema, displaySchema, panelSchema, storeTabSchema, tabSchema }
+export { boxSchema, displaySchema, newTabSchema, panelSchema, storeTabSchema, tabSchema }

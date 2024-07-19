@@ -1,14 +1,16 @@
 import { nanoid } from 'nanoid'
 
-import { MAX_COLUMN_WIDTH_DEFAULT } from '#constants'
+import { layout } from '@newsdash/common/schema'
+
+import { MAX_COLUMN_WIDTH_DEFAULT, TAB_GROUP } from '#constants'
 import { addAppListener } from '#store/middleware/utils'
 import { requestNewTab } from '#store/slices/layout/actions'
 import { updatePanel } from '#store/slices/layout/entities/panels/actions'
 import { selectPanelForTab } from '#store/slices/layout/entities/panels/selectors'
 import { addTab } from '#store/slices/layout/entities/tabs/actions'
 import { selectMaxTabOrder } from '#store/slices/layout/entities/tabs/selectors'
+import { getRandomHue } from '#utils'
 import type { AppListenerEffectAPI } from '#store/middleware/types'
-import type { RootState } from '#store/types'
 
 // New tab requested by user.
 function requestNewTabEffect(listenerApi: AppListenerEffectAPI) {
@@ -23,28 +25,27 @@ function requestNewTabEffect(listenerApi: AppListenerEffectAPI) {
         }
 
         // Find tab order
-        const selectOrder = (state: RootState) => selectMaxTabOrder(state, panelId)
-        const maxOrder = selectOrder(listenerApi.getState())
+        const maxOrder = selectMaxTabOrder(listenerApi.getState(), panelId)
         const order = maxOrder === -Infinity ? 0 : maxOrder + 1
 
-        // Add new tab and set active
-        const tabId = nanoid()
-        listenerApi.dispatch(
-          addTab({
-            id: tabId,
-            customTitle: '',
-            display: 'detailed',
-            enablePopover: true,
-            gridView: false,
-            maxColumnWidth: MAX_COLUMN_WIDTH_DEFAULT,
-            lastFetched: 0,
-            order,
-            parentId: panelId,
-            status: 'new',
-            url: '',
-          })
-        )
-        listenerApi.dispatch(updatePanel({ id: panelId, changes: { activeId: tabId } }))
+        // New tab
+        const tab = layout.newTabSchema.parse({
+          id: nanoid(),
+          customTitle: '',
+          group: TAB_GROUP,
+          hue: getRandomHue(),
+          maxColumnWidth: MAX_COLUMN_WIDTH_DEFAULT,
+          order,
+          parentId: panelId,
+          status: 'new',
+          url: '',
+        })
+
+        // Add new tab and...
+        listenerApi.dispatch(addTab(tab))
+
+        // ...set active
+        listenerApi.dispatch(updatePanel({ id: panelId, changes: { activeId: tab.id } }))
       },
     })
   )

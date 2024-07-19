@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react'
 import { layout } from '@newsdash/common/schema'
 import type { Tab } from '@newsdash/common/schema'
 
-import { MAX_COLUMN_WIDTH_DEFAULT } from '#constants'
 import { editTab, removeTab } from '#store/slices/layout/entities/tabs/actions'
 import { useDispatch } from '#ui/hooks/store'
 import type { TabEditMode } from '#types/layout'
@@ -23,28 +22,29 @@ const formSchema = layout.storeTabSchema.pick({
   url: true,
 })
 
-function getInitialFormValues(mode: TabEditMode, tab: Tab): EditFeedFormValues {
-  return mode === 'new'
-    ? {
-        customTitle: '',
-        display: 'detailed',
-        enablePopover: true,
-        filters: [],
-        gridView: false,
-        hue: tab.hue,
-        maxColumnWidth: MAX_COLUMN_WIDTH_DEFAULT,
-        url: '',
-      }
-    : {
-        customTitle: tab.customTitle,
-        display: tab.display,
-        enablePopover: tab.enablePopover,
-        filters: tab.filters,
-        gridView: tab.gridView,
-        hue: tab.hue,
-        maxColumnWidth: tab.maxColumnWidth,
-        url: tab.url,
-      }
+function getInitialFormValues(tab: Tab): EditFeedFormValues {
+  return {
+    customTitle: tab.customTitle,
+    display: tab.display,
+    enablePopover: tab.enablePopover,
+    filters: tab.filters,
+    gridView: tab.gridView,
+    hue: tab.hue,
+    maxColumnWidth: tab.maxColumnWidth,
+    url: tab.url,
+  }
+}
+
+function validate(values: EditFeedFormValues) {
+  const result = formSchema.safeParse(values)
+  return result.success
+    ? {}
+    : Object.fromEntries(
+        Object.entries(result.error.formErrors.fieldErrors).map(([field, errors]) => [
+          field,
+          Array.isArray(errors) ? errors[0] : undefined,
+        ])
+      )
 }
 
 function useEditForm(mode: TabEditMode, tab: Tab) {
@@ -76,20 +76,9 @@ function useEditForm(mode: TabEditMode, tab: Tab) {
   )
 
   const form = useForm<EditFeedFormValues>({
-    initialValues: getInitialFormValues(mode, tab),
-    validate: (values) => {
-      const result = formSchema.safeParse(values)
-      return result.success
-        ? {}
-        : Object.fromEntries(
-            Object.entries(result.error.formErrors.fieldErrors).map(([field, errors]) => [
-              field,
-              Array.isArray(errors) ? errors[0] : undefined,
-            ])
-          )
-    },
-    // Live update tab
-    onValuesChange: throttledUpdateFeed,
+    initialValues: getInitialFormValues(tab),
+    onValuesChange: throttledUpdateFeed, // Live update tab
+    validate,
   })
 
   const onCancel = () => {

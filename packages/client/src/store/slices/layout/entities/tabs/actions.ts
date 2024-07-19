@@ -2,19 +2,10 @@ import type { Update } from '@reduxjs/toolkit'
 
 import type { Tab } from '@newsdash/common/schema'
 
-import { TAB_GROUP } from '#constants'
-import { getRandomHue } from '#utils'
-
 import tabsSlice from './tabsSlice'
 
 /** Add new tab */
-const addTab = tabsSlice.createAction('addTab', (tab: Omit<Tab, 'hue'>) => ({
-  payload: {
-    group: TAB_GROUP,
-    hue: getRandomHue(),
-    ...tab,
-  },
-}))
+const addTab = tabsSlice.createAction<Tab>('addTab')
 
 /** Remove tab */
 const removeTab = tabsSlice.createAction<string>('removeTab')
