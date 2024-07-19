@@ -6,6 +6,7 @@ import type { AppState, ModalName } from '#types/types'
 const initialState: AppState = {
   colorScheme: 'dark',
   headerVisible: false,
+  initDone: false,
   modal: null,
 }
 
@@ -20,6 +21,10 @@ const appSlice = createSlice({
 
     changeHeaderVisibile(state, { payload }: PayloadAction<boolean>) {
       state.headerVisible = payload
+    },
+
+    initDone(state) {
+      state.initDone = true
     },
 
     openModal(state, { payload }: PayloadAction<ModalName>) {

@@ -14,6 +14,9 @@ interface AppState {
   /** Header visibility state */
   headerVisible: boolean
 
+  /** App initialized */
+  initDone: boolean
+
   /** Name of currently opened modal */
   modal: ModalName | null
 }

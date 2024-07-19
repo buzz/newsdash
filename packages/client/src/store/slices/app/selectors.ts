@@ -9,7 +9,10 @@ const selectColorScheme = (state: RootState) => selectAppSlice(state).colorSchem
 /** Select header visible state */
 const selectHeaderVisibile = (state: RootState) => selectAppSlice(state).headerVisible
 
+/** Select init state */
+const selectInitDone = (state: RootState) => selectAppSlice(state).initDone
+
 /** Select modal */
 const selectModal = (state: RootState) => selectAppSlice(state).modal
 
-export { selectColorScheme, selectHeaderVisibile, selectModal }
+export { selectColorScheme, selectHeaderVisibile, selectInitDone, selectModal }

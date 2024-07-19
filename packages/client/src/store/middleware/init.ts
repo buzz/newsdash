@@ -1,3 +1,4 @@
+import { initDone } from '#store/slices/app/actions'
 import type { AppListenerEffectAPI } from '#store/middleware/types'
 
 import feedInit from './feed/init'
@@ -21,6 +22,8 @@ async function init(listenerApi: AppListenerEffectAPI) {
     feedItemInit(listenerApi)
     layoutInit(listenerApi)
     settingsInit(listenerApi)
+
+    listenerApi.dispatch(initDone())
   })
 }
 
