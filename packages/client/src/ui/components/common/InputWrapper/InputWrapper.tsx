@@ -41,7 +41,7 @@ function InputWrapper({
       <InputLabel className={classes.label} mb={children ? 'xs' : undefined} required={required}>
         {label}
         {help && (
-          <Tooltip label={help}>
+          <Tooltip label={help} maw={350} multiline>
             <IconHelpCircle className={classes.icon} />
           </Tooltip>
         )}

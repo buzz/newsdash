@@ -11,8 +11,8 @@ import classes from './FiltersInput.module.css'
 function Help() {
   return (
     <>
-      Filter the feed list using strings or regular expressions. Items matching <br /> a filter will{' '}
-      <em>not</em> be displayed. The filter matches the title, teaser text, and link, <br />
+      Filter the feed list using strings or regular expressions. Items matching a filter will{' '}
+      <em>not</em> be displayed. The filter matches the title, teaser text, and link,
       case-insensitively. Filters enclosed in <Code>/</Code> are treated as regular expressions.
     </>
   )
