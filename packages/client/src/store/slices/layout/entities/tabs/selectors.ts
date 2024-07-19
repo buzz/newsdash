@@ -48,7 +48,7 @@ const selectPersistTabs = createSelector([tabsSelectors.selectAll], (tabs) =>
 const selectChildTabs = (state: RootState, panelId: string) =>
   tabsSelectors.selectAll(state).filter((tab) => tab.parentId === panelId)
 
-/** Get max tab order for panel */
+/** Select max tab order for panel */
 const selectMaxTabOrder = (state: RootState, panelId: string) =>
   Math.max(...selectChildTabs(state, panelId).map((p) => p.order))
 

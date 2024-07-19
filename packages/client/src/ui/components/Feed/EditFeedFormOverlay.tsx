@@ -7,7 +7,7 @@ import { isTabEditMode } from '#types/typeGuards'
 
 import EditFeedForm from './EditFeedForm/EditFeedForm'
 
-function EditFeedFormOverlay({ tab }: EditFeedFormOverlayProps) {
+function EditFeedFormOverlay({ feedItemCount = 0, tab }: EditFeedFormOverlayProps) {
   const {
     other: { transition },
   } = useMantineTheme()
@@ -23,7 +23,11 @@ function EditFeedFormOverlay({ tab }: EditFeedFormOverlayProps) {
     >
       {(styles) => (
         <Overlay blur={DEFAULT_BLUR} style={styles}>
-          <EditFeedForm mode={status === 'new' ? 'new' : 'edit'} tab={tab} />
+          <EditFeedForm
+            feedItemCount={feedItemCount}
+            mode={status === 'new' ? 'new' : 'edit'}
+            tab={tab}
+          />
         </Overlay>
       )}
     </Transition>
@@ -31,6 +35,7 @@ function EditFeedFormOverlay({ tab }: EditFeedFormOverlayProps) {
 }
 
 interface EditFeedFormOverlayProps {
+  feedItemCount?: number
   tab: Tab
 }
 

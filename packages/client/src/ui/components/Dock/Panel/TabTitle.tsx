@@ -7,24 +7,25 @@ import TabIcon from './TabIcon/TabIcon'
 
 import classes from './Panel.module.css'
 
-function TabTitle({ tab }: TabProps) {
-  const title = tab.description ? (
-    <Tooltip label={tab.description} multiline maw={400}>
-      <span>{getTitle(tab)}</span>
-    </Tooltip>
-  ) : (
-    <span>{getTitle(tab)}</span>
-  )
+function TabTitle({ feedItemCount, tab }: TabTitleProps) {
+  const title = getTitle(tab, feedItemCount)
 
   return (
     <span className={classes.title}>
       <TabIcon tab={tab} />
-      {title}
+      {tab.description ? (
+        <Tooltip label={tab.description} multiline maw={400}>
+          <span>{title}</span>
+        </Tooltip>
+      ) : (
+        <span>{title}</span>
+      )}
     </span>
   )
 }
 
-interface TabProps {
+interface TabTitleProps {
+  feedItemCount: number
   tab: Tab
 }
 

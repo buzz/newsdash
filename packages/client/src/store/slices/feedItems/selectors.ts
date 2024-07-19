@@ -11,37 +11,11 @@ const feedItemsSelectors = feedItemsEntityAdapter.getSelectors(
   (state: RootState) => state.feedItems
 )
 
-/** Select feed items by tab ID. */
-const selectByTabId = createSelector(
-  [
-    feedItemsSelectors.selectAll,
-    (_: RootState, tabId: string) => tabId,
-    (_: RootState, __: string, filters: ((string: string) => boolean)[]) => filters,
-  ],
-  (tabs, tabId, filters) =>
-    tabs.filter(
-      (item) =>
-        item.tabId === tabId &&
-        !filters.some((filter) => filter(`${item.link}${item.title}${item.content}`))
-    )
-)
-
-/** Select tab filters */
-const selectTabFilters = createSelector([tabsSelectors.selectById], (tab) =>
-  tab.filters.map((filter) => {
-    const filterLower = filter.toLowerCase()
-    if (filterLower.startsWith('/') && filterLower.endsWith('/')) {
-      const re = new RegExp(filterLower.slice(1, -1), 'i')
-      return (string: string) => re.test(string)
-    }
-    return (string: string) => string.toLowerCase().includes(filterLower)
-  })
-)
-
 /** Select feed item IDs by tab ID. */
 const selectIdsByTabId = createSelector(
-  [selectByTabId],
-  (feedItems) => new Set(feedItems.map((item) => item.id))
+  [feedItemsSelectors.selectAll, (_, tabId: string) => tabId],
+  (feedItems, tabId) =>
+    new Set(feedItems.filter((item) => item.tabId === tabId).map((item) => item.id))
 )
 
 /** Select old feed item IDs. */
@@ -77,11 +51,5 @@ const selectOldAndOrphanedFeedItemIds = createSelector(
   (oldFeedItemIds, orphanedFeedItemIds) => new Set([...oldFeedItemIds, ...orphanedFeedItemIds])
 )
 
-export {
-  selectByTabId,
-  selectIdsByTabId,
-  selectOldAndOrphanedFeedItemIds,
-  selectOldFeedItemIds,
-  selectTabFilters,
-}
+export { selectIdsByTabId, selectOldAndOrphanedFeedItemIds, selectOldFeedItemIds }
 export default feedItemsSelectors

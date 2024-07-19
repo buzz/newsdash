@@ -7,17 +7,18 @@ function getRandomHue() {
   return Math.floor(Math.random() * 360)
 }
 
-function getTitle({ customTitle, status, title }: Tab) {
+function getTitle({ customTitle, status, title }: Tab, feedItemCount: number) {
   if (status === 'new') {
     return 'Add Feed'
   }
+
+  let displayTitle = 'NO TITLE'
   if (customTitle.length > 0) {
-    return customTitle
+    displayTitle = customTitle
+  } else if (title !== undefined && title.length > 0) {
+    displayTitle = title
   }
-  if (title !== undefined && title.length > 0) {
-    return title
-  }
-  return 'NO TITLE'
+  return `${displayTitle} (${feedItemCount})`
 }
 
 function zodErrorToString<T>(error: z.ZodError<T>) {

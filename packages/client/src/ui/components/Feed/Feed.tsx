@@ -1,20 +1,15 @@
+import type { Tab } from '@newsdash/common/schema'
+
 import { DISPLAY_PARAMS } from '#constants'
-import type { CustomTabData } from '#types/layout'
+import type { FeedItem } from '#types/feed'
 
 import EditFeedFormOverlay from './EditFeedFormOverlay'
 import EmptyList from './EmptyList/EmptyList'
-import useFeedData from './useFeedData'
 import Window from './Window/Window'
 
 import classes from './Feed.module.css'
 
-function Feed({ tab: { id: tabId } }: FeedProps) {
-  if (tabId === undefined) {
-    throw new Error('Expected tabId')
-  }
-
-  const { tab, feedItems } = useFeedData(tabId)
-
+function Feed({ feedItems, tab }: FeedProps) {
   if (feedItems.length === 0) {
     return (
       <>
@@ -34,13 +29,14 @@ function Feed({ tab: { id: tabId } }: FeedProps) {
         overscanCount={overscanCount ?? 1}
         tab={tab}
       />
-      <EditFeedFormOverlay tab={tab} />
+      <EditFeedFormOverlay feedItemCount={feedItems.length} tab={tab} />
     </div>
   )
 }
 
 interface FeedProps {
-  tab: CustomTabData
+  feedItems: FeedItem[]
+  tab: Tab
 }
 
 export default Feed
