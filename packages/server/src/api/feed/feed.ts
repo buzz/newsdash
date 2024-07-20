@@ -29,7 +29,7 @@ const feedPlugin: FastifyPluginAsync = (app) => {
     const url = parseUrl(request.query.url)
     const body = await fetchText(url)
     const imageUrl = parseUrl(await scrapeUrlImage(body, url))
-    return reply.send(downloadImageAndResizeStream(imageUrl))
+    return reply.send(await downloadImageAndResizeStream(imageUrl))
   })
 
   app.get('/logo', async (request: UrlRequest, reply) => {
@@ -44,7 +44,7 @@ const feedPlugin: FastifyPluginAsync = (app) => {
       return reply.send(await downloadImageAndResizeIco(logoUrl))
     }
 
-    return reply.send(downloadImageAndResizeStream(logoUrl, 32, 32))
+    return reply.send(await downloadImageAndResizeStream(logoUrl, 32, 32))
   })
 
   return Promise.resolve()

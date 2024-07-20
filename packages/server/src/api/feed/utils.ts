@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto'
 
 import decodeIco from 'decode-ico'
-import got, { type OptionsOfUnknownResponseBodyWrapped } from 'got'
+import ky from 'ky'
 import metascraper from 'metascraper'
 import metascraperImage from 'metascraper-image'
 import metascraperLogo from 'metascraper-logo'
@@ -21,10 +21,8 @@ import type { CustomFeedFields, RssParserResult } from './types.js'
 const NO_TITLE = 'NO_TITLE'
 const DEFAULT_FETCH_OPTIONS = {
   headers: { 'User-Agent': USER_AGENT },
-  method: 'GET',
-  resolveBodyOnly: false,
-  timeout: { request: FETCH_TIMEOUT },
-} satisfies OptionsOfUnknownResponseBodyWrapped
+  timeout: FETCH_TIMEOUT,
+}
 
 function constructFeedResponse(result: RssParserResult) {
   const { items: resultItems, ...feed } = result
@@ -80,9 +78,10 @@ function parseUrl(urlString: unknown): URL {
   }
 }
 
-function fetchText(url: URL) {
+async function fetchText(url: URL) {
   try {
-    return got(url, DEFAULT_FETCH_OPTIONS).text()
+    const response = await ky.get(url, DEFAULT_FETCH_OPTIONS)
+    return response.text()
   } catch (error) {
     if (isError(error)) {
       throw new BadGateway(error.message)
@@ -91,15 +90,14 @@ function fetchText(url: URL) {
   throw new Error(UNKNOWN_ERROR_MESSAGE)
 }
 
-function fetchStream(url: URL) {
-  try {
-    return got.stream(url, DEFAULT_FETCH_OPTIONS)
-  } catch (error) {
-    if (isError(error)) {
-      throw new BadGateway(error.message)
-    }
+async function fetchBuffer(url: URL) {
+  const response = await ky.get(url, DEFAULT_FETCH_OPTIONS)
+
+  if (!response.ok) {
+    throw new BadGateway(`Fetch error: ${response.statusText}`)
   }
-  throw new Error(UNKNOWN_ERROR_MESSAGE)
+
+  return Buffer.from(await response.arrayBuffer())
 }
 
 function parseFeed(body: string) {
@@ -138,13 +136,16 @@ async function scrapeUrlLogo(html: string, url: URL) {
   throw new NotFound()
 }
 
-function downloadImageAndResizeStream(
+async function downloadImageAndResizeStream(
   url: URL,
   width: number = IMG_WIDTH,
   height: number = IMG_HEIGHT
 ) {
   try {
-    return fetchStream(url).pipe(sharp().resize(width, height).webp({ quality: IMG_QUALITY }))
+    return sharp(await fetchBuffer(url))
+      .resize(width, height)
+      .webp({ quality: IMG_QUALITY })
+      .toBuffer()
   } catch (error: unknown) {
     if (isError(error)) {
       throw new ServerError(error.message)
@@ -155,8 +156,7 @@ function downloadImageAndResizeStream(
 
 async function downloadImageAndResizeIco(url: URL) {
   try {
-    const response = await got(url, { ...DEFAULT_FETCH_OPTIONS, responseType: 'buffer' })
-    const buffer = response.body
+    const buffer = await fetchBuffer(url)
     const images = decodeIco(buffer)
 
     let foundImg = images.find((image) => image.width === 32 && image.height === 32)
@@ -190,7 +190,6 @@ export {
   constructFeedResponse,
   downloadImageAndResizeIco,
   downloadImageAndResizeStream,
-  fetchStream,
   fetchText,
   parseFeed,
   parseUrl,

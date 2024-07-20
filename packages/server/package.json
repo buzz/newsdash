@@ -32,7 +32,7 @@
     "@newsdash/common": "link:../common",
     "decode-ico": "^0.4.1",
     "fastify": "^4.28.1",
-    "got": "^14.4.1",
+    "ky": "^1.4.0",
     "metascraper": "^5.45.19",
     "metascraper-image": "^5.45.10",
     "metascraper-logo": "^5.45.10",
@@ -43,7 +43,6 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@types/got": "^9.6.12",
     "nodemon": "^3.1.4",
     "pino-pretty": "^11.2.1",
     "tsx": "^4.16.2"
