@@ -1,6 +1,9 @@
 .badge {
   --badge-padding-x-sm: calc(var(--mantine-spacing-xs) * 0.5);
-  background-color: light-dark(rgba(0 0 0 / 35%), rgba(255 255 255 / 25%));
+  background-color: light-dark(
+    alpha(var(--mantine-color-dark-4), 70%),
+    alpha(var(--mantine-color-gray-6), 60%)
+  );
   box-shadow: var(--mantine-shadow-xs);
   color: var(--mantine-color-white);
   font-weight: 400;
@@ -12,7 +15,10 @@
   transition-timing-function: var(--transition-timing-function);
 
   &.new {
-    background-color: var(--mantine-primary-color-filled);
+    background-color: light-dark(
+      alpha(var(--mantine-primary-color-filled), 70%),
+      alpha(var(--mantine-primary-color-filled), 60%)
+    );
 
     > span {
       color: var(--mantine-color-white);
@@ -20,7 +26,8 @@
     }
   }
 
-  a:visited & {
-    background-color: var(--mantine-color-dimmed);
+  a:visited > & {
+    /* Can't change alpha value of :visited styles */
+    background-color: light-dark(var(--mantine-color-dark-3), var(--mantine-color-gray-7));
   }
 }
