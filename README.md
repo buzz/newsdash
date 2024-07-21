@@ -10,10 +10,8 @@
 
 <p align="center">
   <a href="#-features">Features</a> •
-  <a href="#-motivation">Motivation</a> •
   <a href="#-installation">Installation</a> •
   <a href="#%EF%B8%8F-development">Development</a> •
-  <a href="#-credits">Credits</a> •
   <a href="#license">License</a>
 </p>
 
@@ -25,19 +23,14 @@
 
 - Customizable dock-based dashboard
 - Support for Atom and RSS feeds
-- Four different feed layouts: condensed, list, detailed, tiles
+- Four feed layouts: condensed, list, detailed, tiles
 - Tabbed multi-feeds
-- Import/Export of settings and feeds
+- Import/Export settings and feeds
 - Filter feed items
-
-## 🤔 Motivation
-
-I couldn't find a modern and simple web-based feed reader that meets my
-requirements. So I wrote my own.
 
 ## 💻 Installation
 
-This is a self-hosted solution. A Docker image is provided, to make the installation easier.
+This is a self-hosted solution with a provided Docker image for easy installation.
 
 ### Requirements
 
@@ -46,42 +39,41 @@ This is a self-hosted solution. A Docker image is provided, to make the installa
 
 ### Docker
 
-To get up and running quickly start the Docker image. It will start the API server. The static web
-app is provided under the volume `/client`. For production you need to [serve the static files
-yourself](#nginx).
+To start quickly, run the Docker image, which starts the API server. The static web app is available
+under the volume `/client`. For production, you need to serve the static files using [a
+webserver](#nginx).
 
 ```bash
 $ docker run \
     -e REDIS_URL=redis://redis:6380 \
     -p 127.0.0.1:3000:3000 \
+    -v ./path/to/client:/client \
     newsdash/newsdash
 ```
 
 #### Redis
 
-To persist your settings and feeds you need to provide a [Redis](http://redis.io) instance. You can
-start a Redis container and link it to newsdash. [Docker Compose](https://docs.docker.com/compose/)
-works great for small setups. Use the environment variable `REDIS_URL` to customize the connection
-URL.
+To persist settings and feeds, provide a Redis instance. You can start a [Redis](http://redis.io)
+container and link it to newsdash. [Docker Compose](https://docs.docker.com/compose/) is ideal for
+small setups. Use the `REDIS_URL` environment variable to customize the connection URL.
 
 #### nginx
 
-For a production deployment you want to use some sort of reverse proxy like
-[nginx](https://nginx.org/). This adds
+For production deployment, use a reverse proxy like [nginx](https://nginx.org/) for:
 
-- static file serving,
-- image caching,
-- basic authentication,
-- gzip compression, and
-- TLS termination.
+- Static file serving
+- Image caching
+- Basic authentication
+- Gzip compression
+- TLS termination
 
 ```nginx
-# A sample nginx configuration as a starting point.
+# Sample nginx configuration as starting point
 
 http {
   # ...
 
-  # cache for newsdash images
+  # Cache for newsdash images (highly recommended)
   proxy_cache_path /var/cache/nginx levels=1:2 keys_zone=newsdash_cache:10m max_size=1g inactive=30d use_temp_path=off;
 
   server {
@@ -105,7 +97,7 @@ http {
     gzip_proxied any;
     gzip_types text/css text/javascript application/json;
 
-    # cache dynamic images
+    # Cache dynamic images
     location ~ ^/api/feed/(image|logo) {
       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
       proxy_set_header Host $host;
@@ -119,7 +111,7 @@ http {
       add_header X-Cache-Status $upstream_cache_status;
     }
 
-    # serve api endpoints
+    # Serve API endpoints
     location ~ ^/api {
       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
       proxy_set_header Host $host;
@@ -127,7 +119,7 @@ http {
       proxy_http_version 1.1;
     }
 
-    # serve static files
+    # Serve static files
     location / {
       try_files $uri $uri/index.html =404;
     }
@@ -137,10 +129,10 @@ http {
 
 ## 🛠️ Development
 
-Make sure you have recent versions of [Node.js](https://nodejs.org/) and [pnpm](https://pnpm.io/)
+Ensure you have recent versions of [Node.js](https://nodejs.org/) and [pnpm](https://pnpm.io/)
 installed.
 
-Check out the project and start a development server.
+Clone the project and start a development server.
 
 ```bash
 $ git clone https://github.com/buzz/newsdash.git
@@ -148,10 +140,6 @@ $ cd newsdash
 $ pnpm install
 $ pnpm dev
 ```
-
-## 💌 Credits
-
-Kudos to Netvibes and iGoogle (both defunct). That's where this project drew its inspiration.
 
 ## License
 
