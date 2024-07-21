@@ -19,13 +19,13 @@
     "#utils": "./src/utils.ts"
   },
   "dependencies": {
-    "@mantine/core": "^7.11.1",
-    "@mantine/form": "^7.11.1",
-    "@mantine/hooks": "^7.11.1",
-    "@mantine/notifications": "^7.11.1",
+    "@mantine/core": "^7.11.2",
+    "@mantine/form": "^7.11.2",
+    "@mantine/hooks": "^7.11.2",
+    "@mantine/notifications": "^7.11.2",
     "@newsdash/common": "link:../common",
     "@reduxjs/toolkit": "^2.2.6",
-    "@tabler/icons-react": "^3.10.0",
+    "@tabler/icons-react": "^3.11.0",
     "clsx": "^2.1.1",
     "lodash-es": "^4.17.21",
     "memoizee": "^0.4.17",
@@ -53,9 +53,9 @@
     "@types/validator": "^13.12.0",
     "@vitejs/plugin-react-swc": "^3.7.0",
     "postcss": "^8.4.39",
-    "postcss-preset-mantine": "^1.15.0",
+    "postcss-preset-mantine": "^1.17.0",
     "postcss-simple-vars": "^7.0.1",
-    "vite": "^5.3.3",
+    "vite": "^5.3.4",
     "vite-plugin-favicon2": "^1.1.5",
     "vite-plugin-svgr": "^4.2.0"
   }
