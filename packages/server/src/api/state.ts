@@ -16,10 +16,15 @@ const TABS_KEY = `${APP_PREFIX}:tabs:*`
 const redisUrl = process.env.REDIS_URL ?? DEFAULT_REDIS_URL
 
 const statePlugin: FastifyPluginAsync = async (app) => {
-  await app.register(fastifyRedis, {
-    url: redisUrl,
-    showFriendlyErrorStack: process.env.NODE_ENV !== 'production',
-  })
+  try {
+    await app.register(fastifyRedis, {
+      closeClient: true,
+      url: redisUrl,
+      showFriendlyErrorStack: process.env.NODE_ENV !== 'production',
+    })
+  } catch {
+    app.log.error('Could not connect to Redis.')
+  }
 
   app.get('/layout', async () => {
     const result = persistLayoutSchema.safeParse({
