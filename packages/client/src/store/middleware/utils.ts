@@ -1,5 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-restricted-imports
 import { addListener } from '@reduxjs/toolkit'
+import { nanoid } from 'nanoid'
 import type { SerializedError } from '@reduxjs/toolkit'
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query'
 
@@ -32,7 +33,21 @@ function extractQueryError(error: FetchBaseQueryError | SerializedError): string
   return UNKNOWN_ERROR_MESSAGE
 }
 
+function createEmptyLayout(): NormalizedEntities {
+  const dockBoxId = nanoid()
+  return {
+    boxes: [{ id: dockBoxId, mode: 'horizontal', order: 0, parentId: null }],
+    panels: [{ id: nanoid(), order: 0, parentId: dockBoxId }],
+    tabs: [],
+  }
+}
+
 function fromPersistLayout({ boxes, panels, tabs }: PersistLayout): NormalizedEntities {
+  // Create empty layout if remote store is empty
+  if (boxes.length === 0 || panels.length === 0) {
+    return createEmptyLayout()
+  }
+
   return {
     boxes,
     panels: panels.map((panel) => ({
