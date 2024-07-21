@@ -1,12 +1,11 @@
 **/*~
 **/.DS_Store
 **/.git
+**/.gitignore
 **/README.md
 **/node_modules
-.gitignore
+**/dist
 .editorconfig
 .dockerignore
 LICENSE.txt
 Dockerfile
-packages/client/dist
-newsdash-dist.zip

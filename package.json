@@ -21,7 +21,7 @@
     "url": "https://github.com/buzz/newsdash.git"
   },
   "scripts": {
-    "build": "pnpm run /:build$/",
+    "build": "pnpm run common:build && pnpm run server:build && pnpm run client:build",
     "client:build:visualize-analyze": "BUNDLE_ANALYZE=1 pnpm run client:build",
     "client:build": "pnpm run --filter @newsdash/client build",
     "client:dev": "pnpm run --filter @newsdash/client dev",
@@ -56,5 +56,20 @@
     "prettier": "^3.3.2",
     "typescript": "^5.5.3",
     "typescript-eslint": "^7.16.0"
+  },
+  "packageManager": "pnpm@9.5.0",
+  "pnpm": {
+    "supportedArchitectures": {
+      "cpu": [
+        "x64"
+      ],
+      "os": [
+        "linux"
+      ],
+      "libc": [
+        "glibc",
+        "musl"
+      ]
+    }
   }
 }
