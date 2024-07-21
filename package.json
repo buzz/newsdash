@@ -22,7 +22,6 @@
   },
   "scripts": {
     "build": "pnpm run common:build && pnpm run server:build && pnpm run client:build",
-    "client:build:visualize-analyze": "BUNDLE_ANALYZE=1 pnpm run client:build",
     "client:build": "pnpm run --filter @newsdash/client build",
     "client:dev": "pnpm run --filter @newsdash/client dev",
     "common:build": "pnpm run --filter @newsdash/common build",
