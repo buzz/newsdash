@@ -213,6 +213,9 @@ importers:
       metascraper-logo-favicon:
         specifier: ^5.45.21
         version: 5.45.21
+      metascraper-youtube:
+        specifier: ^5.45.17
+        version: 5.45.17
       rss-parser:
         specifier: ^3.13.0
         version: 3.13.0
@@ -2406,6 +2409,10 @@ packages:
   get-tsconfig@4.7.6:
     resolution: {integrity: sha512-ZAqrLlu18NbDdRaHq+AKXzAmqIUPswPWKUchfytdAjiRFnCe5ojG2bstg6mRiZabkKfCoL/e98pbBELIV/YCeA==}
 
+  get-video-id@3.6.5:
+    resolution: {integrity: sha512-9RPHSQANIeGW5rU3CjWdm1zi+wUHbBWX+m4m+dqQAavrZ9p1P1J7AbxGvVEEHRyGfGrmMf5PqiRWYMyfqM+QYA==}
+    engines: {node: '>=10'}
+
   getpass@0.1.7:
     resolution: {integrity: sha512-0fzj9JxOLfJ+XGLhR8ze3unN0KZCgZwiSSDz168VERjK8Wl8kVSdcu2kspd4s4wtAa1y/qrVRiAA0WclVsu0ng==}
 
@@ -3022,6 +3029,10 @@ packages:
 
   metascraper-logo@5.45.10:
     resolution: {integrity: sha512-HpIUuczIgefUgmlpDRLRzgYE4P0gD7Z2VsgSI5Qa8sgXqhEGC45UPn6J+LaQuhTaBirVNCHhgqX5uHG4EPDhAw==}
+    engines: {node: '>= 16'}
+
+  metascraper-youtube@5.45.17:
+    resolution: {integrity: sha512-+JDuBWyK9H0qjIemYcKR7yVg0ED9Ba4T6iAxLRRpsF4b7CW3SMcAVVeXe6fYYZkgKcNGnKZgYg8UF5BxVoI1Rg==}
     engines: {node: '>= 16'}
 
   metascraper@5.45.19:
@@ -7107,6 +7118,8 @@ snapshots:
     dependencies:
       resolve-pkg-maps: 1.0.0
 
+  get-video-id@3.6.5: {}
+
   getpass@0.1.7:
     dependencies:
       assert-plus: 1.0.0
@@ -7765,6 +7778,18 @@ snapshots:
     dependencies:
       '@metascraper/helpers': 5.45.10
       lodash: 4.17.21
+    transitivePeerDependencies:
+      - bufferutil
+      - canvas
+      - supports-color
+      - utf-8-validate
+
+  metascraper-youtube@5.45.17:
+    dependencies:
+      '@metascraper/helpers': 5.45.10
+      get-video-id: 3.6.5
+      p-locate: 5.0.0
+      reachable-url: 1.8.1
     transitivePeerDependencies:
       - bufferutil
       - canvas

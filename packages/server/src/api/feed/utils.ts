@@ -6,6 +6,7 @@ import metascraper from 'metascraper'
 import metascraperImage from 'metascraper-image'
 import metascraperLogo from 'metascraper-logo'
 import metascraperLogoFavicon from 'metascraper-logo-favicon'
+import metascraperYoutube from 'metascraper-youtube'
 import RssParser from 'rss-parser'
 import sharp from 'sharp'
 import { stripHtml } from 'string-strip-html'
@@ -112,7 +113,7 @@ function parseFeed(body: string) {
 }
 
 async function scrapeUrlImage(html: string, url: URL) {
-  const imageScraper = metascraper([metascraperImage()])
+  const imageScraper = metascraper([metascraperImage(), metascraperYoutube()])
   const { image: imageList } = await imageScraper({ html, url: String(url) })
 
   // might return comma-separated list of images
