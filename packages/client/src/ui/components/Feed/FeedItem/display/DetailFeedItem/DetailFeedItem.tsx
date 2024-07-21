@@ -1,5 +1,6 @@
 import cx from 'clsx'
 
+import FailableImage from '#ui/components/common/FailableImage'
 import TimeAgoBadge from '#ui/components/Feed/FeedItem/TimeAgoBadge/TimeAgoBadge'
 import type { FeedItemComponentProps } from '#ui/components/Feed/FeedItem/types'
 
@@ -26,7 +27,7 @@ function DetailFeedItem({ feedItem, imageUrl, language }: FeedItemComponentProps
 
   return (
     <>
-      <img alt={feedItem.title} className={classes.image} src={imageUrl} />
+      <FailableImage alt={feedItem.title} className={classes.image} src={imageUrl} />
       <div className={classes.teaserText}>
         <div className={cx(classes.title, { [classes.noContent]: !hasContent })}>{title}</div>
         {hasContent && (

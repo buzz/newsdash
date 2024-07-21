@@ -2,6 +2,7 @@ import { Group, HoverCard, Stack, Text } from '@mantine/core'
 import type { ReactNode } from 'react'
 
 import selectSettings from '#store/slices/settings/selectors'
+import FailableImage from '#ui/components/common/FailableImage'
 import { useSelector } from '#ui/hooks/store'
 
 import classes from './FeedHoverCard.module.css'
@@ -31,7 +32,7 @@ function FeedHoverCard({ children, content, date, imageUrl, language, title }: F
       <HoverCard.Target>{children}</HoverCard.Target>
       <HoverCard.Dropdown className={classes.hoverCard}>
         <Group className={classes.flexWrap} wrap="nowrap">
-          {imageUrl && <img className={classes.image} alt={title} src={imageUrl} />}
+          <FailableImage alt={title} className={classes.image} src={imageUrl} />
           <Stack gap="xs">
             {title.length > 0 && <Text className={classes.title}>{title}</Text>}
             <Text fs="italic" size="sm">
