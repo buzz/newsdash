@@ -38,14 +38,15 @@ function DockLayout({ tabs }: DockLayoutProps) {
   const layout = useSelector(selectDenormalizedLayout)
   const feedItems = useSelector(feedItemsSelectors.selectAll)
 
-  const { slideAnimation } = useSelector(selectSettings)
+  const { itemCount, slideAnimation } = useSelector(selectSettings)
   const groups = useMemo(() => makeGroups(slideAnimation), [slideAnimation])
 
   const tabDataCache = useMemo(
     () => makeTabDataCache(feedItems, tabs.length),
     [feedItems, tabs.length]
   )
-  const rcLoadTab = (tabData: CustomTabData) => loadTab(tabs, feedItems, tabDataCache, tabData)
+  const rcLoadTab = (tabData: CustomTabData) =>
+    loadTab(tabs, feedItems, tabDataCache, itemCount, tabData)
 
   return (
     <RcDockLayout

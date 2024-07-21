@@ -12,6 +12,7 @@ function loadTab(
   tabs: Tab[],
   allFeedItems: FeedItem[],
   { selectFeedItems, selectFilters }: TabDataCache,
+  itemCount: boolean,
   tabData: CustomTabData
 ) {
   const tab = tabs.find((tab) => tab.id === tabData.id)
@@ -27,7 +28,7 @@ function loadTab(
   return {
     ...tabDataWithoutTitle,
     content: <Feed feedItems={feedItems} tab={tab} />,
-    title: <TabTitle feedItemCount={feedItems.length} tab={tab} />,
+    title: <TabTitle feedItemCount={itemCount ? feedItems.length : undefined} tab={tab} />,
   }
 }
 

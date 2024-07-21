@@ -9,10 +9,10 @@ import Divider from '#ui/components/common/Divider/Divider'
 import { useDispatch, useSelector } from '#ui/hooks/store'
 import type { Settings } from '#types/types'
 
+import AppearanceSettings from './AppearanceSettings'
 import ColorSchemeSettings from './ColorSchemeSettings'
 import FeedSettings from './FeedSettings'
 import LocaleSettings from './LocaleSettings'
-import SlideAnimationSettings from './SlideAnimationSettings'
 import TabColorSettings from './TabColorSettings'
 
 function SettingsModal() {
@@ -32,7 +32,7 @@ function SettingsModal() {
         <Divider label="Appearance" />
         <ColorSchemeSettings />
         <TabColorSettings {...props} />
-        <SlideAnimationSettings {...props} />
+        <AppearanceSettings {...props} />
         <Divider label="Feeds" />
         <FeedSettings {...props} />
         <Divider label="Locale Settings" />

@@ -39,6 +39,7 @@ const settingsSchema = z.object({
   dateLocale: z.optional(localeSchema),
   dateHour12: z.optional(z.boolean()),
   slideAnimation: z.boolean().default(true),
+  itemCount: z.boolean().default(true),
 })
 
 const normalizedEntitiesSchema = z.object({

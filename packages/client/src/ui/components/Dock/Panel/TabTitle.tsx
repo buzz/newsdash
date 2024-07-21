@@ -25,7 +25,7 @@ function TabTitle({ feedItemCount, tab }: TabTitleProps) {
 }
 
 interface TabTitleProps {
-  feedItemCount: number
+  feedItemCount?: number
   tab: Tab
 }
 
