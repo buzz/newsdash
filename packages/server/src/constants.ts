@@ -5,7 +5,7 @@ const PKG_VERSION = pkgData.version
 const PKG_HOMEPAGE = pkgData.homepage
 
 const DEFAULT_HOST = 'localhost'
-const DEFAULT_PORT = 3001
+const DEFAULT_PORT = 3000
 const DEFAULT_REDIS_URL = 'redis://127.0.0.1:6379'
 const FETCH_TIMEOUT = 10_000
 const USER_AGENT = `${PKG_NAME}/${PKG_VERSION} (${PKG_HOMEPAGE})`

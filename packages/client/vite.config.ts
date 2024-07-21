@@ -7,8 +7,8 @@ export default defineConfig({
     target: ['chrome126', 'firefox128'],
   },
   server: {
-    port: 3000,
-    proxy: { '/api': 'http://localhost:3001' },
+    port: 3001,
+    proxy: { '/api': 'http://localhost:3000' },
   },
   plugins: [
     react(),
