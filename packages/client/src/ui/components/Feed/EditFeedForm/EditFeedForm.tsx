@@ -40,7 +40,7 @@ function EditFeedForm({ feedItemCount, mode, tab }: EditFeedFormProps) {
               </Title>
               <form className={classes.form} onSubmit={onSubmit} ref={focusTrapRef}>
                 <Divider label="General" />
-                <UrlInput form={form} />
+                <UrlInput form={form} mode={mode} />
                 <TitleInput
                   disabled={form.getValues().customTitle === ''}
                   form={form}
