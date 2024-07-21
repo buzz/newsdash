@@ -2,13 +2,13 @@ import pkgData from '../../../package.json' with { type: 'json' }
 
 const PKG_NAME = pkgData.name
 const PKG_VERSION = pkgData.version
-const PKG_HOMEPAGE = pkgData.homepage
 
 const DEFAULT_HOST = 'localhost'
 const DEFAULT_PORT = 3000
 const DEFAULT_REDIS_URL = 'redis://127.0.0.1:6379'
 const FETCH_TIMEOUT = 10_000
-const USER_AGENT = `${PKG_NAME}/${PKG_VERSION} (${PKG_HOMEPAGE})`
+const USER_AGENT =
+  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.3'
 
 const MAX_CONTENT_LENGTH = 400
 const IMG_QUALITY = 85
@@ -22,7 +22,6 @@ export {
   IMG_MAX_AGE,
   IMG_QUALITY,
   MAX_CONTENT_LENGTH,
-  PKG_HOMEPAGE,
   PKG_NAME,
   PKG_VERSION,
   USER_AGENT,
