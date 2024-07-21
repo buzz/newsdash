@@ -4,6 +4,7 @@ const PKG_NAME = pkgData.name
 const PKG_VERSION = pkgData.version
 const PKG_HOMEPAGE = pkgData.homepage
 
+const DEFAULT_HOST = 'localhost'
 const DEFAULT_PORT = 3001
 const DEFAULT_REDIS_URL = 'redis://127.0.0.1:6379'
 const FETCH_TIMEOUT = 10_000
@@ -14,6 +15,7 @@ const IMG_QUALITY = 85
 const IMG_MAX_AGE = 5_184_000 // 60d
 
 export {
+  DEFAULT_HOST,
   DEFAULT_PORT,
   DEFAULT_REDIS_URL,
   FETCH_TIMEOUT,
