@@ -1,13 +1,13 @@
 import { removeFeedItems } from '#store/slices/feedItems/actions'
-import { selectOldAndOrphanedFeedItemIds } from '#store/slices/feedItems/selectors'
+import { selectOrphanedFeedItemIds } from '#store/slices/feedItems/selectors'
 import type { AppListenerEffectAPI } from '#store/middleware/types'
 
-function cleanupFeedItems(listenerApi: AppListenerEffectAPI) {
+function removeOrphanedFeedItems(listenerApi: AppListenerEffectAPI) {
   const state = listenerApi.getState()
-  const feedIds = selectOldAndOrphanedFeedItemIds(state)
+  const feedIds = selectOrphanedFeedItemIds(state)
   if (feedIds.size > 0) {
     listenerApi.dispatch(removeFeedItems([...feedIds]))
   }
 }
 
-export default cleanupFeedItems
+export default removeOrphanedFeedItems

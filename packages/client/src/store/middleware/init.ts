@@ -11,20 +11,17 @@ import restoreSettings from './settings/restoreSettings'
 
 async function init(listenerApi: AppListenerEffectAPI) {
   // Restore app state
-  await Promise.all([
-    restoreFeedItems(listenerApi),
-    restoreLayout(listenerApi),
-    restoreSettings(listenerApi),
-  ])
+  await restoreSettings(listenerApi)
+  await restoreLayout(listenerApi)
+  await restoreFeedItems(listenerApi)
 
-  listenerApi.fork(() => {
-    feedInit(listenerApi)
-    feedItemInit(listenerApi)
-    layoutInit(listenerApi)
-    settingsInit(listenerApi)
+  // Init sub-modules
+  feedInit(listenerApi)
+  feedItemInit(listenerApi)
+  layoutInit(listenerApi)
+  settingsInit(listenerApi)
 
-    listenerApi.dispatch(initDone())
-  })
+  listenerApi.dispatch(initDone())
 }
 
 export default init
