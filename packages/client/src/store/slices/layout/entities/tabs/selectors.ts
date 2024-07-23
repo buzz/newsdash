@@ -1,5 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit'
 
+import { idSortComparer } from '#store/sortComparer'
 import type { RootState } from '#store/types'
 
 import tabsEntityAdapter from './tabsEntityAdapter'
@@ -42,6 +43,7 @@ const selectPersistTabs = createSelector([tabsSelectors.selectAll], (tabs) =>
       title: tab.title,
       url: tab.url,
     }))
+    .sort(idSortComparer)
 )
 
 /** Select panel tabs */

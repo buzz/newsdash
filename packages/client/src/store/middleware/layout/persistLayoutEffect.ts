@@ -14,7 +14,7 @@ import type { AppListenerEffectAPI } from '#store/middleware/types'
 
 const PERSIST_DELAY = 5000
 
-let lastPersistLayout: PersistLayout | undefined
+let prevPersistLayout: PersistLayout | undefined
 
 /** Persist layout on change */
 function persistLayoutEffect(listenerApi: AppListenerEffectAPI) {
@@ -34,14 +34,14 @@ function persistLayoutEffect(listenerApi: AppListenerEffectAPI) {
 
         const state = listenerApi.getState()
 
-        // Only if we're not editing
+        // Only if we're not editing...
         if (selectEditTabs(state).length === 0) {
-          // Only if layout actually changed
+          // ... and if layout actually changed
           const persistLayout = selectPersistLayout(state)
-          if (!isEqual(persistLayout, lastPersistLayout)) {
+          if (prevPersistLayout && !isEqual(persistLayout, prevPersistLayout)) {
             await listenerApi.dispatch(layoutApi.endpoints.persistLayout.initiate(persistLayout))
-            lastPersistLayout = persistLayout
           }
+          prevPersistLayout = persistLayout
         }
       },
     })

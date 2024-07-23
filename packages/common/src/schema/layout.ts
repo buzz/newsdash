@@ -35,6 +35,8 @@ const panelSchema = z.object({
   size: sizeSchema,
 })
 
+const storePanelSchema = panelSchema.omit({ activeId: true })
+
 const customTabFields = z.object({
   customTitle: z.string(),
   display: displaySchema,
@@ -80,4 +82,12 @@ export type CustomTabFields = z.infer<typeof customTabFields>
 export type Display = z.infer<typeof displaySchema>
 export type Panel = z.infer<typeof panelSchema>
 export type Tab = z.infer<typeof tabSchema>
-export { boxSchema, displaySchema, newTabSchema, panelSchema, storeTabSchema, tabSchema }
+export {
+  boxSchema,
+  displaySchema,
+  newTabSchema,
+  panelSchema,
+  storePanelSchema,
+  storeTabSchema,
+  tabSchema,
+}

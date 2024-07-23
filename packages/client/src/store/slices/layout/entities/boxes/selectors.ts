@@ -1,5 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit'
 
+import { idSortComparer } from '#store/sortComparer'
 import type { RootState } from '#store/types'
 
 import boxesEntityAdapter from './boxesEntityAdapter'
@@ -19,5 +20,10 @@ const selectDockbox = createSelector(
   (boxes) => boxes.at(0)
 )
 
-export { selectChildBoxes, selectDockbox }
+/** Select boxes for persisting */
+const selectPersistBoxes = createSelector([boxesSelectors.selectAll], (boxes) =>
+  boxes.sort(idSortComparer)
+)
+
+export { selectChildBoxes, selectDockbox, selectPersistBoxes }
 export default boxesSelectors

@@ -23,4 +23,14 @@ function dateSortComparer<T extends WithIsoDate>(a: T, b: T) {
   return 0
 }
 
-export { dateSortComparer, orderSortComparer }
+function idSortComparer<T extends { id: string }>(a: T, b: T) {
+  if (a.id < b.id) {
+    return -1
+  }
+  if (a.id > b.id) {
+    return 1
+  }
+  return 0
+}
+
+export { dateSortComparer, idSortComparer, orderSortComparer }
