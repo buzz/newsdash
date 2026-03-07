@@ -1,5 +1,10 @@
 <h1 align="center">
-  <a href="https://github.com/buzz/newsdash"><img src="packages/client/src/assets/logo.svg" alt="newsdash" /></a>
+  <a href="https://github.com/buzz/newsdash">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="packages/client/src/assets/logo-dark.svg">
+      <img alt="newsdash" src="packages/client/src/assets/logo.svg">
+    </picture>
+  </a>
 </h1>
 
 <h4 align="center">A news dashboard inspired by iGoogle and Netvibes</h4>
